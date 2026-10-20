@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "deny": [
+      "mcp__atlassian-olga__createConfluencePage",
+      "mcp__atlassian-olga__updateConfluencePage",
+      "mcp__atlassian-olga__createConfluenceFooterComment",
+      "mcp__atlassian-olga__createConfluenceInlineComment",
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./**/.dev.vars)"
+    ],
+    "ask": [
+      "mcp__atlassian-olga__createJiraIssue",
+      "mcp__atlassian-olga__editJiraIssue",
+      "mcp__atlassian-olga__transitionJiraIssue",
+      "Bash(git push:*)",
+      "Bash(npx wrangler deploy:*)",
+      "Bash(gh secret:*)"
+    ]
+  }
+}

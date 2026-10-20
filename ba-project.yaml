@@ -1,0 +1,83 @@
+# BA workflow kit — project settings. Created by /ba-new, see docs/design.md §3 of the kit.
+# Fields marked (BA) are changed only by the BA or on the BA's explicit OK.
+kit_version: "0.1.0"
+
+project:
+  name: "DeskShare (kit test A)"            # (BA)
+  deadline: null                      # (BA) YYYY-MM-DD
+
+people:
+  ba: "Olga Tkacheva"                   # (BA)
+  sponsor: null                       # (BA) filled after step "requirements"
+
+decisions:
+  proxy_for_sponsor: true             # (BA) "Decided by: <ba> (BA, proxy for <sponsor>)"
+  max_ab: 2                           # (BA) max conflicts with outcome "Prototype both (A/B)"
+
+language:
+  artifacts: en
+  chat: ru
+
+atlassian:
+  site: "hellatkacheva.atlassian.net"                    # e.g. example.atlassian.net
+  cloud_id: "ca7c4adf-0992-45e1-8315-6ffd43c1f4b0"
+  mcp_server: "atlassian-olga"        # name in .mcp.json → tools mcp__<name>__*
+
+source:
+  space_key: "DSSRC"
+  page_id: "65670"
+  title: "DeskShare — Requirements Gathering (source copy)"
+  include_children: true              # (BA)
+  include_attachments: true           # (BA) attachments are listed, files are put into docs/00-source/inbox/ by the BA
+  version: 2                          # set by ingest / sync
+  snapshot_at: "2026-10-20T10:26:26.254Z"  # version.createdAt of the snapshot (MCP exposes only page createdAt — see meta.json notes)
+  children: []                        # [{id, title, version}]
+  attachments: []                     # [{id, title, version, media_type}] — filled by the watch Action / REST
+
+steps:                                # status: not_started | draft | reviewed | approved | stale | skipped
+  ingest:       { status: draft, source_version: 2, updated: 2026-10-20 }
+  requirements: { status: not_started, source_version: null, updated: null }
+  conflicts:    { status: not_started, source_version: null, updated: null }
+  stories:      { status: not_started, source_version: null, updated: null }
+  review:       { status: not_started, source_version: null, updated: null }
+  spec:         { status: not_started, source_version: null, updated: null }
+  build:        { status: not_started, source_version: null, updated: null }
+  deploy:       { status: not_started, source_version: null, updated: null }
+  jira:         { status: not_started, source_version: null, updated: null }
+
+approvals:                            # [{step, status, by, date, note}] — only on the BA's explicit OK
+  - { step: setup, status: approved, by: "Olga Tkacheva", date: 2026-10-20, note: "ba-new" }
+
+jira:
+  project_key: "KAN"
+  style: "team-managed"             # team-managed | company-managed
+  issue_types:                        # always by ID — names may be localized
+    epic: "10003"
+    story: "10006"
+    task: "10005"
+  statuses:                           # filled by jira-sync on first run (needs an issue to read transitions)
+    todo: null
+    in_progress: null
+    done: null
+  priority_on_create: false           # KAN (team-managed): no priority field on the story create screen
+  priority_map: null                  # not used — priority unavailable in KAN
+  priority_via_label: true            # (BA) MoSCoW stored as a label instead — BA decision 2026-10-20
+  labels:
+    project: "deskshare-kit"
+    moscow: { Must: must, Should: should, Could: could }
+
+repo:
+  url: "https://github.com/hellatkacheva/deskshare-kit-test.git"
+  branch: main
+  visibility: "public"   # static profile on a free GitHub account needs public
+
+stack:
+  deploy:
+    profile: static                   # (BA) static (default) | local | cloudflare | none — kit design §3.1
+    url: null                         # set by deploy
+    prod_requires_ok: true            # cannot be disabled
+  constraints: []                     # derived from the profile + project DECs by the spec step
+
+watch:
+  enabled: false                      # (BA) daily GitHub Action → issue "run /ba-sync"
+  issue_label: ba-sync
