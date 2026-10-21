@@ -9,6 +9,7 @@
 | **Deadline** | `project.deadline` not set; milestone 28 October 2026 (CST-007) |
 | **Status** | Reviewed |
 | **Reviewed by** | Olga Tkacheva (BA), 2026-10-21 — interpretations 1–4 confirmed (CON-004 outcome (a); "Tomorrow" green below 80 % and Friday → Monday from the reference; Variant B names on the desk grid; CON-006 recommendation given in chat); GAP-012 availability / accessibility left open for Sam (Q13), no ASM; priorities of REQ-022…REQ-032 set (requirements.md). |
+| **Revised** | 2026-10-21 by `write-stories` (BA answers to backlog OQ-1…OQ-9, all as recommended): DEC-016…DEC-024, ASM-017, ASM-018 added; REQ-033…REQ-041, NFR-009, NFR-010 added to `requirements.md`; §8 Q14 extended. |
 | **Part B** | 2026-10-21 — BA decisions (Olga Tkacheva, BA, proxy for Priya Nandakumar): DEC-011…DEC-015; CON-006 raised by the BA in Part B. Test A repeats the decisions of the reference project DeskShare (`C:\Projects\deskshare\deskshare\docs\02-analysis\analysis-log.md`), except DEC-014 (static instead of Cloudflare — deliberate difference). Assumed values for GAP-002…GAP-012 taken from the reference, cited as "ref ASM-/DEC-…". |
 
 ---
@@ -230,6 +231,8 @@ Unconfirmed `Derived` requirement rows: none — REQ-014 and REQ-018 were confir
 | ASM-014 | Names are deleted after the booking date; only per-floor counts are kept (in the demo browser). GAP-010; = ref ASM-006. | Dana Whitfield | Change the retention rule. | ASSUMPTION — not validated |
 | ASM-015 | Nobody sees other people's names, except in Variant B (DEC-011) for bookings whose booker gave consent, and only for the selected date. GAP-011; = ref DEC-010, ref DEC-036. | Dana Whitfield | Hide names completely / other visibility rule. | ASSUMPTION — not validated |
 | ASM-016 | Phone test: 375 × 667 viewport, current Chrome Android and Safari iOS; desktop: current Chrome and Edge. "Immediately" = no pending or approval state. No server logs (static). Availability and accessibility: no reference value — open (§8 Q13). GAP-012; = ref DEC-026. | Sam Okafor | Wider test matrix; add targets. | ASSUMPTION — not validated |
+| ASM-017 | The office time zone for the demo is UTC+5 (configurable). DEC-016; = ref ASM-010. | Sam Okafor, Priya Nandakumar | Change the configured zone; no rule changes. | ASSUMPTION — not validated |
+| ASM-018 | A name is at most 50 characters. DEC-018; = ref ASM-012. | Priya Nandakumar | Change the configured limit. | ASSUMPTION — not validated |
 
 ## 7. Decision log (`DEC`)
 
@@ -249,6 +252,22 @@ DEC-001 … DEC-010 stand as recorded. Chains: DEC-004 (hard limit) retained by 
 
 Conflict status after Part B: CON-001 Resolved — A/B · CON-002 Resolved (prior, DEC-008) · CON-003 Resolved · CON-004 Resolved · CON-005 Resolved · CON-006 Resolved. **No conflict is Open.** A/B outcomes used: 1 (limit 2).
 
+### Decisions on backlog open questions (step 4, 2026-10-21)
+
+Answers to `docs/03-backlog/backlog.md` §7 (OQ-1…OQ-9). The BA accepted every recommendation ("всё по рекомендации"). All outcome (a) Decided, Decided by: Olga Tkacheva (BA, proxy for Priya Nandakumar), 2026-10-21. Each = the reference decision named, adapted to the `static` profile.
+
+| ID | Origin | Outcome | Decision | Affects |
+|---|---|---|---|---|
+| DEC-016 | OQ-1 | Decided | **Clock and time zone.** All date and time rules ("today", check-in deadline, auto-release, name removal, "Tomorrow") use the device clock converted to one configured office time zone — UTC+5 for the demo (ASM-017). A test-only clock override sets "now" in tests and is ignored in the demo build. Times are shown with the zone label, e.g. "10:00 office time (UTC+5)". (= ref ASM-010, ref DEC-022 adapted — no server clock under DEC-014; label = ref DEC-026.) | NFR-009, NFR-010; US-003, US-005, US-008, US-009, US-013, US-014 |
+| DEC-017 | OQ-2 | Decided | **Seed data and reset.** Dates relative to today: today + the next 2 working days. Today: some bookings checked in and some not, the unconfirmed ones created as same-day bookings at seed time so their deadline lies ahead. Tomorrow (next working day): Floor 1 = 25 booked (amber), Floor 2 = 25 booked (full, red). Some bookings with name consent. Fictional names only. Loaded on first open and by a team-only reset (URL parameter `?reset-demo`, no visible button). On a weekend the seed starts on the next working day. (= ref DEC-016, ref DEC-021, ref DEC-042 adapted.) | REQ-032 → REQ-033, REQ-034; US-002, US-015 |
+| DEC-018 | OQ-3 | Decided | **Name rules.** A name of spaces only counts as empty and is refused; at most 50 characters (ASM-018); names are always shown as plain text. For "one booking per name per day" names are compared case-insensitively, ignoring leading, trailing and repeated spaces (as ASM-012). (= ref DEC-014, ref DEC-026.) | REQ-035; ASM-011, ASM-018; US-005 |
+| DEC-019 | OQ-4 | Decided | **Booking confirmation** shows the date, the desk number and the check-in deadline, plus the hint "Note your desk number — you need it to check in or cancel". There is no search of bookings by name. (= ref DEC-020, ref DEC-034.) | REQ-036; US-005 |
+| DEC-020 | OQ-5 | Decided | **Check-in strictly before the deadline.** Check-in at the deadline is too late; at that moment the booking is released. (= ref DEC-018.) | REQ-037; ASM-008; US-008, US-009 |
+| DEC-021 | OQ-6 | Decided | **Names switch after reload:** Off again after every page reload. (= ref DEC-017.) | REQ-038; DEC-011; US-010 |
+| DEC-022 | OQ-7 | Decided | **Default date on open:** today; on Saturday or Sunday the next working day. (= ref DEC-026.) | REQ-039; US-003 |
+| DEC-023 | OQ-8 | Decided | **Self-reported notice placement:** on the booking form, on the cancel and check-in name fields, and wherever names are shown (Variant B). (= ref DEC-025.) | REQ-029 → REQ-040; US-012 |
+| DEC-024 | OQ-9 | Decided | **Late same-day booking.** Deadline of a same-day booking made after 09:30 = the earlier of (booking time + 30 min) and 23:59 of the booking day. From 23:59 office time a booking for today is refused with "Booking for today is closed — please pick another date"; other dates are not limited. Boundary: 23:58 accepted (deadline 23:59); 23:59 refused. (= ref DEC-035, ref DEC-041.) | REQ-041; ASM-008; US-005, US-009 |
+
 ## 8. Open questions for the sponsor
 
 | # | Question | Origin | Type |
@@ -266,7 +285,7 @@ Conflict status after Part B: CON-001 Resolved — A/B · CON-002 Resolved (prio
 | Q11 | **Dana:** how long may names on bookings be kept? (PoC: deleted after the booking date.) | GAP-010, ASM-014 | Validation of an assumption |
 | Q12 | **Dana:** who may see names on bookings? (PoC: nobody, except Variant B with consent.) | GAP-011, ASM-015 | Validation of an assumption |
 | Q13 | **Sam:** availability and accessibility targets for the PoC? No assumption is made for these two (BA, 2026-10-21). Browsers, "immediately" and logging are assumed in ASM-016 — validate. | GAP-012, ASM-016 | **Open question** (availability, accessibility — no ASM); validation (ASM-016) |
-| Q14 | Validate desk numbering (ASM-007) and the same capacity every day (ASM-002). | ASM-002, ASM-007 | Validation of an assumption |
+| Q14 | Validate desk numbering (ASM-007), the same capacity every day (ASM-002), office time zone UTC+5 (ASM-017) and the 50-character name limit (ASM-018). | ASM-002, ASM-007, ASM-017, ASM-018 | Validation of an assumption |
 
 ## 9. Mapping of requirements §8 observations
 

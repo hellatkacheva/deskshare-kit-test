@@ -39,7 +39,7 @@ steps:                                # status: not_started | draft | reviewed |
   ingest:       { status: reviewed, source_version: 2, updated: 2026-10-21 }
   requirements: { status: reviewed, source_version: 2, updated: 2026-10-21 }
   conflicts:    { status: reviewed, source_version: 2, updated: 2026-10-21 }
-  stories:      { status: not_started, source_version: null, updated: null }
+  stories:      { status: draft, source_version: 2, updated: 2026-10-21 }
   review:       { status: not_started, source_version: null, updated: null }
   spec:         { status: not_started, source_version: null, updated: null }
   build:        { status: not_started, source_version: null, updated: null }
