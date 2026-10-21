@@ -38,7 +38,7 @@ source:
 steps:                                # status: not_started | draft | reviewed | approved | stale | skipped
   ingest:       { status: reviewed, source_version: 2, updated: 2026-10-21 }
   requirements: { status: reviewed, source_version: 2, updated: 2026-10-21 }
-  conflicts:    { status: not_started, source_version: null, updated: null }
+  conflicts:    { status: reviewed, source_version: 2, updated: 2026-10-21 }
   stories:      { status: not_started, source_version: null, updated: null }
   review:       { status: not_started, source_version: null, updated: null }
   spec:         { status: not_started, source_version: null, updated: null }
@@ -50,6 +50,7 @@ approvals:                            # [{step, status, by, date, note}] — onl
   - { step: setup, status: approved, by: "Olga Tkacheva", date: 2026-10-20, note: "ba-new" }
   - { step: requirements, status: reviewed, by: "Olga Tkacheva", date: 2026-10-21, note: "REQ-010 → Must; REQ-014, REQ-018 derived — confirmed; DEC-010 BA decides trade-offs as proxy, Priya approves the result; CST-005 kept for analyze-conflicts; O-08 stays partial" }
   - { step: ingest, status: reviewed, by: "Olga Tkacheva", date: 2026-10-21, note: "65670 v2 + child 458755 v1 (BR); sponsor set: Priya Nandakumar" }
+  - { step: conflicts, status: reviewed, by: "Olga Tkacheva", date: 2026-10-21, note: "DEC-011…DEC-015 (as reference; DEC-014 static — deliberate difference); CON-006 added; REQ-022…REQ-032 priorities set (10 Must, REQ-030 Should — Next band at stories, ref DEC-045); GAP-012 availability/accessibility open for Sam (Q13)" }
 
 jira:
   project_key: "KAN"
