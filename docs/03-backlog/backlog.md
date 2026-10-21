@@ -6,13 +6,14 @@
 | **Date** | 2026-10-21 |
 | **Inputs** | `docs/01-requirements/requirements.md` (Reviewed, revised 2026-10-21), `docs/02-analysis/analysis-log.md` (Reviewed — no conflict Open) — Confluence `65670` v2, `458755` v1 |
 | **Deploy profile** | `static` (DEC-014 — single-device demo, data in the browser; ASM-006) |
-| **Deadline** | `project.deadline` not set; milestone 28 October 2026 (CST-007) |
-| **Status** | Draft |
-| **Revised** | 2026-10-21 — BA answers to OQ-1…OQ-9 (all as recommended) → DEC-016…DEC-024; stories updated; all 15 stories Ready |
+| **Deadline** | 2026-10-28 (`project.deadline`, DEC-027 — milestone from the brief, CST-007) |
+| **Status** | Reviewed (BA, 2026-10-21) |
+| **Revised** | 2026-10-21 — BA answers to OQ-1…OQ-9 (all as recommended) → DEC-016…DEC-024; stories updated |
+| **Revised** | 2026-10-21 by `review-backlog` — BA decisions on `review.md` (DEC-025…DEC-030) and accepted fixes: US-005 split into US-005 / US-016 / US-017; check-in and the A/B group moved into Core; sizes agreed; see `review.md` → "BA outcome" |
 
 Stories use `Confirmed` requirements and `Proposed` requirements from BA-made decisions (`DEC`) and BA-set assumptions (`ASM`). Values taken from an `ASM` are marked `ASSUMPTION — not validated` in the story.
 
-Example calendar used in all acceptance criteria: today = Wed 2026-10-21; booking window (ASM-010) = 2026-10-21 … 2026-10-27, weekend 24–25 Oct not bookable. Names are fictional.
+Example calendar used in all acceptance criteria: today = Wed 2026-10-21; booking window (ASM-010) = 2026-10-21 … 2026-10-27, weekend 24–25 Oct not bookable. Times are office time, UTC+5 for the demo (DEC-016). Names are fictional.
 
 ---
 
@@ -21,8 +22,8 @@ Example calendar used in all acceptance criteria: today = Wed 2026-10-21; bookin
 | Epic | Name | Goal | Stories |
 |---|---|---|---|
 | EP-1 | Demo foundation | The PoC runs in one browser without a backend, starts with demo data and is checked for the demo | US-001, US-002, US-015 |
-| EP-2 | Book and manage a desk | Definition of done: book a desk by date and floor, see remaining capacity, cancel; hard stop | US-003, US-004, US-005, US-006, US-007 |
-| EP-3 | No-show handling | Check-in and auto-release (C2, DEC-008) | US-008, US-009 |
+| EP-2 | Book and manage a desk | Definition of done: book a desk by date and floor, see remaining capacity, cancel; hard stop | US-003, US-004, US-005, US-016, US-006, US-007 |
+| EP-3 | No-show handling | Check-in deadline, check-in and auto-release (C2, DEC-008) | US-017, US-008, US-009 |
 | EP-4 | Privacy and names | Names switch A/B (C1), self-reported notice (C3), name retention | US-010, US-011, US-012, US-014 |
 | EP-5 | Office Manager overview | "Tomorrow" screen (DEC-013) | US-013 |
 
@@ -32,37 +33,39 @@ Example calendar used in all acceptance criteria: today = Wed 2026-10-21; bookin
 |---|---|---|---|---|---|---|---|
 | [US-001](stories/US-001.md) | Bookings kept in this browser, with the demo banner | EP-1 | Must | S | Core demo | REQ-031, NFR-005, DEC-014, ASM-006 | Yes |
 | [US-002](stories/US-002.md) | Seed demo data | EP-1 | Must | S | Core demo | REQ-032, REQ-033, REQ-034, ASM-004, ASM-007, DEC-017 | Yes |
-| [US-003](stories/US-003.md) | Choose a date and a floor, see booked and remaining desks | EP-2 | Must | M | Core demo | REQ-001…REQ-005, REQ-009, REQ-010, REQ-039, NFR-009, NFR-010, ASM-002, ASM-010, ASM-017 | Yes |
+| [US-003](stories/US-003.md) | Choose a date and a floor, see booked and remaining desks | EP-2 | Must | M | Core demo | REQ-001…REQ-005, REQ-009, REQ-010, REQ-039, REQ-042, NFR-009, NFR-010, ASM-002, ASM-010, ASM-017 | Yes |
 | [US-004](stories/US-004.md) | Desk grid of the selected floor (free / taken, no names) — Variant A | EP-2 | Must | S | Core demo | REQ-022, REQ-023, REQ-024, REQ-026, DEC-011, DEC-015, ASM-007 | Yes |
-| [US-005](stories/US-005.md) | Book a free desk | EP-2 | Must | M | Core demo | REQ-006, REQ-007, REQ-008, REQ-022, REQ-023, REQ-035, REQ-036, REQ-041, NFR-004, NFR-006, NFR-009, ASM-008, ASM-010, ASM-011, ASM-018 | Yes |
-| [US-006](stories/US-006.md) | Hard stop when the floor is full | EP-2 | Must | S | Core demo | REQ-011, REQ-012, REQ-024, DEC-004 | Yes |
+| [US-005](stories/US-005.md) | Book a free desk | EP-2 | Must | M | Core demo | REQ-006, REQ-007, REQ-008, REQ-022, REQ-023, REQ-035, REQ-036, NFR-004, NFR-006, ASM-010, ASM-011 | Yes |
+| [US-016](stories/US-016.md) | Name rules when booking (split from US-005) | EP-2 | Must | S | Core demo | REQ-006, REQ-035, DEC-018, ASM-018 | Yes |
+| [US-006](stories/US-006.md) | Hard stop when the floor is full | EP-2 | Must | S | Core demo | REQ-011, REQ-012, REQ-023, REQ-024, DEC-004 | Yes |
 | [US-007](stories/US-007.md) | Cancel my own booking | EP-2 | Must | S | Core demo | REQ-013, REQ-014, REQ-040, ASM-012 | Yes |
-| [US-008](stories/US-008.md) | Check in to my booking | EP-3 | Must | S | Next | REQ-015, REQ-016, REQ-037, REQ-040, NFR-009, NFR-010, ASM-008, ASM-009, ASM-012 | Yes |
-| [US-009](stories/US-009.md) | Auto-release of bookings not checked in | EP-3 | Must | S | Next | REQ-017, REQ-018, REQ-037, REQ-041, NFR-009, NFR-010, ASM-008, ASM-009 | Yes |
-| [US-010](stories/US-010.md) | Demo switch "Show colleagues' names" (A/B switch) | EP-4 | Must | S | Next | REQ-025, REQ-038, DEC-011, DEC-021 | Yes |
-| [US-011](stories/US-011.md) | Variant B: consent and names on the desk grid | EP-4 | Must | M | Next | REQ-027, REQ-028, REQ-040, NFR-002, NFR-003, DEC-011, ASM-015 | Yes |
 | [US-012](stories/US-012.md) | Notice: names are self-reported | EP-4 | Must | S | Core demo | REQ-029, REQ-040, DEC-012, DEC-023 | Yes |
-| [US-013](stories/US-013.md) | "Tomorrow" screen for the Office Manager | EP-5 | Should | M | Next | REQ-030, NFR-009, DEC-013 | Yes |
-| [US-014](stories/US-014.md) | Names removed after the booking date | EP-4 | Must | S | Next | NFR-002, NFR-003, ASM-014 | Yes |
-| [US-015](stories/US-015.md) | Demo smoke test on phone and desktop | EP-1 | Must | S | Core demo | NFR-001, NFR-007, ASM-016 | Yes |
+| [US-017](stories/US-017.md) | Check-in deadline and closing of same-day booking (split from US-005) | EP-3 | Must | S | Core demo | REQ-036, REQ-041, NFR-009, NFR-010, ASM-008, ASM-017, DEC-024 | Yes |
+| [US-008](stories/US-008.md) | Check in to my booking | EP-3 | Must | S | Core demo | REQ-015, REQ-016, REQ-037, REQ-040, NFR-009, NFR-010, ASM-008, ASM-009, ASM-012 | Yes |
+| [US-009](stories/US-009.md) | Auto-release of bookings not checked in | EP-3 | Must | S | Core demo | REQ-017, REQ-018, REQ-037, REQ-041, REQ-042, NFR-009, NFR-010, ASM-008, ASM-009 | Yes |
+| [US-010](stories/US-010.md) | Demo switch "Show colleagues' names" (A/B switch) | EP-4 | Must | S | Core demo | REQ-025, REQ-038, DEC-011, DEC-021, DEC-026 | Yes |
+| [US-011](stories/US-011.md) | Variant B: consent and names on the desk grid | EP-4 | Must | M | Core demo | REQ-027, REQ-028, REQ-035, REQ-040, NFR-002, NFR-003, DEC-011, ASM-015 | Yes |
+| [US-015](stories/US-015.md) | Demo smoke test on phone and desktop | EP-1 | Must | S | Core demo | NFR-001, NFR-007, NFR-010, REQ-034, ASM-016 | Yes |
+| [US-014](stories/US-014.md) | Names removed after the booking date | EP-4 | Must | S | Next | NFR-002, NFR-003, ASM-014, DEC-029 | Yes |
+| [US-013](stories/US-013.md) | "Tomorrow" screen for the Office Manager | EP-5 | Should | M | Next | REQ-030, REQ-042, NFR-009, DEC-013 | Yes |
 
-Totals: 15 stories — 14 Must, 1 Should; sizes 11 S, 4 M; Ready 15 (all open questions answered — DEC-016…DEC-024); size not yet agreed with the BA.
+Totals: 17 stories — 16 Must, 1 Should; sizes 13 S, 4 M (agreed by the BA, DEC-027); all Ready. Table in build order.
 
 ## 3. Cut line and build order
 
 | Band | Stories | Rule |
 |---|---|---|
-| **Core demo** — must ship | US-001 → US-002 → US-003 → US-004 → US-005 → US-006 → US-007 → US-012 → US-015 | The definition of done end to end: book by date and floor, see remaining capacity, cancel, hard stop; banner and self-reported notice |
-| **Next** — if time allows | US-008 → US-009 → US-010 → US-011 → US-014 → US-013 | Check-in / auto-release (DEC-008), the A/B pair (DEC-011), retention (ASM-014), then the "Tomorrow" screen last (Should — BA, 2026-10-21, as ref DEC-045). US-015 gets a step for each "Next" story when it is built |
-| **Drop first** — if time runs out | — (none) | If time runs out, drop from the end of "Next": US-013 first, then US-014 |
+| **Core demo** — must ship | US-001 → US-002 → US-003 → US-004 → US-005 → US-016 → US-006 → US-007 → US-012 → US-017 → US-008 → US-009 → US-010 → US-011 → US-015 | Definition of done end to end (book by date and floor, see remaining capacity, cancel, hard stop), check-in / auto-release (DEC-008, DEC-025) and the A/B group the sponsor toggles at the demo (DEC-011, DEC-026); banner and self-reported notice. US-015 is the last Core step |
+| **Next** — if time allows | US-014 → US-013 | Name retention (Must — not dropped without a BA decision, finding #3), then the "Tomorrow" screen last (Should — BA, 2026-10-21, as ref DEC-045). US-015 gets a step for each "Next" story when it is built |
+| **Drop first** — if time runs out | — | No story in this band. If time runs out, only US-013 (Should) may be dropped; US-014 (Must) needs a recorded BA decision first |
 
-Note: US-010 and US-011 are built together — the A/B group is only demo-ready with the switch and both variants.
+Deadline: 2026-10-28 (DEC-027). US-010 and US-011 are built together — the A/B group is only demo-ready with the switch and both variants.
 
 ## 4. A/B groups (outcome (b) — sponsor chooses at the demo)
 
 | Group | Decision | Variant A | Variant B | Switch |
 |---|---|---|---|---|
-| AB-1 — colleagues' names (C1) | DEC-011 (CON-001) | US-004 — taken desk shows "taken", no names | US-011 — consent checkbox; names of consenting bookers on the grid, selected date only | US-010 — "Show colleagues' names: Off / On", default Off |
+| AB-1 — colleagues' names (C1) | DEC-011 (CON-001); in Core by DEC-026 | US-004 — taken desk shows "taken", no names | US-011 — consent checkbox; names of consenting bookers on the grid, selected date only | US-010 — "Show colleagues' names: Off / On", default Off, Off after reload |
 
 A/B groups used: 1 (limit 2).
 
@@ -70,7 +73,7 @@ A/B groups used: 1 (limit 2).
 
 | Item | Source | Why no story |
 |---|---|---|
-| — | — | No conflict ended as (c) Deferred. |
+| — | — | No conflict ended as (c) Deferred. Hosting (GitHub Pages vs Cloudflare Pages) is decided at the `deploy` step (DEC-030) — no story. |
 
 **Not built by decision (outcome (a), recorded for visibility):**
 
@@ -91,7 +94,7 @@ Out of scope items OOS-001 … OOS-007 have no stories. OOS-008 (desk-level book
 | REQ-003 two floors | Must | Confirmed | US-003 |
 | REQ-004 Floor 1 = 30 | Must | Confirmed | US-003, US-004, US-006, US-013 |
 | REQ-005 Floor 2 = 25 | Must | Confirmed | US-003, US-004, US-006, US-013 |
-| REQ-006 name as free text | Must | Confirmed | US-005 |
+| REQ-006 name as free text | Must | Confirmed | US-005, US-016 |
 | REQ-007 confirmed immediately | Must | Confirmed (refined by REQ-022) | US-005 |
 | REQ-008 effect of booking | Must | Confirmed (narrowed DEC-014) | US-005 |
 | REQ-009 remaining capacity | Must | Confirmed (narrowed DEC-014) | US-003 |
@@ -108,7 +111,7 @@ Out of scope items OOS-001 … OOS-007 have no stories. OOS-008 (desk-level book
 | REQ-020 headcount list | TBD | Not built — DEC-012 | — (not built by decision) |
 | REQ-021 one screen for tomorrow | TBD | Refined by REQ-030 | US-013 (via REQ-030) |
 | REQ-022 pick a desk from a grid | Must | Proposed (DEC-015) | US-004, US-005 |
-| REQ-023 desk once per date | Must | Proposed (DEC-015) | US-004, US-005 |
+| REQ-023 desk once per date | Must | Proposed (DEC-015) | US-004, US-005, US-006 |
 | REQ-024 full = all desks booked | Must | Proposed (DEC-015) | US-004, US-006 |
 | REQ-025 names switch | Must | Proposed (DEC-011) | US-010 |
 | REQ-026 Variant A | Must | Proposed (DEC-011) | US-004 |
@@ -119,14 +122,15 @@ Out of scope items OOS-001 … OOS-007 have no stories. OOS-008 (desk-level book
 | REQ-031 demo banner | Must | Proposed (DEC-014) | US-001, US-015 |
 | REQ-032 seed data | Must | Proposed (DEC-014) | US-002 |
 | REQ-033 seed content | Must | Proposed (DEC-017) | US-002 |
-| REQ-034 team-only reset | Must | Proposed (DEC-017) | US-002 |
-| REQ-035 name rules | Must | Proposed (DEC-018) | US-005 |
-| REQ-036 confirmation content | Must | Proposed (DEC-019) | US-005 |
+| REQ-034 team-only reset | Must | Proposed (DEC-017) | US-002, US-015 |
+| REQ-035 name rules | Must | Proposed (DEC-018) | US-005, US-016, US-011 |
+| REQ-036 confirmation content | Must | Proposed (DEC-019) | US-005, US-017 |
 | REQ-037 check-in strictly before deadline | Must | Proposed (DEC-020) | US-008, US-009 |
 | REQ-038 switch Off after reload | Must | Proposed (DEC-021) | US-010 |
 | REQ-039 default date on open | Must | Proposed (DEC-022) | US-003 |
 | REQ-040 notice placement | Must | Proposed (DEC-023) | US-012, US-007, US-008, US-011 |
-| REQ-041 late same-day booking | Must | Proposed (DEC-024) | US-005, US-009 |
+| REQ-041 late same-day booking | Must | Proposed (DEC-024) | US-017, US-009 |
+| REQ-042 refresh while open | Must | Proposed (DEC-028) | US-003, US-009, US-013 |
 | NFR-001 browser, mobile layout | Must | Confirmed | US-015 |
 | NFR-002 no individual attendance history | Must | Confirmed | US-003, US-011, US-013, US-014 |
 | NFR-003 no list / export of who came in | Must | Confirmed | US-011, US-012, US-014 |
@@ -135,8 +139,8 @@ Out of scope items OOS-001 … OOS-007 have no stories. OOS-008 (desk-level book
 | NFR-006 immediate result | TBD | Confirmed | US-005 (ASM-016) |
 | NFR-007 demo-ready | Must | Confirmed | US-002, US-015 |
 | NFR-008 trustworthy identity | TBD | Not built — DEC-012 | — (not built; notice US-012) |
-| NFR-009 office time zone UTC+5, label | Must | Proposed (DEC-016) | US-003, US-005, US-008, US-009, US-013, US-014 |
-| NFR-010 device clock in office zone, test override | Must | Proposed (DEC-016) | US-003, US-008, US-009 |
+| NFR-009 office time zone UTC+5, label | Must | Proposed (DEC-016) | US-003, US-017, US-008, US-009, US-013, US-014 |
+| NFR-010 device clock in office zone, test override | Must | Proposed (DEC-016) | US-003, US-017, US-008, US-009, US-015 |
 
 Not covered: none of the buildable Must / Should rows. REQ-019, REQ-020, NFR-008 — not built by decision (see §5). Availability and accessibility have no requirement (analysis log §8 Q13).
 
@@ -146,14 +150,14 @@ Each recommendation follows the reference project (`ref` IDs from `C:\Projects\d
 
 | # | Question | Stories affected | Options · recommendation | BA answer |
 |---|---|---|---|---|
-| OQ-1 | Which clock and time zone define "today", 10:00 and "tomorrow"? There is no server (DEC-014). And how are time rules tested? | US-003, US-005, US-008, US-009, US-013 | A — device clock and device time zone · **B — device clock converted to one configured office time zone, UTC+5 for the demo (ref ASM-010); a test-only clock override that is ignored in the demo build (adapted from ref DEC-022)** · **Recommendation: B** — rules do not depend on the demo laptop's settings; time AC become testable | As recommended (BA, 2026-10-21) → DEC-016 |
-| OQ-2 | Seed content and reset. | US-002, US-015 | **Recommendation (ref DEC-016, DEC-021 adapted):** dates relative to today; today + next 2 working days; today: some checked-in bookings and some not checked in, created as same-day bookings at seed time so their deadline lies ahead; tomorrow: Floor 1 = 25 booked (amber), Floor 2 = 25 booked (full, red); some bookings with name consent; fictional names. Loaded on first open and by a team-only reset (URL parameter, no visible button). Alternative: fixed dates — goes stale by 28 Oct | As recommended (BA, 2026-10-21) → DEC-017 |
-| OQ-3 | Name rules: empty, spaces only, maximum length, display; how names are compared for "one booking per name per day". | US-005 | **Recommendation (ref DEC-014, DEC-026, ASM-012):** spaces-only = empty → refused; max 50 characters (ASSUMPTION); shown as plain text; compared case-insensitively ignoring leading, trailing and repeated spaces (as for cancel, ASM-012). Alternative: exact match | As recommended (BA, 2026-10-21) → DEC-018 |
-| OQ-4 | What does the booking confirmation show? | US-005 | **Recommendation (ref DEC-020, DEC-034):** date, desk number and check-in deadline, plus the hint "Note your desk number — you need it to check in or cancel"; no search of bookings by name. Alternative: a short "Booked" message only | As recommended (BA, 2026-10-21) → DEC-019 |
-| OQ-5 | Check-in exactly at the deadline: still on time or too late? | US-008, US-009 | **Recommendation (ref DEC-018):** too late — check-in only strictly before the deadline; at the deadline the booking is released. Alternative: allowed up to and including the deadline minute | As recommended (BA, 2026-10-21) → DEC-020 |
-| OQ-6 | Names switch after a page reload. | US-010 | **Recommendation (ref DEC-017):** Off again after reload (privacy-safe default). Alternative: keeps the last position | As recommended (BA, 2026-10-21) → DEC-021 |
-| OQ-7 | Which date is selected when the app opens? | US-003 | **Recommendation (ref DEC-026):** today; on Saturday / Sunday the next working day. Alternative: no date selected | As recommended (BA, 2026-10-21) → DEC-022 |
-| OQ-8 | Where is the "self-reported" notice shown? | US-012 | **Recommendation (ref DEC-025):** on the booking form, on the cancel and check-in name fields and wherever names are shown (Variant B). Alternative: booking form only | As recommended (BA, 2026-10-21) → DEC-023 |
-| OQ-9 | Same-day booking late in the evening: the deadline "booking time + 30 min" would fall on the next day. | US-005, US-009 | **Recommendation (ref DEC-035, DEC-041):** deadline = the earlier of (booking time + 30 min) and 23:59 of the booking day; from 23:59 a booking for today is refused with "Booking for today is closed — please pick another date". Alternative: no same-day booking after a fixed time | As recommended (BA, 2026-10-21) → DEC-024 |
+| OQ-1 | Which clock and time zone define "today", 10:00 and "tomorrow"? There is no server (DEC-014). And how are time rules tested? | US-003, US-005, US-008, US-009, US-013 | A — device clock and device time zone · **B — device clock converted to one configured office time zone, UTC+5 for the demo (ref ASM-010); a test-only clock override that is ignored in the demo build (adapted from ref DEC-022)** · **Recommendation: B** | As recommended (BA, 2026-10-21) → DEC-016 |
+| OQ-2 | Seed content and reset. | US-002, US-015 | **Recommendation (ref DEC-016, DEC-021 adapted):** dates relative to today; today + next 2 working days; today: some checked-in and some not; tomorrow: Floor 1 = 25 (amber), Floor 2 = 25 (full); some bookings with name consent; loaded on first open and by a team-only reset (URL parameter) | As recommended (BA, 2026-10-21) → DEC-017 |
+| OQ-3 | Name rules: empty, spaces only, maximum length, display; comparison for "one booking per name per day". | US-005 | **Recommendation (ref DEC-014, DEC-026, ASM-012):** spaces-only = empty; max 50; plain text; case-insensitive, ignoring extra spaces | As recommended (BA, 2026-10-21) → DEC-018 |
+| OQ-4 | What does the booking confirmation show? | US-005 | **Recommendation (ref DEC-020, DEC-034):** date, desk, deadline + hint; no search by name | As recommended (BA, 2026-10-21) → DEC-019 |
+| OQ-5 | Check-in exactly at the deadline. | US-008, US-009 | **Recommendation (ref DEC-018):** too late — released at the deadline | As recommended (BA, 2026-10-21) → DEC-020 |
+| OQ-6 | Names switch after a page reload. | US-010 | **Recommendation (ref DEC-017):** Off again | As recommended (BA, 2026-10-21) → DEC-021 |
+| OQ-7 | Which date is selected when the app opens? | US-003 | **Recommendation (ref DEC-026):** today; at the weekend the next working day | As recommended (BA, 2026-10-21) → DEC-022 |
+| OQ-8 | Where is the "self-reported" notice shown? | US-012 | **Recommendation (ref DEC-025):** booking form, cancel and check-in name fields, wherever names are shown | As recommended (BA, 2026-10-21) → DEC-023 |
+| OQ-9 | Same-day booking late in the evening. | US-005, US-009 | **Recommendation (ref DEC-035, DEC-041):** deadline = min(+30 min, 23:59); closed from 23:59 | As recommended (BA, 2026-10-21) → DEC-024 |
 
-Unconfirmed `Derived` and unagreed `Proposed` rows: none — REQ-014 and REQ-018 are confirmed; every Proposed row comes from a BA decision (DEC-011…DEC-015).
+Unconfirmed `Derived` and unagreed `Proposed` rows: none — REQ-014 and REQ-018 are confirmed; every Proposed row comes from a BA decision (DEC-011…DEC-028).

@@ -12,6 +12,7 @@
 | **Reviewed by** | Olga Tkacheva (BA), 2026-10-21 — changes: REQ-010 → Must; REQ-014, REQ-018 derived effects confirmed; DEC-010 added (who decides trade-offs); CST-005 kept as input for `analyze-conflicts` |
 | **Revised** | 2026-10-21 by `analyze-conflicts` (Part B, BA decisions DEC-011…DEC-015 in `docs/02-analysis/analysis-log.md`): REQ-022…REQ-032 added as Proposed (priorities set by the BA 2026-10-21 from the reference: 10 Must, REQ-030 Should); REQ-019 superseded; REQ-020, NFR-008 not built (known limitation); REQ-007, REQ-008, REQ-011, REQ-021 refined; REQ-008…REQ-018 narrowed to one browser (DEC-014); OOS-008 superseded; CST-005 not met literally. |
 | **Revised** | 2026-10-21 by `write-stories` (BA answers to backlog OQ-1…OQ-9 → DEC-016…DEC-024): REQ-033…REQ-041, NFR-009, NFR-010 added as Proposed, Must (priority as the reference rows named); REQ-029, REQ-032 refined. |
+| **Revised** | 2026-10-21 by `review-backlog` (BA decisions DEC-025…DEC-030): REQ-042 added as Proposed, Must. |
 
 **Source keys used in references**
 
@@ -99,6 +100,7 @@ Atomic rows: one testable rule per REQ. Every action REQ is followed by a state-
 | REQ-039 | On opening the app the selected date is today, or the next working day on Saturday or Sunday. | `[DEC-022]` | — | Must | Proposed — from analysis-log DEC-022 (2026-10-21, BA answer to backlog OQ); priority as ref REQ-039 |
 | REQ-040 | The self-reported notice (REQ-029) is shown on the booking form, on the cancel and check-in name fields and wherever names are shown. | `[DEC-023]` | — | Must | Proposed — from analysis-log DEC-023 (2026-10-21, BA answer to backlog OQ); priority as ref NFR-010 / DEC-025 |
 | REQ-041 | Same-day booking after 09:30: deadline = earlier of (booking time + 30 min) and 23:59; from 23:59 a booking for today is refused with "Booking for today is closed — please pick another date". | `[DEC-024]` | — | Must | Proposed — from analysis-log DEC-024 (2026-10-21, BA answer to backlog OQ); priority as ref REQ-045, REQ-051 |
+| REQ-042 | While the app is open, bookings are re-read and auto-release, "today", the default date and the "Tomorrow" screen are re-evaluated on every user action and at least once a minute. | `[DEC-028]` | — | Must | Proposed — from analysis-log DEC-028 (2026-10-21, backlog review #12); deliberate difference from ref DEC-024 |
 
 Note: in REQ-017 the quote's inner quotes are shown escaped (`\"`); in the source they are plain `"`.
 

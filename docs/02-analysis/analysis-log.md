@@ -10,6 +10,7 @@
 | **Status** | Reviewed |
 | **Reviewed by** | Olga Tkacheva (BA), 2026-10-21 — interpretations 1–4 confirmed (CON-004 outcome (a); "Tomorrow" green below 80 % and Friday → Monday from the reference; Variant B names on the desk grid; CON-006 recommendation given in chat); GAP-012 availability / accessibility left open for Sam (Q13), no ASM; priorities of REQ-022…REQ-032 set (requirements.md). |
 | **Revised** | 2026-10-21 by `write-stories` (BA answers to backlog OQ-1…OQ-9, all as recommended): DEC-016…DEC-024, ASM-017, ASM-018 added; REQ-033…REQ-041, NFR-009, NFR-010 added to `requirements.md`; §8 Q14 extended. |
+| **Revised** | 2026-10-21 by `review-backlog` (BA decisions on `docs/03-backlog/review.md`): DEC-025…DEC-030 added; REQ-042 added to `requirements.md`; `project.deadline` set to 2026-10-28 (DEC-027); RSK-001 updated. |
 | **Part B** | 2026-10-21 — BA decisions (Olga Tkacheva, BA, proxy for Priya Nandakumar): DEC-011…DEC-015; CON-006 raised by the BA in Part B. Test A repeats the decisions of the reference project DeskShare (`C:\Projects\deskshare\deskshare\docs\02-analysis\analysis-log.md`), except DEC-014 (static instead of Cloudflare — deliberate difference). Assumed values for GAP-002…GAP-012 taken from the reference, cited as "ref ASM-/DEC-…". |
 
 ---
@@ -200,7 +201,7 @@ Unconfirmed `Derived` requirement rows: none — REQ-014 and REQ-018 were confir
 
 | ID | Risk | Owner | Impact | Mitigation |
 |---|---|---|---|---|
-| RSK-001 | Scope grows (C2 check-in already added; C1, C3, REQ-021 asked) on a fixed-scope engagement with the milestone on 28 Oct 2026 (7 days; `project.deadline` not set). | Olga Tkacheva (BA) | Demo not ready or unstable. | Part B added scope: desk grid (DEC-015), A/B switch (DEC-011), "Tomorrow" screen (DEC-013). Cut line in the backlog; A/B limited to one conflict; set `project.deadline`. |
+| RSK-001 | Scope grows (C2 check-in already added; C1, C3, REQ-021 asked) on a fixed-scope engagement with the milestone on 28 Oct 2026 (7 days; `project.deadline` not set). | Olga Tkacheva (BA) | Demo not ready or unstable. | Part B added scope: desk grid (DEC-015), A/B switch (DEC-011), "Tomorrow" screen (DEC-013). Review: check-in and A/B moved into Core (DEC-025, DEC-026); `project.deadline` = 2026-10-28, sizes accepted (DEC-027); "Tomorrow" stays last in Next. |
 | RSK-002 | On `static`, leadership reads a single-device simulation as a working shared system. | Priya Nandakumar | Wrong expectations after the demo. | Applies — DEC-014 (static). Demo banner REQ-031, seed data REQ-032, ASM-006; spoken disclaimer at the demo. |
 | RSK-003 | Free-text names: anyone can book or cancel under someone else's name. | Dana Whitfield | Misuse; untrustworthy data. | Known limitation (CON-003); GAP-006. |
 | RSK-004 | Capacities and the 1-in-5 no-show figure come from an incomplete spreadsheet and unavailable sample data. | Priya Nandakumar | Wrong limits in a real roll-out. | Capacities as configuration; confirm before production. |
@@ -267,6 +268,19 @@ Answers to `docs/03-backlog/backlog.md` §7 (OQ-1…OQ-9). The BA accepted every
 | DEC-022 | OQ-7 | Decided | **Default date on open:** today; on Saturday or Sunday the next working day. (= ref DEC-026.) | REQ-039; US-003 |
 | DEC-023 | OQ-8 | Decided | **Self-reported notice placement:** on the booking form, on the cancel and check-in name fields, and wherever names are shown (Variant B). (= ref DEC-025.) | REQ-029 → REQ-040; US-012 |
 | DEC-024 | OQ-9 | Decided | **Late same-day booking.** Deadline of a same-day booking made after 09:30 = the earlier of (booking time + 30 min) and 23:59 of the booking day. From 23:59 office time a booking for today is refused with "Booking for today is closed — please pick another date"; other dates are not limited. Boundary: 23:58 accepted (deadline 23:59); 23:59 refused. (= ref DEC-035, ref DEC-041.) | REQ-041; ASM-008; US-005, US-009 |
+
+### Decisions from the backlog review (step 5, 2026-10-21)
+
+Origin: findings `#n` in `docs/03-backlog/review.md`. All outcome (a) Decided, Decided by: Olga Tkacheva (BA, proxy for Priya Nandakumar), 2026-10-21. Fix findings (no trade-off) are listed in `review.md` → "BA outcome" and need no DEC.
+
+| ID | Origin | Outcome | Decision | Rationale | Affects |
+|---|---|---|---|---|---|
+| DEC-025 | #1 | Decided | **Check-in and auto-release move into Core demo** (US-008, US-009, with the deadline story US-017), before US-012. | Confirmed Must scope from W3 (DEC-008); Core US-005 already shows the deadline and the check-in hint. Deliberate difference from the reference cut line (there: "Next"). | `backlog.md` §3; US-008, US-009, US-017 |
+| DEC-026 | #2 | Decided | **The A/B group AB-1 moves into Core demo** (switch US-010, Variant B US-011). | The sponsor decides at the demo (DEC-011, §8 Q1); without the switch DEC-011 would silently become Variant A. Deliberate difference from the reference cut line. | `backlog.md` §3, §4; US-010, US-011 |
+| DEC-027 | #4 | Decided | **`project.deadline` = 2026-10-28** (the milestone from the brief, CST-007). Story sizes accepted as proposed in the backlog; new split stories US-016, US-017 = S. | The brief sets the presentation date `[BR · Next milestone]`; the BA accepts the sizes. | `ba-project.yaml` `project.deadline`; `backlog.md` §2; all stories (DoR "size agreed") |
+| DEC-028 | #12 | Decided | **Refresh while the page is open:** bookings are re-read and auto-release, "today", the default date and "Tomorrow" are re-evaluated on every user action and at least once a minute while the app is open. **Deliberate difference from the reference** (ref DEC-024: re-fetch on actions + Refresh control, no polling). | Reading `localStorage` costs nothing under `static`; a live demo must not show a released desk as taken or a stale "today". | REQ-042; US-003, US-009, US-013 |
+| DEC-029 | #20 | Decided | **Per-floor counts of past dates are kept** as in ASM-014 (= ref ASM-006); no view reads them. Finding #20 not applied. | Matches the reference; cost close to zero; keeps the option to check the no-show rate later (RSK-004). | ASM-014; US-014 |
+| DEC-030 | #27 | Decided | **Hosting (GitHub Pages vs Cloudflare Pages) is decided at the `deploy` step**, after Sam answers §8 Q3. No story changes. | Hosting does not change any story; the profile stays `static` (DEC-014). | ASM-013, CST-005; §8 Q3 |
 
 ## 8. Open questions for the sponsor
 
