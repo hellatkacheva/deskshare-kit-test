@@ -9,10 +9,10 @@
   "author_id": "6170e337062f4c00694a6eb8",
   "parent_id": null,
   "fetched_at": "2026-10-20T15:57:44Z",
-  "children": [],
+  "children": [{"id": "458755", "title": "Workshop brief (source copy)", "version": 1, "snapshot": "confluence/458755/v1/", "added": "2026-10-21"}],
   "sha256": {
     "page_html": "13958c756e48d2bb9d152f4590e11c9a6cb0dc5e4f78ca7d883f8aa7cb231ef8",
     "page_md": "a2ee9028fab8cbb3f80c6587229948dff9761303d20e0d7c45a6b08811255925"
   },
-  "notes": "getConfluencePage (html/markdown) returns no version block. version and created_at come from fetch(ari) metadata; created_at there is the page's createdAt, not necessarily version.createdAt. version_message and parent_id are not exposed by the MCP tools."
+  "notes": "children: added 2026-10-21 on BA instruction (child snapshots live in their own folder by page id; the parent meta lists child ids and versions); page.html, page.md and their hashes unchanged. getConfluencePage (html/markdown) returns no version block. version and created_at come from fetch(ari) metadata; created_at there is the page's createdAt, not necessarily version.createdAt. version_message and parent_id are not exposed by the MCP tools."
 }
