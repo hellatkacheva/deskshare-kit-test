@@ -8,7 +8,7 @@ project:
 
 people:
   ba: "Olga Tkacheva"                   # (BA)
-  sponsor: null                       # (BA) filled after step "requirements"
+  sponsor: "Priya Nandakumar"         # (BA) filled after step "requirements"
 
 decisions:
   proxy_for_sponsor: true             # (BA) "Decided by: <ba> (BA, proxy for <sponsor>)"
@@ -36,7 +36,7 @@ source:
   attachments: []                     # [{id, title, version, media_type}] — filled by the watch Action / REST
 
 steps:                                # status: not_started | draft | reviewed | approved | stale | skipped
-  ingest:       { status: draft, source_version: 2, updated: 2026-10-21 }
+  ingest:       { status: reviewed, source_version: 2, updated: 2026-10-21 }
   requirements: { status: reviewed, source_version: 2, updated: 2026-10-21 }
   conflicts:    { status: not_started, source_version: null, updated: null }
   stories:      { status: not_started, source_version: null, updated: null }
@@ -49,6 +49,7 @@ steps:                                # status: not_started | draft | reviewed |
 approvals:                            # [{step, status, by, date, note}] — only on the BA's explicit OK
   - { step: setup, status: approved, by: "Olga Tkacheva", date: 2026-10-20, note: "ba-new" }
   - { step: requirements, status: reviewed, by: "Olga Tkacheva", date: 2026-10-21, note: "REQ-010 → Must; REQ-014, REQ-018 derived — confirmed; DEC-010 BA decides trade-offs as proxy, Priya approves the result; CST-005 kept for analyze-conflicts; O-08 stays partial" }
+  - { step: ingest, status: reviewed, by: "Olga Tkacheva", date: 2026-10-21, note: "65670 v2 + child 458755 v1 (BR); sponsor set: Priya Nandakumar" }
 
 jira:
   project_key: "KAN"
