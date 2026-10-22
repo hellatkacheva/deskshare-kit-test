@@ -2,6 +2,11 @@
 export const TEXT = {
   banner: 'Demo — bookings are stored in this browser only.',
   appName: 'DeskShare',
+  dateStrip: 'Date',
+  floorTabs: 'Floor',
+  floorLabel: (id) => `Floor ${id}`,
+  floorTab: (id, left) => `Floor ${id} · ${left} left`,
+  countsLine: (id, booked, left) => `Floor ${id}: ${booked} booked · ${left} left`,
 };
 
 export const MESSAGES = {

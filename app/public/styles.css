@@ -7,6 +7,10 @@
   --alert-bg: #fde7e9;
   --alert-fg: #8a1c25;
   --gutter: 16px;
+  --line: #c7c7cc;
+  --accent: #0b57d0;
+  --accent-fg: #ffffff;
+  --disabled-bg: #f1f3f4;
 }
 
 * { box-sizing: border-box; }
@@ -46,3 +50,55 @@ main {
   background: var(--alert-bg);
   color: var(--alert-fg);
 }
+
+/* Book view (ui.md §2) — tap targets ≥ 44 × 44 px (US-015 rule 7) */
+button {
+  font: inherit;
+  min-height: 44px;
+  min-width: 44px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--fg);
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  color: var(--muted);
+  background: var(--disabled-bg);
+}
+
+button[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-fg);
+}
+
+.date-strip {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 4px;
+  margin: 8px 0 12px;
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px 0;
+  min-width: 0;
+}
+
+.day-name { font-size: 0.8rem; }
+.day-num { font-weight: 600; }
+
+.floor-tabs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.floor-tab { padding: 8px; }
+
+.counts-line { margin: 8px 0 0; }

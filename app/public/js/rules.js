@@ -1,6 +1,6 @@
 // Pure booking rules (storage.md §2).
 import {
-  CHECKIN_CUTOFF, DEADLINE_CAP, FLOORS, GRACE_MINUTES, SAME_DAY_THRESHOLD, WORKING_DAYS,
+  BOOKING_WINDOW_DAYS, CHECKIN_CUTOFF, DEADLINE_CAP, FLOORS, GRACE_MINUTES, SAME_DAY_THRESHOLD, WORKING_DAYS,
 } from './config.js';
 import { addDays, addMinutes, isoWeekday } from './time.js';
 
@@ -15,6 +15,24 @@ export function nextWorkingDay(date) {
   let d = addDays(date, 1);
   while (!isWorkingDay(d)) d = addDays(d, 1);
   return d;
+}
+
+/** Today if it is a working day, else the next working day (REQ-039, DEC-022). */
+export function defaultDate(now) {
+  return isWorkingDay(now.date) ? now.date : nextWorkingDay(now.date);
+}
+
+/** today ≤ date ≤ today + BOOKING_WINDOW_DAYS and a working day (ASM-010). */
+export function isBookable(date, now) {
+  return date >= now.date && date <= addDays(now.date, BOOKING_WINDOW_DAYS) && isWorkingDay(date);
+}
+
+/** The calendar days today … today + BOOKING_WINDOW_DAYS (I-13). */
+export function windowDates(now) {
+  return Array.from({ length: BOOKING_WINDOW_DAYS + 1 }, (_, i) => {
+    const date = addDays(now.date, i);
+    return { date, bookable: isWorkingDay(date) };
+  });
 }
 
 /** Check-in deadline of a booking for `date` made at `now` (ASM-008, DEC-024). */

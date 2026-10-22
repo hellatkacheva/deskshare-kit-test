@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { FakeStorage } from './fake-storage.js';
-import { open } from '../../public/js/storage.js';
+import { open, readDay } from '../../public/js/storage.js';
 import { STORAGE_KEY } from '../../public/js/config.js';
 
 const NOW = { date: '2026-10-21', time: '08:00' };
@@ -109,5 +109,47 @@ describe('US-002 seed and reset (storage.md §3.1)', () => {
     const s = new FakeStorage({ [STORAGE_KEY]: withAlex(), 'gearloan:v1': 'keep' });
     open(NOW, { storage: s, host: HOST, search: '?reset-demo' });
     expect(s.getItem('gearloan:v1')).toBe('keep');
+  });
+});
+
+describe('US-003 readDay counts (storage.md §3.2)', () => {
+  const desk = (floor, n) => `F${floor}-${String(n).padStart(2, '0')}`;
+  const many = (date, floor, n) => Array.from({ length: n }, (_, i) => ({
+    ...booking, date, desk: desk(floor, i + 1), floor, name: `P${floor}-${i}`, nameKey: `p${floor}-${i}`,
+  }));
+  const withDoc = (bookings) => new FakeStorage({
+    [STORAGE_KEY]: JSON.stringify({ version: 1, seededAt: null, bookings, pastCounts: {} }),
+  });
+
+  it('See booked and remaining desks for a date', () => {
+    open(NOW, { storage: withDoc([...many('2026-10-22', 1, 12), ...many('2026-10-22', 2, 25)]), host: HOST });
+    const r = readDay('2026-10-22', NOW);
+    expect(r.ok).toBe(true);
+    expect(r.floors).toEqual([
+      { floor: 1, booked: 12, left: 18, full: false },
+      { floor: 2, booked: 25, left: 0, full: true },
+    ]);
+  });
+
+  it('Date without bookings (empty state)', () => {
+    open(NOW, { storage: withDoc(many('2026-10-22', 1, 3)), host: HOST });
+    expect(readDay('2026-10-23', NOW).floors.map((f) => [f.booked, f.left])).toEqual([[0, 30], [0, 25]]);
+  });
+
+  it('re-reads storage on every call (another tab may have written)', () => {
+    const s = withDoc([]);
+    open(NOW, { storage: s, host: HOST });
+    s.setItem(STORAGE_KEY, JSON.stringify({ version: 1, seededAt: null, bookings: many('2026-10-22', 1, 2), pastCounts: {} }));
+    expect(readDay('2026-10-22', NOW).floors[0].booked).toBe(2);
+  });
+
+  it('a date outside the window is not read', () => {
+    open(NOW, { storage: withDoc([]), host: HOST });
+    expect(readDay('2026-10-20', NOW)).toMatchObject({ ok: false, code: 'DATE_NOT_BOOKABLE' });
+  });
+
+  it('storage unavailable → empty floors (I-18)', () => {
+    open(NOW, { storage: null, host: HOST });
+    expect(readDay('2026-10-22', NOW).floors.map((f) => f.booked)).toEqual([0, 0]);
   });
 });

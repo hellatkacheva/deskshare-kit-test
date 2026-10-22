@@ -1,5 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { deadline, isWorkingDay, nameKey, nextWorkingDay } from '../../public/js/rules.js';
+import {
+  deadline, defaultDate, isBookable, isWorkingDay, nameKey, nextWorkingDay, windowDates,
+} from '../../public/js/rules.js';
+import { formatDate } from '../../public/js/time.js';
 
 const at = (date, time) => ({ date, time });
 
@@ -35,5 +38,39 @@ describe('deadline (US-017 rules 1–2, used by the seed)', () => {
 describe('nameKey (REQ-035, I-3)', () => {
   it('case-insensitive, ignores leading, trailing and repeated spaces', () => {
     expect(nameKey('  alex   MORGAN ')).toBe('alex morgan');
+  });
+});
+
+describe('US-003 booking window and default date (ASM-010, DEC-022)', () => {
+  const NOW = { date: '2026-10-21', time: '08:00' };
+
+  it('Booking window — last day and day after', () => {
+    const dates = windowDates(NOW);
+    expect(dates.map((d) => d.date)).toEqual(['2026-10-21', '2026-10-22', '2026-10-23', '2026-10-24',
+      '2026-10-25', '2026-10-26', '2026-10-27']);
+    expect(isBookable('2026-10-27', NOW)).toBe(true);
+    expect(isBookable('2026-10-28', NOW)).toBe(false);
+  });
+
+  it('Weekends and past dates cannot be chosen', () => {
+    const byDate = Object.fromEntries(windowDates(NOW).map((d) => [d.date, d.bookable]));
+    expect(byDate['2026-10-24']).toBe(false);
+    expect(byDate['2026-10-25']).toBe(false);
+    expect(isBookable('2026-10-20', NOW)).toBe(false);
+  });
+
+  it('Default date on a weekday', () => {
+    expect(defaultDate(NOW)).toBe('2026-10-21');
+  });
+
+  it('Default date on a weekend', () => {
+    expect(defaultDate({ date: '2026-10-24', time: '12:00' })).toBe('2026-10-26');
+    expect(defaultDate({ date: '2026-10-25', time: '12:00' })).toBe('2026-10-26');
+  });
+});
+
+describe('formatDate', () => {
+  it('Thu 2026-10-22', () => {
+    expect(formatDate('2026-10-22')).toBe('Thu 2026-10-22');
   });
 });

@@ -1,5 +1,6 @@
 // The only storage module (data-model.md, storage.md §3). Every access is wrapped in try/catch.
-import { RESET_PARAM, STORAGE_KEY, STORAGE_VERSION, TEST_HOSTS } from './config.js';
+import { FLOORS, RESET_PARAM, STORAGE_KEY, STORAGE_VERSION, TEST_HOSTS } from './config.js';
+import { isBookable } from './rules.js';
 import { buildSeed } from './seed.js';
 
 const PROBE_KEY = `${STORAGE_KEY}:probe`;
@@ -61,6 +62,27 @@ export function open(now, { storage, host = '', search = '' } = {}) {
     state = 'unavailable';
   }
   return result();
+}
+
+/** Current document, re-read from storage on every call (another tab may have written). */
+function read() {
+  if (state !== 'ready') return null;
+  try {
+    return parse(backend.getItem(STORAGE_KEY));
+  } catch {
+    return null;
+  }
+}
+
+/** storage.md §3.2 — counts per floor for one bookable date. */
+export function readDay(date, now) {
+  if (!isBookable(date, now)) return { ok: false, code: 'DATE_NOT_BOOKABLE' };
+  const bookings = (read()?.bookings ?? []).filter((b) => b.date === date);
+  const floors = FLOORS.map(({ id, desks }) => {
+    const booked = bookings.filter((b) => b.floor === id).length;
+    return { floor: id, booked, left: desks - booked, full: booked >= desks };
+  });
+  return { ok: true, floors };
 }
 
 export function storageState() {

@@ -32,6 +32,18 @@ export function isoWeekday(date) {
   return new Date(dayUtc(date)).getUTCDay() || 7;
 }
 
+const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+/** Short weekday name: "Thu". */
+export function weekdayName(date) {
+  return WEEKDAYS[isoWeekday(date) - 1];
+}
+
+/** "Thu 2026-10-22". */
+export function formatDate(date) {
+  return `${weekdayName(date)} ${date}`;
+}
+
 /** Office time + n minutes, as "YYYY-MM-DDTHH:MM". */
 export function addMinutes({ date, time }, n) {
   const [h, m] = time.split(':').map(Number);

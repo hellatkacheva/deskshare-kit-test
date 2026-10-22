@@ -81,6 +81,8 @@ Built 2026-10-22: all 11 automated; deployed-build check at `deploy` (S-5); test
 | Page left open over midnight (DEC-028) | E | `US-003.spec.js` (`page.clock` 23:59 → `runFor` 2 min) |
 | Counts after a reload | E | `US-003.spec.js` |
 
+Built 2026-10-22: all 10 automated.
+
 ### US-004 Desk grid of the selected floor (Variant A)
 | Scenario | Type | File |
 |---|---|---|

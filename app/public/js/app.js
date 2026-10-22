@@ -3,6 +3,7 @@ import { REFRESH_INTERVAL_SECONDS, RESET_PARAM } from './config.js';
 import { initClock, now } from './clock.js';
 import { MESSAGES, TEXT } from './messages.js';
 import * as store from './storage.js';
+import { renderBook } from './view-book.js';
 
 const $ = (id) => document.getElementById(id);
 
@@ -17,6 +18,8 @@ function browserStorage() {
 function renderShell() {
   $('banner').textContent = TEXT.banner;
   $('app-name').textContent = TEXT.appName;
+  $('date-strip').setAttribute('aria-label', TEXT.dateStrip);
+  $('floor-tabs').setAttribute('aria-label', TEXT.floorTabs);
 }
 
 function renderStatus() {
@@ -26,10 +29,13 @@ function renderStatus() {
     : state === 'unreadable' ? MESSAGES.STORAGE_UNREADABLE : '';
   box.textContent = message;
   box.hidden = !message;
+  // ui.md §3.6: nothing is rendered from unreadable data.
+  $('book-view').hidden = state === 'unreadable';
 }
 
 function refresh() {
   renderStatus();
+  if (store.storageState() !== 'unreadable') renderBook($('book-view'), now(), refresh);
 }
 
 initClock({ host: location.hostname, search: location.search });
