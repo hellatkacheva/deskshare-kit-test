@@ -34,6 +34,8 @@ export const TEXT = {
   actionsTitle: (desk, date) => `Desk ${desk} · ${formatDate(date)}`,
   nameAsBooked: 'Your name (as booked)',
   cancelButton: 'Cancel booking',
+  checkInButton: 'Check in',
+  checkedIn: 'Checked in ✓',
 };
 
 // Result codes of storage operations (storage.md §4)
@@ -50,4 +52,7 @@ export const MESSAGES = {
   NAME_ALREADY_BOOKED: 'This name already has a booking for that day.',
   NO_BOOKING: ({ desk, date }) => `There is no booking for ${desk} on ${formatDate(date)}.`,
   NAME_MISMATCH: 'The name does not match the booking.',
+  NOT_BOOKING_DAY: 'Check-in is only possible on the booking day.',
+  RELEASED: ({ deadline }) => `Too late — the booking was released at ${TEXT.deadlineLabel(deadline)}.`,
+  ALREADY_CHECKED_IN: 'This booking is already checked in.',
 };

@@ -79,7 +79,7 @@ function openBookForm(date, desk, floor) {
   name.input.focus();
 }
 
-/** ui.md §3.3 — cancel (and, from US-008, check-in) for a taken desk. */
+/** ui.md §3.3 — check-in (booking day only, I-6) and cancel for a taken desk. */
 function openActions(date, desk, deadlineStamp) {
   const isToday = date === clockNow().date;
   const deadlineLine = deadlineStamp
@@ -87,6 +87,16 @@ function openActions(date, desk, deadlineStamp) {
     : null;
   const name = nameField('action-name', TEXT.nameAsBooked);
   const error = el('p', { className: 'error', role: 'alert' });
+  const info = el('p', { className: 'info', role: 'status' });
+  const checkInBtn = isToday
+    ? button(TEXT.checkInButton, () => {
+      const result = store.checkIn({ date, desk, name: name.input.value }, clockNow());
+      rerender();
+      error.textContent = result.ok ? '' : result.message;
+      info.textContent = result.ok ? (result.message ?? TEXT.checkedIn) : '';
+    }, 'primary')
+    : null;
+  const notToday = isToday ? null : el('p', { className: 'info', textContent: MESSAGES.NOT_BOOKING_DAY });
   const cancelBtn = button(TEXT.cancelButton, () => {
     const result = store.cancel({ date, desk, name: name.input.value }, clockNow());
     rerender();
@@ -96,9 +106,11 @@ function openActions(date, desk, deadlineStamp) {
   openDialog(el('div', { className: 'dialog-form' }, [
     el('h2', { textContent: TEXT.actionsTitle(desk, date) }),
     deadlineLine,
+    notToday,
     ...name.nodes,
     error,
-    el('div', { className: 'actions' }, [cancelBtn, button(TEXT.close, closeDialog)]),
+    info,
+    el('div', { className: 'actions' }, [checkInBtn, cancelBtn, button(TEXT.close, closeDialog)]),
   ]));
   name.input.focus();
 }

@@ -4,14 +4,14 @@ import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import {
-  BANNER, KEY, bookDesk, booking, cancelDesk, day, dialog, doc, office, openApp, store, stored, tile,
+  BANNER, KEY, bookDesk, booking, cancelDesk, checkInDesk, day, dialog, doc, office, openApp, store, stored, tile,
 } from './helpers.js';
 
 const ALEX = booking(); // F1-07 on Thu 2026-10-22, "Alex Morgan"
 
 test('Banner on every screen', async ({ page }) => {
-  // Screens so far: Book view, booking form, confirmation, cancel dialog. Check-in (US-008)
-  // and Tomorrow (US-013) are added here when built.
+  // Screens: Book view, booking form, confirmation, desk dialog (cancel + check-in, US-007 / US-008).
+  // Tomorrow (US-013) is added here when built.
   await openApp(page);
   await expect(page.locator('#banner')).toHaveText(BANNER);
   await expect(page.locator('#banner')).toBeVisible();
@@ -98,7 +98,9 @@ test('No network calls with booking data', async ({ page, baseURL }) => {
   await dialog(page).getByRole('button', { name: 'Done' }).click();
   await cancelDesk(page, 'F1-04', 'Alex Morgan'); // US-007
   await expect(tile(page, 'F1-04')).toHaveAccessibleName('F1-04 free');
-  // Check-in (US-008) is added here when built.
+  await day(page, 'Wed 2026-10-21').click();
+  await checkInDesk(page, 'F1-14', 'Grace Holm'); // US-008 — seeded, not checked in, deadline 10:00
+  await expect(dialog(page).getByText('Checked in ✓')).toBeVisible();
   expect(requests.length).toBe(afterLoad);
 });
 

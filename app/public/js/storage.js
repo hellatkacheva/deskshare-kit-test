@@ -173,6 +173,21 @@ export function cancel({ date, desk, name }, now) {
   });
 }
 
+/** storage.md §3.5 — the booking is looked at before release, so the deadline answers RELEASED (I-7). */
+export function checkIn({ date, desk, name }, now) {
+  return mutate((data) => {
+    const b = data.bookings.find((x) => x.date === date && x.desk === desk);
+    if (!b) return fail('NO_BOOKING', { date, desk });
+    if (date !== now.date) return fail('NOT_BOOKING_DAY');
+    if (b.nameKey !== nameKey(name)) return fail('NAME_MISMATCH');
+    if (b.checkedInAt) return { ok: true, info: 'ALREADY_CHECKED_IN', message: MESSAGES.ALREADY_CHECKED_IN };
+    // Strictly before the deadline (DEC-020).
+    if (`${now.date}T${now.time}` >= b.deadline) return fail('RELEASED', { deadline: b.deadline });
+    b.checkedInAt = `${now.date}T${now.time}`;
+    return { ok: true };
+  });
+}
+
 export function storageState() {
   return state;
 }

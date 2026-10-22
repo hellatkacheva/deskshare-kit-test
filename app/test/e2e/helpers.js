@@ -66,3 +66,10 @@ export async function cancelDesk(page, desk, name) {
   await page.getByLabel('Your name').fill(name);
   await page.getByRole('button', { name: 'Cancel booking' }).click();
 }
+
+/** Open the desk actions of a taken desk, type a name, press Check in. */
+export async function checkInDesk(page, desk, name) {
+  await tile(page, desk).click();
+  await page.getByLabel('Your name').fill(name);
+  await page.getByRole('button', { name: 'Check in' }).click();
+}

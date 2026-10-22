@@ -163,3 +163,6 @@ button[aria-pressed="true"] {
 button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
 
 .notice { font-size: 0.85rem; color: var(--muted); }
+
+.info:empty { display: none; }
+.info { font-weight: 600; }

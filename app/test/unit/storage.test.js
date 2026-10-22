@@ -1,6 +1,8 @@
 import { describe, it, expect } from 'vitest';
 import { FakeStorage } from './fake-storage.js';
-import { book, cancel, open, readDay } from '../../public/js/storage.js';
+import {
+  book, cancel, checkIn, open, readDay,
+} from '../../public/js/storage.js';
 import { STORAGE_KEY } from '../../public/js/config.js';
 
 const NOW = { date: '2026-10-21', time: '08:00' };
@@ -372,5 +374,67 @@ describe('US-017 same-day closing in book()', () => {
       ok: false, code: 'SAME_DAY_CLOSED', message: 'Booking for today is closed — please pick another date',
     });
     expect(book({ date: '2026-10-22', desk: 'F2-03', name: 'Jamie Lee' }, late).ok).toBe(true);
+  });
+});
+
+describe('US-008 checkIn (storage.md §3.5)', () => {
+  const THU = '2026-10-22';
+  const at = (time) => ({ date: THU, time });
+  const start = (bookings = [booking]) => {
+    const s = new FakeStorage({ [STORAGE_KEY]: JSON.stringify({ version: 1, seededAt: null, bookings, pastCounts: {} }) });
+    open(NOW, { storage: s, host: HOST });
+    return s;
+  };
+  const stored = (s) => JSON.parse(s.getItem(STORAGE_KEY)).bookings;
+  const alex = (name = 'Alex Morgan') => ({ date: THU, desk: 'F1-07', name });
+
+  it('Check in before the deadline — state effect', () => {
+    const s = start();
+    expect(checkIn(alex(), at('09:10'))).toEqual({ ok: true });
+    expect(stored(s)[0].checkedInAt).toBe('2026-10-22T09:10');
+  });
+
+  it('Check-in before the booking day is refused', () => {
+    start();
+    expect(checkIn(alex(), { date: '2026-10-21', time: '16:00' })).toMatchObject({
+      ok: false, code: 'NOT_BOOKING_DAY', message: 'Check-in is only possible on the booking day.',
+    });
+  });
+
+  it('Wrong name', () => {
+    const s = start();
+    expect(checkIn(alex('Jamie Lee'), at('09:10')).code).toBe('NAME_MISMATCH');
+    expect(stored(s)[0].checkedInAt).toBeNull();
+  });
+
+  it('Name match ignores case and extra spaces', () => {
+    start();
+    expect(checkIn(alex('  ALEX   morgan'), at('09:10')).ok).toBe(true);
+  });
+
+  it('One minute before the deadline (boundary)', () => {
+    start();
+    expect(checkIn(alex(), at('09:59')).ok).toBe(true);
+  });
+
+  it('Exactly at the deadline is too late (boundary)', () => {
+    start();
+    expect(checkIn(alex(), at('10:00'))).toMatchObject({
+      ok: false, code: 'RELEASED', message: 'Too late — the booking was released at 10:00 office time (UTC+5).',
+    });
+  });
+
+  it('Second check-in', () => {
+    const s = start();
+    checkIn(alex(), at('09:10'));
+    expect(checkIn(alex(), at('09:20'))).toEqual({
+      ok: true, info: 'ALREADY_CHECKED_IN', message: 'This booking is already checked in.',
+    });
+    expect(stored(s)[0].checkedInAt).toBe('2026-10-22T09:10');
+  });
+
+  it('No booking on the desk', () => {
+    start([]);
+    expect(checkIn(alex(), at('09:10')).code).toBe('NO_BOOKING');
   });
 });

@@ -180,6 +180,8 @@ Built 2026-10-22: all 9 automated.
 | Second check-in | U, E | `storage.test.js` (`ALREADY_CHECKED_IN`); `US-008.spec.js` |
 | Notice on the check-in name field | E | `US-008.spec.js` |
 
+Built 2026-10-22: all 9 automated.
+
 ### US-009 Auto-release of bookings not checked in
 | Scenario | Type | File |
 |---|---|---|
