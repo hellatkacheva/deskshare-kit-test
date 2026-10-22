@@ -50,6 +50,7 @@ function showConfirmation(booking) {
     el('h2', { textContent: TEXT.bookedTitle }),
     el('p', { textContent: TEXT.dateLine(booking.date) }),
     el('p', { textContent: TEXT.deskLine(booking.desk) }),
+    el('p', { className: 'deadline', textContent: TEXT.checkInBy(booking.deadline) }),
     el('p', { className: 'hint', textContent: TEXT.hint }),
     el('div', { className: 'actions' }, [button(TEXT.done, closeDialog, 'primary')]),
   );
@@ -79,7 +80,11 @@ function openBookForm(date, desk, floor) {
 }
 
 /** ui.md §3.3 — cancel (and, from US-008, check-in) for a taken desk. */
-function openActions(date, desk) {
+function openActions(date, desk, deadlineStamp) {
+  const isToday = date === clockNow().date;
+  const deadlineLine = deadlineStamp
+    ? el('p', { className: 'deadline', textContent: isToday ? TEXT.deadlineToday(deadlineStamp) : TEXT.deadlineOn(deadlineStamp) })
+    : null;
   const name = nameField('action-name', TEXT.nameAsBooked);
   const error = el('p', { className: 'error', role: 'alert' });
   const cancelBtn = button(TEXT.cancelButton, () => {
@@ -90,6 +95,7 @@ function openActions(date, desk) {
   });
   openDialog(el('div', { className: 'dialog-form' }, [
     el('h2', { textContent: TEXT.actionsTitle(desk, date) }),
+    deadlineLine,
     ...name.nodes,
     error,
     el('div', { className: 'actions' }, [cancelBtn, button(TEXT.close, closeDialog)]),
@@ -151,7 +157,7 @@ function renderGrid(root, day) {
     btn.dataset.desk = d.desk;
     btn.addEventListener('click', () => {
       if (!canAct) return;
-      if (d.taken) openActions(date, d.desk);
+      if (d.taken) openActions(date, d.desk, d.deadline);
       else openBookForm(date, d.desk, d.floor);
     });
     return btn;

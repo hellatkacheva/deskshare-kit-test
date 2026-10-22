@@ -2,7 +2,7 @@
 import { FLOORS, RESET_PARAM, STORAGE_KEY, STORAGE_VERSION, TEST_HOSTS } from './config.js';
 import { MESSAGES } from './messages.js';
 import {
-  checkName, cleanName, deadline, desksOf, floorOf, isBookable, nameKey,
+  checkName, cleanName, deadline, desksOf, floorOf, isBookable, nameKey, sameDayClosed,
 } from './rules.js';
 import { buildSeed } from './seed.js';
 
@@ -137,6 +137,7 @@ export function book({ date, desk, name, showName = false }, now) {
     const nameProblem = checkName(name);
     if (nameProblem) return fail(nameProblem);
     if (!isBookable(date, now)) return fail('DATE_NOT_BOOKABLE');
+    if (sameDayClosed(date, now)) return fail('SAME_DAY_CLOSED');
     const floor = floorOf(desk);
     if (floor === null) return fail('UNKNOWN_DESK');
     const sameDay = data.bookings.filter((b) => b.date === date);

@@ -165,6 +165,8 @@ Built 2026-10-22: all 3 automated; "No headcount list" re-checked when Tomorrow 
 | Office time zone, not the device zone | U | `time.test.js`, `rules.test.js` (04:45 UTC → 10:15) |
 | Time label on the check-in field | E | `US-017.spec.js` |
 
+Built 2026-10-22: all 9 automated.
+
 ### US-008 Check in to my booking
 | Scenario | Type | File |
 |---|---|---|

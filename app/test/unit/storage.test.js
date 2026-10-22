@@ -353,3 +353,24 @@ describe('US-007 cancel (storage.md §3.4)', () => {
     expect(book({ date: THU, desk: 'F1-09', name: 'Alex Morgan' }, NOW).ok).toBe(true);
   });
 });
+
+describe('US-017 same-day closing in book()', () => {
+  const start = () => {
+    const s = new FakeStorage({ [STORAGE_KEY]: JSON.stringify({ version: 1, seededAt: null, bookings: [], pastCounts: {} }) });
+    open(NOW, { storage: s, host: HOST });
+    return s;
+  };
+  it('Same-day booking at 23:58 (boundary) — confirmed with deadline 23:59', () => {
+    start();
+    expect(book({ date: '2026-10-21', desk: 'F2-03', name: 'Jamie Lee' }, { date: '2026-10-21', time: '23:58' }))
+      .toMatchObject({ ok: true, booking: { deadline: '2026-10-21T23:59' } });
+  });
+  it('Same-day booking at 23:59 is refused (boundary)', () => {
+    const late = { date: '2026-10-21', time: '23:59' };
+    start();
+    expect(book({ date: '2026-10-21', desk: 'F2-03', name: 'Jamie Lee' }, late)).toMatchObject({
+      ok: false, code: 'SAME_DAY_CLOSED', message: 'Booking for today is closed — please pick another date',
+    });
+    expect(book({ date: '2026-10-22', desk: 'F2-03', name: 'Jamie Lee' }, late).ok).toBe(true);
+  });
+});

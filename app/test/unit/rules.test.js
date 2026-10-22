@@ -1,8 +1,9 @@
 import { describe, it, expect } from 'vitest';
 import {
-  checkName, deadline, defaultDate, isBookable, isWorkingDay, nameKey, nextWorkingDay, windowDates,
+  checkName, deadline, defaultDate, isBookable, isWorkingDay, nameKey, nextWorkingDay, sameDayClosed,
+  windowDates,
 } from '../../public/js/rules.js';
-import { formatDate } from '../../public/js/time.js';
+import { formatDate, officeNow } from '../../public/js/time.js';
 
 const at = (date, time) => ({ date, time });
 
@@ -85,5 +86,36 @@ describe('US-016 checkName (REQ-035, ASM-018)', () => {
     expect(checkName(` ${'a'.repeat(50)} `)).toBeNull();
     expect(checkName('a'.repeat(51))).toBe('NAME_TOO_LONG');
     expect(checkName('😀'.repeat(50))).toBeNull();
+  });
+});
+
+describe('US-017 deadline and same-day closing (ASM-008, DEC-024)', () => {
+  it('Booking made before the day', () => {
+    expect(deadline('2026-10-22', at('2026-10-21', '16:00'))).toBe('2026-10-22T10:00');
+  });
+  it('Same-day booking at 09:30 (boundary)', () => {
+    expect(deadline('2026-10-21', at('2026-10-21', '09:30'))).toBe('2026-10-21T10:00');
+  });
+  it('Same-day booking at 09:31 (boundary + 1)', () => {
+    expect(deadline('2026-10-21', at('2026-10-21', '09:31'))).toBe('2026-10-21T10:01');
+  });
+  it('Same-day booking later in the day', () => {
+    expect(deadline('2026-10-21', at('2026-10-21', '11:15'))).toBe('2026-10-21T11:45');
+  });
+  it('Late same-day booking — deadline capped at 23:59', () => {
+    expect(deadline('2026-10-21', at('2026-10-21', '23:45'))).toBe('2026-10-21T23:59');
+  });
+  it('Same-day booking at 23:58 (boundary)', () => {
+    expect(deadline('2026-10-21', at('2026-10-21', '23:58'))).toBe('2026-10-21T23:59');
+    expect(sameDayClosed('2026-10-21', at('2026-10-21', '23:58'))).toBe(false);
+  });
+  it('Same-day booking at 23:59 is refused (boundary); other dates not limited', () => {
+    expect(sameDayClosed('2026-10-21', at('2026-10-21', '23:59'))).toBe(true);
+    expect(sameDayClosed('2026-10-22', at('2026-10-21', '23:59'))).toBe(false);
+  });
+  it('Office time zone, not the device zone (04:45 UTC = 09:45 office → 10:15)', () => {
+    const now = officeNow(Date.UTC(2026, 9, 21, 4, 45));
+    expect(now).toEqual(at('2026-10-21', '09:45'));
+    expect(deadline('2026-10-21', now)).toBe('2026-10-21T10:15');
   });
 });

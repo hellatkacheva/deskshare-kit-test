@@ -73,3 +73,8 @@ export function checkName(raw) {
   if ([...name].length > NAME_MAX_LENGTH) return 'NAME_TOO_LONG';
   return null;
 }
+
+/** Booking for today is closed from DEADLINE_CAP office time (DEC-024). */
+export function sameDayClosed(date, now) {
+  return date === now.date && now.time >= DEADLINE_CAP;
+}
