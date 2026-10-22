@@ -48,6 +48,8 @@ Commands (`app/package.json`): `npm test` (Vitest) · `npm run test:e2e` (Playwr
 | No network calls with booking data | E, S | `US-001.spec.js` (record requests: after load none; book / cancel / check-in add none); `deployed.smoke.spec.js` |
 | Another browser does not see the data | E | `US-001.spec.js` (two browser contexts) |
 
+Built 2026-10-22: all 7 automated; parts waiting for later stories are listed in `build-status.md`.
+
 ### US-002 Seed demo data
 | Scenario | Type | File |
 |---|---|---|
