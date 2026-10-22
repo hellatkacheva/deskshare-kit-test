@@ -13,6 +13,9 @@ export const TEXT = {
   grid: (id) => `Desks of Floor ${id}`,
   free: 'free',
   taken: 'taken',
+  namesSwitch: "Show colleagues' names",
+  off: 'Off',
+  on: 'On',
   // Booking form and confirmation (ui.md §3.1, §3.2)
   bookTitle: (desk) => `Book desk ${desk}`,
   bookSubtitle: (date, floor) => `${formatDate(date)} · Floor ${floor}`,

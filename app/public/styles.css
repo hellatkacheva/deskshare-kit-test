@@ -166,3 +166,10 @@ button.primary { background: var(--accent); border-color: var(--accent); color: 
 
 .info:empty { display: none; }
 .info { font-weight: 600; }
+
+/* Names switch (US-010) */
+.header { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.switch { padding: 0 12px; }
+.switch-state { font-weight: 700; }
+.switch[aria-checked="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+.tile-desk, .tile-state { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

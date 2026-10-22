@@ -505,3 +505,22 @@ describe('US-009 auto-release (storage.md §3.7)', () => {
     expect(sweep(r.data, at('10:00')).changed).toBe(false);
   });
 });
+
+describe('US-010 / US-011 names in readDay', () => {
+  const withDoc = (bookings) => new FakeStorage({
+    [STORAGE_KEY]: JSON.stringify({ version: 1, seededAt: null, bookings, pastCounts: {} }),
+  });
+  it('switch On: name only with consent; switch Off: never', () => {
+    const jamie = { ...booking, desk: 'F1-08', name: 'Jamie Lee', nameKey: 'jamie lee', showName: false };
+    open(NOW, { storage: withDoc([{ ...booking, showName: true }, jamie]), host: HOST });
+    const on = readDay('2026-10-22', NOW, { names: true }).desks;
+    expect(on.find((d) => d.desk === 'F1-07').name).toBe('Alex Morgan');
+    expect(on.find((d) => d.desk === 'F1-08').name).toBeNull();
+    expect(readDay('2026-10-22', NOW, { names: false }).desks.find((d) => d.desk === 'F1-07').name).toBeNull();
+  });
+  it('Selected date only — other dates never carry names into this day', () => {
+    open(NOW, { storage: withDoc([{ ...booking, showName: true }, { ...booking, date: '2026-10-23', showName: true }]), host: HOST });
+    const day = readDay('2026-10-22', NOW, { names: true });
+    expect(day.desks.filter((d) => d.name)).toHaveLength(1);
+  });
+});

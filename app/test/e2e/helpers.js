@@ -73,3 +73,5 @@ export async function checkInDesk(page, desk, name) {
   await page.getByLabel('Your name').fill(name);
   await page.getByRole('button', { name: 'Check in' }).click();
 }
+
+export const namesSwitch = (page) => page.getByRole('switch', { name: "Show colleagues' names" });

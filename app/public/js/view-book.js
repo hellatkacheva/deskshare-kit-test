@@ -6,7 +6,16 @@ import { defaultDate, isBookable, windowDates } from './rules.js';
 import * as store from './storage.js';
 import { formatDate, weekdayName } from './time.js';
 
-const ui = { selectedDate: null, selectedFloor: FLOORS[0].id };
+// names: the demo switch (US-010) — a JS variable only, so it is Off after every reload (REQ-038).
+const ui = { selectedDate: null, selectedFloor: FLOORS[0].id, names: false };
+
+export function setNames(on) {
+  ui.names = on;
+}
+
+export function namesOn() {
+  return ui.names;
+}
 let rerender = () => {};
 
 function el(tag, props = {}, children = []) {
@@ -159,8 +168,9 @@ function renderGrid(root, day) {
   const canAct = store.storageState() === 'ready'; // US-001 rule 5: no actions without storage
   grid.setAttribute('aria-label', TEXT.grid(ui.selectedFloor));
   grid.replaceChildren(...day.desks.filter((d) => d.floor === ui.selectedFloor).map((d) => {
-    // Variant A: a taken desk shows "taken", never a name (REQ-026). Taken desks stay tappable (US-004 rule 5).
-    const label = d.taken ? TEXT.taken : TEXT.free;
+    // Variant A: "taken" (REQ-026). Variant B: the consenting booker's name, as plain text (REQ-028, REQ-035).
+    // Taken desks stay tappable (US-004 rule 5).
+    const label = d.name ?? (d.taken ? TEXT.taken : TEXT.free);
     const btn = el('button', { type: 'button', className: `tile ${d.taken ? 'tile-taken' : 'tile-free'}` }, [
       el('span', { className: 'tile-desk', textContent: d.desk }),
       el('span', { className: 'tile-state', textContent: label }),
@@ -182,7 +192,7 @@ export function renderBook(root, now, onChange) {
   // I-9: a selected date that left the window falls back to the default date.
   if (!ui.selectedDate || !isBookable(ui.selectedDate, now)) ui.selectedDate = defaultDate(now);
   renderStrip(root, now);
-  const day = store.readDay(ui.selectedDate, now);
+  const day = store.readDay(ui.selectedDate, now, { names: ui.names });
   if (!day.ok) return;
   renderFloors(root, day);
   renderGrid(root, day);

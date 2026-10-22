@@ -205,6 +205,8 @@ Built 2026-10-22: all 9 automated.
 | Switching keeps bookings (state effect) | E | `US-010.spec.js` (counts and stored `showName` unchanged) |
 | Off again after a reload | E | `US-010.spec.js` |
 
+Built 2026-10-22: all 4 automated.
+
 ### US-011 Variant B: consent and names on the desk grid
 | Scenario | Type | File |
 |---|---|---|
