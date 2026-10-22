@@ -117,6 +117,8 @@ Built 2026-10-22: all 10 automated.
 | Name of exactly 50 characters (boundary) | U | `rules.test.js`, `storage.test.js` |
 | Name of 51 characters (boundary + 1) | U, E | `rules.test.js`; `US-016.spec.js` (message, F1-08 free) |
 
+Built 2026-10-22: all 4 automated.
+
 ### US-006 Hard stop when the floor is full
 | Scenario | Type | File |
 |---|---|---|

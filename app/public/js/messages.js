@@ -1,5 +1,5 @@
 // All user texts (config.md §3; storage.md §4; ui.md §1).
-import { BOOKING_WINDOW_DAYS } from './config.js';
+import { BOOKING_WINDOW_DAYS, NAME_MAX_LENGTH } from './config.js';
 import { formatDate } from './time.js';
 
 export const TEXT = {
@@ -33,5 +33,7 @@ export const MESSAGES = {
   DATE_NOT_BOOKABLE: `This date can't be booked — please pick a weekday from today up to ${BOOKING_WINDOW_DAYS} days ahead.`,
   UNKNOWN_DESK: 'This desk does not exist.',
   DESK_TAKEN: 'This desk is already taken — pick another desk.',
+  NAME_REQUIRED: 'Please enter your name.',
+  NAME_TOO_LONG: `Name is too long — maximum ${NAME_MAX_LENGTH} characters.`,
   NAME_ALREADY_BOOKED: 'This name already has a booking for that day.',
 };

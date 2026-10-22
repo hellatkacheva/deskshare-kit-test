@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
-  deadline, defaultDate, isBookable, isWorkingDay, nameKey, nextWorkingDay, windowDates,
+  checkName, deadline, defaultDate, isBookable, isWorkingDay, nameKey, nextWorkingDay, windowDates,
 } from '../../public/js/rules.js';
 import { formatDate } from '../../public/js/time.js';
 
@@ -72,5 +72,18 @@ describe('US-003 booking window and default date (ASM-010, DEC-022)', () => {
 describe('formatDate', () => {
   it('Thu 2026-10-22', () => {
     expect(formatDate('2026-10-22')).toBe('Thu 2026-10-22');
+  });
+});
+
+describe('US-016 checkName (REQ-035, ASM-018)', () => {
+  it('Name of spaces only / empty → NAME_REQUIRED', () => {
+    expect(checkName('   ')).toBe('NAME_REQUIRED');
+    expect(checkName('')).toBe('NAME_REQUIRED');
+  });
+  it('50 characters ok, 51 → NAME_TOO_LONG (code points after trim)', () => {
+    expect(checkName('a'.repeat(50))).toBeNull();
+    expect(checkName(` ${'a'.repeat(50)} `)).toBeNull();
+    expect(checkName('a'.repeat(51))).toBe('NAME_TOO_LONG');
+    expect(checkName('😀'.repeat(50))).toBeNull();
   });
 });

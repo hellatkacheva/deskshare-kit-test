@@ -2,7 +2,7 @@
 import { FLOORS, RESET_PARAM, STORAGE_KEY, STORAGE_VERSION, TEST_HOSTS } from './config.js';
 import { MESSAGES } from './messages.js';
 import {
-  cleanName, deadline, desksOf, floorOf, isBookable, nameKey,
+  checkName, cleanName, deadline, desksOf, floorOf, isBookable, nameKey,
 } from './rules.js';
 import { buildSeed } from './seed.js';
 
@@ -134,6 +134,8 @@ function mutate(change) {
 /** storage.md §3.3 */
 export function book({ date, desk, name, showName = false }, now) {
   return mutate((data) => {
+    const nameProblem = checkName(name);
+    if (nameProblem) return fail(nameProblem);
     if (!isBookable(date, now)) return fail('DATE_NOT_BOOKABLE');
     const floor = floorOf(desk);
     if (floor === null) return fail('UNKNOWN_DESK');

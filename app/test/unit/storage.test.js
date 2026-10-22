@@ -260,3 +260,26 @@ describe('US-005 book (storage.md §3.3)', () => {
     expect(book({ date: THU, desk: 'F1-07', name: 'A' }, NOW).code).toBe('STORAGE_UNREADABLE');
   });
 });
+
+describe('US-016 name rules in book()', () => {
+  const start = () => {
+    const s = new FakeStorage({ [STORAGE_KEY]: JSON.stringify({ version: 1, seededAt: null, bookings: [], pastCounts: {} }) });
+    open(NOW, { storage: s, host: HOST });
+    return s;
+  };
+  it('Name of spaces only', () => {
+    const s = start();
+    expect(book({ date: '2026-10-22', desk: 'F1-07', name: '   ' }, NOW))
+      .toMatchObject({ ok: false, code: 'NAME_REQUIRED', message: 'Please enter your name.' });
+    expect(JSON.parse(s.getItem(STORAGE_KEY)).bookings).toEqual([]);
+  });
+  it('Name of exactly 50 characters (boundary)', () => {
+    start();
+    expect(book({ date: '2026-10-22', desk: 'F1-07', name: 'a'.repeat(50) }, NOW).ok).toBe(true);
+  });
+  it('Name of 51 characters (boundary + 1)', () => {
+    start();
+    expect(book({ date: '2026-10-22', desk: 'F1-08', name: 'a'.repeat(51) }, NOW))
+      .toMatchObject({ ok: false, code: 'NAME_TOO_LONG', message: 'Name is too long — maximum 50 characters.' });
+  });
+});

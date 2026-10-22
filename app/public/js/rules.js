@@ -1,6 +1,7 @@
 // Pure booking rules (storage.md §2).
 import {
-  BOOKING_WINDOW_DAYS, CHECKIN_CUTOFF, DEADLINE_CAP, FLOORS, GRACE_MINUTES, SAME_DAY_THRESHOLD, WORKING_DAYS,
+  BOOKING_WINDOW_DAYS, CHECKIN_CUTOFF, DEADLINE_CAP, FLOORS, GRACE_MINUTES, NAME_MAX_LENGTH, SAME_DAY_THRESHOLD,
+  WORKING_DAYS,
 } from './config.js';
 import { addDays, addMinutes, isoWeekday } from './time.js';
 
@@ -63,4 +64,12 @@ export function desksOf(floorId) {
 export function floorOf(desk) {
   const floor = FLOORS.find((f) => desksOf(f.id).includes(desk));
   return floor ? floor.id : null;
+}
+
+/** null when the name is fine, else NAME_REQUIRED / NAME_TOO_LONG (REQ-035, ASM-018, I-3). */
+export function checkName(raw) {
+  const name = cleanName(raw);
+  if (!name) return 'NAME_REQUIRED';
+  if ([...name].length > NAME_MAX_LENGTH) return 'NAME_TOO_LONG';
+  return null;
 }
