@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { FakeStorage } from './fake-storage.js';
-import { book, open, readDay } from '../../public/js/storage.js';
+import { book, cancel, open, readDay } from '../../public/js/storage.js';
 import { STORAGE_KEY } from '../../public/js/config.js';
 
 const NOW = { date: '2026-10-21', time: '08:00' };
@@ -307,5 +307,49 @@ describe('US-006 hard stop', () => {
     expect(book({ date: '2026-10-22', desk: 'F2-25', name: 'Sam Rivera' }, NOW)).toMatchObject({
       ok: false, code: 'FLOOR_FULL', message: 'This floor is full for this day — please pick another day or floor.',
     });
+  });
+});
+
+describe('US-007 cancel (storage.md §3.4)', () => {
+  const THU = '2026-10-22';
+  const start = (bookings) => {
+    const s = new FakeStorage({ [STORAGE_KEY]: JSON.stringify({ version: 1, seededAt: null, bookings, pastCounts: {} }) });
+    open(NOW, { storage: s, host: HOST });
+    return s;
+  };
+  const stored = (s) => JSON.parse(s.getItem(STORAGE_KEY)).bookings;
+
+  it('Booking already cancelled in another tab', () => {
+    const s = start([booking]);
+    expect(cancel({ date: THU, desk: 'F1-07', name: 'Alex Morgan' }, NOW).ok).toBe(true);
+    expect(cancel({ date: THU, desk: 'F1-07', name: 'Alex Morgan' }, NOW)).toMatchObject({
+      ok: false, code: 'NO_BOOKING', message: 'There is no booking for F1-07 on Thu 2026-10-22.',
+    });
+    expect(stored(s)).toEqual([]);
+  });
+
+  it('Name match ignores case and extra spaces', () => {
+    start([booking]);
+    expect(cancel({ date: THU, desk: 'F1-07', name: '  alex   MORGAN ' }, NOW).ok).toBe(true);
+  });
+
+  it('Wrong name', () => {
+    const s = start([booking]);
+    expect(cancel({ date: THU, desk: 'F1-07', name: 'Alex Morgen' }, NOW)).toMatchObject({
+      ok: false, code: 'NAME_MISMATCH', message: 'The name does not match the booking.',
+    });
+    expect(stored(s)).toEqual([booking]);
+  });
+
+  it('Cancel after check-in on the booking day', () => {
+    const s = start([{ ...booking, checkedInAt: '2026-10-22T09:10' }]);
+    expect(cancel({ date: THU, desk: 'F1-07', name: 'Alex Morgan' }, { date: THU, time: '15:00' }).ok).toBe(true);
+    expect(stored(s)).toEqual([]);
+  });
+
+  it('Same name can book again after cancel', () => {
+    start([booking]);
+    cancel({ date: THU, desk: 'F1-07', name: 'Alex Morgan' }, NOW);
+    expect(book({ date: THU, desk: 'F1-09', name: 'Alex Morgan' }, NOW).ok).toBe(true);
   });
 });

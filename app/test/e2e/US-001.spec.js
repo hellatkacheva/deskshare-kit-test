@@ -4,13 +4,13 @@ import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import {
-  BANNER, KEY, bookDesk, booking, day, dialog, doc, office, openApp, store, stored, tile,
+  BANNER, KEY, bookDesk, booking, cancelDesk, day, dialog, doc, office, openApp, store, stored, tile,
 } from './helpers.js';
 
 const ALEX = booking(); // F1-07 on Thu 2026-10-22, "Alex Morgan"
 
 test('Banner on every screen', async ({ page }) => {
-  // Screens so far: Book view, booking form, confirmation. Cancel / check-in dialog (US-007, US-008)
+  // Screens so far: Book view, booking form, confirmation, cancel dialog. Check-in (US-008)
   // and Tomorrow (US-013) are added here when built.
   await openApp(page);
   await expect(page.locator('#banner')).toHaveText(BANNER);
@@ -21,6 +21,9 @@ test('Banner on every screen', async ({ page }) => {
   await page.getByLabel('Your name').fill('Alex Morgan');
   await page.getByRole('button', { name: 'Book desk' }).click();
   await expect(dialog(page).getByRole('heading', { name: 'Booked ✓' })).toBeVisible();
+  await expect(dialog(page).locator('.dialog-banner')).toHaveText(BANNER);
+  await dialog(page).getByRole('button', { name: 'Done' }).click();
+  await tile(page, 'F1-04').click(); // cancel dialog (US-007)
   await expect(dialog(page).locator('.dialog-banner')).toHaveText(BANNER);
 });
 
@@ -92,7 +95,10 @@ test('No network calls with booking data', async ({ page, baseURL }) => {
   await day(page, 'Thu 2026-10-22').click();
   await bookDesk(page, 'F1-04', 'Alex Morgan'); // US-005
   await expect(dialog(page).getByRole('heading', { name: 'Booked ✓' })).toBeVisible();
-  // Cancel (US-007) and check-in (US-008) are added here when built.
+  await dialog(page).getByRole('button', { name: 'Done' }).click();
+  await cancelDesk(page, 'F1-04', 'Alex Morgan'); // US-007
+  await expect(tile(page, 'F1-04')).toHaveAccessibleName('F1-04 free');
+  // Check-in (US-008) is added here when built.
   expect(requests.length).toBe(afterLoad);
 });
 

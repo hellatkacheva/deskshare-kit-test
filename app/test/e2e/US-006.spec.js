@@ -1,6 +1,8 @@
 // US-006 — Hard stop when the floor is full
 import { test, expect } from '@playwright/test';
-import { bookDesk, day, dialog, doc, floorTab, many, office, openApp, store, stored, tile } from './helpers.js';
+import {
+  bookDesk, booking, cancelDesk, day, dialog, doc, floorTab, many, office, openApp, store, stored, tile,
+} from './helpers.js';
 
 const THU = 'Thu 2026-10-22';
 const FULL_MSG = 'This floor is full for this day — please pick another day or floor.';
@@ -51,4 +53,15 @@ test('Other floor and other day stay bookable', async ({ page }) => {
   await floorTab(page, 1).click();
   await bookDesk(page, 'F1-20', 'Sam Rivera');
   await expect(dialog(page).getByRole('heading', { name: 'Booked ✓' })).toBeVisible();
+});
+
+test('Cancel on a full floor frees a desk (state effect)', async ({ page }) => {
+  // added with US-007 (cancel)
+  const full = many('2026-10-22', 2, 24);
+  full.push(booking({ desk: 'F2-25', floor: 2, name: 'Jamie Lee', nameKey: 'jamie lee' }));
+  await onThursday(page, full, 2);
+  await expect(page.getByText(FULL_MSG)).toBeVisible();
+  await cancelDesk(page, 'F2-25', 'Jamie Lee');
+  await expect(page.getByText('Floor 2: 24 booked · 1 left')).toBeVisible();
+  await expect(tile(page, 'F2-25')).toHaveAccessibleName('F2-25 free');
 });

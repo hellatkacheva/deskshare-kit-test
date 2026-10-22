@@ -128,7 +128,7 @@ Built 2026-10-22: all 4 automated.
 | Other floor and other day stay bookable | E | `US-006.spec.js` |
 | Cancel on a full floor frees a desk | E | `US-006.spec.js` |
 
-Built 2026-10-22: 4 of 5 automated; "Cancel on a full floor frees a desk" is added with US-007.
+Built 2026-10-22: all 5 automated ("Cancel on a full floor frees a desk" added with US-007).
 
 ### US-007 Cancel my own booking
 | Scenario | Type | File |
@@ -140,6 +140,8 @@ Built 2026-10-22: 4 of 5 automated; "Cancel on a full floor frees a desk" is add
 | Wrong name | U, E | `storage.test.js` (`NAME_MISMATCH`); `US-007.spec.js` |
 | Cancel after check-in on the booking day | U | `storage.test.js` |
 | Same name can book again after cancel | U | `storage.test.js` |
+
+Built 2026-10-22: all 7 automated.
 
 ### US-012 Notice: names are self-reported
 | Scenario | Type | File |

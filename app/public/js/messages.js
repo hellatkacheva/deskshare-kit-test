@@ -24,6 +24,10 @@ export const TEXT = {
   dateLine: (date) => `Date: ${formatDate(date)}`,
   deskLine: (desk) => `Desk: ${desk}`,
   hint: 'Note your desk number — you need it to check in or cancel',
+  // Booking actions — cancel / check-in (ui.md §3.3)
+  actionsTitle: (desk, date) => `Desk ${desk} · ${formatDate(date)}`,
+  nameAsBooked: 'Your name (as booked)',
+  cancelButton: 'Cancel booking',
 };
 
 // Result codes of storage operations (storage.md §4)
@@ -37,4 +41,6 @@ export const MESSAGES = {
   NAME_REQUIRED: 'Please enter your name.',
   NAME_TOO_LONG: `Name is too long — maximum ${NAME_MAX_LENGTH} characters.`,
   NAME_ALREADY_BOOKED: 'This name already has a booking for that day.',
+  NO_BOOKING: ({ desk, date }) => `There is no booking for ${desk} on ${formatDate(date)}.`,
+  NAME_MISMATCH: 'The name does not match the booking.',
 };

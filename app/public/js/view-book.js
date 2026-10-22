@@ -37,9 +37,9 @@ function button(text, onClick, className = '') {
   return btn;
 }
 
-function nameField(id) {
+function nameField(id, labelText = TEXT.nameLabel) {
   const input = el('input', { id, type: 'text', autocomplete: 'off', spellcheck: false });
-  const label = el('label', { htmlFor: id, textContent: TEXT.nameLabel });
+  const label = el('label', { htmlFor: id, textContent: labelText });
   return { input, nodes: [label, input] };
 }
 
@@ -73,6 +73,25 @@ function openBookForm(date, desk, floor) {
     else error.textContent = result.message;
   });
   openDialog(form);
+  name.input.focus();
+}
+
+/** ui.md §3.3 — cancel (and, from US-008, check-in) for a taken desk. */
+function openActions(date, desk) {
+  const name = nameField('action-name', TEXT.nameAsBooked);
+  const error = el('p', { className: 'error', role: 'alert' });
+  const cancelBtn = button(TEXT.cancelButton, () => {
+    const result = store.cancel({ date, desk, name: name.input.value }, clockNow());
+    rerender();
+    if (result.ok) closeDialog();
+    else error.textContent = result.message;
+  });
+  openDialog(el('div', { className: 'dialog-form' }, [
+    el('h2', { textContent: TEXT.actionsTitle(desk, date) }),
+    ...name.nodes,
+    error,
+    el('div', { className: 'actions' }, [cancelBtn, button(TEXT.close, closeDialog)]),
+  ]));
   name.input.focus();
 }
 
@@ -130,7 +149,8 @@ function renderGrid(root, day) {
     btn.dataset.desk = d.desk;
     btn.addEventListener('click', () => {
       if (!canAct) return;
-      if (!d.taken) openBookForm(date, d.desk, d.floor);
+      if (d.taken) openActions(date, d.desk);
+      else openBookForm(date, d.desk, d.floor);
     });
     return btn;
   }));

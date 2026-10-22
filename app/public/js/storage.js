@@ -161,6 +161,17 @@ export function book({ date, desk, name, showName = false }, now) {
   });
 }
 
+/** storage.md §3.4 */
+export function cancel({ date, desk, name }, now) {
+  return mutate((data) => {
+    const i = data.bookings.findIndex((b) => b.date === date && b.desk === desk);
+    if (i < 0) return fail('NO_BOOKING', { date, desk });
+    if (data.bookings[i].nameKey !== nameKey(name)) return fail('NAME_MISMATCH');
+    data.bookings.splice(i, 1); // the desk is free at once (REQ-014), also after check-in (ASM-012)
+    return { ok: true };
+  });
+}
+
 export function storageState() {
   return state;
 }
