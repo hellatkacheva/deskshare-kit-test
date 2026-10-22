@@ -1,7 +1,7 @@
 // Book view (ui.md §2–3): date strip, floor tabs, counts, grid, dialogs.
 import { FLOORS } from './config.js';
 import { now as clockNow } from './clock.js';
-import { TEXT } from './messages.js';
+import { MESSAGES, TEXT } from './messages.js';
 import { defaultDate, isBookable, windowDates } from './rules.js';
 import * as store from './storage.js';
 import { formatDate, weekdayName } from './time.js';
@@ -107,6 +107,11 @@ function renderFloors(root, day) {
   }));
   root.querySelector('#counts').replaceChildren(...day.floors.map(({ floor, booked, left }) =>
     el('p', { className: 'counts-line', textContent: TEXT.countsLine(floor, booked, left) })));
+  // ui.md §3.5: hard stop — no free tile, no waitlist (US-006).
+  const full = day.floors.find((f) => f.floor === ui.selectedFloor).full;
+  const notice = root.querySelector('#floor-full');
+  notice.textContent = full ? MESSAGES.FLOOR_FULL : '';
+  notice.hidden = !full;
 }
 
 function renderGrid(root, day) {

@@ -128,6 +128,8 @@ Built 2026-10-22: all 4 automated.
 | Other floor and other day stay bookable | E | `US-006.spec.js` |
 | Cancel on a full floor frees a desk | E | `US-006.spec.js` |
 
+Built 2026-10-22: 4 of 5 automated; "Cancel on a full floor frees a desk" is added with US-007.
+
 ### US-007 Cancel my own booking
 | Scenario | Type | File |
 |---|---|---|

@@ -140,6 +140,8 @@ export function book({ date, desk, name, showName = false }, now) {
     const floor = floorOf(desk);
     if (floor === null) return fail('UNKNOWN_DESK');
     const sameDay = data.bookings.filter((b) => b.date === date);
+    const capacity = FLOORS.find((f) => f.id === floor).desks;
+    if (sameDay.filter((b) => b.floor === floor).length >= capacity) return fail('FLOOR_FULL');
     if (sameDay.some((b) => b.desk === desk)) return fail('DESK_TAKEN');
     const key = nameKey(name);
     if (sameDay.some((b) => b.nameKey === key)) return fail('NAME_ALREADY_BOOKED');

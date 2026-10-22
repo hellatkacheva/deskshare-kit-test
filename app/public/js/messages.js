@@ -32,6 +32,7 @@ export const MESSAGES = {
   STORAGE_UNREADABLE: 'Saved bookings could not be read in this browser. Clear site data to reload demo data.',
   DATE_NOT_BOOKABLE: `This date can't be booked — please pick a weekday from today up to ${BOOKING_WINDOW_DAYS} days ahead.`,
   UNKNOWN_DESK: 'This desk does not exist.',
+  FLOOR_FULL: 'This floor is full for this day — please pick another day or floor.',
   DESK_TAKEN: 'This desk is already taken — pick another desk.',
   NAME_REQUIRED: 'Please enter your name.',
   NAME_TOO_LONG: `Name is too long — maximum ${NAME_MAX_LENGTH} characters.`,

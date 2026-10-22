@@ -283,3 +283,29 @@ describe('US-016 name rules in book()', () => {
       .toMatchObject({ ok: false, code: 'NAME_TOO_LONG', message: 'Name is too long — maximum 50 characters.' });
   });
 });
+
+describe('US-006 hard stop', () => {
+  const desk2 = (n) => `F2-${String(n).padStart(2, '0')}`;
+  const floor2 = (n) => Array.from({ length: n }, (_, i) => ({
+    ...booking, desk: desk2(i + 1), floor: 2, name: `P${i}`, nameKey: `p${i}`,
+  }));
+  const start = (bookings) => {
+    const s = new FakeStorage({ [STORAGE_KEY]: JSON.stringify({ version: 1, seededAt: null, bookings, pastCounts: {} }) });
+    open(NOW, { storage: s, host: HOST });
+    return s;
+  };
+
+  it('Last free desk can be booked (capacity − 1)', () => {
+    start(floor2(24));
+    expect(book({ date: '2026-10-22', desk: 'F2-25', name: 'Jamie Lee' }, NOW).ok).toBe(true);
+    expect(readDay('2026-10-22', NOW).floors[1]).toEqual({ floor: 2, booked: 25, left: 0, full: true });
+  });
+
+  it('Last desk taken in another tab → FLOOR_FULL, not DESK_TAKEN', () => {
+    start(floor2(24));
+    expect(book({ date: '2026-10-22', desk: 'F2-25', name: 'Jamie Lee' }, NOW).ok).toBe(true);
+    expect(book({ date: '2026-10-22', desk: 'F2-25', name: 'Sam Rivera' }, NOW)).toMatchObject({
+      ok: false, code: 'FLOOR_FULL', message: 'This floor is full for this day — please pick another day or floor.',
+    });
+  });
+});
