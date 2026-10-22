@@ -230,6 +230,8 @@ Built 2026-10-22: all 9 automated.
 | Test clock is ignored in the demo build | U, S | `clock.test.js` (host not in `TEST_HOSTS`); `deployed.smoke.spec.js` |
 | Reset parameter is ignored in the demo build (DEC-031) | U, S | `storage.test.js`; `deployed.smoke.spec.js` |
 
+Built 2026-10-22: all 4 automated (outline × 4 browsers); real-phone check (M) and deployed smoke (S) at `deploy`.
+
 ### US-014 Names removed after the booking date (Next)
 | Scenario | Type | File |
 |---|---|---|
