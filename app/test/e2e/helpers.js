@@ -37,9 +37,9 @@ export async function stored(page) {
 }
 
 /** n bookings on one floor for one date, desks 01…n, unique fictional names. */
-export function many(date, floor, n, over = {}) {
+export function many(date, floor, n, over = {}, from = 1) {
   return Array.from({ length: n }, (_, i) => {
-    const desk = `F${floor}-${String(i + 1).padStart(2, '0')}`;
+    const desk = `F${floor}-${String(from + i).padStart(2, "0")}`;
     return booking({ date, desk, floor, name: `Person ${desk}`, nameKey: `person ${desk.toLowerCase()}`, ...over });
   });
 }
@@ -50,3 +50,12 @@ export const floorTab = (page, n) => page.getByRole('button', { name: new RegExp
 
 /** Desk tile on the grid, by its accessible name "F1-07 free" / "F1-07 taken" / "F1-07 <name>". */
 export const tile = (page, desk) => page.getByRole('button', { name: new RegExp(`^${desk} `) });
+
+export const dialog = (page) => page.locator('dialog[open]');
+
+/** Open the booking form of a free desk on the selected date / floor, type a name, press Book desk. */
+export async function bookDesk(page, desk, name) {
+  await tile(page, desk).click();
+  await page.getByLabel('Your name').fill(name);
+  await page.getByRole('button', { name: 'Book desk' }).click();
+}

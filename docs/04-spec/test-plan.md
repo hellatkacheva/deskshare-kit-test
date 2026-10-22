@@ -107,6 +107,8 @@ Built 2026-10-22: all 4 automated.
 | Date outside the window refused at save | U, E | `storage.test.js` (`DATE_NOT_BOOKABLE`); `US-005.spec.js` (form open at 23:59, `runFor` to 00:05, Book) |
 | Confirmation content | E | `US-005.spec.js` |
 
+Built 2026-10-22: all 10 automated.
+
 ### US-016 Name rules when booking
 | Scenario | Type | File |
 |---|---|---|

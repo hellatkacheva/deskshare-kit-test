@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { FakeStorage } from './fake-storage.js';
-import { open, readDay } from '../../public/js/storage.js';
+import { book, open, readDay } from '../../public/js/storage.js';
 import { STORAGE_KEY } from '../../public/js/config.js';
 
 const NOW = { date: '2026-10-21', time: '08:00' };
@@ -177,5 +177,86 @@ describe('US-004 readDay desks (storage.md §3.2)', () => {
   it('Grid follows the date', () => {
     open(NOW, { storage: withDoc([booking]), host: HOST });
     expect(readDay('2026-10-23', NOW).desks.find((d) => d.desk === 'F1-07').taken).toBe(false);
+  });
+});
+
+describe('US-005 book (storage.md §3.3)', () => {
+  const THU = '2026-10-22';
+  const at = (date, time) => ({ date, time });
+  const start = (bookings = []) => {
+    const s = new FakeStorage({
+      [STORAGE_KEY]: JSON.stringify({ version: 1, seededAt: null, bookings, pastCounts: {} }),
+    });
+    open(NOW, { storage: s, host: HOST });
+    return s;
+  };
+  const stored = (s) => JSON.parse(s.getItem(STORAGE_KEY)).bookings;
+
+  it('Book a free desk — confirmed at once, state effect', () => {
+    const s = start();
+    const r = book({ date: THU, desk: 'F1-07', name: 'Alex Morgan' }, at('2026-10-21', '16:00'));
+    expect(r).toEqual({ ok: true, booking: { date: THU, desk: 'F1-07', deadline: '2026-10-22T10:00' } });
+    expect(stored(s)).toEqual([{
+      date: THU, desk: 'F1-07', floor: 1, name: 'Alex Morgan', nameKey: 'alex morgan', showName: false,
+      bookedAt: '2026-10-21T16:00', deadline: '2026-10-22T10:00', checkedInAt: null,
+    }]);
+    expect(readDay(THU, NOW).floors[0]).toMatchObject({ booked: 1, left: 29 });
+  });
+
+  it('Taken desk cannot be booked', () => {
+    const s = start([booking]);
+    expect(book({ date: THU, desk: 'F1-07', name: 'Jamie Lee' }, NOW))
+      .toMatchObject({ ok: false, code: 'DESK_TAKEN', message: 'This desk is already taken — pick another desk.' });
+    expect(stored(s)).toEqual([booking]);
+  });
+
+  it('Same desk on another date is free', () => {
+    start([booking]);
+    expect(book({ date: '2026-10-23', desk: 'F1-07', name: 'Jamie Lee' }, NOW).ok).toBe(true);
+  });
+
+  it('Second booking under the same name on the same day', () => {
+    const s = start([booking]);
+    expect(book({ date: THU, desk: 'F2-03', name: 'Alex Morgan' }, NOW))
+      .toMatchObject({ ok: false, code: 'NAME_ALREADY_BOOKED', message: 'This name already has a booking for that day.' });
+    expect(stored(s)).toHaveLength(1);
+  });
+
+  it('Same name with different case and spaces', () => {
+    start([booking]);
+    expect(book({ date: THU, desk: 'F2-03', name: ' alex  morgan ' }, NOW).code).toBe('NAME_ALREADY_BOOKED');
+  });
+
+  it('Same name on another day', () => {
+    start([booking]);
+    expect(book({ date: '2026-10-23', desk: 'F1-07', name: 'Alex Morgan' }, NOW).ok).toBe(true);
+  });
+
+  it('Two tabs — stale tab cannot double-book (re-check at save)', () => {
+    const s = start();
+    expect(book({ date: THU, desk: 'F1-07', name: 'Alex Morgan' }, NOW).ok).toBe(true); // tab 1
+    expect(book({ date: THU, desk: 'F1-07', name: 'Jamie Lee' }, NOW).code).toBe('DESK_TAKEN'); // tab 2
+    expect(stored(s)).toHaveLength(1);
+  });
+
+  it('Date outside the window refused at save', () => {
+    const s = start();
+    expect(book({ date: '2026-10-20', desk: 'F1-07', name: 'Alex Morgan' }, at('2026-10-21', '00:05')))
+      .toMatchObject({ ok: false, code: 'DATE_NOT_BOOKABLE' });
+    expect(stored(s)).toHaveLength(0);
+  });
+
+  it('stored name is trimmed (I-3); unknown desk refused', () => {
+    const s = start();
+    book({ date: THU, desk: 'F1-07', name: '  Alex Morgan ' }, NOW);
+    expect(stored(s)[0].name).toBe('Alex Morgan');
+    expect(book({ date: THU, desk: 'F9-01', name: 'Jamie Lee' }, NOW).code).toBe('UNKNOWN_DESK');
+  });
+
+  it('no storage → STORAGE_OFF; unreadable → STORAGE_UNREADABLE', () => {
+    open(NOW, { storage: null, host: HOST });
+    expect(book({ date: THU, desk: 'F1-07', name: 'A' }, NOW).code).toBe('STORAGE_OFF');
+    open(NOW, { storage: new FakeStorage({ [STORAGE_KEY]: '{x' }), host: HOST });
+    expect(book({ date: THU, desk: 'F1-07', name: 'A' }, NOW).code).toBe('STORAGE_UNREADABLE');
   });
 });

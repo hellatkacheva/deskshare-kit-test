@@ -129,3 +129,35 @@ button[aria-pressed="true"] {
 .tile-state { font-size: 0.8rem; }
 .tile-free { background: var(--free-bg); }
 .tile-taken { background: var(--taken-bg); color: var(--muted); }
+
+/* Dialogs (ui.md §3) */
+.dialog {
+  width: min(420px, calc(100vw - 2 * var(--gutter)));
+  padding: 0 0 16px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+}
+
+.dialog::backdrop { background: rgb(0 0 0 / 0.35); }
+.dialog > :not(.dialog-banner) { margin-left: var(--gutter); margin-right: var(--gutter); }
+.dialog-banner { position: static; margin: 0 0 8px; border-radius: 12px 12px 0 0; }
+.dialog h2 { font-size: 1.15rem; margin-top: 8px; }
+.dialog-form { margin: 0 var(--gutter); display: flex; flex-direction: column; gap: 6px; }
+.dialog-form > * { margin: 0; }
+
+.dialog input[type="text"] {
+  font: inherit;
+  min-height: 44px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.error:empty { display: none; }
+.error { color: var(--alert-fg); font-weight: 600; }
+.hint { font-weight: 600; }
+
+.actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.actions button { padding: 0 16px; }
+
+button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }

@@ -3,14 +3,25 @@ import { test, expect, chromium } from '@playwright/test';
 import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { BANNER, KEY, booking, day, doc, office, openApp, store, stored, tile } from './helpers.js';
+import {
+  BANNER, KEY, bookDesk, booking, day, dialog, doc, office, openApp, store, stored, tile,
+} from './helpers.js';
 
 const ALEX = booking(); // F1-07 on Thu 2026-10-22, "Alex Morgan"
 
 test('Banner on every screen', async ({ page }) => {
-  // Screens so far: Book view. Dialogs (US-005, US-007, US-008) and Tomorrow (US-013) are added here when built.
+  // Screens so far: Book view, booking form, confirmation. Cancel / check-in dialog (US-007, US-008)
+  // and Tomorrow (US-013) are added here when built.
   await openApp(page);
-  await expect(page.getByText(BANNER, { exact: true })).toBeVisible();
+  await expect(page.locator('#banner')).toHaveText(BANNER);
+  await expect(page.locator('#banner')).toBeVisible();
+  await day(page, 'Thu 2026-10-22').click();
+  await tile(page, 'F1-04').click(); // free in the seed (demo-data.md §6)
+  await expect(dialog(page).locator('.dialog-banner')).toHaveText(BANNER);
+  await page.getByLabel('Your name').fill('Alex Morgan');
+  await page.getByRole('button', { name: 'Book desk' }).click();
+  await expect(dialog(page).getByRole('heading', { name: 'Booked ✓' })).toBeVisible();
+  await expect(dialog(page).locator('.dialog-banner')).toHaveText(BANNER);
 });
 
 test('Data survives a reload (state effect)', async ({ page }) => {
@@ -53,6 +64,7 @@ test('Storage not available', async ({ page }) => {
   });
   await openApp(page);
   await expect(page.getByText('Bookings cannot be saved in this browser — browser storage is turned off.')).toBeVisible();
+  await tile(page, 'F1-07').click(); // US-005: a free desk opens no booking form
   await expect(page.getByRole('button', { name: /book/i })).toHaveCount(0);
 });
 
@@ -77,6 +89,10 @@ test('No network calls with booking data', async ({ page, baseURL }) => {
   }
   const afterLoad = requests.length;
   await page.clock.runFor('02:00'); // two refresh ticks
+  await day(page, 'Thu 2026-10-22').click();
+  await bookDesk(page, 'F1-04', 'Alex Morgan'); // US-005
+  await expect(dialog(page).getByRole('heading', { name: 'Booked ✓' })).toBeVisible();
+  // Cancel (US-007) and check-in (US-008) are added here when built.
   expect(requests.length).toBe(afterLoad);
 });
 

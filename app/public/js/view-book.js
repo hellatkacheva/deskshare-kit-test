@@ -1,19 +1,84 @@
-// Book view (ui.md §2): date strip, floor tabs, counts.
+// Book view (ui.md §2–3): date strip, floor tabs, counts, grid, dialogs.
 import { FLOORS } from './config.js';
+import { now as clockNow } from './clock.js';
 import { TEXT } from './messages.js';
 import { defaultDate, isBookable, windowDates } from './rules.js';
 import * as store from './storage.js';
 import { formatDate, weekdayName } from './time.js';
 
 const ui = { selectedDate: null, selectedFloor: FLOORS[0].id };
+let rerender = () => {};
 
 function el(tag, props = {}, children = []) {
   const node = Object.assign(document.createElement(tag), props);
-  for (const c of children) node.append(c);
+  for (const c of children) if (c) node.append(c);
   return node;
 }
 
-function renderStrip(root, now, rerender) {
+// ---- Dialogs (ui.md §3) — the tick never closes an open dialog (I-9) ----
+
+const dialog = () => document.getElementById('dialog');
+
+function openDialog(...children) {
+  const dlg = dialog();
+  // The demo banner is shown in every dialog too (US-001 rule 3).
+  dlg.replaceChildren(el('p', { className: 'banner dialog-banner', textContent: TEXT.banner }), ...children);
+  if (!dlg.open) dlg.showModal();
+}
+
+function closeDialog() {
+  const dlg = dialog();
+  if (dlg.open) dlg.close();
+}
+
+function button(text, onClick, className = '') {
+  const btn = el('button', { type: 'button', textContent: text, className });
+  btn.addEventListener('click', onClick);
+  return btn;
+}
+
+function nameField(id) {
+  const input = el('input', { id, type: 'text', autocomplete: 'off', spellcheck: false });
+  const label = el('label', { htmlFor: id, textContent: TEXT.nameLabel });
+  return { input, nodes: [label, input] };
+}
+
+function showConfirmation(booking) {
+  openDialog(
+    el('h2', { textContent: TEXT.bookedTitle }),
+    el('p', { textContent: TEXT.dateLine(booking.date) }),
+    el('p', { textContent: TEXT.deskLine(booking.desk) }),
+    el('p', { className: 'hint', textContent: TEXT.hint }),
+    el('div', { className: 'actions' }, [button(TEXT.done, closeDialog, 'primary')]),
+  );
+}
+
+/** ui.md §3.1 — booking form for a free desk. */
+function openBookForm(date, desk, floor) {
+  const name = nameField('book-name');
+  const error = el('p', { className: 'error', role: 'alert' });
+  const submit = el('button', { type: 'submit', textContent: TEXT.bookButton, className: 'primary' });
+  const form = el('form', { className: 'dialog-form' }, [
+    el('h2', { textContent: TEXT.bookTitle(desk) }),
+    el('p', { textContent: TEXT.bookSubtitle(date, floor) }),
+    ...name.nodes,
+    error,
+    el('div', { className: 'actions' }, [button(TEXT.close, closeDialog), submit]),
+  ]);
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const result = store.book({ date, desk, name: name.input.value }, clockNow());
+    rerender();
+    if (result.ok) showConfirmation(result.booking);
+    else error.textContent = result.message;
+  });
+  openDialog(form);
+  name.input.focus();
+}
+
+// ---- Page ----
+
+function renderStrip(root, now) {
   const strip = root.querySelector('#date-strip');
   strip.replaceChildren(...windowDates(now).map(({ date, bookable }) => {
     const btn = el('button', { type: 'button', disabled: !bookable, className: 'day' }, [
@@ -30,7 +95,7 @@ function renderStrip(root, now, rerender) {
   }));
 }
 
-function renderFloors(root, day, rerender) {
+function renderFloors(root, day) {
   root.querySelector('#floor-tabs').replaceChildren(...day.floors.map(({ floor, left }) => {
     const btn = el('button', { type: 'button', className: 'floor-tab', textContent: TEXT.floorTab(floor, left) });
     btn.setAttribute('aria-pressed', String(floor === ui.selectedFloor));
@@ -46,6 +111,8 @@ function renderFloors(root, day, rerender) {
 
 function renderGrid(root, day) {
   const grid = root.querySelector('#grid');
+  const date = ui.selectedDate;
+  const canAct = store.storageState() === 'ready'; // US-001 rule 5: no actions without storage
   grid.setAttribute('aria-label', TEXT.grid(ui.selectedFloor));
   grid.replaceChildren(...day.desks.filter((d) => d.floor === ui.selectedFloor).map((d) => {
     // Variant A: a taken desk shows "taken", never a name (REQ-026). Taken desks stay tappable (US-004 rule 5).
@@ -56,17 +123,22 @@ function renderGrid(root, day) {
     ]);
     btn.setAttribute('aria-label', `${d.desk} ${label}`);
     btn.dataset.desk = d.desk;
+    btn.addEventListener('click', () => {
+      if (!canAct) return;
+      if (!d.taken) openBookForm(date, d.desk, d.floor);
+    });
     return btn;
   }));
 }
 
 /** Re-render from storage for `now` (every action, every tick — DEC-028). */
-export function renderBook(root, now, rerender) {
+export function renderBook(root, now, onChange) {
+  rerender = onChange;
   // I-9: a selected date that left the window falls back to the default date.
   if (!ui.selectedDate || !isBookable(ui.selectedDate, now)) ui.selectedDate = defaultDate(now);
-  renderStrip(root, now, rerender);
+  renderStrip(root, now);
   const day = store.readDay(ui.selectedDate, now);
   if (!day.ok) return;
-  renderFloors(root, day, rerender);
+  renderFloors(root, day);
   renderGrid(root, day);
 }

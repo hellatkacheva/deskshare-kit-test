@@ -1,6 +1,9 @@
 // The only storage module (data-model.md, storage.md §3). Every access is wrapped in try/catch.
 import { FLOORS, RESET_PARAM, STORAGE_KEY, STORAGE_VERSION, TEST_HOSTS } from './config.js';
-import { desksOf, isBookable } from './rules.js';
+import { MESSAGES } from './messages.js';
+import {
+  cleanName, deadline, desksOf, floorOf, isBookable, nameKey,
+} from './rules.js';
 import { buildSeed } from './seed.js';
 
 const PROBE_KEY = `${STORAGE_KEY}:probe`;
@@ -96,6 +99,62 @@ export function readDay(date, now, { names = false } = {}) {
     };
   }));
   return { ok: true, floors, desks };
+}
+
+function fail(code, vars = {}) {
+  const text = MESSAGES[code];
+  return { ok: false, code, message: typeof text === 'function' ? text(vars) : text };
+}
+
+/**
+ * read → check → write in one synchronous call (storage.md §3), so a stale tab cannot
+ * double-book. `change(data)` returns a result; the document is written only on success.
+ */
+function mutate(change) {
+  if (state === 'unavailable') return fail('STORAGE_OFF');
+  if (state === 'unreadable') return fail('STORAGE_UNREADABLE');
+  let data;
+  try {
+    data = parse(backend.getItem(STORAGE_KEY));
+  } catch {
+    return fail('STORAGE_OFF');
+  }
+  if (!data) return fail('STORAGE_UNREADABLE');
+  const result = change(data);
+  if (result.ok) {
+    try {
+      write(data);
+    } catch {
+      return fail('STORAGE_OFF');
+    }
+  }
+  return result;
+}
+
+/** storage.md §3.3 */
+export function book({ date, desk, name, showName = false }, now) {
+  return mutate((data) => {
+    if (!isBookable(date, now)) return fail('DATE_NOT_BOOKABLE');
+    const floor = floorOf(desk);
+    if (floor === null) return fail('UNKNOWN_DESK');
+    const sameDay = data.bookings.filter((b) => b.date === date);
+    if (sameDay.some((b) => b.desk === desk)) return fail('DESK_TAKEN');
+    const key = nameKey(name);
+    if (sameDay.some((b) => b.nameKey === key)) return fail('NAME_ALREADY_BOOKED');
+    const entry = {
+      date,
+      desk,
+      floor,
+      name: cleanName(name),
+      nameKey: key,
+      showName: Boolean(showName),
+      bookedAt: `${now.date}T${now.time}`,
+      deadline: deadline(date, now),
+      checkedInAt: null,
+    };
+    data.bookings.push(entry);
+    return { ok: true, booking: { date, desk, deadline: entry.deadline } };
+  });
 }
 
 export function storageState() {
