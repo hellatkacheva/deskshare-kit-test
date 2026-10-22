@@ -173,3 +173,6 @@ button.primary { background: var(--accent); border-color: var(--accent); color: 
 .switch-state { font-weight: 700; }
 .switch[aria-checked="true"] { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
 .tile-desk, .tile-state { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.consent { display: flex; align-items: center; gap: 8px; min-height: 44px; }
+.consent input { width: 22px; height: 22px; }

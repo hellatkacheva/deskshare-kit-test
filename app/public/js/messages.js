@@ -33,6 +33,7 @@ export const TEXT = {
   deadlineToday: (stamp) => `Check-in deadline: ${TEXT.deadlineLabel(stamp)}`,
   deadlineOn: (stamp) => `Check-in deadline: ${TEXT.deadlineLabel(stamp)} on ${formatDate(stamp.slice(0, 10))}`,
   selfReported: 'Names are self-reported — not for emergency headcount.',
+  consent: 'Show my name to colleagues',
   // Booking actions — cancel / check-in (ui.md §3.3)
   actionsTitle: (desk, date) => `Desk ${desk} · ${formatDate(date)}`,
   nameAsBooked: 'Your name (as booked)',

@@ -70,16 +70,23 @@ function openBookForm(date, desk, floor) {
   const name = nameField('book-name');
   const error = el('p', { className: 'error', role: 'alert' });
   const submit = el('button', { type: 'submit', textContent: TEXT.bookButton, className: 'primary' });
+  // Variant B only: consent checkbox, unchecked (REQ-027). Switch Off → stored without consent.
+  const consent = ui.names ? el('input', { type: 'checkbox', id: 'book-consent' }) : null;
+  const consentRow = consent
+    ? el('label', { className: 'consent', htmlFor: 'book-consent' }, [consent, ` ${TEXT.consent}`])
+    : null;
   const form = el('form', { className: 'dialog-form' }, [
     el('h2', { textContent: TEXT.bookTitle(desk) }),
     el('p', { textContent: TEXT.bookSubtitle(date, floor) }),
     ...name.nodes,
+    consentRow,
     error,
     el('div', { className: 'actions' }, [button(TEXT.close, closeDialog), submit]),
   ]);
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    const result = store.book({ date, desk, name: name.input.value }, clockNow());
+    const showName = Boolean(consent?.checked);
+    const result = store.book({ date, desk, name: name.input.value, showName }, clockNow());
     rerender();
     if (result.ok) showConfirmation(result.booking);
     else error.textContent = result.message;
@@ -195,5 +202,9 @@ export function renderBook(root, now, onChange) {
   const day = store.readDay(ui.selectedDate, now, { names: ui.names });
   if (!day.ok) return;
   renderFloors(root, day);
+  // Wherever names are shown, the self-reported notice is shown too (REQ-040, US-011 rule 7).
+  const notice = root.querySelector('#grid-notice');
+  notice.textContent = ui.names ? TEXT.selfReported : '';
+  notice.hidden = !ui.names;
   renderGrid(root, day);
 }

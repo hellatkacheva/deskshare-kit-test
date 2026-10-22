@@ -220,6 +220,8 @@ Built 2026-10-22: all 4 automated.
 | Name shown as plain text | E | `US-011.spec.js` (`<b>Kim</b>` literal, no `<b>` element in the tile) |
 | Notice wherever names are shown | E | `US-011.spec.js` |
 
+Built 2026-10-22: all 9 automated.
+
 ### US-015 Demo smoke test on phone and desktop
 | Scenario | Type | File |
 |---|---|---|
