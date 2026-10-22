@@ -13,6 +13,12 @@ export const TEXT = {
   grid: (id) => `Desks of Floor ${id}`,
   free: 'free',
   taken: 'taken',
+  // "Tomorrow" view (ui.md §4, US-013)
+  tomorrowLink: 'Tomorrow',
+  bookLink: 'Book',
+  tomorrowTitle: (date) => `Tomorrow — ${formatDate(date)}`,
+  bookedOfCapacity: (booked, capacity) => `${booked} / ${capacity} booked`,
+  status: { green: 'GREEN', amber: 'AMBER', red: 'RED' },
   namesSwitch: "Show colleagues' names",
   off: 'Off',
   on: 'On',

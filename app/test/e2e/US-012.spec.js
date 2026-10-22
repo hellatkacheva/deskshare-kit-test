@@ -40,5 +40,8 @@ test('No headcount list', async ({ page }) => {
   await dialog(page).getByRole('button', { name: 'Close' }).click();
   await tile(page, 'F1-02').click(); // cancel dialog (Ava Morgan's desk)
   await noNames();
-  // "Tomorrow" (US-013) is added here when built.
+  await dialog(page).getByRole('button', { name: 'Close' }).click();
+  await page.getByRole('link', { name: 'Tomorrow' }).click(); // US-013
+  await expect(page.locator('#tomorrow-view')).toBeVisible();
+  await noNames();
 });

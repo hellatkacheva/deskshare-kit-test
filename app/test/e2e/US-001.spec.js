@@ -10,8 +10,7 @@ import {
 const ALEX = booking(); // F1-07 on Thu 2026-10-22, "Alex Morgan"
 
 test('Banner on every screen', async ({ page }) => {
-  // Screens: Book view, booking form, confirmation, desk dialog (cancel + check-in, US-007 / US-008).
-  // Tomorrow (US-013) is added here when built.
+  // Screens: Book view, booking form, confirmation, desk dialog (cancel + check-in), Tomorrow.
   await openApp(page);
   await expect(page.locator('#banner')).toHaveText(BANNER);
   await expect(page.locator('#banner')).toBeVisible();
@@ -25,6 +24,11 @@ test('Banner on every screen', async ({ page }) => {
   await dialog(page).getByRole('button', { name: 'Done' }).click();
   await tile(page, 'F1-04').click(); // cancel dialog (US-007)
   await expect(dialog(page).locator('.dialog-banner')).toHaveText(BANNER);
+  await dialog(page).getByRole('button', { name: 'Close' }).click();
+  await page.getByRole('link', { name: 'Tomorrow' }).click(); // US-013
+  await expect(page.locator('#tomorrow-view')).toBeVisible();
+  await expect(page.locator('#banner')).toBeVisible();
+  await expect(page.locator('#banner')).toHaveText(BANNER);
 });
 
 test('Data survives a reload (state effect)', async ({ page }) => {

@@ -1,6 +1,6 @@
 // Pure booking rules (storage.md §2).
 import {
-  BOOKING_WINDOW_DAYS, CHECKIN_CUTOFF, DEADLINE_CAP, FLOORS, GRACE_MINUTES, NAME_MAX_LENGTH, SAME_DAY_THRESHOLD,
+  AMBER_THRESHOLD_PERCENT, BOOKING_WINDOW_DAYS, CHECKIN_CUTOFF, DEADLINE_CAP, FLOORS, GRACE_MINUTES, NAME_MAX_LENGTH, SAME_DAY_THRESHOLD,
   WORKING_DAYS,
 } from './config.js';
 import { addDays, addMinutes, isoWeekday } from './time.js';
@@ -77,4 +77,11 @@ export function checkName(raw) {
 /** Booking for today is closed from DEADLINE_CAP office time (DEC-024). */
 export function sameDayClosed(date, now) {
   return date === now.date && now.time >= DEADLINE_CAP;
+}
+
+/** "Tomorrow" status (DEC-013): red when full, amber from AMBER_THRESHOLD_PERCENT, else green. */
+export function floorStatus(booked, capacity) {
+  if (booked >= capacity) return 'red';
+  if (booked * 100 >= capacity * AMBER_THRESHOLD_PERCENT) return 'amber';
+  return 'green';
 }

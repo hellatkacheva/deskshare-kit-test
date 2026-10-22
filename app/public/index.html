@@ -11,6 +11,7 @@
   <div id="banner" class="banner" role="note"></div>
   <header class="header">
     <h1 id="app-name"></h1>
+    <a id="nav-link" class="nav-link" href="#/tomorrow"></a>
     <button id="names-switch" type="button" role="switch" aria-checked="false" class="switch">
       <span id="names-switch-label"></span> <span id="names-switch-state" class="switch-state"></span>
     </button>
@@ -24,6 +25,10 @@
       <p id="floor-full" class="status" role="status" hidden></p>
       <p id="grid-notice" class="notice" hidden></p>
       <div id="grid" class="grid" role="group"></div>
+    </section>
+    <section id="tomorrow-view" hidden>
+      <h2 id="tomorrow-title"></h2>
+      <div id="tomorrow-floors" class="tomorrow-floors"></div>
     </section>
   </main>
   <dialog id="dialog" class="dialog"></dialog>

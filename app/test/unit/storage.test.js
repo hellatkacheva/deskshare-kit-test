@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { FakeStorage } from './fake-storage.js';
 import {
-  book, cancel, checkIn, open, readDay, sweep,
+  book, cancel, checkIn, open, readDay, sweep, tomorrow,
 } from '../../public/js/storage.js';
 import { STORAGE_KEY } from '../../public/js/config.js';
 
@@ -522,5 +522,23 @@ describe('US-010 / US-011 names in readDay', () => {
     open(NOW, { storage: withDoc([{ ...booking, showName: true }, { ...booking, date: '2026-10-23', showName: true }]), host: HOST });
     const day = readDay('2026-10-22', NOW, { names: true });
     expect(day.desks.filter((d) => d.name)).toHaveLength(1);
+  });
+});
+
+describe('US-013 tomorrow() (storage.md §3.6)', () => {
+  it('next working day, counts and status per floor, no names; follows a cancel', () => {
+    const f2 = Array.from({ length: 25 }, (_, i) => ({
+      ...booking, desk: `F2-${String(i + 1).padStart(2, '0')}`, floor: 2, name: `P${i}`, nameKey: `p${i}`, showName: true,
+    }));
+    const s = new FakeStorage({ [STORAGE_KEY]: JSON.stringify({ version: 1, seededAt: null, bookings: f2, pastCounts: {} }) });
+    open(NOW, { storage: s, host: HOST });
+    const t = tomorrow(NOW);
+    expect(t).toEqual({ ok: true, date: '2026-10-22', floors: [
+      { floor: 1, booked: 0, capacity: 30, status: 'green' },
+      { floor: 2, booked: 25, capacity: 25, status: 'red' },
+    ] });
+    expect(JSON.stringify(t)).not.toMatch(/P\d/);
+    cancel({ date: '2026-10-22', desk: 'F2-01', name: 'P0' }, NOW);
+    expect(tomorrow(NOW).floors[1]).toEqual({ floor: 2, booked: 24, capacity: 25, status: 'amber' });
   });
 });

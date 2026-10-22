@@ -2,7 +2,8 @@
 import { FLOORS, RESET_PARAM, STORAGE_KEY, STORAGE_VERSION, TEST_HOSTS } from './config.js';
 import { MESSAGES } from './messages.js';
 import {
-  checkName, cleanName, deadline, desksOf, floorOf, isBookable, nameKey, sameDayClosed,
+  checkName, cleanName, deadline, desksOf, floorOf, floorStatus, isBookable, nameKey, nextWorkingDay,
+  sameDayClosed,
 } from './rules.js';
 import { buildSeed } from './seed.js';
 
@@ -238,6 +239,17 @@ export function checkIn({ date, desk, name }, now) {
     b.checkedInAt = `${now.date}T${now.time}`;
     return { ok: true };
   }, { lookFirst: true });
+}
+
+/** storage.md §3.6 — the next working day per floor; counts only, never names (US-013, NFR-002). */
+export function tomorrow(now) {
+  const date = nextWorkingDay(now.date);
+  const bookings = (read(now)?.bookings ?? []).filter((b) => b.date === date);
+  const floors = FLOORS.map(({ id, desks }) => {
+    const booked = bookings.filter((b) => b.floor === id).length;
+    return { floor: id, booked, capacity: desks, status: floorStatus(booked, desks) };
+  });
+  return { ok: true, date, floors };
 }
 
 export function storageState() {

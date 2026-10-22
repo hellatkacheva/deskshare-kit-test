@@ -38,8 +38,19 @@ test('Reset parameter removed after the reset', async ({ page }) => {
 });
 
 test('No visible reset control', async ({ page }) => {
-  // Screens so far: Book view; re-checked as screens are added (US-005, US-007, US-008, US-013).
-  await openApp(page);
-  await expect(page.getByRole('button', { name: /reset/i })).toHaveCount(0);
-  await expect(page.getByRole('link', { name: /reset/i })).toHaveCount(0);
+  // Every screen: Book view, booking form, desk dialog (cancel / check-in), Tomorrow.
+  await openApp(page, { at: '2026-10-21T08:00' });
+  const noReset = async () => {
+    await expect(page.getByRole('button', { name: /reset/i })).toHaveCount(0);
+    await expect(page.getByRole('link', { name: /reset/i })).toHaveCount(0);
+  };
+  await noReset();
+  await page.getByRole('button', { name: /^F1-01 / }).click(); // booking form (free in the seed)
+  await noReset();
+  await page.locator('dialog[open]').getByRole('button', { name: 'Close' }).click();
+  await page.getByRole('button', { name: /^F1-14 / }).click(); // desk dialog
+  await noReset();
+  await page.locator('dialog[open]').getByRole('button', { name: 'Close' }).click();
+  await page.getByRole('link', { name: 'Tomorrow' }).click();
+  await noReset();
 });

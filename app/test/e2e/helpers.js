@@ -75,3 +75,8 @@ export async function checkInDesk(page, desk, name) {
 }
 
 export const namesSwitch = (page) => page.getByRole('switch', { name: "Show colleagues' names" });
+
+export const floorCard = (page, n) => page.locator(`#tomorrow-view [data-floor="${n}"]`);
+export async function openTomorrow(page) {
+  await page.getByRole('link', { name: 'Tomorrow' }).click();
+}

@@ -259,6 +259,8 @@ Built 2026-10-22: all 4 automated.
 | Status follows a cancel (state effect) | U, E | `storage.test.js` (`tomorrow`); `US-013.spec.js` |
 | No names | E | `US-013.spec.js` (switch On, page text has no seed name) |
 
+Built 2026-10-22: all 13 automated.
+
 **Totals:** 17 stories · 122 scenarios · every scenario mapped (U 77 · E 79 · S 4 · M 2 — scenarios with more than one type are counted under each).
 
 ## 4. Checks that test hooks are off in the deployed build

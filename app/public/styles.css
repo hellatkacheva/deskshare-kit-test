@@ -13,6 +13,10 @@
   --disabled-bg: #f1f3f4;
   --free-bg: #e8f5e9;
   --taken-bg: #eceff1;
+  --green: #1e7e34;
+  --amber: #f0a500;
+  --amber-text: #8a5a00;
+  --red: #c5221f;
 }
 
 * { box-sizing: border-box; }
@@ -176,3 +180,24 @@ button.primary { background: var(--accent); border-color: var(--accent); color: 
 
 .consent { display: flex; align-items: center; gap: 8px; min-height: 44px; }
 .consent input { width: 22px; height: 22px; }
+
+/* Navigation and "Tomorrow" view (ui.md §4) */
+.nav-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 12px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.tomorrow-floors { display: grid; gap: 12px; }
+.floor-card { border: 2px solid var(--line); border-radius: 12px; padding: 12px 16px; }
+.floor-card p { margin: 4px 0; }
+.floor-card-head { display: flex; justify-content: space-between; font-weight: 700; }
+.status-green { border-color: var(--green); }
+.status-amber { border-color: var(--amber); }
+.status-red { border-color: var(--red); }
+.status-green .status-word { color: var(--green); }
+.status-amber .status-word { color: var(--amber-text); }
+.status-red .status-word { color: var(--red); }

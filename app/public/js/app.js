@@ -4,8 +4,11 @@ import { initClock, now } from './clock.js';
 import { MESSAGES, TEXT } from './messages.js';
 import * as store from './storage.js';
 import { namesOn, renderBook, setNames } from './view-book.js';
+import { renderTomorrow } from './view-tomorrow.js';
 
 const $ = (id) => document.getElementById(id);
+const BOOK_HASH = '#/';
+const TOMORROW_HASH = '#/tomorrow';
 
 function browserStorage() {
   try {
@@ -28,6 +31,8 @@ function renderShell() {
   });
 }
 
+const onTomorrow = () => location.hash === TOMORROW_HASH;
+
 function renderStatus() {
   const box = $('status');
   const state = store.storageState();
@@ -36,14 +41,26 @@ function renderStatus() {
   box.textContent = message;
   box.hidden = !message;
   // ui.md §3.6: nothing is rendered from unreadable data.
-  $('book-view').hidden = state === 'unreadable';
+  $('book-view').hidden = state === 'unreadable' || onTomorrow();
+  $('tomorrow-view').hidden = state === 'unreadable' || !onTomorrow();
+}
+
+function renderNav() {
+  const tomorrow = onTomorrow();
+  $('nav-link').textContent = tomorrow ? TEXT.bookLink : TEXT.tomorrowLink;
+  $('nav-link').href = tomorrow ? BOOK_HASH : TOMORROW_HASH;
+  // The names switch belongs to the desk grid (US-010 UI notes).
+  $('names-switch').hidden = tomorrow;
+  $('names-switch').setAttribute('aria-checked', String(namesOn()));
+  $('names-switch-state').textContent = namesOn() ? TEXT.on : TEXT.off;
 }
 
 function refresh() {
   renderStatus();
-  $('names-switch').setAttribute('aria-checked', String(namesOn()));
-  $('names-switch-state').textContent = namesOn() ? TEXT.on : TEXT.off;
-  if (store.storageState() !== 'unreadable') renderBook($('book-view'), now(), refresh);
+  renderNav();
+  if (store.storageState() === 'unreadable') return;
+  if (onTomorrow()) renderTomorrow($('tomorrow-view'), now());
+  else renderBook($('book-view'), now(), refresh);
 }
 
 initClock({ host: location.hostname, search: location.search });
@@ -57,6 +74,7 @@ if (opened.resetDone) {
 renderShell();
 refresh();
 setInterval(refresh, REFRESH_INTERVAL_SECONDS * 1000);
+window.addEventListener('hashchange', refresh);
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'visible') refresh();
 });

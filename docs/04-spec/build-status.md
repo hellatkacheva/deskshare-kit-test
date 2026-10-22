@@ -16,7 +16,7 @@ Build order: `backlog.md` §3 — Core demo US-001 → US-002 → US-003 → US-
 | 2 | US-002 Seed demo data | Core demo | Built (local) | 11 / 11 scenarios automated (U 9, E 4); suite: unit 41 ✓, E2E 11 ✓ | 8e89d55 | Accepted (BA, 2026-10-22) | B-2 closed; B-3; deployed-build check at `deploy` (S-5) |
 | 3 | US-003 Choose a date and a floor, see booked and remaining desks | Core demo | Built (local) | 10 / 10 scenarios automated (U 6, E 9); suite: unit 52 ✓, E2E 20 ✓ | 7ad9f7b | Accepted (BA, 2026-10-22) | I-9 (date leaving the window → default date) and I-13 (7-day strip) implemented |
 | 4 | US-004 Desk grid of the selected floor (free / taken, no names) — Variant A | Core demo | Built (local) | 4 / 4 scenarios automated (U 3, E 4); suite: unit 55 ✓, E2E 24 ✓ | 113d1c2 | Accepted (BA, 2026-10-22) | US-001 waiting part (booking visible on the grid after reload / restart) now asserted |
-| 5 | US-005 Book a free desk | Core demo | Built (local) | 10 / 10 scenarios automated (U 9, E 7); suite: unit 65 ✓, E2E 31 ✓ | 9047b48 | Built in batch on BA request "сделай все стори и закомить их" — BA check pending | storage unit tests written together with the code (not before) — B-4; US-001 banner in booking form + confirmation, Book unavailable without storage, no network while booking now asserted |
+| 5 | US-005 Book a free desk | Core demo | Built (local) | 10 / 10 scenarios automated (U 9, E 7); suite: unit 65 ✓, E2E 31 ✓ | 9047b48 | Built in batch on BA request "сделай все стори и закомить их" — BA check pending | code written before its tests — B-4; US-001 banner in booking form + confirmation, Book unavailable without storage, no network while booking now asserted |
 | 6 | US-016 Name rules when booking | Core demo | Built (local) | 4 / 4 scenarios automated (U 4, E 3); suite: unit 70 ✓, E2E 34 ✓ | e8c7a21 | Built in batch on BA request "сделай все стори и закомить их" — BA check pending | tests written first, failed for the right reason |
 | 7 | US-006 Hard stop when the floor is full | Core demo | Built (local) | 5 / 5 scenarios automated (U 2, E 5) — the 5th added with US-007; suite at build: unit 72 ✓, E2E 38 ✓ | 4a2a3bf | Built in batch on BA request "сделай все стори и закомить их" — BA check pending | "Cancel on a full floor frees a desk" added with US-007 |
 | 8 | US-007 Cancel my own booking | Core demo | Built (local) | 7 / 7 scenarios automated (U 5, E 5); suite: unit 77 ✓, E2E 44 ✓ | 89eebfe | Built in batch on BA request "сделай все стори и закомить их" — BA check pending | US-006 scenario 5 and US-001 cancel checks (banner in cancel dialog, no network on cancel) added |
@@ -27,20 +27,18 @@ Build order: `backlog.md` §3 — Core demo US-001 → US-002 → US-003 → US-
 | 13 | US-010 Demo switch "Show colleagues' names" | Core demo | Built (local) | 4 / 4 scenarios automated (E 4, U 2 for readDay names); suite: unit 106 ✓, E2E 63 ✓ | 0f94ad8 | Built in batch on BA request "сделай все стори и закомить их" — BA check pending | switch is a role=switch button, JS variable only (Off after reload); consenting names on tiles with the switch On (rendering shared with US-011) |
 | 14 | US-011 Variant B: consent and names on the desk grid | Core demo | Built (local) | 9 / 9 scenarios automated (E 9, U 2 for readDay names); suite: unit 106 ✓, E2E 72 ✓ | 7e73b69 | Built in batch on BA request "сделай все стори и закомить их" — BA check pending | consent checkbox only with the switch On; notice above the grid while names are shown; names via textContent only |
 | 15 | US-015 Demo smoke test on phone and desktop | Core demo | Built (local) | 4 / 4 scenarios automated: outline on chromium-desktop, msedge, mobile-chrome, mobile-webkit; phone layout on all 4; clock / reset hooks by unit tests; suite: unit 106 ✓, E2E 80 ✓ (all projects) | a6346cf | Built in batch on BA request "сделай все стори и закомить их" — BA check pending | verification story — no new code; tests passed on first run. Manual check on real Chrome Android / Safari iOS and deployed smoke S-1…S-6 pending at `deploy` |
-| 16 | US-014 Names removed after the booking date | Next | Built (local) | 4 / 4 scenarios automated (U 4); suite: unit 110 ✓, E2E 74 ✓ | HASH | Built in batch on BA request "сделай все стори и закомить их" — BA check pending | retention step of sweep (release first, then past dates → per-floor count without names); counts never shown (DEC-029) |
+| 16 | US-014 Names removed after the booking date | Next | Built (local) | 4 / 4 scenarios automated (U 4); suite: unit 110 ✓, E2E 74 ✓ | fe40cf2 | Built in batch on BA request "сделай все стори и закомить их" — BA check pending | retention step of sweep (release first, then past dates → per-floor count without names); counts never shown (DEC-029) |
+| 17 | US-013 "Tomorrow" screen for the Office Manager | Next | Built (local) | 13 / 13 scenarios automated (U 11, E 5); suite: unit 122 ✓, E2E 85 ✓ (all projects) | HASH | Built in batch on BA request "сделай все стори и закомить их" — BA check pending | hash route #/tomorrow, link next to the app name; status as colour + word; names switch hidden there; US-001 / US-002 / US-012 / US-015 checks extended to Tomorrow |
 
-## Scenarios waiting for a later story
+## Scenarios waiting for a later step
 
-Automated now; the named assertion is added when the story is built (never skipped).
+Every part that waited for a later story is now asserted (closed 2026-10-22: US-001 banner on every dialog and on Tomorrow, Book / Cancel / Check in unavailable without storage, no network while booking / cancelling / checking in; US-002 no reset control on every screen; US-006 cancel on a full floor; US-012 and US-015 on Tomorrow). Only checks that need the public URL or real phones remain:
 
 | Story · scenario | Waiting part | Waits for |
 |---|---|---|
-| US-001 · Banner on every screen | banner in the booking form, cancel / check-in dialog, Tomorrow view | US-005, US-007, US-008, US-013 |
-| US-001 · Storage not available | "Book action is not available" against a real Book button | US-005 |
-| US-001 · Saved data cannot be read | Book / Cancel / Check in absent against real buttons | US-005, US-007, US-008 |
-| US-001 · No network calls with booking data | no request while booking, cancelling, checking in | US-005, US-007, US-008 |
-| US-002 · No visible reset control | re-check on every new screen and dialog | US-005, US-007, US-008, US-013 |
 | US-002 · Reset parameter ignored in the deployed build | unit test done; check on the public URL (test-plan §5 S-5) | `deploy` |
+| US-015 · Test clock is ignored in the demo build | unit test done; check on the public URL (S-4) | `deploy` |
+| US-015 · Core demo flow | real Chrome Android and Safari iOS on the public URL (manual, M) | `deploy` |
 
 ## B-n — build interpretations and questions
 
@@ -49,7 +47,7 @@ Automated now; the named assertion is added when the story is built (never skipp
 | B-1 | `npm test` runs the unit tests (as `test-plan.md` §1); E2E run with `npm run test:e2e`. The full suite = both. | interpretation — no options | | — |
 | B-2 | Until US-002 is built, an empty browser gets an empty version-1 document instead of the seed. | interpretation — no options | Closed by US-002 (2026-10-22) | — |
 | B-3 | US-002 "Reset parameter removed after the reset" books F1-12 on 2026-10-22, but after a reset on Wed 2026-10-21 the seed already holds F1-12 on D1 (demo-data.md §6). The test uses the free desk F1-10; the scenario's meaning (booking survives a reload) is unchanged. | interpretation — test data only | | — |
-| B-4 | US-005: the storage code was written before its unit tests (the E2E tests came first). From US-016 on, every story is tests first. | process note — no options | | — |
+| B-4 | US-005: the code (storage `book()` and the booking form) was written before its unit and E2E tests, so those tests were never seen failing. From US-016 on, every story is tests first (US-015 is a verification story with no new code). | process note — no options | | — |
 | B-5 | At a check-in deadline the minute tick (DEC-028) may release the booking before the employee presses Check in; the answer is then "There is no booking for <desk> on <date>." instead of "Too late — the booking was released at …" (I-7). Both refuse the check-in as US-008 requires; only the wording differs. | interpretation — wording only | | — |
 
 ## Deployment

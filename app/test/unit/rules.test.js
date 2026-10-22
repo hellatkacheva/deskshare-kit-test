@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
-  checkName, deadline, defaultDate, isBookable, isWorkingDay, nameKey, nextWorkingDay, sameDayClosed,
+  checkName, deadline, defaultDate, floorStatus, isBookable, isWorkingDay, nameKey, nextWorkingDay, sameDayClosed,
   windowDates,
 } from '../../public/js/rules.js';
 import { formatDate, officeNow } from '../../public/js/time.js';
@@ -118,4 +118,23 @@ describe('US-017 deadline and same-day closing (ASM-008, DEC-024)', () => {
     expect(now).toEqual(at('2026-10-21', '09:45'));
     expect(deadline('2026-10-21', now)).toBe('2026-10-21T10:15');
   });
+});
+
+describe('US-013 next working day and floor status (DEC-013)', () => {
+  it('Tomorrow on a weekday', () => expect(nextWorkingDay('2026-10-21')).toBe('2026-10-22'));
+  it('Tomorrow on Friday is Monday', () => expect(nextWorkingDay('2026-10-23')).toBe('2026-10-26'));
+  it('Tomorrow on Saturday is Monday', () => expect(nextWorkingDay('2026-10-24')).toBe('2026-10-26'));
+  it('Tomorrow on Sunday is Monday', () => expect(nextWorkingDay('2026-10-25')).toBe('2026-10-26'));
+  it('Floor 2 green to amber (boundary)', () => {
+    expect(floorStatus(19, 25)).toBe('green');
+    expect(floorStatus(20, 25)).toBe('amber');
+  });
+  it('Floor 1 amber to red (boundary)', () => {
+    expect(floorStatus(29, 30)).toBe('amber');
+    expect(floorStatus(30, 30)).toBe('red');
+  });
+  it('Floor 1 just below 80 %', () => expect(floorStatus(23, 30)).toBe('green'));
+  it('Floor 1 at 80 %', () => expect(floorStatus(24, 30)).toBe('amber'));
+  it('Floor 2 one desk left', () => expect(floorStatus(24, 25)).toBe('amber'));
+  it('Floor 2 full', () => expect(floorStatus(25, 25)).toBe('red'));
 });

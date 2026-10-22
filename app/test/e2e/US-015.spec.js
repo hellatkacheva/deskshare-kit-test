@@ -70,5 +70,9 @@ test('No horizontal scrolling on the phone', async ({ page }) => {
   await tile(page, 'F1-14').click(); // desk dialog: cancel / check-in
   await check(dialog(page));
   await dialog(page).getByRole('button', { name: 'Close' }).click();
-  // "Tomorrow" (US-013) is added here when built.
+  await page.getByRole('link', { name: 'Tomorrow' }).click(); // US-013
+  await expect(page.locator('#tomorrow-view')).toBeVisible();
+  await check(page.locator('body'));
+  const link = await page.getByRole('link', { name: 'Book' }).boundingBox();
+  expect(link.height).toBeGreaterThanOrEqual(44);
 });
