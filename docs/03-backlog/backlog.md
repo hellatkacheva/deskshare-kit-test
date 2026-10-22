@@ -10,6 +10,7 @@
 | **Status** | Reviewed (BA, 2026-10-21) |
 | **Revised** | 2026-10-21 — BA answers to OQ-1…OQ-9 (all as recommended) → DEC-016…DEC-024; stories updated |
 | **Revised** | 2026-10-21 by `review-backlog` — BA decisions on `review.md` (DEC-025…DEC-030) and accepted fixes: US-005 split into US-005 / US-016 / US-017; check-in and the A/B group moved into Core; sizes agreed; see `review.md` → "BA outcome" |
+| **Revised** | 2026-10-22 by `spec` — BA answers to OQ-S1, OQ-S2 (DEC-031, DEC-032): US-001, US-002, US-015 updated; REQ-043, REQ-044 added to the coverage matrix |
 
 Stories use `Confirmed` requirements and `Proposed` requirements from BA-made decisions (`DEC`) and BA-set assumptions (`ASM`). Values taken from an `ASM` are marked `ASSUMPTION — not validated` in the story.
 
@@ -31,8 +32,8 @@ Example calendar used in all acceptance criteria: today = Wed 2026-10-21; bookin
 
 | Story | Title | Epic | Priority | Size | Cut line | Traces to | Ready? |
 |---|---|---|---|---|---|---|---|
-| [US-001](stories/US-001.md) | Bookings kept in this browser, with the demo banner | EP-1 | Must | S | Core demo | REQ-031, NFR-005, DEC-014, ASM-006 | Yes |
-| [US-002](stories/US-002.md) | Seed demo data | EP-1 | Must | S | Core demo | REQ-032, REQ-033, REQ-034, ASM-004, ASM-007, DEC-017 | Yes |
+| [US-001](stories/US-001.md) | Bookings kept in this browser, with the demo banner | EP-1 | Must | S | Core demo | REQ-031, REQ-043, NFR-005, DEC-014, DEC-031, ASM-006 | Yes |
+| [US-002](stories/US-002.md) | Seed demo data | EP-1 | Must | S | Core demo | REQ-032, REQ-033, REQ-034, REQ-044, ASM-004, ASM-007, DEC-017, DEC-031, DEC-032 | Yes |
 | [US-003](stories/US-003.md) | Choose a date and a floor, see booked and remaining desks | EP-2 | Must | M | Core demo | REQ-001…REQ-005, REQ-009, REQ-010, REQ-039, REQ-042, NFR-009, NFR-010, ASM-002, ASM-010, ASM-017 | Yes |
 | [US-004](stories/US-004.md) | Desk grid of the selected floor (free / taken, no names) — Variant A | EP-2 | Must | S | Core demo | REQ-022, REQ-023, REQ-024, REQ-026, DEC-011, DEC-015, ASM-007 | Yes |
 | [US-005](stories/US-005.md) | Book a free desk | EP-2 | Must | M | Core demo | REQ-006, REQ-007, REQ-008, REQ-022, REQ-023, REQ-035, REQ-036, NFR-004, NFR-006, ASM-010, ASM-011 | Yes |
@@ -131,6 +132,8 @@ Out of scope items OOS-001 … OOS-007 have no stories. OOS-008 (desk-level book
 | REQ-040 notice placement | Must | Proposed (DEC-023) | US-012, US-007, US-008, US-011 |
 | REQ-041 late same-day booking | Must | Proposed (DEC-024) | US-017, US-009 |
 | REQ-042 refresh while open | Must | Proposed (DEC-028) | US-003, US-009, US-013 |
+| REQ-043 unreadable data → read-only | Must | Proposed (DEC-031) | US-001 |
+| REQ-044 `?reset-demo` local / test build only | Must | Proposed (DEC-031) | US-002, US-015 |
 | NFR-001 browser, mobile layout | Must | Confirmed | US-015 |
 | NFR-002 no individual attendance history | Must | Confirmed | US-003, US-011, US-013, US-014 |
 | NFR-003 no list / export of who came in | Must | Confirmed | US-011, US-012, US-014 |

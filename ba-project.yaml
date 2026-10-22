@@ -41,7 +41,7 @@ steps:                                # status: not_started | draft | reviewed |
   conflicts:    { status: reviewed, source_version: 2, updated: 2026-10-21 }
   stories:      { status: reviewed, source_version: 2, updated: 2026-10-21 }
   review:       { status: reviewed, source_version: 2, updated: 2026-10-21 }
-  spec:         { status: not_started, source_version: null, updated: null }
+  spec:         { status: reviewed, source_version: 2, updated: 2026-10-22 }
   build:        { status: not_started, source_version: null, updated: null }
   deploy:       { status: not_started, source_version: null, updated: null }
   jira:         { status: not_started, source_version: null, updated: null }
@@ -53,6 +53,7 @@ approvals:                            # [{step, status, by, date, note}] — onl
   - { step: conflicts, status: reviewed, by: "Olga Tkacheva", date: 2026-10-21, note: "DEC-011…DEC-015 (as reference; DEC-014 static — deliberate difference); CON-006 added; REQ-022…REQ-032 priorities set (10 Must, REQ-030 Should — Next band at stories, ref DEC-045); GAP-012 availability/accessibility open for Sam (Q13)" }
   - { step: stories, status: reviewed, by: "Olga Tkacheva", date: 2026-10-21, note: "backlog v1 after review: 17 stories (16 Must, 1 Should), OQ-1…OQ-9 → DEC-016…DEC-024, all Ready; deadline 2026-10-28" }
   - { step: review, status: reviewed, by: "Olga Tkacheva", date: 2026-10-21, note: "27 findings (0 Blocker, 13 Major, 14 Minor): Fixed 21, Accepted 5 (DEC-025…028, 030), Rejected 1 (#20 → DEC-029)" }
+  - { step: spec, status: reviewed, by: "Olga Tkacheva", date: 2026-10-22, note: "BA review without the technical stakeholder (PoC); OQ-S1 → DEC-031, OQ-S2 → DEC-032; I-1 confirmed (DEC-014 covers REQ-022…030, REQ-042); RSK-011 added (shared github.io origin with test C); no live demo for test A" }
 
 jira:
   project_key: "KAN"
@@ -82,7 +83,15 @@ stack:
     profile: static                   # (BA) static (default) | local | cloudflare | none — kit design §3.1
     url: null                         # set by deploy
     prod_requires_ok: true            # cannot be disabled
-  constraints: []                     # derived from the profile + project DECs by the spec step
+  constraints:                        # derived from the profile + project DECs by the spec step
+    - "No backend, server, database or third-party store — bookings only in browser localStorage (DEC-001, DEC-014, NFR-005)"
+    - "Single-device demo — other employees' bookings are seed data; banner on every screen (DEC-014, ASM-006, REQ-031)"
+    - "Plain HTML/CSS/JS ES modules, no framework, no build step; app/public/ published as is"
+    - "One storage module, key deskshare-kit:v1, try/catch on every access; unreadable data → read-only, never localStorage.clear() (DEC-031)"
+    - "All time rules from one clock in office time UTC+5, fixed offset (DEC-016, ASM-017)"
+    - "Test hooks (?now=, ?reset-demo) only on localhost / 127.0.0.1 — off in the deployed build (NFR-010, DEC-031)"
+    - "No network request with or after the page load (US-001)"
+    - "Re-evaluate on every user action and at least every 60 s while open (DEC-028)"
 
 watch:
   enabled: false                      # (BA) daily GitHub Action → issue "run /ba-sync"
