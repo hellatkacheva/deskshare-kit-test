@@ -73,13 +73,25 @@ export function open(now, { storage, host = '', search = '' } = {}) {
 }
 
 /**
- * storage.md §3.7 — release bookings not checked in by their deadline (US-009, DEC-020).
+ * storage.md §3.7 — 1. release bookings not checked in by their deadline (US-009, DEC-020);
+ * 2. retention: bookings of past dates leave only a per-floor count, no name (US-014, ASM-014, DEC-029).
  * Returns a new document and whether anything changed.
  */
 export function sweep(data, now) {
   const stamp = `${now.date}T${now.time}`;
-  const bookings = data.bookings.filter((b) => b.checkedInAt || stamp < b.deadline);
-  return { data: { ...data, bookings }, changed: bookings.length !== data.bookings.length };
+  const active = data.bookings.filter((b) => b.checkedInAt || stamp < b.deadline);
+  const pastCounts = { ...data.pastCounts };
+  const bookings = [];
+  for (const b of active) {
+    if (b.date < now.date) {
+      const day = { ...pastCounts[b.date] };
+      day[b.floor] = (day[b.floor] ?? 0) + 1;
+      pastCounts[b.date] = day;
+    } else {
+      bookings.push(b);
+    }
+  }
+  return { data: { ...data, bookings, pastCounts }, changed: bookings.length !== data.bookings.length };
 }
 
 /** Current document, re-read and swept on every call (another tab may have written; RSK-008). */

@@ -240,6 +240,8 @@ Built 2026-10-22: all 4 automated (outline × 4 browsers); real-phone check (M) 
 | Today's and future names are kept | U | `retention.test.js` |
 | Removal also after days without use | U | `retention.test.js` (`open` on Mon 2026-10-26) |
 
+Built 2026-10-22: all 4 automated.
+
 ### US-013 "Tomorrow" screen (Next)
 | Scenario | Type | File |
 |---|---|---|
