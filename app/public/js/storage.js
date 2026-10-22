@@ -1,6 +1,6 @@
 // The only storage module (data-model.md, storage.md §3). Every access is wrapped in try/catch.
 import { FLOORS, RESET_PARAM, STORAGE_KEY, STORAGE_VERSION, TEST_HOSTS } from './config.js';
-import { isBookable } from './rules.js';
+import { desksOf, isBookable } from './rules.js';
 import { buildSeed } from './seed.js';
 
 const PROBE_KEY = `${STORAGE_KEY}:probe`;
@@ -74,15 +74,28 @@ function read() {
   }
 }
 
-/** storage.md §3.2 — counts per floor for one bookable date. */
-export function readDay(date, now) {
+/** storage.md §3.2 — counts per floor and every desk for one bookable date. */
+export function readDay(date, now, { names = false } = {}) {
   if (!isBookable(date, now)) return { ok: false, code: 'DATE_NOT_BOOKABLE' };
   const bookings = (read()?.bookings ?? []).filter((b) => b.date === date);
   const floors = FLOORS.map(({ id, desks }) => {
     const booked = bookings.filter((b) => b.floor === id).length;
     return { floor: id, booked, left: desks - booked, full: booked >= desks };
   });
-  return { ok: true, floors };
+  const byDesk = new Map(bookings.map((b) => [b.desk, b]));
+  const desks = FLOORS.flatMap(({ id }) => desksOf(id).map((desk) => {
+    const b = byDesk.get(desk);
+    return {
+      desk,
+      floor: id,
+      taken: Boolean(b),
+      deadline: b ? b.deadline : null,
+      checkedIn: Boolean(b?.checkedInAt),
+      // Names only with the switch On and the booker's consent (REQ-026, REQ-028, ASM-015).
+      name: b && names && b.showName ? b.name : null,
+    };
+  }));
+  return { ok: true, floors, desks };
 }
 
 export function storageState() {

@@ -153,3 +153,29 @@ describe('US-003 readDay counts (storage.md §3.2)', () => {
     expect(readDay('2026-10-22', NOW).floors.map((f) => f.booked)).toEqual([0, 0]);
   });
 });
+
+describe('US-004 readDay desks (storage.md §3.2)', () => {
+  const withDoc = (bookings) => new FakeStorage({
+    [STORAGE_KEY]: JSON.stringify({ version: 1, seededAt: null, bookings, pastCounts: {} }),
+  });
+
+  it('every desk of both floors, free or taken', () => {
+    open(NOW, { storage: withDoc([booking]), host: HOST });
+    const { desks } = readDay('2026-10-22', NOW);
+    expect(desks).toHaveLength(55);
+    expect(desks.filter((d) => d.floor === 2).map((d) => d.desk)[24]).toBe('F2-25');
+    expect(desks.find((d) => d.desk === 'F1-07')).toMatchObject({ taken: true, deadline: '2026-10-22T10:00', checkedIn: false });
+    expect(desks.find((d) => d.desk === 'F1-08')).toMatchObject({ taken: false, deadline: null, name: null });
+  });
+
+  it('Taken desk without a name (Variant A) — names off', () => {
+    open(NOW, { storage: withDoc([{ ...booking, showName: true }]), host: HOST });
+    expect(readDay('2026-10-22', NOW).desks.find((d) => d.desk === 'F1-07').name).toBeNull();
+    expect(readDay('2026-10-22', NOW, { names: false }).desks.find((d) => d.desk === 'F1-07').name).toBeNull();
+  });
+
+  it('Grid follows the date', () => {
+    open(NOW, { storage: withDoc([booking]), host: HOST });
+    expect(readDay('2026-10-23', NOW).desks.find((d) => d.desk === 'F1-07').taken).toBe(false);
+  });
+});

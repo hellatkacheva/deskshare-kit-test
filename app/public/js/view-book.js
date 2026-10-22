@@ -44,11 +44,29 @@ function renderFloors(root, day, rerender) {
     el('p', { className: 'counts-line', textContent: TEXT.countsLine(floor, booked, left) })));
 }
 
+function renderGrid(root, day) {
+  const grid = root.querySelector('#grid');
+  grid.setAttribute('aria-label', TEXT.grid(ui.selectedFloor));
+  grid.replaceChildren(...day.desks.filter((d) => d.floor === ui.selectedFloor).map((d) => {
+    // Variant A: a taken desk shows "taken", never a name (REQ-026). Taken desks stay tappable (US-004 rule 5).
+    const label = d.taken ? TEXT.taken : TEXT.free;
+    const btn = el('button', { type: 'button', className: `tile ${d.taken ? 'tile-taken' : 'tile-free'}` }, [
+      el('span', { className: 'tile-desk', textContent: d.desk }),
+      el('span', { className: 'tile-state', textContent: label }),
+    ]);
+    btn.setAttribute('aria-label', `${d.desk} ${label}`);
+    btn.dataset.desk = d.desk;
+    return btn;
+  }));
+}
+
 /** Re-render from storage for `now` (every action, every tick — DEC-028). */
 export function renderBook(root, now, rerender) {
   // I-9: a selected date that left the window falls back to the default date.
   if (!ui.selectedDate || !isBookable(ui.selectedDate, now)) ui.selectedDate = defaultDate(now);
   renderStrip(root, now, rerender);
   const day = store.readDay(ui.selectedDate, now);
-  if (day.ok) renderFloors(root, day, rerender);
+  if (!day.ok) return;
+  renderFloors(root, day, rerender);
+  renderGrid(root, day);
 }

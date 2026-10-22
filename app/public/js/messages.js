@@ -7,6 +7,9 @@ export const TEXT = {
   floorLabel: (id) => `Floor ${id}`,
   floorTab: (id, left) => `Floor ${id} · ${left} left`,
   countsLine: (id, booked, left) => `Floor ${id}: ${booked} booked · ${left} left`,
+  grid: (id) => `Desks of Floor ${id}`,
+  free: 'free',
+  taken: 'taken',
 };
 
 export const MESSAGES = {

@@ -91,6 +91,8 @@ Built 2026-10-22: all 10 automated.
 | Grid follows the date | E | `US-004.spec.js` |
 | Full floor | E | `US-004.spec.js` |
 
+Built 2026-10-22: all 4 automated.
+
 ### US-005 Book a free desk
 | Scenario | Type | File |
 |---|---|---|

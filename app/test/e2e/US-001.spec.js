@@ -3,7 +3,7 @@ import { test, expect, chromium } from '@playwright/test';
 import { mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { BANNER, KEY, booking, doc, openApp, store, stored } from './helpers.js';
+import { BANNER, KEY, booking, day, doc, office, openApp, store, stored, tile } from './helpers.js';
 
 const ALEX = booking(); // F1-07 on Thu 2026-10-22, "Alex Morgan"
 
@@ -18,6 +18,8 @@ test('Data survives a reload (state effect)', async ({ page }) => {
   await store(page, doc([ALEX]));
   await page.reload();
   expect(JSON.parse(await stored(page)).bookings).toEqual([ALEX]);
+  await day(page, 'Thu 2026-10-22').click();
+  await expect(tile(page, 'F1-07')).toHaveAccessibleName('F1-07 taken'); // US-004
 });
 
 test('Data survives a browser restart', async ({}, testInfo) => {
@@ -32,8 +34,11 @@ test('Data survives a browser restart', async ({}, testInfo) => {
 
     ctx = await chromium.launchPersistentContext(dir, { baseURL });
     page = ctx.pages()[0] ?? (await ctx.newPage());
+    await page.clock.install({ time: office('2026-10-21T08:00') });
     await page.goto('/');
     expect(JSON.parse(await stored(page)).bookings).toEqual([ALEX]);
+    await day(page, 'Thu 2026-10-22').click();
+    await expect(tile(page, 'F1-07')).toHaveAccessibleName('F1-07 taken'); // US-004
     await ctx.close();
   } finally {
     rmSync(dir, { recursive: true, force: true });

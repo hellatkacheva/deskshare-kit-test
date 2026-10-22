@@ -11,6 +11,8 @@
   --accent: #0b57d0;
   --accent-fg: #ffffff;
   --disabled-bg: #f1f3f4;
+  --free-bg: #e8f5e9;
+  --taken-bg: #eceff1;
 }
 
 * { box-sizing: border-box; }
@@ -102,3 +104,28 @@ button[aria-pressed="true"] {
 .floor-tab { padding: 8px; }
 
 .counts-line { margin: 8px 0 0; }
+
+/* Desk grid (ui.md §2) — 5 columns on the phone; state shown by colour and word */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 6px;
+  margin: 12px 0 24px;
+}
+
+@media (min-width: 640px) {
+  .grid { grid-template-columns: repeat(10, minmax(0, 1fr)); }
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6px 2px;
+  min-width: 0;
+}
+
+.tile-desk { font-weight: 600; font-size: 0.85rem; }
+.tile-state { font-size: 0.8rem; }
+.tile-free { background: var(--free-bg); }
+.tile-taken { background: var(--taken-bg); color: var(--muted); }

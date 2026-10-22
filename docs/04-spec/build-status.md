@@ -14,7 +14,8 @@ Build order: `backlog.md` §3 — Core demo US-001 → US-002 → US-003 → US-
 |---|---|---|---|---|---|---|---|
 | 1 | US-001 Bookings kept in this browser, with the demo banner (+ scaffold) | Core demo | Built (local) | 7 / 7 scenarios automated (E 7, U 3 of them); suite: unit 16 ✓, E2E 7 ✓ | cd06945 | Accepted (BA, 2026-10-22) | B-1, B-2; partial assertions waiting — see below |
 | 2 | US-002 Seed demo data | Core demo | Built (local) | 11 / 11 scenarios automated (U 9, E 4); suite: unit 41 ✓, E2E 11 ✓ | 8e89d55 | Accepted (BA, 2026-10-22) | B-2 closed; B-3; deployed-build check at `deploy` (S-5) |
-| 3 | US-003 Choose a date and a floor, see booked and remaining desks | Core demo | Built (local) | 10 / 10 scenarios automated (U 6, E 9); suite: unit 52 ✓, E2E 20 ✓ | (see below) | Accepted (BA, 2026-10-22) | I-9 (date leaving the window → default date) and I-13 (7-day strip) implemented |
+| 3 | US-003 Choose a date and a floor, see booked and remaining desks | Core demo | Built (local) | 10 / 10 scenarios automated (U 6, E 9); suite: unit 52 ✓, E2E 20 ✓ | 7ad9f7b | Accepted (BA, 2026-10-22) | I-9 (date leaving the window → default date) and I-13 (7-day strip) implemented |
+| 4 | US-004 Desk grid of the selected floor (free / taken, no names) — Variant A | Core demo | Built (local) | 4 / 4 scenarios automated (U 3, E 4); suite: unit 55 ✓, E2E 24 ✓ | (see below) | Accepted (BA, 2026-10-22) | US-001 waiting part (booking visible on the grid after reload / restart) now asserted |
 
 ## Scenarios waiting for a later story
 
@@ -23,7 +24,6 @@ Automated now; the named assertion is added when the story is built (never skipp
 | Story · scenario | Waiting part | Waits for |
 |---|---|---|
 | US-001 · Banner on every screen | banner in the booking form, cancel / check-in dialog, Tomorrow view | US-005, US-007, US-008, US-013 |
-| US-001 · Data survives a reload / a browser restart | booking visible on the grid (now checked in storage) | US-004 |
 | US-001 · Storage not available | "Book action is not available" against a real Book button | US-005 |
 | US-001 · Saved data cannot be read | Book / Cancel / Check in absent against real buttons | US-005, US-007, US-008 |
 | US-001 · No network calls with booking data | no request while booking, cancelling, checking in | US-005, US-007, US-008 |

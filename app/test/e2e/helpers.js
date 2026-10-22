@@ -47,3 +47,6 @@ export function many(date, floor, n, over = {}) {
 /** Date button in the strip, by its accessible name "Thu 2026-10-22". */
 export const day = (page, label) => page.getByRole('button', { name: label, exact: true });
 export const floorTab = (page, n) => page.getByRole('button', { name: new RegExp(`^Floor ${n} ·`) });
+
+/** Desk tile on the grid, by its accessible name "F1-07 free" / "F1-07 taken" / "F1-07 <name>". */
+export const tile = (page, desk) => page.getByRole('button', { name: new RegExp(`^${desk} `) });
