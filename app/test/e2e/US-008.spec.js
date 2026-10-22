@@ -38,7 +38,11 @@ test('Exactly at the deadline is too late (boundary)', async ({ page }) => {
   await page.getByLabel('Your name').fill('Alex Morgan');
   await page.clock.runFor('01:00'); // 10:00 — the dialog stays open
   await page.getByRole('button', { name: 'Check in' }).click();
-  await expect(dialog(page).getByText('Too late — the booking was released at 10:00 office time (UTC+5).')).toBeVisible();
+  // The 10:00 tick may release the booking before the click (B-5): either refusal text is correct.
+  const tooLate = 'Too late — the booking was released at 10:00 office time (UTC+5).';
+  const gone = 'There is no booking for F1-07 on Thu 2026-10-22.';
+  await expect(dialog(page).locator('.error')).toHaveText(new RegExp(`^(${escape(tooLate)}|${escape(gone)})$`));
+  await expect(dialog(page).getByText('Checked in ✓')).toHaveCount(0);
 });
 
 test('Second check-in', async ({ page }) => {
@@ -54,3 +58,7 @@ test('Notice on the check-in name field', async ({ page }) => {
   await expect(dialog(page).getByRole('button', { name: 'Check in' })).toBeVisible();
   await expect(dialog(page).getByText(NOTICE)).toBeVisible();
 });
+
+function escape(text) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}

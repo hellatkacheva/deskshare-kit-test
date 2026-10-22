@@ -22,7 +22,8 @@ Build order: `backlog.md` §3 — Core demo US-001 → US-002 → US-003 → US-
 | 8 | US-007 Cancel my own booking | Core demo | Built (local) | 7 / 7 scenarios automated (U 5, E 5); suite: unit 77 ✓, E2E 44 ✓ | 89eebfe | Built in batch on BA request "сделай все стори и закомить их" — BA check pending | US-006 scenario 5 and US-001 cancel checks (banner in cancel dialog, no network on cancel) added |
 | 9 | US-012 Notice: names are self-reported | Core demo | Built (local) | 3 / 3 scenarios automated (E 3); suite: unit 77 ✓, E2E 47 ✓ | 7abef96 | Built in batch on BA request "сделай все стори и закомить их" — BA check pending | "No headcount list" is a guard — passes before and after; extended with Tomorrow at US-013 |
 | 10 | US-017 Check-in deadline and closing of same-day booking | Core demo | Built (local) | 9 / 9 scenarios automated (U 9, E 3); suite: unit 87 ✓, E2E 50 ✓ | 522b657 | Built in batch on BA request "сделай все стори и закомить их" — BA check pending | deadline in the confirmation ("Please check in by … on …") and in the desk dialog ("Check-in deadline: …") |
-| 11 | US-008 Check in to my booking | Core demo | Built (local) | 9 / 9 scenarios automated (U 8, E 6); suite: unit 95 ✓, E2E 56 ✓ | HASH | Built in batch on BA request "сделай все стори и закомить их" — BA check pending | I-6 (Check in only on the booking day), I-7 (RELEASED at the deadline) implemented; US-001 no-network check now covers check-in |
+| 11 | US-008 Check in to my booking | Core demo | Built (local) | 9 / 9 scenarios automated (U 8, E 6); suite: unit 95 ✓, E2E 56 ✓ | c92c2b1 | Built in batch on BA request "сделай все стори и закомить их" — BA check pending | I-6 (Check in only on the booking day), I-7 (RELEASED at the deadline) implemented; US-001 no-network check now covers check-in |
+| 12 | US-009 Auto-release of bookings not checked in | Core demo | Built (local) | 9 / 9 scenarios automated (U 9, E 3); suite: unit 104 ✓, E2E 59 ✓ | HASH | Built in batch on BA request "сделай все стори и закомить их" — BA check pending | B-5; sweep on open, every read and every write (RSK-008); US-001 restart test now uses the test clock in both sessions |
 
 ## Scenarios waiting for a later story
 
@@ -44,6 +45,8 @@ Automated now; the named assertion is added when the story is built (never skipp
 | B-1 | `npm test` runs the unit tests (as `test-plan.md` §1); E2E run with `npm run test:e2e`. The full suite = both. | interpretation — no options | | — |
 | B-2 | Until US-002 is built, an empty browser gets an empty version-1 document instead of the seed. | interpretation — no options | Closed by US-002 (2026-10-22) | — |
 | B-3 | US-002 "Reset parameter removed after the reset" books F1-12 on 2026-10-22, but after a reset on Wed 2026-10-21 the seed already holds F1-12 on D1 (demo-data.md §6). The test uses the free desk F1-10; the scenario's meaning (booking survives a reload) is unchanged. | interpretation — test data only | | — |
+| B-4 | US-005: the storage code was written before its unit tests (the E2E tests came first). From US-016 on, every story is tests first. | process note — no options | | — |
+| B-5 | At a check-in deadline the minute tick (DEC-028) may release the booking before the employee presses Check in; the answer is then "There is no booking for <desk> on <date>." instead of "Too late — the booking was released at …" (I-7). Both refuse the check-in as US-008 requires; only the wording differs. | interpretation — wording only | | — |
 
 ## Deployment
 

@@ -195,6 +195,8 @@ Built 2026-10-22: all 9 automated.
 | Same name can book again after release | U | `storage.test.js` |
 | Late same-day booking released at 23:59 | U | `storage.test.js` |
 
+Built 2026-10-22: all 9 automated.
+
 ### US-010 Demo switch "Show colleagues' names"
 | Scenario | Type | File |
 |---|---|---|

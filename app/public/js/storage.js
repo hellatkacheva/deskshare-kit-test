@@ -59,7 +59,12 @@ export function open(now, { storage, host = '', search = '' } = {}) {
       state = 'ready';
       return result();
     }
-    state = parse(raw) ? 'ready' : 'unreadable';
+    const data = parse(raw);
+    state = data ? 'ready' : 'unreadable';
+    if (data) {
+      const swept = sweep(data, now); // catch up on releases while the app was closed (US-009)
+      if (swept.changed) write(swept.data);
+    }
   } catch {
     backend = null;
     state = 'unavailable';
@@ -67,20 +72,41 @@ export function open(now, { storage, host = '', search = '' } = {}) {
   return result();
 }
 
-/** Current document, re-read from storage on every call (another tab may have written). */
-function read() {
+/**
+ * storage.md §3.7 — release bookings not checked in by their deadline (US-009, DEC-020).
+ * Returns a new document and whether anything changed.
+ */
+export function sweep(data, now) {
+  const stamp = `${now.date}T${now.time}`;
+  const bookings = data.bookings.filter((b) => b.checkedInAt || stamp < b.deadline);
+  return { data: { ...data, bookings }, changed: bookings.length !== data.bookings.length };
+}
+
+/** Current document, re-read and swept on every call (another tab may have written; RSK-008). */
+function read(now) {
   if (state !== 'ready') return null;
+  let parsed;
   try {
-    return parse(backend.getItem(STORAGE_KEY));
+    parsed = parse(backend.getItem(STORAGE_KEY));
   } catch {
     return null;
   }
+  if (!parsed) return null;
+  const { data, changed } = sweep(parsed, now);
+  if (changed) {
+    try {
+      write(data);
+    } catch {
+      // shown from memory; the next write reports STORAGE_OFF
+    }
+  }
+  return data;
 }
 
 /** storage.md §3.2 — counts per floor and every desk for one bookable date. */
 export function readDay(date, now, { names = false } = {}) {
   if (!isBookable(date, now)) return { ok: false, code: 'DATE_NOT_BOOKABLE' };
-  const bookings = (read()?.bookings ?? []).filter((b) => b.date === date);
+  const bookings = (read(now)?.bookings ?? []).filter((b) => b.date === date);
   const floors = FLOORS.map(({ id, desks }) => {
     const booked = bookings.filter((b) => b.floor === id).length;
     return { floor: id, booked, left: desks - booked, full: booked >= desks };
@@ -107,10 +133,11 @@ function fail(code, vars = {}) {
 }
 
 /**
- * read → check → write in one synchronous call (storage.md §3), so a stale tab cannot
- * double-book. `change(data)` returns a result; the document is written only on success.
+ * read → sweep → check → write in one synchronous call (storage.md §3), so a stale tab cannot
+ * double-book. `change(data)` returns a result; the document is written on success or when the
+ * sweep changed it. `lookFirst`: run `change` before the sweep (check-in, I-7).
  */
-function mutate(change) {
+function mutate(now, change, { lookFirst = false } = {}) {
   if (state === 'unavailable') return fail('STORAGE_OFF');
   if (state === 'unreadable') return fail('STORAGE_UNREADABLE');
   let data;
@@ -120,8 +147,21 @@ function mutate(change) {
     return fail('STORAGE_OFF');
   }
   if (!data) return fail('STORAGE_UNREADABLE');
-  const result = change(data);
-  if (result.ok) {
+  let changed = false;
+  const doSweep = () => {
+    const swept = sweep(data, now);
+    data = swept.data;
+    changed = swept.changed;
+  };
+  let result;
+  if (lookFirst) {
+    result = change(data);
+    doSweep();
+  } else {
+    doSweep();
+    result = change(data);
+  }
+  if (result.ok || changed) {
     try {
       write(data);
     } catch {
@@ -133,7 +173,7 @@ function mutate(change) {
 
 /** storage.md §3.3 */
 export function book({ date, desk, name, showName = false }, now) {
-  return mutate((data) => {
+  return mutate(now, (data) => {
     const nameProblem = checkName(name);
     if (nameProblem) return fail(nameProblem);
     if (!isBookable(date, now)) return fail('DATE_NOT_BOOKABLE');
@@ -164,7 +204,7 @@ export function book({ date, desk, name, showName = false }, now) {
 
 /** storage.md §3.4 */
 export function cancel({ date, desk, name }, now) {
-  return mutate((data) => {
+  return mutate(now, (data) => {
     const i = data.bookings.findIndex((b) => b.date === date && b.desk === desk);
     if (i < 0) return fail('NO_BOOKING', { date, desk });
     if (data.bookings[i].nameKey !== nameKey(name)) return fail('NAME_MISMATCH');
@@ -175,7 +215,7 @@ export function cancel({ date, desk, name }, now) {
 
 /** storage.md §3.5 — the booking is looked at before release, so the deadline answers RELEASED (I-7). */
 export function checkIn({ date, desk, name }, now) {
-  return mutate((data) => {
+  return mutate(now, (data) => {
     const b = data.bookings.find((x) => x.date === date && x.desk === desk);
     if (!b) return fail('NO_BOOKING', { date, desk });
     if (date !== now.date) return fail('NOT_BOOKING_DAY');
@@ -185,7 +225,7 @@ export function checkIn({ date, desk, name }, now) {
     if (`${now.date}T${now.time}` >= b.deadline) return fail('RELEASED', { deadline: b.deadline });
     b.checkedInAt = `${now.date}T${now.time}`;
     return { ok: true };
-  });
+  }, { lookFirst: true });
 }
 
 export function storageState() {

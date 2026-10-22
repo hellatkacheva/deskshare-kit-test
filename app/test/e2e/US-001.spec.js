@@ -42,6 +42,7 @@ test('Data survives a browser restart', async ({}, testInfo) => {
   try {
     let ctx = await chromium.launchPersistentContext(dir, { baseURL });
     let page = ctx.pages()[0] ?? (await ctx.newPage());
+    await page.clock.install({ time: office('2026-10-21T08:00') });
     await page.goto('/');
     await store(page, doc([ALEX]));
     await ctx.close();

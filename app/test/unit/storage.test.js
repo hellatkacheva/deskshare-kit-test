@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { FakeStorage } from './fake-storage.js';
 import {
-  book, cancel, checkIn, open, readDay,
+  book, cancel, checkIn, open, readDay, sweep,
 } from '../../public/js/storage.js';
 import { STORAGE_KEY } from '../../public/js/config.js';
 
@@ -436,5 +436,72 @@ describe('US-008 checkIn (storage.md §3.5)', () => {
   it('No booking on the desk', () => {
     start([]);
     expect(checkIn(alex(), at('09:10')).code).toBe('NO_BOOKING');
+  });
+});
+
+describe('US-009 auto-release (storage.md §3.7)', () => {
+  const THU = '2026-10-22';
+  const at = (time, date = THU) => ({ date, time });
+  const jamie = { ...booking, desk: 'F2-03', floor: 2, name: 'Jamie Lee', nameKey: 'jamie lee' }; // deadline 10:00
+  const start = (bookings) => {
+    const s = new FakeStorage({ [STORAGE_KEY]: JSON.stringify({ version: 1, seededAt: null, bookings, pastCounts: {} }) });
+    open(at('09:00'), { storage: s, host: HOST });
+    return s;
+  };
+  const f2 = (r) => r.floors[1];
+  const deskOf = (r, d) => r.desks.find((x) => x.desk === d);
+
+  it('Booking released after the deadline (state effect)', () => {
+    const s = start([jamie]);
+    const r = readDay(THU, at('10:01'));
+    expect(deskOf(r, 'F2-03').taken).toBe(false);
+    expect(f2(r)).toMatchObject({ booked: 0, left: 25 });
+    expect(JSON.parse(s.getItem(STORAGE_KEY)).bookings).toEqual([]); // released = deleted, saved
+  });
+
+  it('Released exactly at the deadline (boundary)', () => {
+    start([jamie]);
+    expect(deskOf(readDay(THU, at('10:00')), 'F2-03').taken).toBe(false);
+  });
+
+  it('Not released before the deadline', () => {
+    start([jamie]);
+    expect(deskOf(readDay(THU, at('09:59')), 'F2-03').taken).toBe(true);
+  });
+
+  it('Released without anyone using the app at 10:00 (open at 11:00)', () => {
+    const s = new FakeStorage({ [STORAGE_KEY]: JSON.stringify({ version: 1, seededAt: null, bookings: [jamie], pastCounts: {} }) });
+    open(at('11:00'), { storage: s, host: HOST });
+    expect(JSON.parse(s.getItem(STORAGE_KEY)).bookings).toEqual([]);
+  });
+
+  it('Checked-in booking is not released', () => {
+    start([{ ...booking, checkedInAt: '2026-10-22T09:10' }]);
+    expect(deskOf(readDay(THU, at('10:01')), 'F1-07').taken).toBe(true);
+  });
+
+  it('Released desk can be booked again', () => {
+    start([jamie]);
+    expect(book({ date: THU, desk: 'F2-03', name: 'Sam Rivera' }, at('10:05')))
+      .toMatchObject({ ok: true, booking: { deadline: '2026-10-22T10:35' } });
+  });
+
+  it('Same name can book again after release', () => {
+    start([jamie]);
+    expect(book({ date: THU, desk: 'F2-05', name: 'Jamie Lee' }, at('10:10')).ok).toBe(true);
+  });
+
+  it('Late same-day booking released at 23:59', () => {
+    const late = { ...jamie, date: '2026-10-21', bookedAt: '2026-10-21T23:45', deadline: '2026-10-21T23:59' };
+    start([late]);
+    expect(deskOf(readDay('2026-10-21', at('23:59', '2026-10-21')), 'F2-03').taken).toBe(false);
+  });
+
+  it('sweep() reports changes and keeps checked-in bookings', () => {
+    const data = { version: 1, bookings: [jamie, { ...booking, checkedInAt: '2026-10-22T09:00' }], pastCounts: {} };
+    const r = sweep(data, at('10:00'));
+    expect(r.changed).toBe(true);
+    expect(r.data.bookings.map((b) => b.desk)).toEqual(['F1-07']);
+    expect(sweep(r.data, at('10:00')).changed).toBe(false);
   });
 });
