@@ -1,5 +1,5 @@
 // Boot and page shell (architecture.md §3, ui.md §1).
-import { REFRESH_INTERVAL_SECONDS } from './config.js';
+import { REFRESH_INTERVAL_SECONDS, RESET_PARAM } from './config.js';
 import { initClock, now } from './clock.js';
 import { MESSAGES, TEXT } from './messages.js';
 import * as store from './storage.js';
@@ -33,7 +33,13 @@ function refresh() {
 }
 
 initClock({ host: location.hostname, search: location.search });
-store.open(now(), { storage: browserStorage(), host: location.hostname, search: location.search });
+const opened = store.open(now(), { storage: browserStorage(), host: location.hostname, search: location.search });
+if (opened.resetDone) {
+  // US-002 rule 9: a later reload must not reset again.
+  const url = new URL(location.href);
+  url.searchParams.delete(RESET_PARAM);
+  history.replaceState(null, '', url);
+}
 renderShell();
 refresh();
 setInterval(refresh, REFRESH_INTERVAL_SECONDS * 1000);

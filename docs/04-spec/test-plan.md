@@ -65,6 +65,8 @@ Built 2026-10-22: all 7 automated; parts waiting for later stories are listed in
 | Seed on a weekend | U | `seed.test.js` (Sat 12:00 → D0 Mon, none checked in, deadline 10:00) |
 | No visible reset control | E | `US-002.spec.js` (no button / link whose text or label contains "reset") |
 
+Built 2026-10-22: all 11 automated; deployed-build check at `deploy` (S-5); test data note B-3 in `build-status.md`.
+
 ### US-003 Choose a date and a floor, see booked and remaining desks
 | Scenario | Type | File |
 |---|---|---|

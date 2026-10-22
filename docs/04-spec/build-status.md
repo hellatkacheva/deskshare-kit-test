@@ -12,7 +12,8 @@ Build order: `backlog.md` §3 — Core demo US-001 → US-002 → US-003 → US-
 
 | # | Story | Band | Status | Tests | Commit | BA | Notes |
 |---|---|---|---|---|---|---|---|
-| 1 | US-001 Bookings kept in this browser, with the demo banner (+ scaffold) | Core demo | Built (local) | 7 / 7 scenarios automated (E 7, U 3 of them); suite: unit 16 ✓, E2E 7 ✓ | (see below) | Accepted (BA, 2026-10-22) | B-1, B-2; partial assertions waiting — see below |
+| 1 | US-001 Bookings kept in this browser, with the demo banner (+ scaffold) | Core demo | Built (local) | 7 / 7 scenarios automated (E 7, U 3 of them); suite: unit 16 ✓, E2E 7 ✓ | cd06945 | Accepted (BA, 2026-10-22) | B-1, B-2; partial assertions waiting — see below |
+| 2 | US-002 Seed demo data | Core demo | Built (local) | 11 / 11 scenarios automated (U 9, E 4); suite: unit 41 ✓, E2E 11 ✓ | (see below) | Accepted (BA, 2026-10-22) | B-2 closed; B-3; deployed-build check at `deploy` (S-5) |
 
 ## Scenarios waiting for a later story
 
@@ -25,13 +26,16 @@ Automated now; the named assertion is added when the story is built (never skipp
 | US-001 · Storage not available | "Book action is not available" against a real Book button | US-005 |
 | US-001 · Saved data cannot be read | Book / Cancel / Check in absent against real buttons | US-005, US-007, US-008 |
 | US-001 · No network calls with booking data | no request while booking, cancelling, checking in | US-005, US-007, US-008 |
+| US-002 · No visible reset control | re-check on every new screen and dialog | US-005, US-007, US-008, US-013 |
+| US-002 · Reset parameter ignored in the deployed build | unit test done; check on the public URL (test-plan §5 S-5) | `deploy` |
 
 ## B-n — build interpretations and questions
 
 | # | Item | Options | BA answer | DEC |
 |---|---|---|---|---|
 | B-1 | `npm test` runs the unit tests (as `test-plan.md` §1); E2E run with `npm run test:e2e`. The full suite = both. | interpretation — no options | | — |
-| B-2 | Until US-002 is built, an empty browser gets an empty version-1 document instead of the seed. | interpretation — no options | | — |
+| B-2 | Until US-002 is built, an empty browser gets an empty version-1 document instead of the seed. | interpretation — no options | Closed by US-002 (2026-10-22) | — |
+| B-3 | US-002 "Reset parameter removed after the reset" books F1-12 on 2026-10-22, but after a reset on Wed 2026-10-21 the seed already holds F1-12 on D1 (demo-data.md §6). The test uses the free desk F1-10; the scenario's meaning (booking survives a reload) is unchanged. | interpretation — test data only | | — |
 
 ## Deployment
 
