@@ -24,6 +24,7 @@ export const TEXT = {
   dateLine: (date) => `Date: ${formatDate(date)}`,
   deskLine: (desk) => `Desk: ${desk}`,
   hint: 'Note your desk number — you need it to check in or cancel',
+  selfReported: 'Names are self-reported — not for emergency headcount.',
   // Booking actions — cancel / check-in (ui.md §3.3)
   actionsTitle: (desk, date) => `Desk ${desk} · ${formatDate(date)}`,
   nameAsBooked: 'Your name (as booked)',

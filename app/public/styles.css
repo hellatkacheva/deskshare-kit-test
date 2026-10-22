@@ -161,3 +161,5 @@ button[aria-pressed="true"] {
 .actions button { padding: 0 16px; }
 
 button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
+
+.notice { font-size: 0.85rem; color: var(--muted); }

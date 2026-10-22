@@ -150,6 +150,8 @@ Built 2026-10-22: all 7 automated.
 | Notice on the cancel name field | E | `US-012.spec.js` |
 | No headcount list | E | `US-012.spec.js` (every view and dialog: no seed name of today in page text with the switch Off; Tomorrow when built) |
 
+Built 2026-10-22: all 3 automated; "No headcount list" re-checked when Tomorrow (US-013) is built.
+
 ### US-017 Check-in deadline and closing of same-day booking
 | Scenario | Type | File |
 |---|---|---|

@@ -40,7 +40,9 @@ function button(text, onClick, className = '') {
 function nameField(id, labelText = TEXT.nameLabel) {
   const input = el('input', { id, type: 'text', autocomplete: 'off', spellcheck: false });
   const label = el('label', { htmlFor: id, textContent: labelText });
-  return { input, nodes: [label, input] };
+  // REQ-040: the self-reported notice sits next to every name field (US-012).
+  const notice = el('p', { className: 'notice', textContent: TEXT.selfReported });
+  return { input, nodes: [label, input, notice] };
 }
 
 function showConfirmation(booking) {
