@@ -31,6 +31,7 @@ Used in every reference as `[KEY · Section]`.
 |---|---|---|
 | `confluence/65670/v2/` | 2026-10-20 | 458755 v1 (listed in `meta.json` 2026-10-21; child created after the parent snapshot) |
 | `confluence/458755/v1/` | 2026-10-21 | — (child page of 65670) |
+| `confluence/65670/v3/` | 2026-10-23 | 458755 v1 — CHG-001: C0 only (emphasis on "no approval step"); working source `01-…md` stays on v2 text, identical in words |
 
 ## Known missing inputs
 

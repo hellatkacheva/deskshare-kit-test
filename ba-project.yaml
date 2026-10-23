@@ -29,22 +29,22 @@ source:
   title: "DeskShare — Requirements Gathering (source copy)"
   include_children: true              # (BA)
   include_attachments: true           # (BA) attachments are listed, files are put into docs/00-source/inbox/ by the BA
-  version: 2                          # set by ingest / sync
-  snapshot_at: "2026-10-20T10:26:26.254Z"  # version.createdAt of the snapshot (MCP exposes only page createdAt — see meta.json notes)
+  version: 3                          # set by ingest / sync
+  snapshot_at: "2026-10-20T10:26:26.254Z"  # version.createdAt of the snapshot (MCP exposes only page createdAt — see meta.json notes; unchanged for v3, CHG-001)
   children:                           # [{id, title, version}]
     - { id: "458755", title: "Workshop brief (source copy)", version: 1 }
   attachments: []                     # [{id, title, version, media_type}] — filled by the watch Action / REST
 
 steps:                                # status: not_started | draft | reviewed | approved | stale | skipped
-  ingest:       { status: reviewed, source_version: 2, updated: 2026-10-21 }
-  requirements: { status: reviewed, source_version: 2, updated: 2026-10-21 }
-  conflicts:    { status: reviewed, source_version: 2, updated: 2026-10-21 }
-  stories:      { status: reviewed, source_version: 2, updated: 2026-10-21 }
-  review:       { status: reviewed, source_version: 2, updated: 2026-10-21 }
-  spec:         { status: reviewed, source_version: 2, updated: 2026-10-22 }
-  build:        { status: reviewed, source_version: 2, updated: 2026-10-23 }
-  deploy:       { status: reviewed, source_version: 2, updated: 2026-10-23 }
-  jira:         { status: reviewed, source_version: 2, updated: 2026-10-23 }
+  ingest:       { status: reviewed, source_version: 3, updated: 2026-10-21 }
+  requirements: { status: reviewed, source_version: 3, updated: 2026-10-21 }
+  conflicts:    { status: reviewed, source_version: 3, updated: 2026-10-21 }
+  stories:      { status: reviewed, source_version: 3, updated: 2026-10-21 }
+  review:       { status: reviewed, source_version: 3, updated: 2026-10-21 }
+  spec:         { status: reviewed, source_version: 3, updated: 2026-10-22 }
+  build:        { status: reviewed, source_version: 3, updated: 2026-10-23 }
+  deploy:       { status: reviewed, source_version: 3, updated: 2026-10-23 }
+  jira:         { status: reviewed, source_version: 3, updated: 2026-10-23 }
 
 approvals:                            # [{step, status, by, date, note}] — only on the BA's explicit OK
   - { step: setup, status: approved, by: "Olga Tkacheva", date: 2026-10-20, note: "ba-new" }
@@ -60,6 +60,7 @@ approvals:                            # [{step, status, by, date, note}] — onl
   - { step: deploy, status: reviewed, by: "Olga Tkacheva", date: 2026-10-23, note: "checked on a phone on the public URL — works; smoke S-1…S-6 ✓" }
   - { step: jira, status: plan-ok, by: "Olga Tkacheva", date: 2026-10-23, note: "36 create, 0 update; all stories and epics Done as proposed; every issue into sprint 'DeskShare Kit Test PoC' (created and started by the BA)" }
   - { step: jira, status: reviewed, by: "Olga Tkacheva", date: 2026-10-23, note: "board checked; 36 issues, no duplicates (Q5 = KAN-27 only); sprint 'DeskShare Kit Test PoC' started by the BA; board link set from the BA's browser URL" }
+  - { step: sync, status: plan-ok, by: "Olga Tkacheva", date: 2026-10-23, note: "CHG-001 v2→v3: row 1 (C0 only — accept snapshot, no artifact changes)" }
 
 jira:
   project_key: "KAN"
