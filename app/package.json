@@ -7,7 +7,8 @@
     "serve": "node scripts/serve.mjs",
     "test": "vitest run",
     "test:e2e": "playwright test --project=chromium-desktop",
-    "test:e2e:all": "playwright test"
+    "test:e2e:all": "playwright test",
+    "test:smoke": "playwright test --project=deployed"
   },
   "devDependencies": {
     "@playwright/test": "1.63.0",

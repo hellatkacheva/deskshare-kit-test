@@ -12,6 +12,7 @@
 | **Revised** | 2026-10-21 by `write-stories` (BA answers to backlog OQ-1…OQ-9, all as recommended): DEC-016…DEC-024, ASM-017, ASM-018 added; REQ-033…REQ-041, NFR-009, NFR-010 added to `requirements.md`; §8 Q14 extended. |
 | **Revised** | 2026-10-21 by `review-backlog` (BA decisions on `docs/03-backlog/review.md`): DEC-025…DEC-030 added; REQ-042 added to `requirements.md`; `project.deadline` set to 2026-10-28 (DEC-027); RSK-001 updated. |
 | **Revised** | 2026-10-22 by `spec` (BA answers to OQ-S1, OQ-S2): DEC-031, DEC-032 added; DEC-017 partly superseded by DEC-031; REQ-043, REQ-044 added to `requirements.md`. |
+| **Revised** | 2026-10-23 by `deploy`: DEC-033 (hosting GitHub Pages, BA decision; Sam open — ASM-013; CST-005 not met literally); DEC-030 closed. |
 | **Part B** | 2026-10-21 — BA decisions (Olga Tkacheva, BA, proxy for Priya Nandakumar): DEC-011…DEC-015; CON-006 raised by the BA in Part B. Test A repeats the decisions of the reference project DeskShare (`C:\Projects\deskshare\deskshare\docs\02-analysis\analysis-log.md`), except DEC-014 (static instead of Cloudflare — deliberate difference). Assumed values for GAP-002…GAP-012 taken from the reference, cited as "ref ASM-/DEC-…". |
 
 ---
@@ -292,6 +293,14 @@ Origin: spec questions `OQ-Sn` in `docs/04-spec/architecture.md` §8. Decided by
 |---|---|---|---|---|---|
 | DEC-031 | OQ-S1 | Decided | **Unreadable saved data → read-only.** If the stored DeskShare data cannot be read (damaged JSON or another storage version), the app shows "Saved bookings could not be read in this browser. Clear site data to reload demo data.", Book / Cancel / Check in are not available and the stored data is left unchanged. **`?reset-demo` works only in the local / test build** (`localhost`, `127.0.0.1`) and is ignored in the deployed build; there, recovery and the demo-day reset are done by clearing the site data in the browser — the app then loads the seed as on first open. The instruction goes into `README.md` and the demo-day checklist (`docs/04-spec/demo-data.md` §9). **Partly supersedes DEC-017** (team-only reset by URL parameter → local / test build only). | Option A as recommended, with the BA's addition on the reset: no booking is silently lost (US-001 rule 5); nothing destructive is reachable from a URL of the deployed app. | REQ-034 → REQ-043, REQ-044; US-001, US-002, US-015; DEC-017 |
 | DEC-032 | OQ-S2 | Decided | **Exact seed = the reference seed** (ref `docs/04-spec/demo-data.md`): D0 Floor 1 = 10 bookings (6 checked in, 4 not), Floor 2 = 8 (5 checked in, 3 not), name consent on 4 + 2 D0 bookings (Grace Holm, F1-14: not checked in, consent — the check-in shown at the demo); D1 Floor 1 = 25, Floor 2 = 25, no consent; D2 Floor 1 = 12, Floor 2 = 6, no consent; 86 rows, fictional names N1…N50 of the reference. Rows: `docs/04-spec/demo-data.md`. | As recommended; refines the "some" of DEC-017 into exact rows; same seed as the reference. | REQ-033; US-002, US-015 |
+
+### Decisions from deploy (step 8, 2026-10-23)
+
+Decided by: Olga Tkacheva (BA, proxy for Priya Nandakumar), 2026-10-23.
+
+| ID | Origin | Outcome | Decision | Rationale | Affects |
+|---|---|---|---|---|---|
+| DEC-033 | DEC-030 (hosting decided at `deploy`) | Decided | **Hosting: GitHub Pages** (`https://hellatkacheva.github.io/deskshare-kit-test/`), published from `app/public/` by the Actions workflow `pages`. BA decision without Sam's answer: **Sam's confirmation stays open** (ASM-013, §8 Q3, spec T-1). **CST-005 "deployed to Cloudflare" is not met literally** (as already noted for DEC-014). | Static profile (DEC-014); `repo.visibility: public`; no account or secrets beyond GitHub; the BA chose not to wait for Sam before the milestone (CST-007). | DEC-030 (closed); ASM-013 (still not validated); CST-005; RSK-007; RSK-011 (shared `hellatkacheva.github.io` origin) |
 
 ## 8. Open questions for the sponsor
 
