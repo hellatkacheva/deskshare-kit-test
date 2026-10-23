@@ -24,11 +24,11 @@ test('Turn On and Off', async ({ page }) => {
 
 test('Switching keeps bookings (state effect)', async ({ page }) => {
   await openApp(page, { at: '2026-10-21T08:00' });
-  await expect(page.getByText('Floor 1: 10 booked · 20 left')).toBeVisible();
+  await expect(page.getByText('Floor 1: 10 booked · 25 left')).toBeVisible();
   const before = await consentOf(page);
   await namesSwitch(page).click();
   await namesSwitch(page).click();
-  await expect(page.getByText('Floor 1: 10 booked · 20 left')).toBeVisible();
+  await expect(page.getByText('Floor 1: 10 booked · 25 left')).toBeVisible();
   expect(await consentOf(page)).toEqual(before);
 });
 

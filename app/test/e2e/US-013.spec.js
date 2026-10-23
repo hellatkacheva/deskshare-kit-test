@@ -19,12 +19,19 @@ test('Screen left open over midnight (DEC-028)', async ({ page }) => {
 });
 
 test('Floor 2 full', async ({ page }) => {
-  await openApp(page, { at: '2026-10-21T08:00' }); // seed: D1 Floor 1 = 25, Floor 2 = 25
+  await openApp(page, { at: '2026-10-21T08:00' }); // seed: D1 Floor 2 = 25 of 25
   await openTomorrow(page);
   await expect(floorCard(page, 2)).toContainText('25 / 25');
   await expect(floorCard(page, 2)).toContainText('RED');
-  await expect(floorCard(page, 1)).toContainText('25 / 30');
+});
+
+test('Seeded demo state (DEC-034)', async ({ page }) => {
+  await openApp(page, { at: '2026-10-21T08:00' }); // seed: D1 Floor 1 = 30 of 35, Floor 2 = 25 of 25
+  await openTomorrow(page);
+  await expect(floorCard(page, 1)).toContainText('30 / 35');
   await expect(floorCard(page, 1)).toContainText('AMBER');
+  await expect(floorCard(page, 2)).toContainText('25 / 25');
+  await expect(floorCard(page, 2)).toContainText('RED');
 });
 
 test('Status follows a cancel (state effect)', async ({ page }) => {

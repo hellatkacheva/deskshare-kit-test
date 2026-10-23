@@ -29,22 +29,22 @@ source:
   title: "DeskShare — Requirements Gathering (source copy)"
   include_children: true              # (BA)
   include_attachments: true           # (BA) attachments are listed, files are put into docs/00-source/inbox/ by the BA
-  version: 3                          # set by ingest / sync
-  snapshot_at: "2026-10-20T10:26:26.254Z"  # version.createdAt of the snapshot (MCP exposes only page createdAt — see meta.json notes; unchanged for v3, CHG-001)
+  version: 4                          # set by ingest / sync
+  snapshot_at: "2026-10-20T10:26:26.254Z"  # version.createdAt of the snapshot (MCP exposes only page createdAt — see meta.json notes; unchanged for v3, CHG-001, and v4, CHG-002)
   children:                           # [{id, title, version}]
     - { id: "458755", title: "Workshop brief (source copy)", version: 1 }
   attachments: []                     # [{id, title, version, media_type}] — filled by the watch Action / REST
 
 steps:                                # status: not_started | draft | reviewed | approved | stale | skipped
-  ingest:       { status: reviewed, source_version: 3, updated: 2026-10-21 }
-  requirements: { status: reviewed, source_version: 3, updated: 2026-10-21 }
-  conflicts:    { status: reviewed, source_version: 3, updated: 2026-10-21 }
-  stories:      { status: reviewed, source_version: 3, updated: 2026-10-21 }
-  review:       { status: reviewed, source_version: 3, updated: 2026-10-21 }
-  spec:         { status: reviewed, source_version: 3, updated: 2026-10-22 }
-  build:        { status: reviewed, source_version: 3, updated: 2026-10-23 }
-  deploy:       { status: reviewed, source_version: 3, updated: 2026-10-23 }
-  jira:         { status: reviewed, source_version: 3, updated: 2026-10-23 }
+  ingest:       { status: draft, source_version: 4, updated: 2026-10-23 }  # CHG-002 row 1
+  requirements: { status: draft, source_version: 4, updated: 2026-10-23 }  # CHG-002
+  conflicts:    { status: draft, source_version: 4, updated: 2026-10-23 }  # CHG-002
+  stories:      { status: draft, source_version: 4, updated: 2026-10-23 }  # CHG-002
+  review:       { status: draft, source_version: 4, updated: 2026-10-23 }  # CHG-002
+  spec:         { status: draft, source_version: 4, updated: 2026-10-23 }  # CHG-002
+  build:        { status: reviewed, source_version: 4, updated: 2026-10-23 }  # CHG-002, BA accepted
+  deploy:       { status: stale, source_version: 3, updated: 2026-10-23 }  # CHG-002
+  jira:         { status: stale, source_version: 3, updated: 2026-10-23 }  # CHG-002
 
 approvals:                            # [{step, status, by, date, note}] — only on the BA's explicit OK
   - { step: setup, status: approved, by: "Olga Tkacheva", date: 2026-10-20, note: "ba-new" }
@@ -61,6 +61,10 @@ approvals:                            # [{step, status, by, date, note}] — onl
   - { step: jira, status: plan-ok, by: "Olga Tkacheva", date: 2026-10-23, note: "36 create, 0 update; all stories and epics Done as proposed; every issue into sprint 'DeskShare Kit Test PoC' (created and started by the BA)" }
   - { step: jira, status: reviewed, by: "Olga Tkacheva", date: 2026-10-23, note: "board checked; 36 issues, no duplicates (Q5 = KAN-27 only); sprint 'DeskShare Kit Test PoC' started by the BA; board link set from the BA's browser URL" }
   - { step: sync, status: plan-ok, by: "Olga Tkacheva", date: 2026-10-23, note: "CHG-001 v2→v3: row 1 (C0 only — accept snapshot, no artifact changes)" }
+  - { step: sync, status: plan-ok, by: "Olga Tkacheva", date: 2026-10-23, note: "CHG-002 v3→v4: rows 1–19; Q1 seed → C (DEC-034); Q2 in place with 'Revised CHG-002' + old value; Q3 35 intentional ('тест B2')" }
+  - { step: build, status: gate-waived, by: "Olga Tkacheva", date: 2026-10-23, note: "H6 waived — 'Приёмку после каждой истории (H6) на этот раз отменяю — изменения только числовые; проверю итог разом перед deploy'; scope: CHG-002 rework of US-002, US-003, US-004, US-005, US-006, US-010, US-013 (+ tests of US-007, US-015, US-016); stop before deploy with test results" }
+  - { step: build, status: reviewed, by: "Olga Tkacheva", date: 2026-10-23, note: "CHG-002 rework checked locally at once — 'Локально проверила — OK'; deferred H6 check done for US-002, -003, -004, -005, -006, -010, -013 (+ tests of US-007, -015, -016); review S2-1…S2-6 fixed" }
+  - { step: deploy, status: public-deploy-ok, by: "Olga Tkacheva", date: 2026-10-23, note: "CHG-002 redeploy — 'Deploy (строка 17) — OK, публикуй и запусти smoke S-1…S-6'" }
 
 jira:
   project_key: "KAN"

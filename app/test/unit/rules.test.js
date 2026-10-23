@@ -4,6 +4,7 @@ import {
   windowDates,
 } from '../../public/js/rules.js';
 import { formatDate, officeNow } from '../../public/js/time.js';
+import { FLOORS } from '../../public/js/config.js';
 
 const at = (date, time) => ({ date, time });
 
@@ -130,11 +131,12 @@ describe('US-013 next working day and floor status (DEC-013)', () => {
     expect(floorStatus(20, 25)).toBe('amber');
   });
   it('Floor 1 amber to red (boundary)', () => {
-    expect(floorStatus(29, 30)).toBe('amber');
-    expect(floorStatus(30, 30)).toBe('red');
+    expect(floorStatus(34, 35)).toBe('amber');
+    expect(floorStatus(35, 35)).toBe('red');
   });
-  it('Floor 1 just below 80 %', () => expect(floorStatus(23, 30)).toBe('green'));
-  it('Floor 1 at 80 %', () => expect(floorStatus(24, 30)).toBe('amber'));
+  it('Floor 1 just below 80 %', () => expect(floorStatus(27, 35)).toBe('green'));
+  it('Floor 1 at 80 %', () => expect(floorStatus(28, 35)).toBe('amber'));
+  it('Floor 1 capacity from config (CHG-002)', () => expect(FLOORS.find((f) => f.id === 1).desks).toBe(35));
   it('Floor 2 one desk left', () => expect(floorStatus(24, 25)).toBe('amber'));
   it('Floor 2 full', () => expect(floorStatus(25, 25)).toBe('red'));
 });

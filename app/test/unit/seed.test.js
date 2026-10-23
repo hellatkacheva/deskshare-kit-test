@@ -11,8 +11,8 @@ const AC_AND_STAKEHOLDER_NAMES = ['alex morgan', 'jamie lee', 'sam rivera', 'kim
 const count = (bookings, date, floor) => bookings.filter((b) => b.date === date && b.floor === floor).length;
 
 describe('seed rows (demo-data.md §8)', () => {
-  it('86 rows, desks only from F1-01…F1-30 / F2-01…F2-25', () => {
-    expect(SEED_ROWS).toHaveLength(86);
+  it('91 rows, desks only from F1-01…F1-35 / F2-01…F2-25', () => {
+    expect(SEED_ROWS).toHaveLength(91);
     const all = FLOORS.flatMap((f) => desksOf(f.id));
     for (const r of SEED_ROWS) expect(all).toContain(r.desk);
   });
@@ -20,7 +20,9 @@ describe('seed rows (demo-data.md §8)', () => {
   it('totals per day and floor as §2; consent only on D0 (4 + 2)', () => {
     const t = (day, p) => SEED_ROWS.filter((r) => r.day === day && r.desk.startsWith(p)).length;
     expect([t('D0', 'F1-'), t('D0', 'F2-'), t('D1', 'F1-'), t('D1', 'F2-'), t('D2', 'F1-'), t('D2', 'F2-')])
-      .toEqual([10, 8, 25, 25, 12, 6]);
+      .toEqual([10, 8, 30, 25, 12, 6]);
+    expect(SEED_ROWS.filter((r) => r.day === 'D1' && /^F1-3[1-5]$/.test(r.desk)).map((r) => r.desk))
+      .toEqual(['F1-31', 'F1-32', 'F1-33', 'F1-34', 'F1-35']);
     const consent = SEED_ROWS.filter((r) => r.showName);
     expect(consent.every((r) => r.day === 'D0')).toBe(true);
     expect(consent.filter((r) => r.desk.startsWith('F1-'))).toHaveLength(4);
@@ -37,7 +39,10 @@ describe('seed rows (demo-data.md §8)', () => {
 describe('US-002 Seed demo data', () => {
   it('Seed content relative to today', () => {
     const b = buildSeed(WED_0800).bookings;
-    expect([count(b, '2026-10-22', 1), count(b, '2026-10-22', 2)]).toEqual([25, 25]);
+    expect([count(b, '2026-10-22', 1), count(b, '2026-10-22', 2)]).toEqual([30, 25]);
+    const d1f1 = b.filter((x) => x.date === '2026-10-22' && x.floor === 1).map((x) => x.desk);
+    for (const d of ['F1-31', 'F1-32', 'F1-33', 'F1-34', 'F1-35']) expect(d1f1).toContain(d);
+    expect(desksOf(1).filter((d) => !d1f1.includes(d))).toEqual(['F1-04', 'F1-10', 'F1-16', 'F1-22', 'F1-28']);
     const today = b.filter((x) => x.date === '2026-10-21');
     expect(today.some((x) => x.checkedInAt)).toBe(true);
     expect(today.some((x) => !x.checkedInAt)).toBe(true);

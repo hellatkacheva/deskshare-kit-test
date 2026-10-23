@@ -29,6 +29,16 @@ test('Full floor refuses a new booking (boundary — at capacity)', async ({ pag
   await expect(page.locator('body')).not.toContainText(/waitlist|waiting list/i);
 });
 
+test('Floor 1 last desk and hard stop at 35 (boundary — CHG-002, S2-2)', async ({ page }) => {
+  await onThursday(page, many('2026-10-22', 1, 34), 1);
+  await bookDesk(page, 'F1-35', 'Jamie Lee');
+  await expect(dialog(page).getByRole('heading', { name: 'Booked ✓' })).toBeVisible();
+  await dialog(page).getByRole('button', { name: 'Done' }).click();
+  await expect(page.getByText('Floor 1: 35 booked · 0 left')).toBeVisible();
+  await expect(page.locator('#grid').getByRole('button', { name: / free$/ })).toHaveCount(0);
+  await expect(page.getByText(FULL_MSG)).toBeVisible();
+});
+
 test('Last desk taken in another tab (re-check at save)', async ({ context }) => {
   const one = await context.newPage();
   await onThursday(one, many('2026-10-22', 2, 24), 2);

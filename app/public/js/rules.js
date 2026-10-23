@@ -54,7 +54,7 @@ export function nameKey(raw) {
   return cleanName(String(raw ?? '').normalize('NFC')).replace(/\s+/g, ' ').toLowerCase();
 }
 
-/** Desk ids of a floor: F1-01 … F1-30 (ASM-007). */
+/** Desk ids of a floor: F1-01 … F1-35 (ASM-007). */
 export function desksOf(floorId) {
   const floor = FLOORS.find((f) => f.id === floorId);
   return floor ? Array.from({ length: floor.desks }, (_, i) => `${floor.prefix}-${pad(i + 1)}`) : [];

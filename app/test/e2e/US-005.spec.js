@@ -24,14 +24,14 @@ test('Book a free desk (happy path)', async ({ page }) => {
 
 test('State effect of booking', async ({ page }) => {
   await onThursday(page, twelve());
-  await expect(page.getByText('Floor 1: 12 booked · 18 left')).toBeVisible();
+  await expect(page.getByText('Floor 1: 12 booked · 23 left')).toBeVisible();
   await bookDesk(page, 'F1-07', 'Alex Morgan');
   await dialog(page).getByRole('button', { name: 'Done' }).click();
   await expect(tile(page, 'F1-07')).toHaveAccessibleName('F1-07 taken');
-  await expect(page.getByText('Floor 1: 13 booked · 17 left')).toBeVisible();
+  await expect(page.getByText('Floor 1: 13 booked · 22 left')).toBeVisible();
   await page.reload();
   await day(page, THU).click();
-  await expect(page.getByText('Floor 1: 13 booked · 17 left')).toBeVisible();
+  await expect(page.getByText('Floor 1: 13 booked · 22 left')).toBeVisible();
 });
 
 test('Taken desk cannot be booked', async ({ page }) => {
@@ -39,7 +39,7 @@ test('Taken desk cannot be booked', async ({ page }) => {
   await tile(page, 'F1-07').click();
   await expect(page.getByRole('button', { name: 'Book desk' })).toHaveCount(0);
   expect(JSON.parse(await stored(page)).bookings).toEqual([booking()]);
-  await expect(page.getByText('Floor 1: 1 booked · 29 left')).toBeVisible();
+  await expect(page.getByText('Floor 1: 1 booked · 34 left')).toBeVisible();
 });
 
 test('Second booking under the same name on the same day', async ({ page }) => {

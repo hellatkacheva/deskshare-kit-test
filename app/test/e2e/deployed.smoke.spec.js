@@ -54,17 +54,17 @@ test('S-2 / S-3 · book and cancel, no requests after load', async ({ page, base
   const afterLoad = requests.length;
 
   await onD1(page, 1);
-  await expect(page.getByText('Floor 1: 25 booked · 5 left')).toBeVisible();
+  await expect(page.getByText('Floor 1: 30 booked · 5 left')).toBeVisible();
   await tile(page, 'F1-04').click(); // free on D1 (demo-data.md §6)
   await page.getByLabel('Your name').fill('Smoke Test');
   await page.getByRole('button', { name: 'Book desk' }).click();
   await expect(dialog(page).getByRole('heading', { name: 'Booked ✓' })).toBeVisible();
   await dialog(page).getByRole('button', { name: 'Done' }).click();
-  await expect(page.getByText('Floor 1: 26 booked · 4 left')).toBeVisible();
+  await expect(page.getByText('Floor 1: 31 booked · 4 left')).toBeVisible();
   await tile(page, 'F1-04').click();
   await page.getByLabel('Your name').fill('Smoke Test');
   await page.getByRole('button', { name: 'Cancel booking' }).click();
-  await expect(page.getByText('Floor 1: 25 booked · 5 left')).toBeVisible();
+  await expect(page.getByText('Floor 1: 30 booked · 5 left')).toBeVisible();
   expect(requests.length, 'requests after load').toBe(afterLoad);
 });
 

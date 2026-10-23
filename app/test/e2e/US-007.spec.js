@@ -37,10 +37,10 @@ test('Booking already cancelled in another tab (re-check at save)', async ({ con
 
 test('State effect of cancel', async ({ page }) => {
   await onThursday(page, [ALEX, ...many('2026-10-22', 1, 12, {}, 13)]);
-  await expect(page.getByText('Floor 1: 13 booked · 17 left')).toBeVisible();
+  await expect(page.getByText('Floor 1: 13 booked · 22 left')).toBeVisible();
   await cancelDesk(page, 'F1-07', 'Alex Morgan');
   await expect(tile(page, 'F1-07')).toHaveAccessibleName('F1-07 free');
-  await expect(page.getByText('Floor 1: 12 booked · 18 left')).toBeVisible();
+  await expect(page.getByText('Floor 1: 12 booked · 23 left')).toBeVisible();
   await page.reload();
   await day(page, THU).click();
   await expect(tile(page, 'F1-07')).toHaveAccessibleName('F1-07 free');
@@ -58,5 +58,5 @@ test('Wrong name', async ({ page }) => {
   await expect(dialog(page).getByText('The name does not match the booking.')).toBeVisible();
   await dialog(page).getByRole('button', { name: 'Close' }).click();
   await expect(tile(page, 'F1-07')).toHaveAccessibleName('F1-07 taken');
-  await expect(page.getByText('Floor 1: 1 booked · 29 left')).toBeVisible();
+  await expect(page.getByText('Floor 1: 1 booked · 34 left')).toBeVisible();
 });

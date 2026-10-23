@@ -72,7 +72,7 @@ describe('US-002 seed and reset (storage.md §3.1)', () => {
     const s = new FakeStorage();
     const r = open(NOW, { storage: s, host: HOST, search: '' });
     expect(r.seeded).toBe(true);
-    expect(docOf(s).bookings).toHaveLength(86);
+    expect(docOf(s).bookings).toHaveLength(91);
     expect(docOf(s).seededAt).toBe('2026-10-21T08:00');
   });
 
@@ -90,13 +90,13 @@ describe('US-002 seed and reset (storage.md §3.1)', () => {
     expect(r.resetDone).toBe(true);
     expect(r.seeded).toBe(true);
     expect(docOf(s).bookings.some((b) => b.name === 'Alex Morgan')).toBe(false);
-    expect(docOf(s).bookings).toHaveLength(86);
+    expect(docOf(s).bookings).toHaveLength(91);
   });
 
   it('Reset also works on localhost and repairs unreadable data', () => {
     const s = new FakeStorage({ [STORAGE_KEY]: '{broken' });
     expect(open(NOW, { storage: s, host: 'localhost', search: '?reset-demo' }).state).toBe('ready');
-    expect(docOf(s).bookings).toHaveLength(86);
+    expect(docOf(s).bookings).toHaveLength(91);
   });
 
   it('Reset parameter ignored in the deployed build (DEC-031)', () => {
@@ -128,14 +128,14 @@ describe('US-003 readDay counts (storage.md §3.2)', () => {
     const r = readDay('2026-10-22', NOW);
     expect(r.ok).toBe(true);
     expect(r.floors).toEqual([
-      { floor: 1, booked: 12, left: 18, full: false },
+      { floor: 1, booked: 12, left: 23, full: false },
       { floor: 2, booked: 25, left: 0, full: true },
     ]);
   });
 
   it('Date without bookings (empty state)', () => {
     open(NOW, { storage: withDoc(many('2026-10-22', 1, 3)), host: HOST });
-    expect(readDay('2026-10-23', NOW).floors.map((f) => [f.booked, f.left])).toEqual([[0, 30], [0, 25]]);
+    expect(readDay('2026-10-23', NOW).floors.map((f) => [f.booked, f.left])).toEqual([[0, 35], [0, 25]]);
   });
 
   it('re-reads storage on every call (another tab may have written)', () => {
@@ -164,7 +164,8 @@ describe('US-004 readDay desks (storage.md §3.2)', () => {
   it('every desk of both floors, free or taken', () => {
     open(NOW, { storage: withDoc([booking]), host: HOST });
     const { desks } = readDay('2026-10-22', NOW);
-    expect(desks).toHaveLength(55);
+    expect(desks).toHaveLength(60);
+    expect(desks.filter((d) => d.floor === 1).map((d) => d.desk)[34]).toBe('F1-35');
     expect(desks.filter((d) => d.floor === 2).map((d) => d.desk)[24]).toBe('F2-25');
     expect(desks.find((d) => d.desk === 'F1-07')).toMatchObject({ taken: true, deadline: '2026-10-22T10:00', checkedIn: false });
     expect(desks.find((d) => d.desk === 'F1-08')).toMatchObject({ taken: false, deadline: null, name: null });
@@ -202,7 +203,7 @@ describe('US-005 book (storage.md §3.3)', () => {
       date: THU, desk: 'F1-07', floor: 1, name: 'Alex Morgan', nameKey: 'alex morgan', showName: false,
       bookedAt: '2026-10-21T16:00', deadline: '2026-10-22T10:00', checkedInAt: null,
     }]);
-    expect(readDay(THU, NOW).floors[0]).toMatchObject({ booked: 1, left: 29 });
+    expect(readDay(THU, NOW).floors[0]).toMatchObject({ booked: 1, left: 34 });
   });
 
   it('Taken desk cannot be booked', () => {
@@ -534,7 +535,7 @@ describe('US-013 tomorrow() (storage.md §3.6)', () => {
     open(NOW, { storage: s, host: HOST });
     const t = tomorrow(NOW);
     expect(t).toEqual({ ok: true, date: '2026-10-22', floors: [
-      { floor: 1, booked: 0, capacity: 30, status: 'green' },
+      { floor: 1, booked: 0, capacity: 35, status: 'green' },
       { floor: 2, booked: 25, capacity: 25, status: 'red' },
     ] });
     expect(JSON.stringify(t)).not.toMatch(/P\d/);

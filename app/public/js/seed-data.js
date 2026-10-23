@@ -1,4 +1,4 @@
-// Demo seed rows (demo-data.md §4–7, DEC-032). Fictional names only. 86 rows.
+// Demo seed rows (demo-data.md §4–7, DEC-032, DEC-034). Fictional names only. 91 rows.
 const N = [
   'Ava Morgan', 'Ben Carter', 'Chloe Diaz', 'Daniel Brooks', 'Ella Novak',
   'Felix Grant', 'Grace Holm', 'Hugo Silva', 'Isla Byrne', 'Jonas Weber',
@@ -10,6 +10,7 @@ const N = [
   'Julia Stone', 'Karim Haddad', 'Lena Fischer', 'Marco Rossi', 'Nina Berg',
   'Oscar Wells', 'Paula Costa', 'Rami Aziz', 'Sofia Lind', 'Tomas Kral',
   'Uma Rao', 'Victor Hale', 'Wendy Clarke', 'Yara Saleh', 'Zane Foster',
+  'Amira Hassan', 'Bruno Keller', 'Clara Jensen', 'Dmitri Volkov', 'Elif Arslan', // N51–N55, DEC-034
 ];
 
 // §4 D0 — [desk, name, checkedIn, showName]
@@ -30,6 +31,7 @@ const range = (from, to) => Array.from({ length: to - from + 1 }, (_, i) => from
 // §6 D1 and §7 D2 — desks in order, names N<first>… in desk order
 const PLAIN = [
   ['D1', f1([1, 2, 3, 5, 6, 7, 8, 9, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, 23, 24, 25, 26, 27, 29, 30]), 1],
+  ['D1', f1(range(31, 35)), 51], // DEC-034 — D1 Floor 1 = 30 of 35 (amber)
   ['D1', f2(range(1, 25)), 26],
   ['D2', f1([1, 3, 6, 9, 12, 15, 18, 21, 24, 26, 28, 30]), 26],
   ['D2', f2([2, 5, 8, 11, 14, 17]), 38],

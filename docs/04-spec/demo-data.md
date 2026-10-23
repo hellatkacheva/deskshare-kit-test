@@ -6,9 +6,9 @@
 | **Date** | 2026-10-22 |
 | **Inputs** | `stories/US-002.md`, `US-015.md`, `US-011.md`, `US-013.md` (Reviewed, updated by spec 2026-10-22); `requirements.md` (REQ-032…REQ-034, REQ-044); `analysis-log.md` (DEC-017, DEC-031, DEC-032, ASM-004, ASM-007, ASM-008); reference seed `C:\Projects\deskshare\deskshare\docs\04-spec\demo-data.md` — Confluence `65670` v2, `458755` v1 |
 | **Deploy profile** | `static` — seed stands in for other employees' bookings (DEC-014, ASM-006) |
-| **Status** | Reviewed (BA, 2026-10-22 — BA review without the technical stakeholder, PoC) |
+| **Status** | Draft — Revised CHG-002 (2026-10-23, Confluence 65670 v4: Floor 1 = 35, REQ-045, DEC-034); was Reviewed (BA, 2026-10-22) |
 
-Seed module: `app/public/js/seed-data.js` exports the 86 rows below as `{ day: "D0", desk: "F1-02", name: "Ava Morgan", checkedIn: true, showName: true }`; `seed.js` turns them into bookings for `now` (§3). The rows equal the reference seed (DEC-032). All names are fictional (REQ-032); none equals a name used in the acceptance criteria ("Alex Morgan", "Jamie Lee", "Sam Rivera", "Kim") or a stakeholder.
+Seed module: `app/public/js/seed-data.js` exports the 91 rows below as `{ day: "D0", desk: "F1-02", name: "Ava Morgan", checkedIn: true, showName: true }`; `seed.js` turns them into bookings for `now` (§3). The rows equal the reference seed (DEC-032) plus 5 D1 rows on F1-31…F1-35 (DEC-034, CHG-002). All names are fictional (REQ-032); none equals a name used in the acceptance criteria ("Alex Morgan", "Jamie Lee", "Sam Rivera", "Kim") or a stakeholder.
 
 ## 1. Days
 
@@ -22,10 +22,10 @@ Source: REQ-033, DEC-017, US-002 rule 5. All three days are inside the booking w
 
 ## 2. Totals
 
-| Day | Floor 1 (30) | Floor 2 (25) | Consent | Shows |
+| Day | Floor 1 (35) | Floor 2 (25) | Consent | Shows |
 |---|---|---|---|---|
 | D0 | 10 booked: 6 checked in, 4 not | 8 booked: 5 checked in, 3 not | F1: 4 · F2: 2 | check-in (US-008), auto-release (US-009), names switch (US-010, US-011) |
-| D1 | 25 booked → **AMBER** | 25 booked → **full / RED** | none | hard stop (US-006), "Tomorrow" (US-013) |
+| D1 | 30 booked → **AMBER** (86 %; was 25 of 30 — DEC-034) | 25 booked → **full / RED** | none | hard stop (US-006), "Tomorrow" (US-013) |
 | D2 | 12 booked | 6 booked | none | normal day |
 
 ## 3. Times and states at seed time
@@ -65,7 +65,7 @@ Source: REQ-033, DEC-017, US-002 rule 5. All three days are inside the booking w
 After the deadline, Grace Holm not checked in: Floor 1 = 6 booked, Floor 2 = 5 booked. Grace Holm checked in first: Floor 1 = 7, Floor 2 = 5.
 Switch On: names on F1-02, F1-03, F1-05, F1-14, F2-01, F2-04; every other taken desk shows "taken".
 
-## 5. Name list (N1–N50)
+## 5. Name list (N1–N55)
 
 | # | Name | # | Name | # | Name | # | Name | # | Name |
 |---|---|---|---|---|---|---|---|---|---|
@@ -80,13 +80,15 @@ Switch On: names on F1-02, F1-03, F1-05, F1-14, F2-01, F2-04; every other taken 
 | 9 | Isla Byrne | 19 | Simon Ito | 29 | Carlos Vega | 39 | Marco Rossi | 49 | Yara Saleh |
 | 10 | Jonas Weber | 20 | Tara Quinn | 30 | Dina Sato | 40 | Nina Berg | 50 | Zane Foster |
 
+Added by DEC-034 (CHG-002): 51 Amira Hassan · 52 Bruno Keller · 53 Clara Jensen · 54 Dmitri Volkov · 55 Elif Arslan.
+
 D0 uses N1–N18 (§4). Floor 1 and Floor 2 use separate names on each day, so no name is booked twice on one date (ASM-011).
 
 ## 6. D1 — next working day (not checked in, no consent)
 
 | Floor | Desks booked | Names | Free |
 |---|---|---|---|
-| Floor 1 (25) | F1-01, 02, 03, 05, 06, 07, 08, 09, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, 23, 24, 25, 26, 27, 29, 30 | N1…N25 in that desk order | F1-04, F1-10, F1-16, F1-22, F1-28 |
+| Floor 1 (30) | F1-01, 02, 03, 05, 06, 07, 08, 09, 11, 12, 13, 14, 15, 17, 18, 19, 20, 21, 23, 24, 25, 26, 27, 29, 30, 31, 32, 33, 34, 35 | N1…N25 in that desk order, then N51…N55 on F1-31…F1-35 (DEC-034) | F1-04, F1-10, F1-16, F1-22, F1-28 |
 | Floor 2 (25) | F2-01 … F2-25 | N26…N50 in desk order | none → full |
 
 ## 7. D2 (not checked in, no consent)
@@ -98,7 +100,7 @@ D0 uses N1–N18 (§4). Floor 1 and Floor 2 use separate names on each day, so n
 
 ## 8. Validity (checked by `test/unit/seed.test.js`)
 
-86 rows · desks only from F1-01…F1-30 / F2-01…F2-25 · no desk twice per day · no normalised name twice per day · consent only on D0 (4 on Floor 1, 2 on Floor 2) · totals as §2 · no AC or stakeholder names · the seed passes the same checks as `book()` (US-002 "Seed follows the booking rules").
+91 rows · desks only from F1-01…F1-35 / F2-01…F2-25 · no desk twice per day · no normalised name twice per day · consent only on D0 (4 on Floor 1, 2 on Floor 2) · totals as §2 · no AC or stakeholder names · the seed passes the same checks as `book()` (US-002 "Seed follows the booking rules").
 
 ## 9. Reset and demo-day checklist (DEC-031, US-015 rule 5)
 

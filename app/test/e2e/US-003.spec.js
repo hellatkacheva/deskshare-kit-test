@@ -9,7 +9,7 @@ test('See booked and remaining desks for a date', async ({ page }) => {
   await openApp(page);
   await store(page, busyThursday);
   await day(page, THU).click();
-  await expect(page.getByText('Floor 1: 12 booked · 18 left')).toBeVisible();
+  await expect(page.getByText('Floor 1: 12 booked · 23 left')).toBeVisible();
   await expect(page.getByText('Floor 2: 25 booked · 0 left')).toBeVisible();
 });
 
@@ -51,7 +51,7 @@ test('Date without bookings (empty state)', async ({ page }) => {
   await openApp(page);
   await store(page, doc(many('2026-10-22', 1, 3)));
   await day(page, 'Fri 2026-10-23').click();
-  await expect(page.getByText('Floor 1: 0 booked · 30 left')).toBeVisible();
+  await expect(page.getByText('Floor 1: 0 booked · 35 left')).toBeVisible();
   await expect(page.getByText('Floor 2: 0 booked · 25 left')).toBeVisible();
 });
 
@@ -68,8 +68,8 @@ test('Counts after a reload', async ({ page }) => {
   await openApp(page);
   await store(page, busyThursday);
   await day(page, THU).click();
-  await expect(page.getByText('Floor 1: 12 booked · 18 left')).toBeVisible();
+  await expect(page.getByText('Floor 1: 12 booked · 23 left')).toBeVisible();
   await page.reload();
   await day(page, THU).click();
-  await expect(page.getByText('Floor 1: 12 booked · 18 left')).toBeVisible();
+  await expect(page.getByText('Floor 1: 12 booked · 23 left')).toBeVisible();
 });

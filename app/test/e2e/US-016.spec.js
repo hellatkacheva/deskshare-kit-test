@@ -13,7 +13,7 @@ test('Name of spaces only', async ({ page }) => {
   await expect(dialog(page).getByText('Please enter your name.')).toBeVisible();
   await dialog(page).getByRole('button', { name: 'Close' }).click();
   await expect(tile(page, 'F1-07')).toHaveAccessibleName('F1-07 free');
-  await expect(page.getByText('Floor 1: 0 booked · 30 left')).toBeVisible();
+  await expect(page.getByText('Floor 1: 0 booked · 35 left')).toBeVisible();
 });
 
 test('Empty name', async ({ page }) => {

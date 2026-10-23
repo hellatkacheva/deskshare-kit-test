@@ -1,0 +1,18 @@
+{
+  "page_id": "65670",
+  "title": "DeskShare — Requirements Gathering (source copy)",
+  "space_key": "DSSRC",
+  "space_id": "393220",
+  "version": 4,
+  "created_at": "2026-10-20T10:26:26.254Z",
+  "version_message": null,
+  "author_id": "6170e337062f4c00694a6eb8",
+  "parent_id": null,
+  "fetched_at": "2026-10-23T07:04:33Z",
+  "children": [{"id": "458755", "title": "Workshop brief (source copy)", "version": 1, "snapshot": "confluence/458755/v1/"}],
+  "sha256": {
+    "page_html": "f8331c86bb2d3e85a6086420835c06899bd3618439e348edf987c77e2b80f6f3",
+    "page_md": "7d35165703968eb333ddaf1fbe9b06c90510c64f2f8362284317c33bbd65fd34"
+  },
+  "notes": "Snapshot taken by /ba-sync (change-impact phase A, CHG-002). version from fetch(ari) metadata; getConfluencePage returns no version block, so version.createdAt and version_message are not exposed — created_at is the page's createdAt. page.md = getConfluencePage markdown body; it differs from v3/page.md in one line only (Floor 1 capacity 30 → 35). page.html = getConfluencePage html body: same 145 data-local-id elements as v3 (spot-checked), the only difference is the same text change; written as v3/page.html with that one replacement (cmp: 1 byte)."
+}

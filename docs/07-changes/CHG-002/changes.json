@@ -1,0 +1,133 @@
+{
+  "generated_by": "change-impact/scripts/blockdiff.mjs",
+  "generated_at": "2026-10-23T07:04:46.680Z",
+  "quotes_scanned": 166,
+  "pages": [
+    {
+      "page_id": "65670",
+      "old_version": 3,
+      "new_version": 4,
+      "page_op": "page changed",
+      "blocks": {
+        "old": 81,
+        "new": 81
+      },
+      "count": {
+        "modified": 1
+      },
+      "changes": [
+        {
+          "op": "modified",
+          "old": {
+            "index": 33,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Booking a desk"
+            ],
+            "label": null,
+            "text": "Two floors only for the PoC: Floor 1 (capacity 30) and Floor 2 (capacity 25) — pulled from the spreadsheet reference Priya brought, sized up from her earlier ballpark now that real numbers were in front of her."
+          },
+          "new": {
+            "index": 33,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Booking a desk"
+            ],
+            "label": null,
+            "text": "Two floors only for the PoC: Floor 1 (capacity 35) and Floor 2 (capacity 25) — pulled from the spreadsheet reference Priya brought, sized up from her earlier ballpark now that real numbers were in front of her."
+          },
+          "similarity": 0.98,
+          "numbers": {
+            "old": [
+              "1",
+              "30",
+              "2",
+              "25"
+            ],
+            "new": [
+              "1",
+              "35",
+              "2",
+              "25"
+            ]
+          },
+          "words": {
+            "removed": [
+              "30"
+            ],
+            "added": [
+              "35"
+            ]
+          },
+          "hint": null,
+          "id": "D1",
+          "hits": [
+            {
+              "file": "docs/01-requirements/requirements.md",
+              "line": 65,
+              "item": "REQ-003",
+              "quote": "Two floors only for the PoC",
+              "still_in_new": true
+            },
+            {
+              "file": "docs/01-requirements/requirements.md",
+              "line": 66,
+              "item": "REQ-004",
+              "quote": "Floor 1 (capacity 30)",
+              "still_in_new": false
+            },
+            {
+              "file": "docs/01-requirements/requirements.md",
+              "line": 67,
+              "item": "REQ-005",
+              "quote": "Floor 2 (capacity 25)",
+              "still_in_new": true
+            },
+            {
+              "file": "docs/02-analysis/analysis-log.md",
+              "line": 129,
+              "item": "CON-006",
+              "quote": "Floor 1 (capacity 30) and Floor 2 (capacity 25)",
+              "still_in_new": false
+            },
+            {
+              "file": "docs/02-analysis/analysis-log.md",
+              "line": 193,
+              "item": "SI-4",
+              "quote": "sized up from her earlier ballpark",
+              "still_in_new": true
+            },
+            {
+              "file": "docs/02-analysis/analysis-log.md",
+              "line": 198,
+              "item": "SI-9",
+              "quote": "from the spreadsheet reference Priya brought",
+              "still_in_new": true
+            },
+            {
+              "file": "docs/03-backlog/stories/US-003.md",
+              "line": 11,
+              "item": "US-003",
+              "quote": "Two floors only for the PoC",
+              "still_in_new": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "458755",
+      "old_version": 1,
+      "new_version": 1,
+      "page_op": "page changed",
+      "blocks": {
+        "old": 27,
+        "new": 27
+      },
+      "count": {},
+      "changes": []
+    }
+  ]
+}

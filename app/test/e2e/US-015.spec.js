@@ -15,16 +15,16 @@ test('Core demo flow', async ({ page }) => {
   // Select a date and a floor, book a free desk, cancel it — remaining −1 then +1.
   await day(page, 'Wed 2026-10-21').click();
   await floorTab(page, 1).click();
-  await expect(page.getByText('Floor 1: 10 booked · 20 left')).toBeVisible();
+  await expect(page.getByText('Floor 1: 10 booked · 25 left')).toBeVisible();
   await tile(page, 'F1-01').click();
   await expect(page.locator('#banner')).toHaveText(BANNER);
   await expect(dialog(page).getByText(NOTICE)).toBeVisible(); // notice on the booking form
   await dialog(page).getByRole('button', { name: 'Close' }).click();
   await bookDesk(page, 'F1-01', 'Alex Morgan');
   await dialog(page).getByRole('button', { name: 'Done' }).click();
-  await expect(page.getByText('Floor 1: 11 booked · 19 left')).toBeVisible();
+  await expect(page.getByText('Floor 1: 11 booked · 24 left')).toBeVisible();
   await cancelDesk(page, 'F1-01', 'Alex Morgan');
-  await expect(page.getByText('Floor 1: 10 booked · 20 left')).toBeVisible();
+  await expect(page.getByText('Floor 1: 10 booked · 25 left')).toBeVisible();
 
   // Next working day: Floor 2 full — hard stop with the "pick another day or floor" message.
   await day(page, 'Thu 2026-10-22').click();

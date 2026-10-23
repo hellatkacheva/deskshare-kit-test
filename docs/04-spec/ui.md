@@ -6,7 +6,7 @@
 | **Date** | 2026-10-22 |
 | **Inputs** | `docs/03-backlog/backlog.md`, `stories/US-001…US-017` (Reviewed), `docs/01-requirements/requirements.md`, `docs/02-analysis/analysis-log.md` (DEC-011…DEC-032), `ba-project.yaml` — Confluence `65670` v2, `458755` v1 |
 | **Deploy profile** | `static` (DEC-014) |
-| **Status** | Reviewed (BA, 2026-10-22 — BA review without the technical stakeholder, PoC) |
+| **Status** | Draft — Revised CHG-002 (2026-10-23, Confluence 65670 v4: Floor 1 = 35, REQ-045, DEC-034); was Reviewed (BA, 2026-10-22) |
 
 One page `app/public/index.html`, plain HTML / CSS / JS (ES modules), no framework. Two views by URL hash: `#/` **Book** (default) and `#/tomorrow` **Tomorrow** (US-013, Next band). Dialogs use `<dialog>`. All user-typed text is inserted with `textContent` — never `innerHTML` (REQ-035, US-011 "Name shown as plain text"). Dates are shown as `Thu 2026-10-22`. All asset paths are relative (GitHub Pages sub-path — I-16).
 
@@ -38,8 +38,8 @@ One page `app/public/index.html`, plain HTML / CSS / JS (ES modules), no framewo
 │ Wed  Thu  Fri  Sat  Sun  Mon  Tue     │ ← 7-day strip today … today+6 (US-003)
 │ 21●  22   23   24░  25░  26   27      │   ● selected · ░ weekend, disabled
 ├───────────────────────────────────────┤
-│ [Floor 1 · 18 left] [Floor 2 · 0 left]│ ← floor tabs (US-003)
-│ Floor 1: 12 booked · 18 left          │ ← counts line, no names (US-003)
+│ [Floor 1 · 23 left] [Floor 2 · 0 left]│ ← floor tabs (US-003)
+│ Floor 1: 12 booked · 23 left          │ ← counts line, no names (US-003)
 │ Floor 2: 25 booked · 0 left           │
 ├───────────────────────────────────────┤
 │ (switch On) Names are self-reported — │ ← notice (US-011 rule 7)
@@ -48,7 +48,7 @@ One page `app/public/index.html`, plain HTML / CSS / JS (ES modules), no framewo
 │ │F1-01││F1-02││F1-03││F1-04││F1-05│   │ ← grid, 5 columns on the phone
 │ │free ││taken││Ava M││free ││taken│   │   free / "taken" / consented name
 │ └─────┘└─────┘└─────┘└─────┘└─────┘   │
-│  … F1-30                              │
+│  … F1-35                              │
 └───────────────────────────────────────┘
 ```
 
@@ -143,7 +143,7 @@ No "book anyway", no waitlist (US-006 rules 2, 4).
 
 | State | Shown | Serves |
 |---|---|---|
-| Date without bookings | `0 booked · 30 left` / `0 booked · 25 left`; all tiles free | US-003 "Date without bookings" |
+| Date without bookings | `0 booked · 35 left` / `0 booked · 25 left`; all tiles free | US-003 "Date without bookings" |
 | After reload | same data from storage; switch Off; default date selected | US-001, US-003, US-010 |
 
 ## 4. Tomorrow view (`#/tomorrow`, US-013 — Next band)
@@ -156,7 +156,7 @@ No "book anyway", no waitlist (US-006 rules 2, 4).
 │ Tomorrow — Thu 2026-10-22             │
 │ ┌───────────────────────────────────┐ │
 │ │ Floor 1          AMBER            │ │ ← colour + word
-│ │ 25 / 30 booked                    │ │
+│ │ 30 / 35 booked                    │ │
 │ └───────────────────────────────────┘ │
 │ ┌───────────────────────────────────┐ │
 │ │ Floor 2          RED              │ │

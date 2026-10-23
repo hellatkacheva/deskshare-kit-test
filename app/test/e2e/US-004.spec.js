@@ -15,6 +15,17 @@ test('Grid shows all desks of the floor', async ({ page }) => {
   await expect(tiles.last()).toHaveAccessibleName('F2-25 free');
 });
 
+test('Grid shows all desks of Floor 1 (CHG-002, S2-1)', async ({ page }) => {
+  await openApp(page);
+  await store(page, doc([]));
+  await day(page, THU).click();
+  await floorTab(page, 1).click();
+  const tiles = page.locator('#grid').getByRole('button');
+  await expect(tiles).toHaveCount(35);
+  await expect(tiles.first()).toHaveAccessibleName('F1-01 free');
+  await expect(tiles.last()).toHaveAccessibleName('F1-35 free');
+});
+
 test('Taken desk without a name (Variant A)', async ({ page }) => {
   await openApp(page);
   await store(page, doc([booking({ showName: true })])); // "Alex Morgan", F1-07, 2026-10-22

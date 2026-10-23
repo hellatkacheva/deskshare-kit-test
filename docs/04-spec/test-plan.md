@@ -6,7 +6,7 @@
 | **Date** | 2026-10-22 |
 | **Inputs** | `stories/US-001…US-017` (Reviewed; US-001, US-002, US-015 updated by spec 2026-10-22), `docs/01-requirements/requirements.md`, `docs/02-analysis/analysis-log.md` (DEC-016, DEC-028, DEC-031), `ba-project.yaml` — Confluence `65670` v2, `458755` v1 |
 | **Deploy profile** | `static` (DEC-014) |
-| **Status** | Reviewed (BA, 2026-10-22 — BA review without the technical stakeholder, PoC) |
+| **Status** | Draft — Revised CHG-002 (2026-10-23, Confluence 65670 v4: Floor 1 = 35, REQ-045, DEC-034); was Reviewed (BA, 2026-10-22) |
 
 ## 1. Test setup
 
@@ -55,13 +55,13 @@ Built 2026-10-22: all 7 automated; parts waiting for later stories are listed in
 |---|---|---|
 | First open loads the seed | U, E | `storage.test.js`, `seed.test.js`; `US-002.spec.js` |
 | Seed does not overwrite existing data | U | `storage.test.js` |
-| Seed content relative to today | U | `seed.test.js` (now Wed 08:00 → D1 25/30, 25/25; D0 mixed; consent present) |
+| Seed content relative to today | U, E | `seed.test.js` (now Wed 08:00 → D1 30/35, 25/25; F1-31…F1-35 taken, free F1-04, 10, 16, 22, 28 — S2-5; D0 mixed; consent present; 91 rows — DEC-034); `US-013.spec.js` "Seeded demo state" (Tomorrow 30 / 35 amber, 25 / 25 red) |
 | Deadline of seeded unconfirmed bookings — seeded before 09:30 | U | `seed.test.js` (08:00 → 10:00) |
 | Deadline of seeded unconfirmed bookings — seeded after 09:30 | U | `seed.test.js` (11:00 → 11:30) |
 | Seed follows the booking rules | U | `seed.test.js` |
-| Team-only reset in the local / test build | U, E | `storage.test.js` (host `127.0.0.1`); `US-002.spec.js` |
+| Team-only reset in the local / test build | U, E | `storage.test.js` (host `127.0.0.1`); `US-002.spec.js` (now Wed 08:00, F1-04 — S2-6) |
 | Reset parameter ignored in the deployed build | U, S | `storage.test.js` (host `example.github.io`); `deployed.smoke.spec.js` |
-| Reset parameter removed after the reset | E | `US-002.spec.js` |
+| Reset parameter removed after the reset | E | `US-002.spec.js` (now Wed 08:00, F1-10 — S2-6) |
 | Seed on a weekend | U | `seed.test.js` (Sat 12:00 → D0 Mon, none checked in, deadline 10:00) |
 | No visible reset control | E | `US-002.spec.js` (no button / link whose text or label contains "reset") |
 
@@ -87,11 +87,12 @@ Built 2026-10-22: all 10 automated.
 | Scenario | Type | File |
 |---|---|---|
 | Grid shows all desks of the floor | E | `US-004.spec.js` |
+| Grid shows all desks of Floor 1 (CHG-002, S2-1) | E | `US-004.spec.js` (35 tiles, last F1-35) |
 | Taken desk without a name (Variant A) | U, E | `storage.test.js` (`readDay` names off → `name: null`); `US-004.spec.js` (page text has no "Alex Morgan") |
 | Grid follows the date | E | `US-004.spec.js` |
 | Full floor | E | `US-004.spec.js` |
 
-Built 2026-10-22: all 4 automated.
+Built 2026-10-22: all 4 automated. CHG-002 (2026-10-23): 5 / 5 — "Grid shows all desks of Floor 1" added (S2-1).
 
 ### US-005 Book a free desk
 | Scenario | Type | File |
@@ -124,11 +125,12 @@ Built 2026-10-22: all 4 automated.
 |---|---|---|
 | Last free desk can be booked (capacity − 1) | U, E | `storage.test.js`; `US-006.spec.js` |
 | Full floor refuses a new booking (at capacity) | E | `US-006.spec.js` (message, no free tile, no waitlist) |
+| Floor 1 last desk and hard stop at 35 (CHG-002, S2-2) | E | `US-006.spec.js` (34 → F1-35 booked → 35 booked · 0 left, message, no free tile) |
 | Last desk taken in another tab | U, E | `storage.test.js` (`FLOOR_FULL`); `US-006.spec.js` (two pages) |
 | Other floor and other day stay bookable | E | `US-006.spec.js` |
 | Cancel on a full floor frees a desk | E | `US-006.spec.js` |
 
-Built 2026-10-22: all 5 automated ("Cancel on a full floor frees a desk" added with US-007).
+Built 2026-10-22: all 5 automated; CHG-002 (2026-10-23): 6 / 6 — "Floor 1 last desk and hard stop at 35" added (S2-2) ("Cancel on a full floor frees a desk" added with US-007).
 
 ### US-007 Cancel my own booking
 | Scenario | Type | File |
@@ -250,16 +252,17 @@ Built 2026-10-22: all 4 automated.
 | Tomorrow on Saturday is Monday | U | `rules.test.js` |
 | Tomorrow on Sunday is Monday | U | `rules.test.js` |
 | Floor 2 green to amber (boundary) | U | `rules.test.js` (`floorStatus` 19 / 20 of 25) |
-| Floor 1 amber to red (boundary) | U | `rules.test.js` (29 / 30 of 30) |
+| Floor 1 amber to red (boundary) | U | `rules.test.js` (34 / 35 of 35) |
 | Screen left open over midnight (DEC-028) | E | `US-013.spec.js` (`page.clock`) |
-| Floor 1 just below 80 % | U | `rules.test.js` (23 / 30) |
-| Floor 1 at 80 % | U | `rules.test.js` (24 / 30) |
+| Floor 1 just below 80 % | U | `rules.test.js` (27 / 35) |
+| Floor 1 at 80 % | U | `rules.test.js` (28 / 35) |
 | Floor 2 one desk left | U | `rules.test.js` (24 / 25) |
 | Floor 2 full | U, E | `rules.test.js`; `US-013.spec.js` (seed D1) |
+| Seeded demo state (DEC-034, S2-4) | E | `US-013.spec.js` (seed, now Wed 08:00 → 30 / 35 AMBER, 25 / 25 RED) |
 | Status follows a cancel (state effect) | U, E | `storage.test.js` (`tomorrow`); `US-013.spec.js` |
 | No names | E | `US-013.spec.js` (switch On, page text has no seed name) |
 
-Built 2026-10-22: all 13 automated.
+Built 2026-10-22: all 13 automated. CHG-002 (2026-10-23): 14 / 14 — "Seeded demo state" added (S2-4).
 
 **Totals:** 17 stories · 122 scenarios · every scenario mapped (U 77 · E 79 · S 4 · M 2 — scenarios with more than one type are counted under each).
 
