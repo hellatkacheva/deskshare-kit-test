@@ -43,8 +43,8 @@ steps:                                # status: not_started | draft | reviewed |
   review:       { status: draft, source_version: 4, updated: 2026-10-23 }  # CHG-002
   spec:         { status: draft, source_version: 4, updated: 2026-10-23 }  # CHG-002
   build:        { status: reviewed, source_version: 4, updated: 2026-10-23 }  # CHG-002, BA accepted
-  deploy:       { status: stale, source_version: 3, updated: 2026-10-23 }  # CHG-002
-  jira:         { status: stale, source_version: 3, updated: 2026-10-23 }  # CHG-002
+  deploy:       { status: draft, source_version: 4, updated: 2026-10-23 }  # CHG-002 redeploy 8dda522, smoke ✓
+  jira:         { status: draft, source_version: 4, updated: 2026-10-23 }  # CHG-002 row 18 (9 descriptions)
 
 approvals:                            # [{step, status, by, date, note}] — only on the BA's explicit OK
   - { step: setup, status: approved, by: "Olga Tkacheva", date: 2026-10-20, note: "ba-new" }
@@ -64,7 +64,8 @@ approvals:                            # [{step, status, by, date, note}] — onl
   - { step: sync, status: plan-ok, by: "Olga Tkacheva", date: 2026-10-23, note: "CHG-002 v3→v4: rows 1–19; Q1 seed → C (DEC-034); Q2 in place with 'Revised CHG-002' + old value; Q3 35 intentional ('тест B2')" }
   - { step: build, status: gate-waived, by: "Olga Tkacheva", date: 2026-10-23, note: "H6 waived — 'Приёмку после каждой истории (H6) на этот раз отменяю — изменения только числовые; проверю итог разом перед deploy'; scope: CHG-002 rework of US-002, US-003, US-004, US-005, US-006, US-010, US-013 (+ tests of US-007, US-015, US-016); stop before deploy with test results" }
   - { step: build, status: reviewed, by: "Olga Tkacheva", date: 2026-10-23, note: "CHG-002 rework checked locally at once — 'Локально проверила — OK'; deferred H6 check done for US-002, -003, -004, -005, -006, -010, -013 (+ tests of US-007, -015, -016); review S2-1…S2-6 fixed" }
-  - { step: deploy, status: public-deploy-ok, by: "Olga Tkacheva", date: 2026-10-23, note: "CHG-002 redeploy — 'Deploy (строка 17) — OK, публикуй и запусти smoke S-1…S-6'" }
+  - { step: deploy, status: public-deploy-ok, by: "Olga Tkacheva", date: 2026-10-23, note: "CHG-002 redeploy — 'Deploy (строка 17) — OK, публикуй и запусти smoke S-1…S-6'; https://hellatkacheva.github.io/deskshare-kit-test/ — commit 8dda522, run 39959780609; smoke S-1…S-6 ✓" }
+  - { step: sync, status: reviewed, by: "Olga Tkacheva", date: 2026-10-23, note: "CHG-002 v3→v4 closed — rows 1–20 done; trace intact (trace-auditor); Jira spot check KAN-10 OK" }
 
 jira:
   project_key: "KAN"

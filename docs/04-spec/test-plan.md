@@ -264,7 +264,7 @@ Built 2026-10-22: all 4 automated.
 
 Built 2026-10-22: all 13 automated. CHG-002 (2026-10-23): 14 / 14 — "Seeded demo state" added (S2-4).
 
-**Totals:** 17 stories · 122 scenarios · every scenario mapped (U 77 · E 79 · S 4 · M 2 — scenarios with more than one type are counted under each).
+**Totals:** 17 stories · 125 scenarios · every scenario mapped (U 77 · E 83 · S 4 · M 2 — scenarios with more than one type are counted under each). Revised CHG-002 (2026-10-23): was 122 · E 79 — +3 scenarios (S2-1, S2-2, S2-4, all E) and "Seed content relative to today" U → U, E (S2-5).
 
 ## 4. Checks that test hooks are off in the deployed build
 

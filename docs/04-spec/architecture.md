@@ -6,7 +6,7 @@
 | **Date** | 2026-10-22 |
 | **Inputs** | `docs/03-backlog/backlog.md` + `stories/US-001…US-017` (Reviewed; US-001, US-002, US-015 updated by spec 2026-10-22), `docs/01-requirements/requirements.md` (REQ-001…REQ-044, NFR-001…NFR-010), `docs/02-analysis/analysis-log.md` (DEC-001…DEC-032, ASM-002…ASM-018), `ba-project.yaml` (`stack.deploy.profile: static`, `repo.*`) — Confluence `65670` v2, `458755` v1 |
 | **Deploy profile** | `static` — plain HTML/CSS/JS, `localStorage`, no backend (DEC-014) |
-| **Status** | Reviewed (BA, 2026-10-22 — BA review without the technical stakeholder, PoC) |
+| **Status** | Draft — Revised CHG-002 (2026-10-23, Confluence 65670 v4): seed rows 86 → 91 (DEC-034, trace-auditor finding); was Reviewed (BA, 2026-10-22 — BA review without the technical stakeholder, PoC) |
 
 Spec files: `architecture.md` (this) · `data-model.md` · `storage.md` (instead of `api.md`) · `ui.md` · `config.md` · `test-plan.md` · `demo-data.md`. `build-status.md` is written by the `build` step.
 
@@ -97,7 +97,7 @@ sequenceDiagram
 | `app/public/js/time.js` | office time, date arithmetic, weekdays, formatting | storage.md §2 | US-003 |
 | `app/public/js/rules.js` | pure rules | storage.md §2 | US-003 |
 | `app/public/js/storage.js` | `open`, `readDay`, `book`, `cancel`, `checkIn`, `tomorrow`, `sweep` | storage.md §3, data-model.md | US-001 |
-| `app/public/js/seed-data.js` | 86 seed rows | demo-data.md §4–7 | US-002 |
+| `app/public/js/seed-data.js` | 91 (86 + 5, DEC-034) seed rows — Revised CHG-002 | demo-data.md §4–7 | US-002 |
 | `app/public/js/seed.js` | `buildSeed(now)` | demo-data.md §1–3 | US-002 |
 | `app/public/js/app.js` | boot, hash routing, tick, names-switch variable, storage-state message | ui.md §1, §3.6 | US-001 |
 | `app/public/js/view-book.js` | date strip, floor tabs, counts, grid, dialogs | ui.md §2–3, §5 | US-003 |
