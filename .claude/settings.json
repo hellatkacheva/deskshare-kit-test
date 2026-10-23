@@ -9,12 +9,18 @@
       "Read(./.env.*)",
       "Read(./**/.dev.vars)"
     ],
-    "ask": [
+    "allow": [
       "mcp__atlassian-olga__createJiraIssue",
       "mcp__atlassian-olga__editJiraIssue",
       "mcp__atlassian-olga__transitionJiraIssue",
+      "mcp__atlassian-olga__addCommentToJiraIssue"
+    ],
+    "ask": [
       "Bash(git push:*)",
       "Bash(npx wrangler deploy:*)",
+      "Bash(npx wrangler d1 migrations apply:*)",
+      "Bash(gh api:*)",
+      "Bash(gh workflow run:*)",
       "Bash(gh secret:*)"
     ]
   }
