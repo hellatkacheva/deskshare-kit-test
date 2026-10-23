@@ -1,0 +1,19 @@
+{
+  "page_id": "1146892",
+  "title": "Workshop 4 minutes",
+  "space_key": "DSSRC",
+  "space_id": "393220",
+  "version": 1,
+  "created_at": "2026-10-23T14:39:38.367Z",
+  "version_created_at": "2026-10-23T14:41:47.442Z",
+  "version_message": "",
+  "author_id": "6170e337062f4c00694a6eb8",
+  "parent_id": "65670",
+  "fetched_at": "2026-10-23T14:42:58Z",
+  "children": [],
+  "sha256": {
+    "page_html": "d2ca6d82088d141fd726c91a3d2c99c9e1534920a0f9ead21d6e60e8a7b0b8fe",
+    "page_md": "96ec6fcf4c503df7ebf3b0b2a6c47e1c24a46bcc3b6718d9324557a6aeb05223"
+  },
+  "notes": "New child page of 65670, snapshot taken by /ba-sync (change-impact phase A, CHG-004). page.md / page.html = getConfluencePage markdown / html bodies saved as fetched (K-24: not assembled, not edited). The page has no headings; the html keeps line breaks inside <p> as in the response."
+}

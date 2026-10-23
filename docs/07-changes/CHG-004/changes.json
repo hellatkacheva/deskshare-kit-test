@@ -1,0 +1,98 @@
+{
+  "generated_by": "change-impact/scripts/blockdiff.mjs",
+  "generated_at": "2026-10-23T14:42:58.886Z",
+  "quotes_scanned": 180,
+  "pages": [
+    {
+      "page_id": "65670",
+      "old_version": 5,
+      "new_version": 5,
+      "page_op": "page changed",
+      "blocks": {
+        "old": 81,
+        "new": 81
+      },
+      "count": {},
+      "changes": []
+    },
+    {
+      "page_id": "458755",
+      "old_version": 1,
+      "new_version": 1,
+      "page_op": "page changed",
+      "blocks": {
+        "old": 27,
+        "new": 27
+      },
+      "count": {},
+      "changes": []
+    },
+    {
+      "page_id": "1146892",
+      "old_version": null,
+      "new_version": 1,
+      "page_op": "page added",
+      "blocks": {
+        "old": 0,
+        "new": 4
+      },
+      "count": {
+        "added": 4
+      },
+      "changes": [
+        {
+          "op": "added",
+          "old": null,
+          "new": {
+            "index": 0,
+            "kind": "p",
+            "path": [],
+            "label": null,
+            "text": "Workshop 4 — Booking note"
+          },
+          "hint": null,
+          "id": "D1"
+        },
+        {
+          "op": "added",
+          "old": null,
+          "new": {
+            "index": 1,
+            "kind": "p",
+            "path": [],
+            "label": null,
+            "text": "Date: 2026-10-24 Attendees: Priya Nandakumar (sponsor), Dana Whitfield, Sam"
+          },
+          "hint": null,
+          "id": "D2"
+        },
+        {
+          "op": "added",
+          "old": null,
+          "new": {
+            "index": 2,
+            "kind": "p",
+            "path": [],
+            "label": null,
+            "text": "Priya: \"People keep asking if they can leave a short note with a booking — like 'need a second monitor' or 'visiting from another office'.\" Dana: \"Fine, as long as it is optional and short. No names of other people in it.\" Sam: \"Keep it to 50 characters and keep it in the browser like everything else.\""
+          },
+          "hint": null,
+          "id": "D3"
+        },
+        {
+          "op": "added",
+          "old": null,
+          "new": {
+            "index": 3,
+            "kind": "p",
+            "path": [],
+            "label": null,
+            "text": "Agreed: an optional note per booking, maximum 50 characters. The note is shown on the booking confirmation and in the desk dialog. It is deleted together with the name after the booking date."
+          },
+          "hint": null,
+          "id": "D4"
+        }
+      ]
+    }
+  ]
+}
