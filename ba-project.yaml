@@ -59,7 +59,7 @@ approvals:                            # [{step, status, by, date, note}] — onl
   - { step: deploy, status: public-deploy-ok, by: "Olga Tkacheva", date: 2026-10-23, note: "GitHub Pages https://hellatkacheva.github.io/deskshare-kit-test/ — commit 041800d, run 39897150136; DEC-033 (Sam open, ASM-013; CST-005 not met literally); smoke S-1…S-6 ✓" }
   - { step: deploy, status: reviewed, by: "Olga Tkacheva", date: 2026-10-23, note: "checked on a phone on the public URL — works; smoke S-1…S-6 ✓" }
   - { step: jira, status: plan-ok, by: "Olga Tkacheva", date: 2026-10-23, note: "36 create, 0 update; all stories and epics Done as proposed; every issue into sprint 'DeskShare Kit Test PoC' (created and started by the BA)" }
-  - { step: jira, status: reviewed, by: "Olga Tkacheva", date: 2026-10-23, note: "board checked; 36 issues, no duplicates (Q5 = KAN-27 only); sprint 'DeskShare Kit Test PoC' started by the BA; board link in jira-map pending the BA's browser URL" }
+  - { step: jira, status: reviewed, by: "Olga Tkacheva", date: 2026-10-23, note: "board checked; 36 issues, no duplicates (Q5 = KAN-27 only); sprint 'DeskShare Kit Test PoC' started by the BA; board link set from the BA's browser URL" }
 
 jira:
   project_key: "KAN"

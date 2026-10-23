@@ -6,7 +6,7 @@
 | **Date** | 2026-10-23 |
 | **Inputs** | `docs/03-backlog/backlog.md` + `stories/US-*.md` (Reviewed), `docs/02-analysis/analysis-log.md` §8, `docs/04-spec/build-status.md` (all stories Accepted, deployed 2026-10-23) — Confluence `65670` v2, `458755` v1 |
 | **Site / project** | `hellatkacheva.atlassian.net` · project **KAN** "DeskShare Kit Test" (team-managed) |
-| **Board** | link pending — the generated URL `…/jira/software/projects/KAN/boards/1` did not open for the BA (2026-10-23); to be replaced with the address from the BA's browser |
+| **Board** | https://hellatkacheva.atlassian.net/jira/software/projects/KAN/boards/1?sprintStarted=true&filter=&groupBy=none |
 | **Sprint** | "DeskShare Kit Test PoC" — id 1, board 1, field `customfield_10020`; read as **future** on 2026-10-23 09:38, then **started by the BA** (2026-10-23) |
 | **Issue types (by ID)** | Epic `10003` · Story `10006` · Task `10005` |
 | **Statuses** | To Do `10006` "К выполнению" (transition 11) · In Progress `10007` "В работе" (transition 21) · Done `10009` "Готово" (transition 41) — mapped by status category |
