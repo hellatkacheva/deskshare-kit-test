@@ -40,6 +40,6 @@ In the batch run, the code of US-005 (storage `book()` and the booking form) was
 | Date | Step | Duration (approx.) |
 |---|---|---|
 | 2026-10-22 | spec + BA review | ~45 min |
-| 2026-10-22 | build US-001…US-004 (one by one, H6 each) | ~65 min |
-| 2026-10-22 | build US-005…US-013 (batch, H6 waived) | ~2 h |
+| 2026-10-22 | build US-001…US-004 (one by one, H6 each) | ~30 min by commit times (`583087b` 21:54 → `113d1c2` 22:24); the run-log estimates (25 + 15 + 15 + 10 = 65 min) were too high |
+| 2026-10-22 | build US-005…US-013 (batch, H6 waived) | ~25 min by commit times (`113d1c2` 22:24 → `0c8d2dc` 22:49); corrected 2026-10-23 — an earlier "~2 h" here was an estimate, not measured |
 | 2026-10-23 | BA local check, acceptance, build reviewed | — |
