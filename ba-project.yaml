@@ -67,6 +67,7 @@ approvals:                            # [{step, status, by, date, note}] — onl
   - { step: deploy, status: public-deploy-ok, by: "Olga Tkacheva", date: 2026-10-23, note: "CHG-002 redeploy — 'Deploy (строка 17) — OK, публикуй и запусти smoke S-1…S-6'; https://hellatkacheva.github.io/deskshare-kit-test/ — commit 8dda522, run 39959780609; smoke S-1…S-6 ✓" }
   - { step: sync, status: reviewed, by: "Olga Tkacheva", date: 2026-10-23, note: "CHG-002 v3→v4 closed — rows 1–20 done; trace intact (trace-auditor); Jira spot check KAN-10 OK" }
   - { step: sync, status: plan-ok, by: "Olga Tkacheva", date: 2026-10-23, note: "CHG-003 v4→v5: rows 1–6, 10, 17–18; v5 edit deliberate (test B4); CON-007 → A (DEC-035, no waitlist; SI-12; Q15)" }
+  - { step: sync, status: reviewed, by: "Olga Tkacheva", date: 2026-10-23, note: "CHG-003 v4→v5 closed — rows 1–6, 10, 17–18 done (option A); trace intact; v5 page.html re-saved as fetched (identical); v4 meta annotated (K-24)" }
 
 jira:
   project_key: "KAN"

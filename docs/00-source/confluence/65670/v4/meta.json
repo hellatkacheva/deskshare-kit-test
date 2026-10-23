@@ -14,5 +14,6 @@
     "page_html": "f8331c86bb2d3e85a6086420835c06899bd3618439e348edf987c77e2b80f6f3",
     "page_md": "7d35165703968eb333ddaf1fbe9b06c90510c64f2f8362284317c33bbd65fd34"
   },
+  "provenance": "assembled, not as fetched — see K-24 (page.html = v3/page.html + one text replacement; the fetched v4 body can no longer be retrieved). Annotation added 2026-10-23 on the BA's instruction (CHG-003); files and sha256 unchanged.",
   "notes": "Snapshot taken by /ba-sync (change-impact phase A, CHG-002). version from fetch(ari) metadata; getConfluencePage returns no version block, so version.createdAt and version_message are not exposed — created_at is the page's createdAt. page.md = getConfluencePage markdown body; it differs from v3/page.md in one line only (Floor 1 capacity 30 → 35). page.html = getConfluencePage html body: same 145 data-local-id elements as v3 (spot-checked), the only difference is the same text change; written as v3/page.html with that one replacement (cmp: 1 byte)."
 }
