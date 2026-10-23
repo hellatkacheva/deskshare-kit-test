@@ -42,7 +42,7 @@ steps:                                # status: not_started | draft | reviewed |
   stories:      { status: reviewed, source_version: 2, updated: 2026-10-21 }
   review:       { status: reviewed, source_version: 2, updated: 2026-10-21 }
   spec:         { status: reviewed, source_version: 2, updated: 2026-10-22 }
-  build:        { status: draft, source_version: 2, updated: 2026-10-22 }
+  build:        { status: reviewed, source_version: 2, updated: 2026-10-23 }
   deploy:       { status: not_started, source_version: null, updated: null }
   jira:         { status: not_started, source_version: null, updated: null }
 
@@ -54,6 +54,8 @@ approvals:                            # [{step, status, by, date, note}] — onl
   - { step: stories, status: reviewed, by: "Olga Tkacheva", date: 2026-10-21, note: "backlog v1 after review: 17 stories (16 Must, 1 Should), OQ-1…OQ-9 → DEC-016…DEC-024, all Ready; deadline 2026-10-28" }
   - { step: review, status: reviewed, by: "Olga Tkacheva", date: 2026-10-21, note: "27 findings (0 Blocker, 13 Major, 14 Minor): Fixed 21, Accepted 5 (DEC-025…028, 030), Rejected 1 (#20 → DEC-029)" }
   - { step: spec, status: reviewed, by: "Olga Tkacheva", date: 2026-10-22, note: "BA review without the technical stakeholder (PoC); OQ-S1 → DEC-031, OQ-S2 → DEC-032; I-1 confirmed (DEC-014 covers REQ-022…030, REQ-042); RSK-011 added (shared github.io origin with test C); no live demo for test A" }
+  - { step: build, status: gate-waived, by: "Olga Tkacheva", date: 2026-10-22, note: "BA decision: per-story acceptance gate (H6) waived for US-005…US-013 — 'сделай все стори и закомить их'; stories built and committed one by one without a stop" }
+  - { step: build, status: reviewed, by: "Olga Tkacheva", date: 2026-10-23, note: "US-005…US-013 checked locally and accepted; all 17 stories accepted; B-5 kept as known (check-in refused in both cases); B-4 noted (US-005 tests never seen failing)" }
 
 jira:
   project_key: "KAN"
