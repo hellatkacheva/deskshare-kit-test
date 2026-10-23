@@ -38,7 +38,7 @@ Example calendar used in all acceptance criteria: today = Wed 2026-10-21; bookin
 | [US-004](stories/US-004.md) | Desk grid of the selected floor (free / taken, no names) — Variant A | EP-2 | Must | S | Core demo | REQ-022, REQ-023, REQ-024, REQ-026, DEC-011, DEC-015, ASM-007 | Yes |
 | [US-005](stories/US-005.md) | Book a free desk | EP-2 | Must | M | Core demo | REQ-006, REQ-007, REQ-008, REQ-022, REQ-023, REQ-035, REQ-036, NFR-004, NFR-006, ASM-010, ASM-011 | Yes |
 | [US-016](stories/US-016.md) | Name rules when booking (split from US-005) | EP-2 | Must | S | Core demo | REQ-006, REQ-035, DEC-018, ASM-018 | Yes |
-| [US-006](stories/US-006.md) | Hard stop when the floor is full | EP-2 | Must | S | Core demo | REQ-011, REQ-012, REQ-023, REQ-024, DEC-004 | Yes |
+| [US-006](stories/US-006.md) | Hard stop when the floor is full | EP-2 | Must | S | Core demo | REQ-011, REQ-012, REQ-023, REQ-024, DEC-004, DEC-005, DEC-015, REQ-045 | Yes |
 | [US-007](stories/US-007.md) | Cancel my own booking | EP-2 | Must | S | Core demo | REQ-013, REQ-014, REQ-040, ASM-012 | Yes |
 | [US-012](stories/US-012.md) | Notice: names are self-reported | EP-4 | Must | S | Core demo | REQ-029, REQ-040, DEC-012, DEC-023 | Yes |
 | [US-017](stories/US-017.md) | Check-in deadline and closing of same-day booking (split from US-005) | EP-3 | Must | S | Core demo | REQ-036, REQ-041, NFR-009, NFR-010, ASM-008, ASM-017, DEC-024 | Yes |
