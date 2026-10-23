@@ -1,0 +1,18 @@
+{
+  "page_id": "65670",
+  "title": "DeskShare — Requirements Gathering (source copy)",
+  "space_key": "DSSRC",
+  "space_id": "393220",
+  "version": 3,
+  "created_at": "2026-10-20T10:26:26.254Z",
+  "version_message": null,
+  "author_id": "6170e337062f4c00694a6eb8",
+  "parent_id": null,
+  "fetched_at": "2026-10-23T06:47:42Z",
+  "children": [{"id": "458755", "title": "Workshop brief (source copy)", "version": 1, "snapshot": "confluence/458755/v1/"}],
+  "sha256": {
+    "page_html": "6b53709c48315fec51194b323894cf2d0ed52741b6ac7283c051526912d13b54",
+    "page_md": "c578538c36a1673fc0fe3383aef77942046c1748c4ff4b76b34006f5dcc6602d"
+  },
+  "notes": "Snapshot taken by /ba-sync (change-impact phase A, CHG-001). version from fetch(ari) metadata; getConfluencePage returns no version block, so version.createdAt and version_message are not exposed — created_at is the page's createdAt. page.html is the getConfluencePage html body as returned now: it carries data-local-id attributes that the v2 snapshot does not have (MCP output format changed, not page content). page.md = getConfluencePage markdown body."
+}

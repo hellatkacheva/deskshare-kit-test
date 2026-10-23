@@ -1,0 +1,1951 @@
+{
+  "generated_by": "change-impact/scripts/blockdiff.mjs",
+  "generated_at": "2026-10-23T06:48:05.478Z",
+  "quotes_scanned": 166,
+  "pages": [
+    {
+      "page_id": "65670",
+      "old_version": 2,
+      "new_version": 3,
+      "page_op": "page changed",
+      "blocks": {
+        "old": 81,
+        "new": 81
+      },
+      "count": {
+        "cosmetic": 81
+      },
+      "changes": [
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 0,
+            "kind": "h1",
+            "path": [],
+            "label": null,
+            "text": "DeskShare — Requirements Gathering (source material)"
+          },
+          "new": {
+            "index": 0,
+            "kind": "h1",
+            "path": [],
+            "label": null,
+            "text": "DeskShare — Requirements Gathering (source material)"
+          },
+          "hint": "C0",
+          "id": "D1"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 1,
+            "kind": "p",
+            "path": [],
+            "label": "Source",
+            "text": "Source: Confluence page \"DeskShare - Northwind Analytics\", exported 14 Oct 2026. Scope of this file: only the raw inputs — sales handoff, project context and the minutes of Workshops 1–3. Text is verbatim; only line breaks and list formatting were changed. Sections produced by another team (resolution log, conflict table, risk log, backlog, mockups) were deliberately excluded. Read-only. Do not edit — workflow steps write their output to docs/01-… and later folders."
+          },
+          "new": {
+            "index": 1,
+            "kind": "p",
+            "path": [],
+            "label": "Source",
+            "text": "Source: Confluence page \"DeskShare - Northwind Analytics\", exported 14 Oct 2026. Scope of this file: only the raw inputs — sales handoff, project context and the minutes of Workshops 1–3. Text is verbatim; only line breaks and list formatting were changed. Sections produced by another team (resolution log, conflict table, risk log, backlog, mockups) were deliberately excluded. Read-only. Do not edit — workflow steps write their output to docs/01-… and later folders."
+          },
+          "hint": "C0",
+          "id": "D2"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 2,
+            "kind": "h2",
+            "path": [],
+            "label": null,
+            "text": "Handoff from Discovery"
+          },
+          "new": {
+            "index": 2,
+            "kind": "h2",
+            "path": [],
+            "label": null,
+            "text": "Handoff from Discovery"
+          },
+          "hint": "C0",
+          "id": "D3"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 3,
+            "kind": "p",
+            "path": [
+              "Handoff from Discovery"
+            ],
+            "label": null,
+            "text": "Sales ran two discovery calls with Northwind Analytics in late August, scoped the opportunity at a high level, and closed a fixed-scope engagement. Discovery did not dig into detailed requirements — that starts now, with this team's formal requirements-gathering phase."
+          },
+          "new": {
+            "index": 3,
+            "kind": "p",
+            "path": [
+              "Handoff from Discovery"
+            ],
+            "label": null,
+            "text": "Sales ran two discovery calls with Northwind Analytics in late August, scoped the opportunity at a high level, and closed a fixed-scope engagement. Discovery did not dig into detailed requirements — that starts now, with this team's formal requirements-gathering phase."
+          },
+          "hint": "C0",
+          "id": "D4"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 4,
+            "kind": "p",
+            "path": [
+              "Handoff from Discovery"
+            ],
+            "label": null,
+            "text": "The full, unedited handoff notes are the account exec's own notes (not cleaned up for a BA audience) — DeskShare_Sales_Discovery_Handoff_MOMs.docx; expect gaps and a couple of things worth double-checking rather than taking at face value. (Note from our team: this file is not yet available to us — see README.md in this folder.)"
+          },
+          "new": {
+            "index": 4,
+            "kind": "p",
+            "path": [
+              "Handoff from Discovery"
+            ],
+            "label": null,
+            "text": "The full, unedited handoff notes are the account exec's own notes (not cleaned up for a BA audience) — DeskShare_Sales_Discovery_Handoff_MOMs.docx; expect gaps and a couple of things worth double-checking rather than taking at face value. (Note from our team: this file is not yet available to us — see README.md in this folder.)"
+          },
+          "hint": "C0",
+          "id": "D5"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 5,
+            "kind": "h3",
+            "path": [
+              "Handoff from Discovery"
+            ],
+            "label": null,
+            "text": "Sales handoff notes (verbatim from the account exec):"
+          },
+          "new": {
+            "index": 5,
+            "kind": "h3",
+            "path": [
+              "Handoff from Discovery"
+            ],
+            "label": null,
+            "text": "Sales handoff notes (verbatim from the account exec):"
+          },
+          "hint": "C0",
+          "id": "D6"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 6,
+            "kind": "p",
+            "path": [
+              "Handoff from Discovery",
+              "Sales handoff notes (verbatim from the account exec)"
+            ],
+            "label": null,
+            "text": "\"Client is a ~120-person hybrid company, current process is a shared spreadsheet that keeps double-booking desks. Sponsor is the Office Manager. IT is thin — no time for a real dev project, which is why they're open to a lightweight PoC. They want to see something clickable, not a slide deck.\""
+          },
+          "new": {
+            "index": 6,
+            "kind": "p",
+            "path": [
+              "Handoff from Discovery",
+              "Sales handoff notes (verbatim from the account exec)"
+            ],
+            "label": null,
+            "text": "\"Client is a ~120-person hybrid company, current process is a shared spreadsheet that keeps double-booking desks. Sponsor is the Office Manager. IT is thin — no time for a real dev project, which is why they're open to a lightweight PoC. They want to see something clickable, not a slide deck.\""
+          },
+          "hint": "C0",
+          "id": "D7"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 7,
+            "kind": "h2",
+            "path": [],
+            "label": null,
+            "text": "Expanded Project Context"
+          },
+          "new": {
+            "index": 7,
+            "kind": "h2",
+            "path": [],
+            "label": null,
+            "text": "Expanded Project Context"
+          },
+          "hint": "C0",
+          "id": "D8"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 8,
+            "kind": "p",
+            "path": [
+              "Expanded Project Context"
+            ],
+            "label": "Company",
+            "text": "Company: Northwind Analytics, ~120 employees, hybrid work policy (3 anchor office days/week, no fixed seating)."
+          },
+          "new": {
+            "index": 8,
+            "kind": "p",
+            "path": [
+              "Expanded Project Context"
+            ],
+            "label": "Company",
+            "text": "Company: Northwind Analytics, ~120 employees, hybrid work policy (3 anchor office days/week, no fixed seating)."
+          },
+          "hint": "C0",
+          "id": "D9"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 9,
+            "kind": "p",
+            "path": [
+              "Expanded Project Context"
+            ],
+            "label": "Current state",
+            "text": "Current state: Desk booking runs through a shared Google Sheet maintained by the Office Manager. It breaks down weekly — people book the same desk twice, forget to release a booking when plans change, and there's no visibility into which floor is actually full until someone shows up and can't find a seat."
+          },
+          "new": {
+            "index": 9,
+            "kind": "p",
+            "path": [
+              "Expanded Project Context"
+            ],
+            "label": "Current state",
+            "text": "Current state: Desk booking runs through a shared Google Sheet maintained by the Office Manager. It breaks down weekly — people book the same desk twice, forget to release a booking when plans change, and there's no visibility into which floor is actually full until someone shows up and can't find a seat."
+          },
+          "hint": "C0",
+          "id": "D10"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 10,
+            "kind": "p",
+            "path": [
+              "Expanded Project Context"
+            ],
+            "label": "Why now",
+            "text": "Why now: The company just signed a new hybrid-work policy that assumes desk availability is self-service. The spreadsheet was a stopgap; it's now actively causing complaints serious enough that the Office Manager escalated to their leadership, who approved fixing it."
+          },
+          "new": {
+            "index": 10,
+            "kind": "p",
+            "path": [
+              "Expanded Project Context"
+            ],
+            "label": "Why now",
+            "text": "Why now: The company just signed a new hybrid-work policy that assumes desk availability is self-service. The spreadsheet was a stopgap; it's now actively causing complaints serious enough that the Office Manager escalated to their leadership, who approved fixing it."
+          },
+          "hint": "C0",
+          "id": "D11"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 11,
+            "kind": "p",
+            "path": [
+              "Expanded Project Context"
+            ],
+            "label": "Decision makers",
+            "text": "Decision makers: Priya Nandakumar (Office Manager) is the sponsor and day-to-day decision-maker. Dana Whitfield (HR Business Partner) has a seat at the table because booking data touches employee attendance patterns. Sam Okafor (Software Engineer) represents the small internal IT function and has veto power on anything that creates ongoing maintenance burden for them."
+          },
+          "new": {
+            "index": 11,
+            "kind": "p",
+            "path": [
+              "Expanded Project Context"
+            ],
+            "label": "Decision makers",
+            "text": "Decision makers: Priya Nandakumar (Office Manager) is the sponsor and day-to-day decision-maker. Dana Whitfield (HR Business Partner) has a seat at the table because booking data touches employee attendance patterns. Sam Okafor (Software Engineer) represents the small internal IT function and has veto power on anything that creates ongoing maintenance burden for them."
+          },
+          "hint": "C0",
+          "id": "D12"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 12,
+            "kind": "p",
+            "path": [
+              "Expanded Project Context"
+            ],
+            "label": "What \"done\" looks like for this engagement",
+            "text": "What \"done\" looks like for this engagement: a working PoC that lets an employee book a desk by date and floor, see remaining capacity, and cancel a booking — good enough for Priya to demo to her leadership as proof the idea works."
+          },
+          "new": {
+            "index": 12,
+            "kind": "p",
+            "path": [
+              "Expanded Project Context"
+            ],
+            "label": "What \"done\" looks like for this engagement",
+            "text": "What \"done\" looks like for this engagement: a working PoC that lets an employee book a desk by date and floor, see remaining capacity, and cancel a booking — good enough for Priya to demo to her leadership as proof the idea works."
+          },
+          "hint": "C0",
+          "id": "D13"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 13,
+            "kind": "h2",
+            "path": [],
+            "label": null,
+            "text": "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff"
+          },
+          "new": {
+            "index": 13,
+            "kind": "h2",
+            "path": [],
+            "label": null,
+            "text": "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff"
+          },
+          "hint": "C0",
+          "id": "D14"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 14,
+            "kind": "p",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff"
+            ],
+            "label": "Date",
+            "text": "Date: Mon, Sep 8, 2026, 10:00–10:45 Attendees: Priya Nandakumar (Office Manager, sponsor), Sam Okafor (Software Engineer), Dana Whitfield (HR Business Partner), BA (facilitator)"
+          },
+          "new": {
+            "index": 14,
+            "kind": "p",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff"
+            ],
+            "label": "Date",
+            "text": "Date: Mon, Sep 8, 2026, 10:00–10:45 Attendees: Priya Nandakumar (Office Manager, sponsor), Sam Okafor (Software Engineer), Dana Whitfield (HR Business Partner), BA (facilitator)"
+          },
+          "hint": "C0",
+          "id": "D15"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 15,
+            "kind": "p",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff"
+            ],
+            "label": "Agenda",
+            "text": "Agenda: Review sales handoff notes; confirm scope boundaries; agree on who needs to be in the requirements deep-dive."
+          },
+          "new": {
+            "index": 15,
+            "kind": "p",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff"
+            ],
+            "label": "Agenda",
+            "text": "Agenda: Review sales handoff notes; confirm scope boundaries; agree on who needs to be in the requirements deep-dive."
+          },
+          "hint": "C0",
+          "id": "D16"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 16,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff"
+            ],
+            "label": null,
+            "text": "Discussion:"
+          },
+          "new": {
+            "index": 16,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff"
+            ],
+            "label": null,
+            "text": "Discussion:"
+          },
+          "hint": "C0",
+          "id": "D17"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 17,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff",
+              "Discussion"
+            ],
+            "label": null,
+            "text": "BA read back the sales handoff notes; Priya confirmed them as accurate but added: \"The spreadsheet chaos isn't the whole story — people have also started just claiming a desk in person and ignoring the sheet entirely, so half our 'bookings' aren't even in it anymore.\""
+          },
+          "new": {
+            "index": 17,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff",
+              "Discussion"
+            ],
+            "label": null,
+            "text": "BA read back the sales handoff notes; Priya confirmed them as accurate but added: \"The spreadsheet chaos isn't the whole story — people have also started just claiming a desk in person and ignoring the sheet entirely, so half our 'bookings' aren't even in it anymore.\""
+          },
+          "hint": "C0",
+          "id": "D18"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 18,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff",
+              "Discussion"
+            ],
+            "label": null,
+            "text": "Sam flagged early that he does not want to own a database or server: \"If this needs me babysitting a backend, it's not a PoC, it's a project. I don't have headcount for that.\""
+          },
+          "new": {
+            "index": 18,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff",
+              "Discussion"
+            ],
+            "label": null,
+            "text": "Sam flagged early that he does not want to own a database or server: \"If this needs me babysitting a backend, it's not a PoC, it's a project. I don't have headcount for that.\""
+          },
+          "hint": "C0",
+          "id": "D19"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 19,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff",
+              "Discussion"
+            ],
+            "label": null,
+            "text": "Dana raised a boundary up front: \"Whatever this shows, it can't turn into an attendance-tracking tool by accident. I don't want a report that tells someone's manager they only came in twice this month.\""
+          },
+          "new": {
+            "index": 19,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff",
+              "Discussion"
+            ],
+            "label": null,
+            "text": "Dana raised a boundary up front: \"Whatever this shows, it can't turn into an attendance-tracking tool by accident. I don't want a report that tells someone's manager they only came in twice this month.\""
+          },
+          "hint": "C0",
+          "id": "D20"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 20,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff"
+            ],
+            "label": null,
+            "text": "Decisions:"
+          },
+          "new": {
+            "index": 20,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff"
+            ],
+            "label": null,
+            "text": "Decisions:"
+          },
+          "hint": "C0",
+          "id": "D21"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 21,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff",
+              "Decisions"
+            ],
+            "label": null,
+            "text": "Scope stays a browser-only PoC; no shared backend/database for this phase (confirmed with Sam)."
+          },
+          "new": {
+            "index": 21,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff",
+              "Decisions"
+            ],
+            "label": null,
+            "text": "Scope stays a browser-only PoC; no shared backend/database for this phase (confirmed with Sam)."
+          },
+          "hint": "C0",
+          "id": "D22"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 22,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff",
+              "Decisions"
+            ],
+            "label": null,
+            "text": "No manager-facing reporting or attendance analytics in this PoC (confirmed with Dana) — noted as explicitly out of scope, not just deferred."
+          },
+          "new": {
+            "index": 22,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff",
+              "Decisions"
+            ],
+            "label": null,
+            "text": "No manager-facing reporting or attendance analytics in this PoC (confirmed with Dana) — noted as explicitly out of scope, not just deferred."
+          },
+          "hint": "C0",
+          "id": "D23"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 23,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff",
+              "Decisions"
+            ],
+            "label": null,
+            "text": "Priya is the single point of sign-off for what ships."
+          },
+          "new": {
+            "index": 23,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff",
+              "Decisions"
+            ],
+            "label": null,
+            "text": "Priya is the single point of sign-off for what ships."
+          },
+          "hint": "C0",
+          "id": "D24"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 24,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff"
+            ],
+            "label": null,
+            "text": "Action items:"
+          },
+          "new": {
+            "index": 24,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff"
+            ],
+            "label": null,
+            "text": "Action items:"
+          },
+          "hint": "C0",
+          "id": "D25"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 25,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff",
+              "Action items"
+            ],
+            "label": null,
+            "text": "BA to schedule Workshop 2 (requirements deep-dive) before end of week — Owner: BA, Due: Sep 9."
+          },
+          "new": {
+            "index": 25,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff",
+              "Action items"
+            ],
+            "label": null,
+            "text": "BA to schedule Workshop 2 (requirements deep-dive) before end of week — Owner: BA, Due: Sep 9."
+          },
+          "hint": "C0",
+          "id": "D26"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 26,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff",
+              "Action items"
+            ],
+            "label": null,
+            "text": "Priya to pull last month's spreadsheet as a reference for real booking volume — Owner: Priya, Due: Sep 9."
+          },
+          "new": {
+            "index": 26,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff",
+              "Action items"
+            ],
+            "label": null,
+            "text": "Priya to pull last month's spreadsheet as a reference for real booking volume — Owner: Priya, Due: Sep 9."
+          },
+          "hint": "C0",
+          "id": "D27"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 27,
+            "kind": "h2",
+            "path": [],
+            "label": null,
+            "text": "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+          },
+          "new": {
+            "index": 27,
+            "kind": "h2",
+            "path": [],
+            "label": null,
+            "text": "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+          },
+          "hint": "C0",
+          "id": "D28"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 28,
+            "kind": "p",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": "Date",
+            "text": "Date: Wed, Sep 10, 2026, 14:00–15:00 Attendees: Priya Nandakumar, Sam Okafor, Dana Whitfield, BA (facilitator)"
+          },
+          "new": {
+            "index": 28,
+            "kind": "p",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": "Date",
+            "text": "Date: Wed, Sep 10, 2026, 14:00–15:00 Attendees: Priya Nandakumar, Sam Okafor, Dana Whitfield, BA (facilitator)"
+          },
+          "hint": "C0",
+          "id": "D29"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 29,
+            "kind": "p",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": "Agenda",
+            "text": "Agenda: Walk through the booking flow end to end; capture rules, edge cases, and anything explicitly out of scope."
+          },
+          "new": {
+            "index": 29,
+            "kind": "p",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": "Agenda",
+            "text": "Agenda: Walk through the booking flow end to end; capture rules, edge cases, and anything explicitly out of scope."
+          },
+          "hint": "C0",
+          "id": "D30"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 30,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": null,
+            "text": "Discussion by topic:"
+          },
+          "new": {
+            "index": 30,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": null,
+            "text": "Discussion by topic:"
+          },
+          "hint": "C0",
+          "id": "D31"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 31,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": null,
+            "text": "Booking a desk"
+          },
+          "new": {
+            "index": 31,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": null,
+            "text": "Booking a desk"
+          },
+          "hint": "C0",
+          "id": "D32"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 32,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Booking a desk"
+            ],
+            "label": null,
+            "text": "Priya: employees should pick a date and a floor, and see a desk immediately — no approval step. \"If someone has to wait for me to approve it, I'm right back to being the bottleneck.\""
+          },
+          "new": {
+            "index": 32,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Booking a desk"
+            ],
+            "label": null,
+            "text": "Priya: employees should pick a date and a floor, and see a desk immediately — no approval step. \"If someone has to wait for me to approve it, I'm right back to being the bottleneck.\""
+          },
+          "hint": "C0",
+          "id": "D33"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 33,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Booking a desk"
+            ],
+            "label": null,
+            "text": "Two floors only for the PoC: Floor 1 (capacity 30) and Floor 2 (capacity 25) — pulled from the spreadsheet reference Priya brought, sized up from her earlier ballpark now that real numbers were in front of her."
+          },
+          "new": {
+            "index": 33,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Booking a desk"
+            ],
+            "label": null,
+            "text": "Two floors only for the PoC: Floor 1 (capacity 30) and Floor 2 (capacity 25) — pulled from the spreadsheet reference Priya brought, sized up from her earlier ballpark now that real numbers were in front of her."
+          },
+          "hint": "C0",
+          "id": "D34"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 34,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": null,
+            "text": "Capacity limits"
+          },
+          "new": {
+            "index": 34,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": null,
+            "text": "Capacity limits"
+          },
+          "hint": "C0",
+          "id": "D35"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 35,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Capacity limits"
+            ],
+            "label": null,
+            "text": "Sam pushed for a hard stop rather than a warning: once a floor hits capacity for a given day, the system should refuse the booking outright, not just flag it. \"People ignore soft warnings. That's basically what the spreadsheet already does.\""
+          },
+          "new": {
+            "index": 35,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Capacity limits"
+            ],
+            "label": null,
+            "text": "Sam pushed for a hard stop rather than a warning: once a floor hits capacity for a given day, the system should refuse the booking outright, not just flag it. \"People ignore soft warnings. That's basically what the spreadsheet already does.\""
+          },
+          "hint": "C0",
+          "id": "D36"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 36,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Capacity limits"
+            ],
+            "label": null,
+            "text": "Agreed: no waitlist in this PoC — if a floor is full, the employee is told to pick another day or floor. Waitlisting was parked as a future-phase idea, not built now."
+          },
+          "new": {
+            "index": 36,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Capacity limits"
+            ],
+            "label": null,
+            "text": "Agreed: no waitlist in this PoC — if a floor is full, the employee is told to pick another day or floor. Waitlisting was parked as a future-phase idea, not built now."
+          },
+          "hint": "C0",
+          "id": "D37"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 37,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": null,
+            "text": "Cancelling"
+          },
+          "new": {
+            "index": 37,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": null,
+            "text": "Cancelling"
+          },
+          "hint": "C0",
+          "id": "D38"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 38,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Cancelling"
+            ],
+            "label": null,
+            "text": "Dana: employees must be able to cancel their own booking without going through Priya or IT. No mention of needing manager approval to cancel."
+          },
+          "new": {
+            "index": 38,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Cancelling"
+            ],
+            "label": null,
+            "text": "Dana: employees must be able to cancel their own booking without going through Priya or IT. No mention of needing manager approval to cancel."
+          },
+          "hint": "C0",
+          "id": "D39"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 39,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": null,
+            "text": "Privacy"
+          },
+          "new": {
+            "index": 39,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": null,
+            "text": "Privacy"
+          },
+          "hint": "C0",
+          "id": "D40"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 40,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Privacy"
+            ],
+            "label": null,
+            "text": "Dana repeated the boundary from Workshop 1: the tool can show how many desks are booked per floor, but should not surface anyone's individual attendance history in a way that could be pulled into a report. Booking records tied to a name for the purpose of the booking itself is fine; a list or export of \"who came in which days\" is not."
+          },
+          "new": {
+            "index": 40,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Privacy"
+            ],
+            "label": null,
+            "text": "Dana repeated the boundary from Workshop 1: the tool can show how many desks are booked per floor, but should not surface anyone's individual attendance history in a way that could be pulled into a report. Booking records tied to a name for the purpose of the booking itself is fine; a list or export of \"who came in which days\" is not."
+          },
+          "hint": "C0",
+          "id": "D41"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 41,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": null,
+            "text": "Admin needs"
+          },
+          "new": {
+            "index": 41,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": null,
+            "text": "Admin needs"
+          },
+          "hint": "C0",
+          "id": "D42"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 42,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Admin needs"
+            ],
+            "label": null,
+            "text": "Sam asked whether Priya needs to block a desk for maintenance (e.g., a broken chair). Priya said it's a real need but not urgent enough to hold up the PoC — logged as a backlog item for a later iteration, not blocking."
+          },
+          "new": {
+            "index": 42,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Admin needs"
+            ],
+            "label": null,
+            "text": "Sam asked whether Priya needs to block a desk for maintenance (e.g., a broken chair). Priya said it's a real need but not urgent enough to hold up the PoC — logged as a backlog item for a later iteration, not blocking."
+          },
+          "hint": "C0",
+          "id": "D43"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 43,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": null,
+            "text": "Out of scope, explicitly confirmed:"
+          },
+          "new": {
+            "index": 43,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": null,
+            "text": "Out of scope, explicitly confirmed:"
+          },
+          "hint": "C0",
+          "id": "D44"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 44,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Out of scope, explicitly confirmed"
+            ],
+            "label": null,
+            "text": "No login/authentication (name is typed in at booking time — acceptable for a PoC, revisit for production)."
+          },
+          "new": {
+            "index": 44,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Out of scope, explicitly confirmed"
+            ],
+            "label": null,
+            "text": "No login/authentication (name is typed in at booking time — acceptable for a PoC, revisit for production)."
+          },
+          "hint": "C0",
+          "id": "D45"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 45,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Out of scope, explicitly confirmed"
+            ],
+            "label": null,
+            "text": "No integration with HR systems or the badge/access system."
+          },
+          "new": {
+            "index": 45,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Out of scope, explicitly confirmed"
+            ],
+            "label": null,
+            "text": "No integration with HR systems or the badge/access system."
+          },
+          "hint": "C0",
+          "id": "D46"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 46,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Out of scope, explicitly confirmed"
+            ],
+            "label": null,
+            "text": "No mobile app — responsive browser use is enough for the demo."
+          },
+          "new": {
+            "index": 46,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Out of scope, explicitly confirmed"
+            ],
+            "label": null,
+            "text": "No mobile app — responsive browser use is enough for the demo."
+          },
+          "hint": "C0",
+          "id": "D47"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 47,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Out of scope, explicitly confirmed"
+            ],
+            "label": null,
+            "text": "No admin desk-blocking feature (parked, see above)."
+          },
+          "new": {
+            "index": 47,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Out of scope, explicitly confirmed"
+            ],
+            "label": null,
+            "text": "No admin desk-blocking feature (parked, see above)."
+          },
+          "hint": "C0",
+          "id": "D48"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 48,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": null,
+            "text": "Decisions:"
+          },
+          "new": {
+            "index": 48,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": null,
+            "text": "Decisions:"
+          },
+          "hint": "C0",
+          "id": "D49"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 49,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Decisions"
+            ],
+            "label": null,
+            "text": "Scope at this point: book by date + floor, hard capacity limit per floor, self-service cancellation, no accounts, no reporting."
+          },
+          "new": {
+            "index": 49,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Decisions"
+            ],
+            "label": null,
+            "text": "Scope at this point: book by date + floor, hard capacity limit per floor, self-service cancellation, no accounts, no reporting."
+          },
+          "hint": "C0",
+          "id": "D50"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 50,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Decisions"
+            ],
+            "label": null,
+            "text": "Priya will demo the PoC to her leadership using this exact scope — nothing beyond it should be implied as \"coming next\" without her sign-off."
+          },
+          "new": {
+            "index": 50,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Decisions"
+            ],
+            "label": null,
+            "text": "Priya will demo the PoC to her leadership using this exact scope — nothing beyond it should be implied as \"coming next\" without her sign-off."
+          },
+          "hint": "C0",
+          "id": "D51"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 51,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": null,
+            "text": "Open questions / parking lot:"
+          },
+          "new": {
+            "index": 51,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": null,
+            "text": "Open questions / parking lot:"
+          },
+          "hint": "C0",
+          "id": "D52"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 52,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Open questions / parking lot"
+            ],
+            "label": null,
+            "text": "Should capacity limits differ by day of week (e.g., Mondays are busier)? Parked — worth asking again if this moves past PoC."
+          },
+          "new": {
+            "index": 52,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Open questions / parking lot"
+            ],
+            "label": null,
+            "text": "Should capacity limits differ by day of week (e.g., Mondays are busier)? Parked — worth asking again if this moves past PoC."
+          },
+          "hint": "C0",
+          "id": "D53"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 53,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Open questions / parking lot"
+            ],
+            "label": null,
+            "text": "Desk-level (not just floor-level) booking — Sam noted it's a bigger data-modeling problem and shouldn't be assumed for this phase."
+          },
+          "new": {
+            "index": 53,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Open questions / parking lot"
+            ],
+            "label": null,
+            "text": "Desk-level (not just floor-level) booking — Sam noted it's a bigger data-modeling problem and shouldn't be assumed for this phase."
+          },
+          "hint": "C0",
+          "id": "D54"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 54,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": null,
+            "text": "Action items:"
+          },
+          "new": {
+            "index": 54,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive"
+            ],
+            "label": null,
+            "text": "Action items:"
+          },
+          "hint": "C0",
+          "id": "D55"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 55,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Action items"
+            ],
+            "label": null,
+            "text": "BA to turn this into backlog items (Jira) ahead of the build lab — Owner: BA, Due: before Day 2 build session."
+          },
+          "new": {
+            "index": 55,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Action items"
+            ],
+            "label": null,
+            "text": "BA to turn this into backlog items (Jira) ahead of the build lab — Owner: BA, Due: before Day 2 build session."
+          },
+          "hint": "C0",
+          "id": "D56"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 56,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Action items"
+            ],
+            "label": null,
+            "text": "Sam to confirm hosting approach is acceptable for IT — Owner: Sam, Due: Day 1 wrap."
+          },
+          "new": {
+            "index": 56,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Action items"
+            ],
+            "label": null,
+            "text": "Sam to confirm hosting approach is acceptable for IT — Owner: Sam, Due: Day 1 wrap."
+          },
+          "hint": "C0",
+          "id": "D57"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 57,
+            "kind": "h2",
+            "path": [],
+            "label": null,
+            "text": "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)"
+          },
+          "new": {
+            "index": 57,
+            "kind": "h2",
+            "path": [],
+            "label": null,
+            "text": "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)"
+          },
+          "hint": "C0",
+          "id": "D58"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 58,
+            "kind": "p",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)"
+            ],
+            "label": "Date",
+            "text": "Date: Thu, Sep 11, 2026, 09:00–09:45 Attendees: Priya Nandakumar, Sam Okafor, Dana Whitfield, BA (facilitator)"
+          },
+          "new": {
+            "index": 58,
+            "kind": "p",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)"
+            ],
+            "label": "Date",
+            "text": "Date: Thu, Sep 11, 2026, 09:00–09:45 Attendees: Priya Nandakumar, Sam Okafor, Dana Whitfield, BA (facilitator)"
+          },
+          "hint": "C0",
+          "id": "D59"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 59,
+            "kind": "p",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)"
+            ],
+            "label": "Context",
+            "text": "Context: Priya informally shared the Workshop 2 scope with a handful of employees before this session. Their feedback surfaced three new points that weren't on the table in Workshop 2."
+          },
+          "new": {
+            "index": 59,
+            "kind": "p",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)"
+            ],
+            "label": "Context",
+            "text": "Context: Priya informally shared the Workshop 2 scope with a handful of employees before this session. Their feedback surfaced three new points that weren't on the table in Workshop 2."
+          },
+          "hint": "C0",
+          "id": "D60"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 60,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)"
+            ],
+            "label": null,
+            "text": "Discussion by topic:"
+          },
+          "new": {
+            "index": 60,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)"
+            ],
+            "label": null,
+            "text": "Discussion by topic:"
+          },
+          "hint": "C0",
+          "id": "D61"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 61,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)"
+            ],
+            "label": null,
+            "text": "\"Show me where my team sat\" (new ask from Sam, via employee feedback)"
+          },
+          "new": {
+            "index": 61,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)"
+            ],
+            "label": null,
+            "text": "\"Show me where my team sat\" (new ask from Sam, via employee feedback)"
+          },
+          "hint": "C0",
+          "id": "D62"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 62,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "\"Show me where my team sat\" (new ask from Sam, via employee feedback)"
+            ],
+            "label": null,
+            "text": "Sam: several employees asked if the tool could show which desk their teammates booked, not just how many desks are free — \"the whole point of coming in is sitting near my team; capacity numbers don't tell me that.\""
+          },
+          "new": {
+            "index": 62,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "\"Show me where my team sat\" (new ask from Sam, via employee feedback)"
+            ],
+            "label": null,
+            "text": "Sam: several employees asked if the tool could show which desk their teammates booked, not just how many desks are free — \"the whole point of coming in is sitting near my team; capacity numbers don't tell me that.\""
+          },
+          "hint": "C0",
+          "id": "D63"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 63,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "\"Show me where my team sat\" (new ask from Sam, via employee feedback)"
+            ],
+            "label": null,
+            "text": "Dana pushed back immediately: \"We already agreed no one gets a report of who's where. Showing live desks is showing who's where — I don't see the difference.\""
+          },
+          "new": {
+            "index": 63,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "\"Show me where my team sat\" (new ask from Sam, via employee feedback)"
+            ],
+            "label": null,
+            "text": "Dana pushed back immediately: \"We already agreed no one gets a report of who's where. Showing live desks is showing who's where — I don't see the difference.\""
+          },
+          "hint": "C0",
+          "id": "D64"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 64,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "\"Show me where my team sat\" (new ask from Sam, via employee feedback)"
+            ],
+            "label": null,
+            "text": "Sam disagreed that it's the same thing: a live view of today's bookings isn't a historical attendance report, in his view. Dana wasn't convinced."
+          },
+          "new": {
+            "index": 64,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "\"Show me where my team sat\" (new ask from Sam, via employee feedback)"
+            ],
+            "label": null,
+            "text": "Sam disagreed that it's the same thing: a live view of today's bookings isn't a historical attendance report, in his view. Dana wasn't convinced."
+          },
+          "hint": "C0",
+          "id": "D65"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 65,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "\"Show me where my team sat\" (new ask from Sam, via employee feedback)"
+            ],
+            "label": null,
+            "text": "Not resolved in this session. Parked as C1 — a conflict to bring back to Priya for a scope call, since it sits right on the boundary Dana drew in Workshop 1."
+          },
+          "new": {
+            "index": 65,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "\"Show me where my team sat\" (new ask from Sam, via employee feedback)"
+            ],
+            "label": null,
+            "text": "Not resolved in this session. Parked as C1 — a conflict to bring back to Priya for a scope call, since it sits right on the boundary Dana drew in Workshop 1."
+          },
+          "hint": "C0",
+          "id": "D66"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 66,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)"
+            ],
+            "label": null,
+            "text": "No-show / ghost bookings (new ask from Priya)"
+          },
+          "new": {
+            "index": 66,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)"
+            ],
+            "label": null,
+            "text": "No-show / ghost bookings (new ask from Priya)"
+          },
+          "hint": "C0",
+          "id": "D67"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 67,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "No-show / ghost bookings (new ask from Priya)"
+            ],
+            "label": null,
+            "text": "Priya reported that in the sample data she pulled, roughly 1 in 5 bookings appear to be no-shows, which means the hard capacity cap from Workshop 2 may be turning away people for desks that end up empty. She asked whether the cap could allow a small overbook buffer."
+          },
+          "new": {
+            "index": 67,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "No-show / ghost bookings (new ask from Priya)"
+            ],
+            "label": null,
+            "text": "Priya reported that in the sample data she pulled, roughly 1 in 5 bookings appear to be no-shows, which means the hard capacity cap from Workshop 2 may be turning away people for desks that end up empty. She asked whether the cap could allow a small overbook buffer."
+          },
+          "hint": "C0",
+          "id": "D68"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 68,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "No-show / ghost bookings (new ask from Priya)"
+            ],
+            "label": null,
+            "text": "Sam objected: \"We just agreed on a hard stop two days ago. If we make it soft now, that's the same complaint-generating behavior as the spreadsheet.\" He proposed an alternative instead: an automatic release if a booking isn't \"confirmed\" by some cutoff time."
+          },
+          "new": {
+            "index": 68,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "No-show / ghost bookings (new ask from Priya)"
+            ],
+            "label": null,
+            "text": "Sam objected: \"We just agreed on a hard stop two days ago. If we make it soft now, that's the same complaint-generating behavior as the spreadsheet.\" He proposed an alternative instead: an automatic release if a booking isn't \"confirmed\" by some cutoff time."
+          },
+          "hint": "C0",
+          "id": "D69"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 69,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "No-show / ghost bookings (new ask from Priya)"
+            ],
+            "label": null,
+            "text": "Resolved as C2: agreed to add a check-in/grace-period mechanic (a booking auto-releases if not confirmed by a cutoff time) instead of loosening the hard cap. This is new scope, not something already designed — needs its own acceptance criteria in the backlog."
+          },
+          "new": {
+            "index": 69,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "No-show / ghost bookings (new ask from Priya)"
+            ],
+            "label": null,
+            "text": "Resolved as C2: agreed to add a check-in/grace-period mechanic (a booking auto-releases if not confirmed by a cutoff time) instead of loosening the hard cap. This is new scope, not something already designed — needs its own acceptance criteria in the backlog."
+          },
+          "hint": "C0",
+          "id": "D70"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 70,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)"
+            ],
+            "label": null,
+            "text": "Identity trust for headcount (new ask from Dana)"
+          },
+          "new": {
+            "index": 70,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)"
+            ],
+            "label": null,
+            "text": "Identity trust for headcount (new ask from Dana)"
+          },
+          "hint": "C0",
+          "id": "D71"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 71,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "Identity trust for headcount (new ask from Dana)"
+            ],
+            "label": null,
+            "text": "Dana repeated her fire-drill use case from Workshop 1, but added a new concern after thinking it through: with a free-text name field, two different people could type \"J. Smith,\" or someone could book under a coworker's name by mistake or on purpose. \"If I'm using this list to know who's in the building during an emergency, it has to be trustworthy, not just present.\""
+          },
+          "new": {
+            "index": 71,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "Identity trust for headcount (new ask from Dana)"
+            ],
+            "label": null,
+            "text": "Dana repeated her fire-drill use case from Workshop 1, but added a new concern after thinking it through: with a free-text name field, two different people could type \"J. Smith,\" or someone could book under a coworker's name by mistake or on purpose. \"If I'm using this list to know who's in the building during an emergency, it has to be trustworthy, not just present.\""
+          },
+          "hint": "C0",
+          "id": "D72"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 72,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "Identity trust for headcount (new ask from Dana)"
+            ],
+            "label": null,
+            "text": "Sam maintained his position from Workshop 1 that no login/auth is in scope for this PoC — \"that's a real problem, but it's a production problem, not a PoC problem.\""
+          },
+          "new": {
+            "index": 72,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "Identity trust for headcount (new ask from Dana)"
+            ],
+            "label": null,
+            "text": "Sam maintained his position from Workshop 1 that no login/auth is in scope for this PoC — \"that's a real problem, but it's a production problem, not a PoC problem.\""
+          },
+          "hint": "C0",
+          "id": "D73"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 73,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "Identity trust for headcount (new ask from Dana)"
+            ],
+            "label": null,
+            "text": "Not resolved. Logged as C3 — a known gap between what the PoC demonstrates and what Dana would need before relying on it operationally."
+          },
+          "new": {
+            "index": 73,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "Identity trust for headcount (new ask from Dana)"
+            ],
+            "label": null,
+            "text": "Not resolved. Logged as C3 — a known gap between what the PoC demonstrates and what Dana would need before relying on it operationally."
+          },
+          "hint": "C0",
+          "id": "D74"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 74,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)"
+            ],
+            "label": null,
+            "text": "Decisions actually made this session:"
+          },
+          "new": {
+            "index": 74,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)"
+            ],
+            "label": null,
+            "text": "Decisions actually made this session:"
+          },
+          "hint": "C0",
+          "id": "D75"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 75,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "Decisions actually made this session"
+            ],
+            "label": null,
+            "text": "C2 (no-show/ghost bookings) was resolved via the check-in/grace-period mechanic. C1 and C3 are explicitly open going into backlog creation."
+          },
+          "new": {
+            "index": 75,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "Decisions actually made this session"
+            ],
+            "label": null,
+            "text": "C2 (no-show/ghost bookings) was resolved via the check-in/grace-period mechanic. C1 and C3 are explicitly open going into backlog creation."
+          },
+          "hint": "C0",
+          "id": "D76"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 76,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "Decisions actually made this session"
+            ],
+            "label": null,
+            "text": "Priya asked that all three be written up clearly (not glossed over) so she can make a scope call on the two still open before development starts."
+          },
+          "new": {
+            "index": 76,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "Decisions actually made this session"
+            ],
+            "label": null,
+            "text": "Priya asked that all three be written up clearly (not glossed over) so she can make a scope call on the two still open before development starts."
+          },
+          "hint": "C0",
+          "id": "D77"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 77,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)"
+            ],
+            "label": null,
+            "text": "Action items:"
+          },
+          "new": {
+            "index": 77,
+            "kind": "h3",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)"
+            ],
+            "label": null,
+            "text": "Action items:"
+          },
+          "hint": "C0",
+          "id": "D78"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 78,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "Action items"
+            ],
+            "label": null,
+            "text": "BA to document C1 and C3 as explicit open items, not silently pick a side — Owner: BA, Due: before backlog is finalized."
+          },
+          "new": {
+            "index": 78,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "Action items"
+            ],
+            "label": null,
+            "text": "BA to document C1 and C3 as explicit open items, not silently pick a side — Owner: BA, Due: before backlog is finalized."
+          },
+          "hint": "C0",
+          "id": "D79"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 79,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "Action items"
+            ],
+            "label": null,
+            "text": "BA to write the check-in/grace-period mechanic (C2) up as a real backlog item, since it's new scope — Owner: BA, Due: before backlog is finalized."
+          },
+          "new": {
+            "index": 79,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "Action items"
+            ],
+            "label": null,
+            "text": "BA to write the check-in/grace-period mechanic (C2) up as a real backlog item, since it's new scope — Owner: BA, Due: before backlog is finalized."
+          },
+          "hint": "C0",
+          "id": "D80"
+        },
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 80,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "Action items"
+            ],
+            "label": null,
+            "text": "BA to flag the identity-trust gap (C3) as a known limitation, not a build item — Owner: BA, Due: before backlog is finalized."
+          },
+          "new": {
+            "index": 80,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)",
+              "Action items"
+            ],
+            "label": null,
+            "text": "BA to flag the identity-trust gap (C3) as a known limitation, not a build item — Owner: BA, Due: before backlog is finalized."
+          },
+          "hint": "C0",
+          "id": "D81"
+        }
+      ]
+    },
+    {
+      "page_id": "458755",
+      "old_version": 1,
+      "new_version": 1,
+      "page_op": "page changed",
+      "blocks": {
+        "old": 27,
+        "new": 27
+      },
+      "count": {},
+      "changes": []
+    }
+  ]
+}
