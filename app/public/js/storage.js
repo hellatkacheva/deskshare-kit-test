@@ -2,7 +2,7 @@
 import { FLOORS, RESET_PARAM, STORAGE_KEY, STORAGE_VERSION, TEST_HOSTS } from './config.js';
 import { MESSAGES } from './messages.js';
 import {
-  checkName, cleanName, deadline, desksOf, floorOf, floorStatus, isBookable, nameKey, nextWorkingDay,
+  checkName, checkNote, cleanName, cleanNote, deadline, desksOf, floorOf, floorStatus, isBookable, nameKey, nextWorkingDay,
   sameDayClosed,
 } from './rules.js';
 import { buildSeed } from './seed.js';
@@ -135,6 +135,8 @@ export function readDay(date, now, { names = false } = {}) {
       checkedIn: Boolean(b?.checkedInAt),
       // Names only with the switch On and the booker's consent (REQ-026, REQ-028, ASM-015).
       name: b && names && b.showName ? b.name : null,
+      // The note, independent of the switch (REQ-049, ASM-019); absent in bookings saved before notes (I-19).
+      note: b?.note ?? null,
     };
   }));
   return { ok: true, floors, desks };
@@ -185,10 +187,12 @@ function mutate(now, change, { lookFirst = false } = {}) {
 }
 
 /** storage.md §3.3 */
-export function book({ date, desk, name, showName = false }, now) {
+export function book({ date, desk, name, showName = false, note = null }, now) {
   return mutate(now, (data) => {
     const nameProblem = checkName(name);
     if (nameProblem) return fail(nameProblem);
+    const noteProblem = checkNote(note);
+    if (noteProblem) return fail(noteProblem);
     if (!isBookable(date, now)) return fail('DATE_NOT_BOOKABLE');
     if (sameDayClosed(date, now)) return fail('SAME_DAY_CLOSED');
     const floor = floorOf(desk);
@@ -210,8 +214,10 @@ export function book({ date, desk, name, showName = false }, now) {
       deadline: deadline(date, now),
       checkedInAt: null,
     };
+    const text = cleanNote(note);
+    if (text) entry.note = text; // optional field — storage stays version 1 (I-19, DEC-036)
     data.bookings.push(entry);
-    return { ok: true, booking: { date, desk, deadline: entry.deadline } };
+    return { ok: true, booking: { date, desk, deadline: entry.deadline, note: text } };
   });
 }
 

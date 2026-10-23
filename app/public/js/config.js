@@ -11,6 +11,7 @@ export const BOOKING_WINDOW_DAYS = 6; // ASM-010 — ASSUMPTION, not validated
 export const WORKING_DAYS = [1, 2, 3, 4, 5]; // ASM-010, DEC-013 (ISO weekdays)
 export const AMBER_THRESHOLD_PERCENT = 80; // DEC-013
 export const NAME_MAX_LENGTH = 50; // ASM-018 — ASSUMPTION, not validated
+export const NOTE_MAX_LENGTH = 50; // REQ-047 (W4, DEC-036)
 export const FLOORS = [ // REQ-003, REQ-045 (Floor 1 = 35, CHG-002), REQ-005; numbering ASM-007 — ASSUMPTION, not validated
   { id: 1, prefix: 'F1', desks: 35 },
   { id: 2, prefix: 'F2', desks: 25 },

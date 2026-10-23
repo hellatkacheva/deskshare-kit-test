@@ -31,7 +31,8 @@ const dialog = () => document.getElementById('dialog');
 function openDialog(...children) {
   const dlg = dialog();
   // The demo banner is shown in every dialog too (US-001 rule 3).
-  dlg.replaceChildren(el('p', { className: 'banner dialog-banner', textContent: TEXT.banner }), ...children);
+  // Skip empty parts like el() does — replaceChildren(null) would render the text "null" (B-7).
+  dlg.replaceChildren(el('p', { className: 'banner dialog-banner', textContent: TEXT.banner }), ...children.filter(Boolean));
   if (!dlg.open) dlg.showModal();
 }
 
@@ -59,6 +60,7 @@ function showConfirmation(booking) {
     el('h2', { textContent: TEXT.bookedTitle }),
     el('p', { textContent: TEXT.dateLine(booking.date) }),
     el('p', { textContent: TEXT.deskLine(booking.desk) }),
+    booking.note ? el('p', { className: 'note', textContent: TEXT.yourNote(booking.note) }) : null,
     el('p', { className: 'deadline', textContent: TEXT.checkInBy(booking.deadline) }),
     el('p', { className: 'hint', textContent: TEXT.hint }),
     el('div', { className: 'actions' }, [button(TEXT.done, closeDialog, 'primary')]),
@@ -68,6 +70,13 @@ function showConfirmation(booking) {
 /** ui.md §3.1 — booking form for a free desk. */
 function openBookForm(date, desk, floor) {
   const name = nameField('book-name');
+  // US-018: optional note, no maxlength — 51 characters are refused with the message (I-19).
+  const noteInput = el('input', { id: 'book-note', type: 'text', autocomplete: 'off' });
+  const noteNodes = [
+    el('label', { htmlFor: 'book-note', textContent: TEXT.noteLabel }),
+    noteInput,
+    el('p', { className: 'notice', textContent: TEXT.noteHint }),
+  ];
   const error = el('p', { className: 'error', role: 'alert' });
   const submit = el('button', { type: 'submit', textContent: TEXT.bookButton, className: 'primary' });
   // Variant B only: consent checkbox, unchecked (REQ-027). Switch Off → stored without consent.
@@ -79,6 +88,7 @@ function openBookForm(date, desk, floor) {
     el('h2', { textContent: TEXT.bookTitle(desk) }),
     el('p', { textContent: TEXT.bookSubtitle(date, floor) }),
     ...name.nodes,
+    ...noteNodes,
     consentRow,
     error,
     el('div', { className: 'actions' }, [button(TEXT.close, closeDialog), submit]),
@@ -86,7 +96,7 @@ function openBookForm(date, desk, floor) {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
     const showName = Boolean(consent?.checked);
-    const result = store.book({ date, desk, name: name.input.value, showName }, clockNow());
+    const result = store.book({ date, desk, name: name.input.value, showName, note: noteInput.value }, clockNow());
     rerender();
     if (result.ok) showConfirmation(result.booking);
     else error.textContent = result.message;
@@ -96,7 +106,7 @@ function openBookForm(date, desk, floor) {
 }
 
 /** ui.md §3.3 — check-in (booking day only, I-6) and cancel for a taken desk. */
-function openActions(date, desk, deadlineStamp) {
+function openActions(date, desk, deadlineStamp, note) {
   const isToday = date === clockNow().date;
   const deadlineLine = deadlineStamp
     ? el('p', { className: 'deadline', textContent: isToday ? TEXT.deadlineToday(deadlineStamp) : TEXT.deadlineOn(deadlineStamp) })
@@ -121,6 +131,7 @@ function openActions(date, desk, deadlineStamp) {
   });
   openDialog(el('div', { className: 'dialog-form' }, [
     el('h2', { textContent: TEXT.actionsTitle(desk, date) }),
+    note ? el('p', { className: 'note', textContent: TEXT.noteLine(note) }) : null,
     deadlineLine,
     notToday,
     ...name.nodes,
@@ -186,7 +197,7 @@ function renderGrid(root, day) {
     btn.dataset.desk = d.desk;
     btn.addEventListener('click', () => {
       if (!canAct) return;
-      if (d.taken) openActions(date, d.desk, d.deadline);
+      if (d.taken) openActions(date, d.desk, d.deadline, d.note);
       else openBookForm(date, d.desk, d.floor);
     });
     return btn;

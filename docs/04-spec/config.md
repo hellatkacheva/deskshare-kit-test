@@ -6,7 +6,7 @@
 | **Date** | 2026-10-22 |
 | **Inputs** | `docs/03-backlog/backlog.md`, `stories/US-001…US-017` (Reviewed), `docs/01-requirements/requirements.md`, `docs/02-analysis/analysis-log.md` (ASM-002…ASM-018, DEC-013…DEC-032), `ba-project.yaml` — Confluence `65670` v2, `458755` v1 |
 | **Deploy profile** | `static` (DEC-014) |
-| **Status** | Draft — Revised CHG-002 (2026-10-23, Confluence 65670 v4: Floor 1 = 35, REQ-045, DEC-034); was Reviewed (BA, 2026-10-22) |
+| **Status** | Draft — Revised CHG-004 (2026-10-23, Confluence 1146892 v1, W4: booking note, US-018, DEC-036); Revised CHG-002 (2026-10-23, Confluence 65670 v4: Floor 1 = 35, REQ-045, DEC-034); was Reviewed (BA, 2026-10-22) |
 
 **Rule:** `app/public/js/config.js` is the **only** module that holds these values. Every other module imports them; no literal of the table below appears anywhere else in `app/public/` (checked by `test/unit/config.test.js`). There is no server, so a change means editing `config.js` and republishing the static files — no rebuild (no build step).
 
@@ -26,6 +26,7 @@
 | `WORKING_DAYS` | `[1, 2, 3, 4, 5]` | ISO weekdays, Mon = 1 … Sun = 7 | ASM-010 (ASSUMPTION — not validated: weekends not bookable), DEC-013 (Friday → Monday), DEC-022 | US-002, US-003, US-013 |
 | `AMBER_THRESHOLD_PERCENT` | `80` | integer %; amber when booked × 100 ≥ capacity × value and desks remain | DEC-013 (decided) | US-013 |
 | `NAME_MAX_LENGTH` | `50` | integer, Unicode code points after trim | ASM-018 (ASSUMPTION — not validated), DEC-018 | US-016 |
+| `NOTE_MAX_LENGTH` | `50` | integer, Unicode code points after trim | REQ-047 `[W4 · Workshop 4 — Booking note]` "maximum 50 characters" (Proposed, DEC-036 — decided, not an assumption) | US-018 |
 | `FLOORS` | `[{ id: 1, prefix: "F1", desks: 35 }, { id: 2, prefix: "F2", desks: 25 }]` | list → desks `F1-01…F1-35`, `F2-01…F2-25` (2-digit numbers) | REQ-003, REQ-045, REQ-005 (Confirmed; Revised CHG-002 — Floor 1 was 30, REQ-004); ASM-007 numbering (ASSUMPTION — not validated); ASM-002 same every day (ASSUMPTION — not validated) | US-002, US-003, US-004, US-006, US-013 |
 | `REFRESH_INTERVAL_SECONDS` | `60` | integer seconds | DEC-028 ("at least once a minute") | US-003, US-009, US-013 |
 

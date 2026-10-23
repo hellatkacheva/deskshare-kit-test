@@ -1,6 +1,6 @@
 // Pure booking rules (storage.md §2).
 import {
-  AMBER_THRESHOLD_PERCENT, BOOKING_WINDOW_DAYS, CHECKIN_CUTOFF, DEADLINE_CAP, FLOORS, GRACE_MINUTES, NAME_MAX_LENGTH, SAME_DAY_THRESHOLD,
+  AMBER_THRESHOLD_PERCENT, BOOKING_WINDOW_DAYS, CHECKIN_CUTOFF, DEADLINE_CAP, FLOORS, GRACE_MINUTES, NAME_MAX_LENGTH, NOTE_MAX_LENGTH, SAME_DAY_THRESHOLD,
   WORKING_DAYS,
 } from './config.js';
 import { addDays, addMinutes, isoWeekday } from './time.js';
@@ -72,6 +72,17 @@ export function checkName(raw) {
   if (!name) return 'NAME_REQUIRED';
   if ([...name].length > NAME_MAX_LENGTH) return 'NAME_TOO_LONG';
   return null;
+}
+
+/** Trimmed note, or null when there is none (REQ-046, US-018 rule 2). */
+export function cleanNote(raw) {
+  return String(raw ?? '').trim() || null;
+}
+
+/** null when the note is fine, else NOTE_TOO_LONG (REQ-047, code points after trim — US-018 rule 2, I-19). */
+export function checkNote(raw) {
+  const note = cleanNote(raw);
+  return note && [...note].length > NOTE_MAX_LENGTH ? 'NOTE_TOO_LONG' : null;
 }
 
 /** Booking for today is closed from DEADLINE_CAP office time (DEC-024). */

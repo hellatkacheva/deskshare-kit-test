@@ -6,6 +6,7 @@ Read-only. Only the `ingest-confluence` skill writes here (new snapshots, regene
 |---|---|---|---|
 | `01-deskshare-requirements-gathering.md` | DeskShare requirements-gathering source: sales handoff, project context, minutes of Workshops 1–3 | Confluence 65670 | v5 |
 | `02-workshop-brief.md` | Workshop brief: goal, practice project, stakeholder slide quotes, expected deliverables, ground rules, next milestone | Confluence 458755 (child of 65670) | v1 |
+| `03-workshop-4-minutes.md` | Workshop 4 minutes: booking note (optional note per booking, 50 characters) — dated 2026-10-24 (SI-13) | Confluence 1146892 (child of 65670) | v1 |
 <!-- rows added by ingest-confluence -->
 
 ## Source keys
@@ -21,6 +22,7 @@ Used in every reference as `[KEY · Section]`.
 | `W2` | Workshop 2 — requirements deep-dive, Wed Sep 10, 2026 | `Meeting Minutes — Workshop 2: Requirements Deep-Dive` |
 | `W3` | Workshop 3 — requirements refinement (new conflicts surfaced), Thu Sep 11, 2026 | `Meeting Minutes — Workshop 3: Requirements Refinement (new conflicts surfaced)` |
 | `BR` | Workshop brief (child page 458755): BA AI Workshop 17–18 Sep 2026 — goal, practice project, stakeholder quotes from the slides, expected deliverables, ground rules, next milestone (28 Oct 2026). One key for the whole page; the section is the H2 heading, e.g. `[BR · Stakeholders (as quoted on the slides)]` | `# BA AI Workshop — brief (source material)` (file `02-workshop-brief.md`) |
+| `W4` | Workshop 4 minutes (child page 1146892): booking note, dated 2026-10-24. **One key for the whole page; the page has no headings** — every reference uses the title paragraph as section: `[W4 · Workshop 4 — Booking note]` (BA, CHG-004; K-25) | first paragraph "Workshop 4 — Booking note" (file `03-workshop-4-minutes.md`) |
 <!-- rows added by ingest-confluence -->
 
 ## Snapshots
@@ -34,6 +36,7 @@ Used in every reference as `[KEY · Section]`.
 | `confluence/65670/v3/` | 2026-10-23 | 458755 v1 — CHG-001: C0 only (emphasis on "no approval step"); working source `01-…md` stays on v2 text, identical in words |
 | `confluence/65670/v4/` | 2026-10-23 | 458755 v1 — CHG-002: C2 D1 Floor 1 capacity 30 → 35; working source `01-…md` regenerated from v4 (also picks up the v3 emphasis on "no approval step") |
 | `confluence/65670/v5/` | 2026-10-23 | 458755 v1 — CHG-003: C4 D1 W2 · Capacity limits "no waitlist in this PoC" → "a waitlist is in scope for this phase, PoC" (BA: deliberate test edit, scenario B4; DEC-035 keeps no waitlist; SI-12); working source `01-…md` regenerated from v5. `page.md` = MCP markdown body; `page.html` saved as fetched (re-fetched and confirmed byte-identical, K-24). Note: `v4/page.html` was assembled from v3 + one replacement, not saved as fetched (K-24, `v4/meta.json` provenance) |
+| `confluence/1146892/v1/` | 2026-10-23 | — (child page of 65670, new in CHG-004: C6 + C3, optional booking note; BA: test page, scenario B6, handled as real). `page.md` / `page.html` saved as fetched from the MCP bodies (K-24) |
 
 ## Known missing inputs
 

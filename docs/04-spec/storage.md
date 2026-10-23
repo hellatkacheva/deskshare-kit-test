@@ -6,7 +6,7 @@
 | **Date** | 2026-10-22 |
 | **Inputs** | `docs/03-backlog/backlog.md`, `stories/US-001…US-017` (Reviewed), `docs/01-requirements/requirements.md`, `docs/02-analysis/analysis-log.md` (DEC-014…DEC-032, ASM), `ba-project.yaml` — Confluence `65670` v2, `458755` v1 |
 | **Deploy profile** | `static` — no API; this file replaces `api.md` |
-| **Status** | Reviewed (BA, 2026-10-22 — BA review without the technical stakeholder, PoC) |
+| **Status** | Draft — Revised CHG-004 (2026-10-23, Confluence 1146892 v1, W4: booking note, US-018, DEC-036); was Reviewed (BA, 2026-10-22 — BA review without the technical stakeholder, PoC) |
 
 There is no server and no API (DEC-014, NFR-005). The UI calls the functions of `app/public/js/storage.js`; they use the pure rules of `app/public/js/rules.js` and the time helpers of `app/public/js/time.js`. `now` is always passed in (office time `{ date: "YYYY-MM-DD", time: "HH:MM" }` from `clock.js`), so every rule is unit-testable with a fixed time (NFR-010).
 
@@ -34,6 +34,8 @@ The UI shows `message` as plain text (`textContent`). Codes and texts: §4.
 | `cleanName(raw)` | trim leading / trailing whitespace | I-3 |
 | `nameKey(raw)` | NFC → trim → whitespace runs → one space → lower case | REQ-035, DEC-018, ASM-012 |
 | `checkName(raw)` | `cleanName` empty → `NAME_REQUIRED`; > `NAME_MAX_LENGTH` code points → `NAME_TOO_LONG` | REQ-035, ASM-018 |
+| `cleanNote(raw)` | trim leading / trailing whitespace; empty → `null` (no note) | REQ-046, US-018 rule 2 |
+| `checkNote(raw)` | `cleanNote` > `NOTE_MAX_LENGTH` code points → `NOTE_TOO_LONG`; else `null` | REQ-047, US-018 rule 2 |
 | `desksOf(floor)` | `F<id>-01 … F<id>-<NN>` from `FLOORS` | ASM-007 |
 | `floorStatus(booked, capacity)` | booked = capacity → `red`; booked × 100 ≥ capacity × `AMBER_THRESHOLD_PERCENT` → `amber`; else `green` | DEC-013, REQ-030 |
 | `deadlineLabel(deadline)` | `"<HH:MM> office time (<OFFICE_TZ_LABEL>)"` | NFR-009, US-017 rule 4 |
@@ -60,11 +62,12 @@ On any other host `RESET_PARAM` is ignored (deployed build — DEC-031).
 | Output | Rule | Source |
 |---|---|---|
 | `floors[]` | per floor `{ floor, booked, left = capacity − booked, full: left = 0 }` | REQ-009, REQ-010, REQ-024 |
-| `desks[]` | per desk of both floors `{ desk, floor, taken, deadline \| null, checkedIn, name \| null }` | REQ-022, REQ-023 |
+| `desks[]` | per desk of both floors `{ desk, floor, taken, deadline \| null, checkedIn, name \| null, note \| null }` | REQ-022, REQ-023 |
+| `note` | the booking's note, or `null` (no booking, no note, or a booking saved before notes existed); independent of `names` (ASM-019) | REQ-049, US-018 rule 5 |
 | `name` | only if `names = true` **and** the booking has `showName = true`; otherwise `null` | REQ-026, REQ-028, ASM-015 |
 | `date` not bookable | `DATE_NOT_BOOKABLE` (past dates are never read — I-9) | ASM-010 |
 
-### 3.3 `book({ date, desk, name, showName }, now)` → `{ ok, booking: { date, desk, deadline } }`
+### 3.3 `book({ date, desk, name, showName, note }, now)` → `{ ok, booking: { date, desk, deadline, note } }`
 
 Checks in this order; the first failing one is returned.
 
@@ -72,13 +75,14 @@ Checks in this order; the first failing one is returned.
 |---|---|---|---|
 | 1 | store not ready | `STORAGE_OFF` / `STORAGE_UNREADABLE` | US-001 "Storage not available", "Saved data cannot be read" |
 | 2 | `checkName(name)` | `NAME_REQUIRED`, `NAME_TOO_LONG` | US-016 all 4 scenarios |
+| 2a | `checkNote(note)` | `NOTE_TOO_LONG` | US-018 "Note of 51 characters is refused" (CHG-004) |
 | 3 | `isBookable(date, now)` | `DATE_NOT_BOOKABLE` | US-005 "Date outside the window refused at save" |
 | 4 | `sameDayClosed(date, now)` | `SAME_DAY_CLOSED` | US-017 "Same-day booking at 23:59 is refused" |
 | 5 | desk not in `FLOORS` | `UNKNOWN_DESK` | defensive (no AC) |
 | 6 | floor full on `date` | `FLOOR_FULL` | US-006 "Full floor refuses", "Last desk taken in another tab" |
 | 7 | desk taken on `date` | `DESK_TAKEN` | US-005 "Taken desk cannot be booked", "Two tabs — stale tab cannot double-book" |
 | 8 | `nameKey` already booked on `date` | `NAME_ALREADY_BOOKED` | US-005 "Second booking under the same name…", "Same name with different case and spaces" |
-| ok | add booking: `name = cleanName`, `nameKey`, `showName` (false when the switch is Off), `bookedAt = now`, `deadline = deadline(date, now)`, `checkedInAt = null` | — | US-005 "State effect of booking", US-017 deadlines |
+| ok | add booking: `name = cleanName`, `nameKey`, `showName` (false when the switch is Off), `bookedAt = now`, `deadline = deadline(date, now)`, `checkedInAt = null`; `note = cleanNote(note)` only when not `null` (field absent otherwise — I-19) | — | US-005 "State effect of booking", US-017 deadlines, US-018 |
 
 ### 3.4 `cancel({ date, desk, name }, now)` → `{ ok }`
 
@@ -124,6 +128,7 @@ Wording fixed by a story or decision is quoted exactly; other wording is an inte
 | `STORAGE_UNREADABLE` | "Saved bookings could not be read in this browser. Clear site data to reload demo data." | DEC-031 | US-001 "Saved data cannot be read" |
 | `NAME_REQUIRED` | "Please enter your name." | I-10 (ref) | US-016 "Name of spaces only", "Empty name" |
 | `NAME_TOO_LONG` | "Name is too long — maximum `<max>` characters." | I-10 (ref) | US-016 "Name of 51 characters" |
+| `NOTE_TOO_LONG` | "The note can have at most 50 characters." | DEC-036 | US-018 "Note of 51 characters is refused" |
 | `DATE_NOT_BOOKABLE` | "This date can't be booked — please pick a weekday from today up to `<window>` days ahead." (`<window>` = `BOOKING_WINDOW_DAYS`) | I-10 (ref, adapted) | US-005 "Date outside the window refused at save" |
 | `SAME_DAY_CLOSED` | "Booking for today is closed — please pick another date" | DEC-024 (exact, no full stop) | US-017 "…at 23:59 is refused" |
 | `UNKNOWN_DESK` | "This desk does not exist." | I-10 (ref) | — |

@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { FakeStorage } from './fake-storage.js';
 import {
-  book, cancel, checkIn, open, readDay, sweep, tomorrow,
+  book, cancel, checkIn, open, readDay, storageState, sweep, tomorrow,
 } from '../../public/js/storage.js';
 import { STORAGE_KEY } from '../../public/js/config.js';
 
@@ -198,7 +198,7 @@ describe('US-005 book (storage.md §3.3)', () => {
   it('Book a free desk — confirmed at once, state effect', () => {
     const s = start();
     const r = book({ date: THU, desk: 'F1-07', name: 'Alex Morgan' }, at('2026-10-21', '16:00'));
-    expect(r).toEqual({ ok: true, booking: { date: THU, desk: 'F1-07', deadline: '2026-10-22T10:00' } });
+    expect(r).toEqual({ ok: true, booking: { date: THU, desk: 'F1-07', deadline: '2026-10-22T10:00', note: null } }); // note: US-018 (CHG-004)
     expect(stored(s)).toEqual([{
       date: THU, desk: 'F1-07', floor: 1, name: 'Alex Morgan', nameKey: 'alex morgan', showName: false,
       bookedAt: '2026-10-21T16:00', deadline: '2026-10-22T10:00', checkedInAt: null,
@@ -541,5 +541,69 @@ describe('US-013 tomorrow() (storage.md §3.6)', () => {
     expect(JSON.stringify(t)).not.toMatch(/P\d/);
     cancel({ date: '2026-10-22', desk: 'F2-01', name: 'P0' }, NOW);
     expect(tomorrow(NOW).floors[1]).toEqual({ floor: 2, booked: 24, capacity: 25, status: 'amber' });
+  });
+});
+
+describe('US-018 notes in book / readDay / cancel / release (storage.md §3.2–3.4, §3.7)', () => {
+  const THU = '2026-10-22';
+  const WED_1600 = { date: '2026-10-21', time: '16:00' };
+  const start = (bookings = [], at = WED_1600) => {
+    const s = new FakeStorage({ [STORAGE_KEY]: JSON.stringify({ version: 1, seededAt: null, bookings, pastCounts: {} }) });
+    open(at, { storage: s, host: HOST });
+    return s;
+  };
+  const stored = (s) => JSON.parse(s.getItem(STORAGE_KEY)).bookings;
+  const deskOf = (r, d) => r.desks.find((x) => x.desk === d);
+
+  it('Book with a note — stored trimmed, returned in booking', () => {
+    const s = start();
+    const r = book({ date: THU, desk: 'F1-04', name: 'Alex Morgan', note: '  need a second monitor ' }, WED_1600);
+    expect(r).toMatchObject({ ok: true, booking: { desk: 'F1-04', note: 'need a second monitor' } });
+    expect(stored(s)[0].note).toBe('need a second monitor');
+  });
+
+  it('Book without a note / spaces only — no note field', () => {
+    const s = start();
+    expect(book({ date: THU, desk: 'F1-04', name: 'Alex Morgan' }, WED_1600).booking.note).toBeNull();
+    expect(book({ date: THU, desk: 'F1-05', name: 'Jamie Lee', note: '   ' }, WED_1600).ok).toBe(true);
+    for (const b of stored(s)) expect(b).not.toHaveProperty('note');
+  });
+
+  it('Note of 50 ok; 51 → NOTE_TOO_LONG, nothing stored', () => {
+    const s = start();
+    expect(book({ date: THU, desk: 'F1-04', name: 'Alex Morgan', note: 'a'.repeat(50) }, WED_1600).ok).toBe(true);
+    const r = book({ date: THU, desk: 'F1-05', name: 'Jamie Lee', note: 'a'.repeat(51) }, WED_1600);
+    expect(r).toMatchObject({ ok: false, code: 'NOTE_TOO_LONG', message: 'The note can have at most 50 characters.' });
+    expect(stored(s)).toHaveLength(1);
+  });
+
+  it('readDay shows the note with names off and on; never the name with names off', () => {
+    start([{ ...booking, desk: 'F1-04', showName: true, note: 'visiting from another office' }]);
+    const off = deskOf(readDay(THU, WED_1600), 'F1-04');
+    expect(off).toMatchObject({ note: 'visiting from another office', name: null });
+    expect(deskOf(readDay(THU, WED_1600, { names: true }), 'F1-04').note).toBe('visiting from another office');
+    expect(deskOf(readDay(THU, WED_1600), 'F1-05').note).toBeNull();
+  });
+
+  it('Note removed on cancel', () => {
+    const s = start([{ ...booking, desk: 'F1-04', note: 'need a second monitor' }]);
+    expect(cancel({ date: THU, desk: 'F1-04', name: 'Alex Morgan' }, WED_1600).ok).toBe(true);
+    expect(s.getItem(STORAGE_KEY)).not.toContain('need a second monitor');
+  });
+
+  it('Note removed on auto-release; the next booking of the desk has no note', () => {
+    const at = { date: THU, time: '10:05' };
+    const s = start([{ ...booking, desk: 'F1-04', note: 'need a second monitor' }], { date: THU, time: '09:00' });
+    expect(book({ date: THU, desk: 'F1-04', name: 'Jamie Lee' }, at).ok).toBe(true);
+    expect(deskOf(readDay(THU, at), 'F1-04').note).toBeNull();
+    expect(s.getItem(STORAGE_KEY)).not.toContain('need a second monitor');
+  });
+
+  it('Bookings saved before notes existed stay readable (DEC-031)', () => {
+    const s = start([booking]); // version 1, no note field
+    expect(storageState()).toBe('ready');
+    expect(deskOf(readDay(THU, WED_1600), 'F1-07')).toMatchObject({ taken: true, note: null });
+    expect(book({ date: THU, desk: 'F1-04', name: 'Jamie Lee', note: 'hi' }, WED_1600).ok).toBe(true);
+    expect(stored(s)).toHaveLength(2);
   });
 });

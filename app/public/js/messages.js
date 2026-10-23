@@ -1,5 +1,7 @@
 // All user texts (config.md §3; storage.md §4; ui.md §1).
-import { BOOKING_WINDOW_DAYS, NAME_MAX_LENGTH, OFFICE_TZ_LABEL } from './config.js';
+import {
+  BOOKING_WINDOW_DAYS, NAME_MAX_LENGTH, NOTE_MAX_LENGTH, OFFICE_TZ_LABEL,
+} from './config.js';
 import { formatDate } from './time.js';
 
 export const TEXT = {
@@ -40,6 +42,11 @@ export const TEXT = {
   deadlineOn: (stamp) => `Check-in deadline: ${TEXT.deadlineLabel(stamp)} on ${formatDate(stamp.slice(0, 10))}`,
   selfReported: 'Names are self-reported — not for emergency headcount.',
   consent: 'Show my name to colleagues',
+  // Booking note (ui.md §3.1–3.3, US-018, DEC-036)
+  noteLabel: 'Note (optional)',
+  noteHint: `Optional, up to ${NOTE_MAX_LENGTH} characters. Please do not include names.`,
+  yourNote: (note) => `Your note: ${note}`,
+  noteLine: (note) => `Note: ${note}`,
   // Booking actions — cancel / check-in (ui.md §3.3)
   actionsTitle: (desk, date) => `Desk ${desk} · ${formatDate(date)}`,
   nameAsBooked: 'Your name (as booked)',
@@ -59,6 +66,7 @@ export const MESSAGES = {
   DESK_TAKEN: 'This desk is already taken — pick another desk.',
   NAME_REQUIRED: 'Please enter your name.',
   NAME_TOO_LONG: `Name is too long — maximum ${NAME_MAX_LENGTH} characters.`,
+  NOTE_TOO_LONG: `The note can have at most ${NOTE_MAX_LENGTH} characters.`,
   NAME_ALREADY_BOOKED: 'This name already has a booking for that day.',
   NO_BOOKING: ({ desk, date }) => `There is no booking for ${desk} on ${formatDate(date)}.`,
   NAME_MISMATCH: 'The name does not match the booking.',

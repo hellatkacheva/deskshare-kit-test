@@ -6,7 +6,7 @@
 | **Date** | 2026-10-22 |
 | **Inputs** | `docs/03-backlog/backlog.md`, `stories/US-001…US-017` (Reviewed), `docs/01-requirements/requirements.md`, `docs/02-analysis/analysis-log.md` (DEC-014…DEC-032, ASM-006…ASM-018), `ba-project.yaml` — Confluence `65670` v2, `458755` v1 |
 | **Deploy profile** | `static` — `localStorage` only (DEC-014, ASM-006) |
-| **Status** | Reviewed (BA, 2026-10-22 — BA review without the technical stakeholder, PoC) |
+| **Status** | Draft — Revised CHG-004 (2026-10-23, Confluence 1146892 v1, W4: booking note, US-018, DEC-036); was Reviewed (BA, 2026-10-22 — BA review without the technical stakeholder, PoC) |
 
 ## 1. Storage location
 
@@ -54,6 +54,7 @@
 | `name` | text, 1…`NAME_MAX_LENGTH` code points | typed name, leading / trailing spaces removed (I-3) | REQ-006, REQ-035, NFR-004 |
 | `nameKey` | text | normalised name: NFC → trim → whitespace runs → one space → lower case (I-3) | REQ-035, ASM-011, ASM-012 |
 | `showName` | boolean | consent "Show my name to colleagues"; `false` when booked with the switch Off | REQ-027, US-011 rule 2 |
+| `note` | text, 1…`NOTE_MAX_LENGTH` code points — **optional field** | the booking note, trimmed (`cleanNote`); the field is absent when there is no note. Bookings saved before CHG-004 have no `note` and stay valid — storage stays version 1 (DEC-036, I-19) | REQ-046, REQ-047, NFR-012, US-018 |
 | `bookedAt` | office time | time of booking (minute precision) | US-017 |
 | `deadline` | office time | check-in deadline, computed once at booking (storage.md §2 `deadline()`), I-4 | ASM-008, DEC-024 |
 | `checkedInAt` | office time \| `null` | set by check-in | REQ-015, REQ-016 |
@@ -123,5 +124,6 @@ Retention (US-014) is in the **Next** band: until US-014 is built, sweep does re
 | Cancelled booking | at once | REQ-014 |
 | Released booking | at the first sweep at or after its deadline | REQ-018 |
 | Names of past dates | at the first sweep after the booking date (US-014, Next band) | ASM-014 |
+| Notes | with their booking: at once on cancel, at the first sweep at or after the deadline when released, at the first sweep after the booking date (whole booking deleted, US-014) | REQ-050, US-018 (CHG-004) |
 | Per-floor counts of past dates | kept, never shown | DEC-029 |
 | Everything | clearing site data, or `?reset-demo` in the local / test build | DEC-031 |

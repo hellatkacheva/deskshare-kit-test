@@ -45,3 +45,13 @@ describe('US-014 retention', () => {
     expect(data.pastCounts).toEqual({ '2026-10-21': { 1: 1 }, '2026-10-22': { 1: 1 } });
   });
 });
+
+describe('US-018 notes after the booking date (REQ-050)', () => {
+  it("Note deleted with the name after the booking date; today's notes kept", () => {
+    const past = b({ checkedInAt: '2026-10-21T09:05', note: 'need a second monitor' });
+    const thu = b({ date: '2026-10-22', desk: 'F1-10', name: 'Jamie Lee', nameKey: 'jamie lee', deadline: '2026-10-22T10:00', note: 'visiting from another office' });
+    const data = openOn('2026-10-22', [past, thu]);
+    expect(JSON.stringify(data)).not.toMatch(/need a second monitor|Alex Morgan/);
+    expect(data.bookings).toEqual([thu]);
+  });
+});

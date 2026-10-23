@@ -6,7 +6,7 @@
 | **Date** | 2026-10-22 |
 | **Inputs** | `docs/03-backlog/backlog.md` + `stories/US-001…US-017` (Reviewed; US-001, US-002, US-015 updated by spec 2026-10-22), `docs/01-requirements/requirements.md` (REQ-001…REQ-044, NFR-001…NFR-010), `docs/02-analysis/analysis-log.md` (DEC-001…DEC-032, ASM-002…ASM-018), `ba-project.yaml` (`stack.deploy.profile: static`, `repo.*`) — Confluence `65670` v2, `458755` v1 |
 | **Deploy profile** | `static` — plain HTML/CSS/JS, `localStorage`, no backend (DEC-014) |
-| **Status** | Draft — Revised CHG-002 (2026-10-23, Confluence 65670 v4): seed rows 86 → 91 (DEC-034, trace-auditor finding); was Reviewed (BA, 2026-10-22 — BA review without the technical stakeholder, PoC) |
+| **Status** | Draft — Revised CHG-004 (2026-10-23, Confluence 1146892 v1, W4: booking note, US-018, DEC-036); Revised CHG-002 (2026-10-23, Confluence 65670 v4): seed rows 86 → 91 (DEC-034, trace-auditor finding); was Reviewed (BA, 2026-10-22 — BA review without the technical stakeholder, PoC) |
 
 Spec files: `architecture.md` (this) · `data-model.md` · `storage.md` (instead of `api.md`) · `ui.md` · `config.md` · `test-plan.md` · `demo-data.md`. `build-status.md` is written by the `build` step.
 
@@ -176,6 +176,7 @@ No spec question is open.
 | I-16 | All asset paths are relative (GitHub Pages serves the site under `/deskshare-kit-test/`). | `repo.url`, DEC-030 | deploy |
 | I-17 | Phone layout is automated with Playwright emulation (Chromium mobile, WebKit iPhone SE 375 × 667); real Chrome Android and Safari iOS are checked manually on the public URL. | ASM-016; emulation ≠ real Safari iOS | US-015 |
 | I-18 | With storage unavailable the grid shows all desks free with no actions (nothing can be read or saved). | US-001 rule 5 | US-001 |
+| I-19 | The booking note is an optional field of a version-1 booking (absent = no note), so data saved before CHG-004 stays readable and no version change makes demo browsers read-only (DEC-031). The note field has no `maxlength`; `checkNote()` refuses 51 code points with the message; the note is shown with `textContent` only (confirmation "Your note:", desk dialog "Note:"), never on tiles, counts or Tomorrow. | DEC-036, OQ-S3 (keep v1 — BA via CHG-004 §8 Q6) | US-018 |
 
 ## 10. Questions for the technical stakeholder (Sam Okafor)
 

@@ -48,6 +48,20 @@ test('Core demo flow', async ({ page }) => {
   await expect(page.locator('#banner')).toBeVisible();
 });
 
+test('Booking note in the demo flow (Next — US-018)', async ({ page }) => {
+  await openApp(page, { at: '2026-10-21T08:30' });
+  await day(page, 'Thu 2026-10-22').click();
+  await floorTab(page, 1).click();
+  await tile(page, 'F1-04').click();
+  await page.getByLabel('Your name').fill('Alex Morgan');
+  await page.getByLabel('Note (optional)').fill('need a second monitor');
+  await page.getByRole('button', { name: 'Book desk' }).click();
+  await expect(dialog(page).getByText('Your note: need a second monitor')).toBeVisible();
+  await dialog(page).getByRole('button', { name: 'Done' }).click();
+  await tile(page, 'F1-04').click();
+  await expect(dialog(page).getByText('Note: need a second monitor')).toBeVisible();
+});
+
 test('No horizontal scrolling on the phone', async ({ page }) => {
   await page.setViewportSize({ width: 375, height: 667 });
   await openApp(page, { at: '2026-10-21T08:30' });

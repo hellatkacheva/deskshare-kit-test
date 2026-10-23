@@ -33,18 +33,19 @@ source:
   snapshot_at: "2026-10-23T13:54:42.048Z"  # version.createdAt of the v5 snapshot (CHG-003 — getConfluencePage now returns the version block); v2–v4 had only the page createdAt 2026-10-20T10:26:26.254Z
   children:                           # [{id, title, version}]
     - { id: "458755", title: "Workshop brief (source copy)", version: 1 }
+    - { id: "1146892", title: "Workshop 4 minutes", version: 1 }   # CHG-004
   attachments: []                     # [{id, title, version, media_type}] — filled by the watch Action / REST
 
 steps:                                # status: not_started | draft | reviewed | approved | stale | skipped
-  ingest:       { status: draft, source_version: 5, updated: 2026-10-23 }  # CHG-002 row 1; CHG-003
-  requirements: { status: draft, source_version: 5, updated: 2026-10-23 }  # CHG-002; CHG-003
-  conflicts:    { status: draft, source_version: 5, updated: 2026-10-23 }  # CHG-002; CHG-003
-  stories:      { status: draft, source_version: 5, updated: 2026-10-23 }  # CHG-002; CHG-003
-  review:       { status: draft, source_version: 5, updated: 2026-10-23 }  # CHG-002; CHG-003 not affected (option A)
-  spec:         { status: draft, source_version: 5, updated: 2026-10-23 }  # CHG-002; CHG-003 not affected (option A)
-  build:        { status: reviewed, source_version: 5, updated: 2026-10-23 }  # CHG-002, BA accepted; CHG-003 not affected (option A)
-  deploy:       { status: draft, source_version: 5, updated: 2026-10-23 }  # CHG-002 redeploy 8dda522, smoke ✓; CHG-003 not affected (option A)
-  jira:         { status: draft, source_version: 5, updated: 2026-10-23 }  # CHG-002 row 18 (9 descriptions); CHG-003
+  ingest:       { status: stale, source_version: 5, updated: 2026-10-23 }  # CHG-002 row 1; CHG-003; CHG-004 in progress
+  requirements: { status: stale, source_version: 5, updated: 2026-10-23 }  # CHG-002; CHG-003; CHG-004 in progress
+  conflicts:    { status: stale, source_version: 5, updated: 2026-10-23 }  # CHG-002; CHG-003; CHG-004 in progress
+  stories:      { status: stale, source_version: 5, updated: 2026-10-23 }  # CHG-002; CHG-003; CHG-004 in progress
+  review:       { status: stale, source_version: 5, updated: 2026-10-23 }  # CHG-002; CHG-003 not affected (option A); CHG-004 in progress
+  spec:         { status: stale, source_version: 5, updated: 2026-10-23 }  # CHG-002; CHG-003 not affected (option A); CHG-004 in progress
+  build:        { status: reviewed, source_version: 5, updated: 2026-10-23 }  # CHG-002, BA accepted; CHG-003 not affected (option A); CHG-004 in progress; accepted (H6)
+  deploy:       { status: stale, source_version: 5, updated: 2026-10-23 }  # CHG-002 redeploy 8dda522, smoke ✓; CHG-003 not affected (option A); CHG-004 in progress
+  jira:         { status: stale, source_version: 5, updated: 2026-10-23 }  # CHG-002 row 18 (9 descriptions); CHG-003; CHG-004 in progress
 
 approvals:                            # [{step, status, by, date, note}] — only on the BA's explicit OK
   - { step: setup, status: approved, by: "Olga Tkacheva", date: 2026-10-20, note: "ba-new" }
@@ -68,6 +69,9 @@ approvals:                            # [{step, status, by, date, note}] — onl
   - { step: sync, status: reviewed, by: "Olga Tkacheva", date: 2026-10-23, note: "CHG-002 v3→v4 closed — rows 1–20 done; trace intact (trace-auditor); Jira spot check KAN-10 OK" }
   - { step: sync, status: plan-ok, by: "Olga Tkacheva", date: 2026-10-23, note: "CHG-003 v4→v5: rows 1–6, 10, 17–18; v5 edit deliberate (test B4); CON-007 → A (DEC-035, no waitlist; SI-12; Q15)" }
   - { step: sync, status: reviewed, by: "Olga Tkacheva", date: 2026-10-23, note: "CHG-003 v4→v5 closed — rows 1–6, 10, 17–18 done (option A); trace intact; v5 page.html re-saved as fetched (identical); v4 meta annotated (K-24)" }
+  - { step: sync, status: plan-ok, by: "Olga Tkacheva", date: 2026-10-23, note: "CHG-004 new child 1146892 v1: all rows 1–16; W4 test page (scenario B6), handled as real; SI-13…SI-15; CON-008 → B (Next, Must); key W4; Q4–Q7 as recommended" }
+  - { step: build, status: reviewed, by: "Olga Tkacheva", date: 2026-10-23, note: "CHG-004: US-018, US-005, US-015 note step accepted after the B-7 fix — 'US-018, US-005 и шаг в US-015 — accepted'" }
+  - { step: deploy, status: public-deploy-ok, by: "Olga Tkacheva", date: 2026-10-23, note: "CHG-004 redeploy — 'Перепубликация (строка 14) — OK, публикуй и запусти smoke'" }
 
 jira:
   project_key: "KAN"

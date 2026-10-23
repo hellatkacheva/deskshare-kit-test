@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
-  checkName, deadline, defaultDate, floorStatus, isBookable, isWorkingDay, nameKey, nextWorkingDay, sameDayClosed,
+  checkName, checkNote, cleanNote, deadline, defaultDate, floorStatus, isBookable, isWorkingDay, nameKey, nextWorkingDay, sameDayClosed,
   windowDates,
 } from '../../public/js/rules.js';
 import { formatDate, officeNow } from '../../public/js/time.js';
@@ -139,4 +139,23 @@ describe('US-013 next working day and floor status (DEC-013)', () => {
   it('Floor 1 capacity from config (CHG-002)', () => expect(FLOORS.find((f) => f.id === 1).desks).toBe(35));
   it('Floor 2 one desk left', () => expect(floorStatus(24, 25)).toBe('amber'));
   it('Floor 2 full', () => expect(floorStatus(25, 25)).toBe('red'));
+});
+
+describe('US-018 note rules (REQ-046, REQ-047, DEC-036)', () => {
+  it('Spaces only / empty → no note', () => {
+    expect(cleanNote('   ')).toBeNull();
+    expect(cleanNote('')).toBeNull();
+    expect(cleanNote(undefined)).toBeNull();
+    expect(checkNote('   ')).toBeNull();
+  });
+  it('50 characters ok, 51 → NOTE_TOO_LONG', () => {
+    expect(checkNote('a'.repeat(50))).toBeNull();
+    expect(checkNote('a'.repeat(51))).toBe('NOTE_TOO_LONG');
+  });
+  it('Counting — trimmed, code points', () => {
+    const note = `  ${'a'.repeat(49)}🖥  `;
+    expect(checkNote(note)).toBeNull();
+    expect(cleanNote(note)).toBe(`${'a'.repeat(49)}🖥`);
+    expect(checkNote(`${'a'.repeat(50)}🖥`)).toBe('NOTE_TOO_LONG');
+  });
 });

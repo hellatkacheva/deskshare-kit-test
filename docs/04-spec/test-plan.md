@@ -6,7 +6,7 @@
 | **Date** | 2026-10-22 |
 | **Inputs** | `stories/US-001…US-017` (Reviewed; US-001, US-002, US-015 updated by spec 2026-10-22), `docs/01-requirements/requirements.md`, `docs/02-analysis/analysis-log.md` (DEC-016, DEC-028, DEC-031), `ba-project.yaml` — Confluence `65670` v2, `458755` v1 |
 | **Deploy profile** | `static` (DEC-014) |
-| **Status** | Draft — Revised CHG-002 (2026-10-23, Confluence 65670 v4: Floor 1 = 35, REQ-045, DEC-034); was Reviewed (BA, 2026-10-22) |
+| **Status** | Draft — Revised CHG-004 (2026-10-23, Confluence 1146892 v1, W4: booking note, US-018, DEC-036); Revised CHG-002 (2026-10-23, Confluence 65670 v4: Floor 1 = 35, REQ-045, DEC-034); was Reviewed (BA, 2026-10-22) |
 
 ## 1. Test setup
 
@@ -231,6 +231,7 @@ Built 2026-10-22: all 9 automated.
 | No horizontal scrolling on the phone | E, M | `US-015.spec.js` on `mobile-chrome`, `mobile-webkit` (`scrollWidth ≤ clientWidth`; bounding boxes ≥ 44 × 44 for buttons, tiles, switch; every view and dialog) |
 | Test clock is ignored in the demo build | U, S | `clock.test.js` (host not in `TEST_HOSTS`); `deployed.smoke.spec.js` |
 | Reset parameter is ignored in the demo build (DEC-031) | U, S | `storage.test.js`; `deployed.smoke.spec.js` |
+| Booking note in the demo flow (Next — US-018, CHG-004) | E | `US-015.spec.js` on `chromium-desktop`, `msedge`, `mobile-chrome`, `mobile-webkit` |
 
 Built 2026-10-22: all 4 automated (outline × 4 browsers); real-phone check (M) and deployed smoke (S) at `deploy`.
 
@@ -243,6 +244,27 @@ Built 2026-10-22: all 4 automated (outline × 4 browsers); real-phone check (M) 
 | Removal also after days without use | U | `retention.test.js` (`open` on Mon 2026-10-26) |
 
 Built 2026-10-22: all 4 automated.
+
+### US-018 Optional note with my booking (Next — CHG-004)
+| Scenario | Type | File |
+|---|---|---|
+| Book with a note (happy path) | U, E | `storage.test.js` (stored trimmed note, returned in `booking`); `US-018.spec.js` ("Your note: …", no name) |
+| Book without a note | U, E | `storage.test.js` (no `note` field); `US-018.spec.js` (no "Your note:" line; **B-7:** no `.note` element, no "null" / "undefined", no loose text node in the confirmation and in the desk dialog of a booking without a note) |
+| Note of 50 characters (boundary) | U | `rules.test.js` (`checkNote`), `storage.test.js` |
+| Note of 51 characters is refused (boundary + 1) | U, E | `rules.test.js`, `storage.test.js` (`NOTE_TOO_LONG`, nothing stored); `US-018.spec.js` (message) |
+| Counting — trimmed, code points | U | `rules.test.js` (2 spaces + 49 letters + "🖥" + 2 spaces → 50) |
+| Spaces only is no note | U | `rules.test.js` (`cleanNote` → `null`), `storage.test.js` |
+| Hint on the note field | E | `US-018.spec.js` (hint text; input has no `maxlength`) |
+| Note in the desk dialog, names switch Off and On | U, E | `storage.test.js` (`readDay` `note` with `names` false / true, `name` null); `US-018.spec.js` |
+| Note is plain text | E | `US-018.spec.js` (confirmation and dialog show "<b>bold</b>", no `<b>` element) |
+| Note not on tiles or counts | E | `US-018.spec.js` |
+| Note kept after a reload | E | `US-018.spec.js` |
+| Note removed on cancel (state effect) | U | `storage.test.js` |
+| Note removed on auto-release (state effect) | U, E | `storage.test.js` (release, then a new booking without note); `US-018.spec.js` (10:05, dialog without note) |
+| Note deleted with the name after the booking date; today's notes kept | U | `retention.test.js` |
+| Bookings saved before notes existed stay readable (DEC-031) | U, E | `storage.test.js` (v1 document without `note`: ready, `readDay` note null, `book` ok); `US-018.spec.js` (+ B-7: desk dialog with the switch Off and On has no note element and no "null") |
+
+Built 2026-10-23 (CHG-004): tests first — see `build-status.md`.
 
 ### US-013 "Tomorrow" screen (Next)
 | Scenario | Type | File |
@@ -264,7 +286,7 @@ Built 2026-10-22: all 4 automated.
 
 Built 2026-10-22: all 13 automated. CHG-002 (2026-10-23): 14 / 14 — "Seeded demo state" added (S2-4).
 
-**Totals:** 17 stories · 125 scenarios · every scenario mapped (U 77 · E 83 · S 4 · M 2 — scenarios with more than one type are counted under each). Revised CHG-002 (2026-10-23): was 122 · E 79 — +3 scenarios (S2-1, S2-2, S2-4, all E) and "Seed content relative to today" U → U, E (S2-5).
+**Totals:** 18 stories · 141 scenarios · every scenario mapped (U 88 · E 94 · S 4 · M 2 — scenarios with more than one type are counted under each). Revised CHG-004 (2026-10-23): +15 US-018 scenarios, +1 US-015 note step (was 17 · 125 · U 77 · E 83). Revised CHG-002 (2026-10-23): was 122 · E 79 — +3 scenarios (S2-1, S2-2, S2-4, all E) and "Seed content relative to today" U → U, E (S2-5).
 
 ## 4. Checks that test hooks are off in the deployed build
 

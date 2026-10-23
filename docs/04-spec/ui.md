@@ -6,7 +6,7 @@
 | **Date** | 2026-10-22 |
 | **Inputs** | `docs/03-backlog/backlog.md`, `stories/US-001…US-017` (Reviewed), `docs/01-requirements/requirements.md`, `docs/02-analysis/analysis-log.md` (DEC-011…DEC-032), `ba-project.yaml` — Confluence `65670` v2, `458755` v1 |
 | **Deploy profile** | `static` (DEC-014) |
-| **Status** | Draft — Revised CHG-002 (2026-10-23, Confluence 65670 v4: Floor 1 = 35, REQ-045, DEC-034); was Reviewed (BA, 2026-10-22) |
+| **Status** | Draft — Revised CHG-004 (2026-10-23, Confluence 1146892 v1, W4: booking note, US-018, DEC-036); Revised CHG-002 (2026-10-23, Confluence 65670 v4: Floor 1 = 35, REQ-045, DEC-034); was Reviewed (BA, 2026-10-22) |
 
 One page `app/public/index.html`, plain HTML / CSS / JS (ES modules), no framework. Two views by URL hash: `#/` **Book** (default) and `#/tomorrow` **Tomorrow** (US-013, Next band). Dialogs use `<dialog>`. All user-typed text is inserted with `textContent` — never `innerHTML` (REQ-035, US-011 "Name shown as plain text"). Dates are shown as `Thu 2026-10-22`. All asset paths are relative (GitHub Pages sub-path — I-16).
 
@@ -80,6 +80,8 @@ One page `app/public/index.html`, plain HTML / CSS / JS (ES modules), no framewo
 ```
 Book → `book()`. Error → message in the ⚠ line, the dialog stays open, the grid behind is re-rendered (`DESK_TAKEN`, `FLOOR_FULL`). Name errors are shown next to the name field (US-016 UI notes).
 
+**Note field (US-018, CHG-004 — Next band):** below the name field and its notice: label **"Note (optional)"**, a one-line text input without `maxlength` (51 characters are refused with `NOTE_TOO_LONG`, I-19), and the hint **"Optional, up to 50 characters. Please do not include names."** (DEC-036, ASM-020). The value goes to `book({ …, note })`.
+
 ### 3.2 Confirmation (after `book()` ok)
 
 ```
@@ -93,7 +95,7 @@ Book → `book()`. Error → message in the ⚠ line, the dialog stays open, the
 │                              [Done]   │
 └───────────────────────────────────────┘
 ```
-No name in the confirmation (US-005 rule 9); no pending or approval state (REQ-007).
+No name in the confirmation (US-005 rule 9); no pending or approval state (REQ-007). With a note (US-018): one more line **"Your note: <note>"** after the desk line, as plain text (DEC-036, review S4-11); no line without a note.
 
 ### 3.3 Booking actions — cancel / check-in (tap a taken or named desk)
 
@@ -116,7 +118,7 @@ No name in the confirmation (US-005 rule 9); no pending or approval state (REQ-0
 | today | deadline line + **Check in** + **Cancel booking** | US-008, US-007, US-017 |
 | future date | deadline line ("Check-in deadline: 10:00 office time (UTC+5) on Thu 2026-10-22") + the line "Check-in is only possible on the booking day." + **Cancel booking** only | US-008, US-017, I-6 |
 
-Check in ok → "Checked in ✓" (or the info "This booking is already checked in."); Cancel ok → dialog closes, desk free. Errors in the ⚠ line; after `NO_BOOKING` / `RELEASED` the grid is re-rendered.
+With a note (US-018): a line **"Note: <note>"** under the title, as plain text, with the names switch Off or On; never the booker's name (ASM-019, RSK-012). Check in ok → "Checked in ✓" (or the info "This booking is already checked in."); Cancel ok → dialog closes, desk free. Errors in the ⚠ line; after `NO_BOOKING` / `RELEASED` the grid is re-rendered.
 
 ### 3.4 Unavailable dialog actions
 

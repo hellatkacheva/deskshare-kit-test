@@ -7,7 +7,7 @@
 | **Inputs** | `docs/01-requirements/requirements.md` (Reviewed 2026-10-21), `docs/00-source/01-deskshare-requirements-gathering.md` — Confluence `65670` v2, `docs/00-source/02-workshop-brief.md` — Confluence `458755` v1, `docs/00-source/README.md`, `ba-project.yaml` |
 | **Deploy profile** | `static` (`ba-project.yaml` → `stack.deploy.profile`) |
 | **Deadline** | `project.deadline` not set; milestone 28 October 2026 (CST-007) |
-| **Status** | Draft — Revised CHG-002, CHG-003, BA review pending |
+| **Status** | Draft — Revised CHG-002, CHG-003, CHG-004, BA review pending |
 | **Reviewed by** | Olga Tkacheva (BA), 2026-10-21 — interpretations 1–4 confirmed (CON-004 outcome (a); "Tomorrow" green below 80 % and Friday → Monday from the reference; Variant B names on the desk grid; CON-006 recommendation given in chat); GAP-012 availability / accessibility left open for Sam (Q13), no ASM; priorities of REQ-022…REQ-032 set (requirements.md). |
 | **Revised** | 2026-10-21 by `write-stories` (BA answers to backlog OQ-1…OQ-9, all as recommended): DEC-016…DEC-024, ASM-017, ASM-018 added; REQ-033…REQ-041, NFR-009, NFR-010 added to `requirements.md`; §8 Q14 extended. |
 | **Revised** | 2026-10-21 by `review-backlog` (BA decisions on `docs/03-backlog/review.md`): DEC-025…DEC-030 added; REQ-042 added to `requirements.md`; `project.deadline` set to 2026-10-28 (DEC-027); RSK-001 updated. |
@@ -15,6 +15,7 @@
 | **Revised** | 2026-10-23 by `/ba-sync` CHG-002 (Confluence 65670 v3 → v4, Floor 1 capacity 30 → 35): CON-006 quote, DEC-015, SI-9, RSK-005, ASM-007 revised in place; DEC-034 added (seed, BA answer Q1 = C); DEC-017 and DEC-032 partly superseded by DEC-034. Architect rule re-checked: no new shared-data need (CON-005 / DEC-014 cover per-floor capacity). |
 | **Revised** | 2026-10-23 by `deploy`: DEC-033 (hosting GitHub Pages, BA decision; Sam open — ASM-013; CST-005 not met literally); DEC-030 closed. |
 | **Revised** | 2026-10-23 by `/ba-sync` CHG-003 (Confluence 65670 v4 → v5, W2 · Capacity limits "no waitlist" → "a waitlist is in scope"): SI-12, CON-007 → DEC-035 (keep no waitlist, BA as proxy), Q15 added. |
+| **Revised** | 2026-10-23 by `/ba-sync` CHG-004 (new child page 1146892 v1 "Workshop 4 minutes", key W4 — optional booking note): SI-13…SI-15, CON-008 → DEC-036 (note in scope, Next band, Must), GAP-014, GAP-015, ASM-019, ASM-020, RSK-012, Q16, Q17 added; ASM-006, ASM-014 annotated. **Architect rule re-checked: no new shared-data need** — the note is kept with its booking in the browser (Sam: "keep it in the browser like everything else"), covered by DEC-014 / ASM-006. |
 | **Part B** | 2026-10-21 — BA decisions (Olga Tkacheva, BA, proxy for Priya Nandakumar): DEC-011…DEC-015; CON-006 raised by the BA in Part B. Test A repeats the decisions of the reference project DeskShare (`C:\Projects\deskshare\deskshare\docs\02-analysis\analysis-log.md`), except DEC-014 (static instead of Cloudflare — deliberate difference). Assumed values for GAP-002…GAP-012 taken from the reference, cited as "ref ASM-/DEC-…". |
 
 ---
@@ -164,6 +165,26 @@
 **Status:** Resolved → DEC-035 (Option A, Decided).
 
 ---
+### CON-008 — Booking note (Workshop 4) vs. the agreed demo scope (DEC-006, DEC-007) · CHG-004
+
+| | |
+|---|---|
+| **Position A** | Priya Nandakumar, Dana Whitfield, Sam (W4): "Agreed: an optional note per booking, maximum 50 characters. The note is shown on the booking confirmation and in the desk dialog." `[W4 · Workshop 4 — Booking note]` |
+| **Position B** | DEC-006 "Scope at this point: book by date + floor, hard capacity limit per floor, self-service cancellation, no accounts, no reporting." `[W2 · Decisions]`; DEC-007 "nothing beyond it should be implied as "coming next" without her sign-off" `[W2 · Decisions]`; CST-001, CST-008; milestone 2026-10-28 (CST-007); RSK-001 |
+| **Why they conflict** | A new feature five days before the milestone widens the demo scope; it is small and needs no shared data, but adds spec, build, review and a redeploy, and opens privacy questions (GAP-014, GAP-015). |
+| **At stake** | Core demo stability; Dana's privacy boundary in the desk dialog; deadline. |
+| **Linked** | REQ-046…REQ-050, NFR-011, NFR-012, REQ-036, DEC-006, DEC-007, DEC-019, CST-007, CST-008, RSK-001, RSK-012, SI-13…SI-15 |
+
+| Option | Description | Pros | Cons | Effect on scope |
+|---|---|---|---|---|
+| **A — In scope now, Core demo (Must)** | US-018 built before the demo; US-005 reworked; redeploy. | Follows "Agreed" with the sponsor present; small, additive. | Build + H6 + H7 with 5 days left in the Core band; privacy questions open at the demo. | +1 story (Core), 1 revised. |
+| **B — In scope, Next band (Must)** | Same story, built after Core; dropped only by a recorded BA decision (as US-014). | As A without risk to the Core demo. | Still a build and a redeploy before the 28th. | +1 story (Next), 1 revised. |
+| **C — Deferred — sponsor decision** | REQ-046…050 Proposed / TBD; no story; Q17 after the demo. | No build risk. | Decides against an "Agreed" item with the sponsor present. | None now. |
+
+**Claude's recommendation:** Option B (C if the page were a slip).
+**Status:** Resolved → DEC-036 (Option B, Decided).
+
+---
 ## 2. Goal-vs-constraint check
 
 | Goal element | Source | Constraints in play | Achievable? | Item |
@@ -202,6 +223,8 @@ Architect rule (`ba-rules` §7): **CON-005 raised** — profile `static`, and RE
 | GAP-011 | Who may see the names on bookings — only the person who booked, or anyone using the tool? | Dana Whitfield | Privacy boundary for any screen that lists bookings (cancel, check-in). | NFR-003, NFR-004, CON-001 | Open — sponsor question §8 Q12; until answered ASM-015 |
 | GAP-012 | Non-functional targets not stated: browsers, accessibility, availability, concurrent users, performance beyond "immediately", logging. | Sam Okafor | Test scope of the PoC. | NFR-001, NFR-006, ASM-005 | Open — sponsor question §8 Q13; until answered ASM-016 (availability, accessibility stay open) |
 | GAP-013 | What makes tomorrow “a problem” — a full floor, a threshold (which)? | Priya Nandakumar | Only needed if CON-004 option B is chosen. | REQ-021, CON-004 | Closed — answered by DEC-013 (thresholds set by the BA) |
+| GAP-014 | Who may see the note in the desk dialog — anyone who opens the taken desk, only in Variant B with consent, or only after the booker's name matches? | Dana Whitfield | The dialog also asks for the booker's name to cancel / check in; a visible note with a name gives the misuse of RSK-010 (RSK-012). | REQ-049, NFR-011, GAP-011, ASM-015, DEC-011 | Open → ASM-019 (Q16) |
+| GAP-015 | "No names of other people in it" — free text cannot be checked reliably; is the booker's own name allowed? | Dana Whitfield | Privacy boundary in a free-text field. | NFR-011, DEC-012 | Open → ASM-020 (Q16) |
 
 Unconfirmed `Derived` requirement rows: none — REQ-014 and REQ-018 were confirmed in the BA review (2026-10-21).
 
@@ -221,6 +244,9 @@ Unconfirmed `Derived` requirement rows: none — REQ-014 and REQ-018 were confir
 | SI-10 | The brief is "Summarised by Claude" from slides that are not available; slide quotes cannot be checked. | `[BR · BA AI Workshop — brief (source material)]` |
 | SI-11 | Action items are due "Day 1 wrap" / "before Day 2 build session" — these days are not dated anywhere. | `[W2 · Action items]` |
 | SI-12 | Since v5 (CHG-003) the same bullet says "a waitlist is in scope for this phase, PoC" and "Waitlisting was parked as a future-phase idea, not built now."; the W2 decisions list a scope without a waitlist ("Scope at this point: book by date + floor, hard capacity limit per floor, self-service cancellation, no accounts, no reporting.") and "nothing beyond it should be implied as "coming next" without her sign-off". Handled by CON-007 → DEC-035. | `[W2 · Capacity limits]` vs `[W2 · Decisions]` |
+| SI-13 | The Workshop 4 minutes are dated "2026-10-24", but the page was created on 2026-10-23 (future-dated minutes). BA: test page (scenario B6), handled as real. | `[W4 · Workshop 4 — Booking note]` |
+| SI-14 | Workshop 4 lists "Sam" without surname or role and no "BA (facilitator)"; W1–W3 always list "Sam Okafor (Software Engineer)" and "BA (facilitator)". | `[W4 · Workshop 4 — Booking note]` vs `[W1 · Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff]` |
+| SI-15 | "Agreed: an optional note per booking" names no decider, while "Priya is the single point of sign-off for what ships." (as SI-8; Priya attended; reconciled by DEC-010 — the BA decided the scope in DEC-036). | `[W4 · Workshop 4 — Booking note]` vs `[W1 · Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff]` |
 
 ## 5. Risks (`RSK`)
 
@@ -237,6 +263,7 @@ Unconfirmed `Derived` requirement rows: none — REQ-014 and REQ-018 were confir
 | RSK-009 | Desk-level booking (DEC-015) overrides Sam's W2 caution ("shouldn't be assumed for this phase") and enlarges the build before 28 Oct. | Sam Okafor | Sam's objection late; schedule slip. | Plain numbered grid (ASM-007); §8 Q4 to Sam; cut line. |
 | RSK-010 | Variant B (DEC-011): a name shown on the grid can be re-typed to cancel or check in that booking (ASM-012), which also weakens the no-show mechanic (reference: ref DEC-029). | Dana Whitfield | Misuse visible at the demo; Dana's boundary tested. | Switch Off by default; consent per booking; selected date only, no history/export; the demo script names this cost of Variant B. |
 | RSK-011 | Shared GitHub Pages origin: `hellatkacheva.github.io` is also the origin of kit test C (GearLoan, also `static`). Both apps keep data in that origin's `localStorage`; clearing site data (the deployed reset, DEC-031) wipes the demo data of both projects in that browser. Added by `spec`, 2026-10-22 (BA). | Olga Tkacheva (BA) | Other project's demo data lost before or during its demo. | Unique storage key per project (`deskshare-kit:v1`; never `localStorage.clear()` — architecture I-11); warning in `README.md` and the demo-day checklist (`docs/04-spec/demo-data.md` §9); after clearing, reload both apps' seeds. |
+| RSK-012 | A note can contain a name (own or another person's) and is shown in the desk dialog of a taken desk, also in Variant A; knowing the name lets anyone cancel or check in that booking (as RSK-010). Added CHG-004. | Olga Tkacheva (BA) | Privacy breach; misuse of cancel / check-in. | Hint "Please do not include names." (ASM-020); plain text; deleted after the date (REQ-050); Q16 to Dana. |
 
 ## 6. Assumptions (`ASM`)
 
@@ -247,7 +274,7 @@ Unconfirmed `Derived` requirement rows: none — REQ-014 and REQ-018 were confir
 | ASM-003 | Only dates from today onward can be booked; past dates cannot be booked or cancelled. | Priya Nandakumar | Validation rules of REQ-001 / REQ-013. | **Superseded by ASM-010** |
 | ASM-004 | The PoC starts without importing the Google Sheet; demo data is seeded. GAP-009; = ref ASM-008. | Priya Nandakumar | Import story needed. | ASSUMPTION — not validated |
 | ASM-005 | Current versions of Chrome, Edge and Safari (desktop and mobile) are enough for the demo; no availability or performance targets beyond "immediately". | Sam Okafor | Wider test matrix. | **Refined by ASM-016** |
-| ASM-006 | Single-device demo: bookings are stored only in the browser (`localStorage`) of the demo device; other employees' bookings are seed data; a banner says so. Remaining capacity, hard stop, cancel and auto-release hold only within that browser. Origin DEC-014 (CON-005 narrowing); no reference value (ref DEC-009 chose Cloudflare). | Priya Nandakumar | If sharing between devices is needed: re-open CON-005 (`local` / `cloudflare`), with Sam's OK. | ASSUMPTION — not validated |
+| ASM-006 | Single-device demo: bookings are stored only in the browser (`localStorage`) of the demo device; other employees' bookings are seed data; a banner says so. Remaining capacity, hard stop, cancel and auto-release hold only within that browser. Booking notes (REQ-046…REQ-050) too — CHG-004. Origin DEC-014 (CON-005 narrowing); no reference value (ref DEC-009 chose Cloudflare). | Priya Nandakumar | If sharing between devices is needed: re-open CON-005 (`local` / `cloudflare`), with Sam's OK. | ASSUMPTION — not validated |
 | ASM-007 | Desks are numbered F1-01 … F1-35 and F2-01 … F2-25 (matching REQ-045 / REQ-005; Revised CHG-002 — was F1-01 … F1-30 / REQ-004). No floor plan — desks are shown as a simple grid. Origin DEC-015; = ref ASM-009. | Priya Nandakumar | Replace the desk list / add a floor-plan view. | ASSUMPTION — not validated |
 | ASM-008 | Check-in deadline is 10:00 on the booking day. For a same-day booking made after 09:30, the deadline is 30 minutes after the booking time. A booking not checked in by its deadline is auto-released. GAP-002; = ref ASM-001. | Priya Nandakumar | Change the cutoff values and the related AC. | ASSUMPTION — not validated |
 | ASM-009 | Check-in is possible only on the booking day, without any presence check, with the same identification rule as cancel (ASM-012). A released desk can be booked again the same day. GAP-003; = ref ASM-002 (re-booking: ref DEC-024). | Priya Nandakumar | Rework the check-in flow (e.g. on-site check). | ASSUMPTION — not validated |
@@ -255,11 +282,13 @@ Unconfirmed `Derived` requirement rows: none — REQ-014 and REQ-018 were confir
 | ASM-011 | One booking per name per day. A second booking under the same name for the same day is rejected with a message. GAP-005; = ref ASM-004. | Priya Nandakumar | Remove / relax the rule. | ASSUMPTION — not validated |
 | ASM-012 | "Own" booking: to cancel or check in, the employee selects date + desk and re-types the name; it must match the booking case-insensitively, ignoring leading, trailing and repeated spaces. Cancel is allowed at any time of the booking day, also after check-in; the desk is free at once. GAP-006; = ref DEC-012, ref DEC-014, ref DEC-019. | Priya Nandakumar, Dana Whitfield | Other identification rule (e.g. device token). | ASSUMPTION — not validated |
 | ASM-013 | Static hosting without a backend (GitHub Pages, `repo.visibility: public`) is acceptable to IT — it meets DEC-001 literally. GAP-008; ref ASM-007 assumed Cloudflare Workers + D1 — not applicable after DEC-014. | Sam Okafor | Move hosting as Sam requires. | ASSUMPTION — not validated |
-| ASM-014 | Names are deleted after the booking date; only per-floor counts are kept (in the demo browser). GAP-010; = ref ASM-006. | Dana Whitfield | Change the retention rule. | ASSUMPTION — not validated |
+| ASM-014 | Names are deleted after the booking date; only per-floor counts are kept (in the demo browser). GAP-010; = ref ASM-006. *Consistent with `[W4 · Workshop 4 — Booking note]` "It is deleted together with the name after the booking date." (CHG-004) — not a direct answer to GAP-010; Q11 stays open.* | Dana Whitfield | Change the retention rule. | ASSUMPTION — not validated |
 | ASM-015 | Nobody sees other people's names, except in Variant B (DEC-011) for bookings whose booker gave consent, and only for the selected date. GAP-011; = ref DEC-010, ref DEC-036. | Dana Whitfield | Hide names completely / other visibility rule. | ASSUMPTION — not validated |
 | ASM-016 | Phone test: 375 × 667 viewport, current Chrome Android and Safari iOS; desktop: current Chrome and Edge. "Immediately" = no pending or approval state. No server logs (static). Availability and accessibility: no reference value — open (§8 Q13). GAP-012; = ref DEC-026. | Sam Okafor | Wider test matrix; add targets. | ASSUMPTION — not validated |
 | ASM-017 | The office time zone for the demo is UTC+5 (configurable). DEC-016; = ref ASM-010. | Sam Okafor, Priya Nandakumar | Change the configured zone; no rule changes. | ASSUMPTION — not validated |
 | ASM-018 | A name is at most 50 characters. DEC-018; = ref ASM-012. | Priya Nandakumar | Change the configured limit. | ASSUMPTION — not validated |
+| ASM-019 | Anyone who opens the desk dialog of a taken desk sees its note (literal reading of "shown … in the desk dialog"), in Variant A and B. GAP-014. | Dana Whitfield | Show the note only in Variant B with consent, or only after the name matches. | ASSUMPTION — not validated |
+| ASM-020 | The note field carries the hint "Please do not include names." (stricter than the source "No names of other people"); there is no automatic check — known limitation, as DEC-012 (RSK-012). GAP-015. | Dana Whitfield | Change the hint; add a check. | ASSUMPTION — not validated |
 
 ## 7. Decision log (`DEC`)
 
@@ -341,6 +370,14 @@ Decided by: Olga Tkacheva (BA, proxy for Priya Nandakumar), 2026-10-23 — answe
 |---|---|---|---|---|---|
 | DEC-035 | CON-007 (CHG-003 D1, C4) | Decided | **No waitlist in this PoC — DEC-005 retained.** If a floor is full, the employee is told to pick another day or floor (REQ-012); nothing is queued. The v5 sentence "a waitlist is in scope for this phase, PoC" is recorded as SI-12; Priya confirms or overturns via Q15. | The same bullet still says "parked as a future-phase idea, not built now"; W2 Decisions and DEC-007 unchanged; a waitlist would need a shared queue (architect rule) and a full rework before 2026-10-28. | DEC-005, OOS-006, US-006 (traces), Q15 |
 
+### Decisions from /ba-sync CHG-004 (2026-10-23)
+
+Decided by: Olga Tkacheva (BA, proxy for Priya Nandakumar), 2026-10-23 — answer to CHG-004 §8 ("2 — B. 3 — W4. 4 — как рекомендовано"; W4 is a test page, scenario B6, handled as real).
+
+| ID | Origin | Outcome | Decision | Rationale | Affects |
+|---|---|---|---|---|---|
+| DEC-036 | CON-008 (CHG-004, W4) | Decided | **Booking note in scope, Next band, Must** — new story US-018, built after the Core demo stories, dropped only by a recorded BA decision. Visibility: anyone who opens the desk dialog (ASM-019); field hint "Optional, up to 50 characters. Please do not include names." (prefix added by the BA, review S4-8) without an automatic check (ASM-020); confirmation line "Your note: …" (S4-11); 50 = Unicode code points after trim; spaces only = no note; 51 refused, not truncated; plain text; only at booking (no editing); not on tiles, counts or Tomorrow; removed with the booking on cancel / release / sweep. Storage stays version 1 (optional field); no seeded notes. | "Agreed" with the sponsor present; small, additive, no shared-data need; the Next band keeps the Core demo safe. | REQ-046…REQ-050, NFR-011, NFR-012, REQ-036, US-018, US-005 |
+
 ## 8. Open questions for the sponsor
 
 | # | Question | Origin | Type |
@@ -360,6 +397,8 @@ Decided by: Olga Tkacheva (BA, proxy for Priya Nandakumar), 2026-10-23 — answe
 | Q13 | **Sam:** availability and accessibility targets for the PoC? No assumption is made for these two (BA, 2026-10-21). Browsers, "immediately" and logging are assumed in ASM-016 — validate. | GAP-012, ASM-016 | **Open question** (availability, accessibility — no ASM); validation (ASM-016) |
 | Q14 | Validate desk numbering (ASM-007), the same capacity every day (ASM-002), office time zone UTC+5 (ASM-017) and the 50-character name limit (ASM-018). | ASM-002, ASM-007, ASM-017, ASM-018 | Validation of an assumption |
 | Q15 | **Priya:** the minutes (Confluence v5) now say "a waitlist is in scope for this phase, PoC", while the same bullet says it was "parked as a future-phase idea, not built now". The PoC keeps no waitlist (DEC-035) — confirm, or should a waitlist be in scope? | CON-007, DEC-035, SI-12 (CHG-003) | Validation — BA proxy decision until answered |
+| Q16 | **Dana:** a booking note (W4) is shown in the desk dialog to anyone who opens the taken desk, and the field says "Please do not include names." without an automatic check — is that acceptable? Is the booker's own name allowed? | GAP-014, GAP-015, ASM-019, ASM-020, RSK-012 (CHG-004) | Validation — BA proxy decision until answered |
+| Q17 | **Priya:** please confirm the Workshop 4 minutes (dated 2026-10-24; "Agreed" without a named decider) and that the booking note is in scope in the Next band, after the Core demo (DEC-036). | SI-13, SI-15, CON-008, DEC-036 (CHG-004) | Validation — BA proxy decision until answered |
 
 ## 9. Mapping of requirements §8 observations
 
