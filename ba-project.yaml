@@ -44,7 +44,7 @@ steps:                                # status: not_started | draft | reviewed |
   spec:         { status: reviewed, source_version: 2, updated: 2026-10-22 }
   build:        { status: reviewed, source_version: 2, updated: 2026-10-23 }
   deploy:       { status: reviewed, source_version: 2, updated: 2026-10-23 }
-  jira:         { status: not_started, source_version: null, updated: null }
+  jira:         { status: reviewed, source_version: 2, updated: 2026-10-23 }
 
 approvals:                            # [{step, status, by, date, note}] — only on the BA's explicit OK
   - { step: setup, status: approved, by: "Olga Tkacheva", date: 2026-10-20, note: "ba-new" }
@@ -58,6 +58,8 @@ approvals:                            # [{step, status, by, date, note}] — onl
   - { step: build, status: reviewed, by: "Olga Tkacheva", date: 2026-10-23, note: "US-005…US-013 checked locally and accepted; all 17 stories accepted; B-5 kept as known (check-in refused in both cases); B-4 noted (US-005 tests never seen failing)" }
   - { step: deploy, status: public-deploy-ok, by: "Olga Tkacheva", date: 2026-10-23, note: "GitHub Pages https://hellatkacheva.github.io/deskshare-kit-test/ — commit 041800d, run 39897150136; DEC-033 (Sam open, ASM-013; CST-005 not met literally); smoke S-1…S-6 ✓" }
   - { step: deploy, status: reviewed, by: "Olga Tkacheva", date: 2026-10-23, note: "checked on a phone on the public URL — works; smoke S-1…S-6 ✓" }
+  - { step: jira, status: plan-ok, by: "Olga Tkacheva", date: 2026-10-23, note: "36 create, 0 update; all stories and epics Done as proposed; every issue into sprint 'DeskShare Kit Test PoC' (created and started by the BA)" }
+  - { step: jira, status: reviewed, by: "Olga Tkacheva", date: 2026-10-23, note: "board checked; 36 issues, no duplicates (Q5 = KAN-27 only); sprint 'DeskShare Kit Test PoC' started by the BA; board link in jira-map pending the BA's browser URL" }
 
 jira:
   project_key: "KAN"
@@ -67,9 +69,9 @@ jira:
     story: "10006"
     task: "10005"
   statuses:                           # filled by jira-sync on first run (needs an issue to read transitions)
-    todo: null
-    in_progress: null
-    done: null
+    todo: "10006"        # К выполнению (category To Do) — transition 11
+    in_progress: "10007" # В работе (category In Progress) — transition 21; "На проверке" 10008 also In Progress, not used
+    done: "10009"        # Готово (category Done) — transition 41
   priority_on_create: false           # KAN (team-managed): no priority field on the story create screen
   priority_map: null                  # not used — priority unavailable in KAN
   priority_via_label: true            # (BA) MoSCoW stored as a label instead — BA decision 2026-10-20
