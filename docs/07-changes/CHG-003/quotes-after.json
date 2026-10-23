@@ -1,0 +1,74 @@
+{
+  "generated_by": "change-impact/scripts/blockdiff.mjs",
+  "generated_at": "2026-10-23T14:32:05.054Z",
+  "pages": [
+    "65670:5",
+    "458755:1"
+  ],
+  "total": 180,
+  "found": 174,
+  "missing": [
+    {
+      "file": "docs/01-requirements/requirements.md",
+      "line": 68,
+      "item": "REQ-004",
+      "quote": "Floor 1 (capacity 30)",
+      "kind": "source",
+      "fragments_missing": [
+        "floor 1 (capacity 30)"
+      ]
+    },
+    {
+      "file": "docs/01-requirements/requirements.md",
+      "line": 147,
+      "item": "DEC-005",
+      "quote": "Agreed: no waitlist in this PoC",
+      "kind": "source",
+      "fragments_missing": [
+        "agreed: no waitlist in this poc"
+      ]
+    },
+    {
+      "file": "docs/02-analysis/analysis-log.md",
+      "line": 131,
+      "item": "CON-006",
+      "quote": "Floor 1 (capacity 30)",
+      "kind": "source",
+      "fragments_missing": [
+        "floor 1 (capacity 30)"
+      ]
+    },
+    {
+      "file": "docs/02-analysis/analysis-log.md",
+      "line": 152,
+      "item": "CON-007",
+      "quote": "Agreed: no waitlist in this PoC",
+      "kind": "source",
+      "fragments_missing": [
+        "agreed: no waitlist in this poc"
+      ]
+    }
+  ],
+  "not_source": [
+    {
+      "file": "docs/02-analysis/analysis-log.md",
+      "line": 306,
+      "item": "DEC-027",
+      "quote": "size agreed",
+      "kind": "dor-label",
+      "fragments_missing": [
+        "size agreed"
+      ]
+    },
+    {
+      "file": "docs/03-backlog/stories/US-012.md",
+      "line": 11,
+      "item": "US-012",
+      "quote": "Names are self-reported — not for emergency headcount.",
+      "kind": "ui-text",
+      "fragments_missing": [
+        "names are self-reported - not for emergency headcount"
+      ]
+    }
+  ]
+}

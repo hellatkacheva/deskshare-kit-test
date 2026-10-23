@@ -7,13 +7,14 @@
 | **Inputs** | `docs/01-requirements/requirements.md` (Reviewed 2026-10-21), `docs/00-source/01-deskshare-requirements-gathering.md` — Confluence `65670` v2, `docs/00-source/02-workshop-brief.md` — Confluence `458755` v1, `docs/00-source/README.md`, `ba-project.yaml` |
 | **Deploy profile** | `static` (`ba-project.yaml` → `stack.deploy.profile`) |
 | **Deadline** | `project.deadline` not set; milestone 28 October 2026 (CST-007) |
-| **Status** | Draft — Revised CHG-002, BA review pending |
+| **Status** | Draft — Revised CHG-002, CHG-003, BA review pending |
 | **Reviewed by** | Olga Tkacheva (BA), 2026-10-21 — interpretations 1–4 confirmed (CON-004 outcome (a); "Tomorrow" green below 80 % and Friday → Monday from the reference; Variant B names on the desk grid; CON-006 recommendation given in chat); GAP-012 availability / accessibility left open for Sam (Q13), no ASM; priorities of REQ-022…REQ-032 set (requirements.md). |
 | **Revised** | 2026-10-21 by `write-stories` (BA answers to backlog OQ-1…OQ-9, all as recommended): DEC-016…DEC-024, ASM-017, ASM-018 added; REQ-033…REQ-041, NFR-009, NFR-010 added to `requirements.md`; §8 Q14 extended. |
 | **Revised** | 2026-10-21 by `review-backlog` (BA decisions on `docs/03-backlog/review.md`): DEC-025…DEC-030 added; REQ-042 added to `requirements.md`; `project.deadline` set to 2026-10-28 (DEC-027); RSK-001 updated. |
 | **Revised** | 2026-10-22 by `spec` (BA answers to OQ-S1, OQ-S2): DEC-031, DEC-032 added; DEC-017 partly superseded by DEC-031; REQ-043, REQ-044 added to `requirements.md`. |
 | **Revised** | 2026-10-23 by `/ba-sync` CHG-002 (Confluence 65670 v3 → v4, Floor 1 capacity 30 → 35): CON-006 quote, DEC-015, SI-9, RSK-005, ASM-007 revised in place; DEC-034 added (seed, BA answer Q1 = C); DEC-017 and DEC-032 partly superseded by DEC-034. Architect rule re-checked: no new shared-data need (CON-005 / DEC-014 cover per-floor capacity). |
 | **Revised** | 2026-10-23 by `deploy`: DEC-033 (hosting GitHub Pages, BA decision; Sam open — ASM-013; CST-005 not met literally); DEC-030 closed. |
+| **Revised** | 2026-10-23 by `/ba-sync` CHG-003 (Confluence 65670 v4 → v5, W2 · Capacity limits "no waitlist" → "a waitlist is in scope"): SI-12, CON-007 → DEC-035 (keep no waitlist, BA as proxy), Q15 added. |
 | **Part B** | 2026-10-21 — BA decisions (Olga Tkacheva, BA, proxy for Priya Nandakumar): DEC-011…DEC-015; CON-006 raised by the BA in Part B. Test A repeats the decisions of the reference project DeskShare (`C:\Projects\deskshare\deskshare\docs\02-analysis\analysis-log.md`), except DEC-014 (static instead of Cloudflare — deliberate difference). Assumed values for GAP-002…GAP-012 taken from the reference, cited as "ref ASM-/DEC-…". |
 
 ---
@@ -143,6 +144,26 @@
 
 ---
 
+### CON-007 — Waitlist in scope (source v5) vs. no waitlist (DEC-005, OOS-006, DEC-006, DEC-007) · CHG-003 (C4)
+
+| | |
+|---|---|
+| **Position A** | Source v5: "Agreed: a waitlist is in scope for this phase, PoC" `[W2 · Capacity limits]` (Confluence 65670 v5, CHG-003 D1) |
+| **Position B** | DEC-005 "Agreed: no waitlist in this PoC" `[W2 · Capacity limits]` (v2–v4); OOS-006 "Waitlisting was parked as a future-phase idea, not built now." (same block, still in v5); DEC-006 "Scope at this point: book by date + floor, hard capacity limit per floor, self-service cancellation, no accounts, no reporting." `[W2 · Decisions]`; DEC-007 "nothing beyond it should be implied as "coming next" without her sign-off" `[W2 · Decisions]`; deadline 2026-10-28 (CST-007) |
+| **Why they conflict** | The new text puts a waitlist in scope; the same bullet and the unchanged W2 decisions keep it out. A waitlist is also a queue shared across users — profile `static` cannot provide it (architect rule, would need its own CON). |
+| **At stake** | PoC scope five days before the milestone; DEC-005 / OOS-006; US-006 rule 4 and AC; rework of US-006, US-007, US-009 and a redeploy if in scope. |
+| **Linked** | DEC-005, OOS-006, DEC-006, DEC-007, REQ-012, US-006, SI-12, CST-007, CST-008 |
+
+| Option | Description | Pros | Cons | Effect on scope |
+|---|---|---|---|---|
+| **A — Keep no waitlist** | Decided by the BA as proxy; v5 recorded as SI-12; Priya confirms (Q15). | Matches the rest of the block, W2 Decisions, DEC-007; no build or redeploy. | Decided against the latest source text until Priya answers. | None. |
+| **B — Waitlist in scope** | DEC-005, OOS-006 superseded; GAP, new REQs, US-018+; US-006 / US-007 / US-009 reworked; architect-rule CON. | Follows the v5 text literally. | Full spec → build → deploy before 28 Oct; queue only in one browser on `static`; breaks DEC-007. | +1–2 stories, 3 reworked. |
+| **C — Deferred — sponsor decision** | Not built; Q15 to Priya as an open scope question. | No decision against the source. | DEC-005 in limbo; the demo could imply a waitlist as "coming next". | None now. |
+
+**Claude's recommendation:** Option A — outcome (a) Decided.
+**Status:** Resolved → DEC-035 (Option A, Decided).
+
+---
 ## 2. Goal-vs-constraint check
 
 | Goal element | Source | Constraints in play | Achievable? | Item |
@@ -199,6 +220,7 @@ Unconfirmed `Derived` requirement rows: none — REQ-014 and REQ-018 were confir
 | SI-9 | Capacities 35 / 25 (was 30 / 25 until v4 — Revised CHG-002) come "from the spreadsheet reference Priya brought", while Priya says of the same sheet "half our 'bookings' aren't even in it anymore". | `[W2 · Booking a desk]` vs `[W1 · Discussion]` |
 | SI-10 | The brief is "Summarised by Claude" from slides that are not available; slide quotes cannot be checked. | `[BR · BA AI Workshop — brief (source material)]` |
 | SI-11 | Action items are due "Day 1 wrap" / "before Day 2 build session" — these days are not dated anywhere. | `[W2 · Action items]` |
+| SI-12 | Since v5 (CHG-003) the same bullet says "a waitlist is in scope for this phase, PoC" and "Waitlisting was parked as a future-phase idea, not built now."; the W2 decisions list a scope without a waitlist ("Scope at this point: book by date + floor, hard capacity limit per floor, self-service cancellation, no accounts, no reporting.") and "nothing beyond it should be implied as "coming next" without her sign-off". Handled by CON-007 → DEC-035. | `[W2 · Capacity limits]` vs `[W2 · Decisions]` |
 
 ## 5. Risks (`RSK`)
 
@@ -311,6 +333,14 @@ Decided by: Olga Tkacheva (BA, proxy for Priya Nandakumar), 2026-10-23 — answe
 |---|---|---|---|---|---|
 | DEC-034 | CHG-002 §8 Q1 (D1: Floor 1 capacity 30 → 35, REQ-045) | Decided | **Seed, next working day (D1), Floor 1 = 30 booked of 35 (86 %, amber).** The 25 existing D1 Floor 1 rows stay; 5 rows are added on F1-31 … F1-35 with 5 new fictional names (N51 … N55), no consent. Free desks on D1 Floor 1 stay F1-04, F1-10, F1-16, F1-22, F1-28 ("· 5 left"). Seed 86 → 91 rows. Option C of three (A keep 25 → green; B 28/35 on the boundary). | As Claude recommended: keeps the DEC-017 intent (green, amber and red all visible on "Tomorrow") and the same free desks, so smoke S-2 and B-3 do not change. Cost: the seed is no longer the reference seed. | DEC-017, DEC-032 (partly superseded); REQ-033; US-002, US-013, US-015; `docs/04-spec/demo-data.md`; `app/public/js/seed-data.js` |
 
+### Decisions from /ba-sync CHG-003 (2026-10-23)
+
+Decided by: Olga Tkacheva (BA, proxy for Priya Nandakumar), 2026-10-23 — answer to CHG-003 §8 ("A — оставляем «без листа ожидания», противоречие → SI-12, вопрос Priya → Q15"; the v5 edit is a deliberate test edit, scenario B4).
+
+| ID | Origin | Outcome | Decision | Rationale | Affects |
+|---|---|---|---|---|---|
+| DEC-035 | CON-007 (CHG-003 D1, C4) | Decided | **No waitlist in this PoC — DEC-005 retained.** If a floor is full, the employee is told to pick another day or floor (REQ-012); nothing is queued. The v5 sentence "a waitlist is in scope for this phase, PoC" is recorded as SI-12; Priya confirms or overturns via Q15. | The same bullet still says "parked as a future-phase idea, not built now"; W2 Decisions and DEC-007 unchanged; a waitlist would need a shared queue (architect rule) and a full rework before 2026-10-28. | DEC-005, OOS-006, US-006 (traces), Q15 |
+
 ## 8. Open questions for the sponsor
 
 | # | Question | Origin | Type |
@@ -329,6 +359,7 @@ Decided by: Olga Tkacheva (BA, proxy for Priya Nandakumar), 2026-10-23 — answe
 | Q12 | **Dana:** who may see names on bookings? (PoC: nobody, except Variant B with consent.) | GAP-011, ASM-015 | Validation of an assumption |
 | Q13 | **Sam:** availability and accessibility targets for the PoC? No assumption is made for these two (BA, 2026-10-21). Browsers, "immediately" and logging are assumed in ASM-016 — validate. | GAP-012, ASM-016 | **Open question** (availability, accessibility — no ASM); validation (ASM-016) |
 | Q14 | Validate desk numbering (ASM-007), the same capacity every day (ASM-002), office time zone UTC+5 (ASM-017) and the 50-character name limit (ASM-018). | ASM-002, ASM-007, ASM-017, ASM-018 | Validation of an assumption |
+| Q15 | **Priya:** the minutes (Confluence v5) now say "a waitlist is in scope for this phase, PoC", while the same bullet says it was "parked as a future-phase idea, not built now". The PoC keeps no waitlist (DEC-035) — confirm, or should a waitlist be in scope? | CON-007, DEC-035, SI-12 (CHG-003) | Validation — BA proxy decision until answered |
 
 ## 9. Mapping of requirements §8 observations
 

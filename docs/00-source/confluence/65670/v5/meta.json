@@ -1,0 +1,26 @@
+{
+  "page_id": "65670",
+  "title": "DeskShare — Requirements Gathering (source copy)",
+  "space_key": "DSSRC",
+  "space_id": "393220",
+  "version": 5,
+  "created_at": "2026-10-20T10:26:26.254Z",
+  "version_created_at": "2026-10-23T13:54:42.048Z",
+  "version_message": "",
+  "author_id": "6170e337062f4c00694a6eb8",
+  "parent_id": "393393",
+  "fetched_at": "2026-10-23T13:55:50Z",
+  "children": [
+    {
+      "id": "458755",
+      "title": "Workshop brief (source copy)",
+      "version": 1,
+      "snapshot": "confluence/458755/v1/"
+    }
+  ],
+  "sha256": {
+    "page_html": "d9068413f4bf409cd2165c48c9d813389b75a450227816e0379ce9c917769374",
+    "page_md": "4c5ebc54b30c36efca84b38127d65a8953efff4d7f3e14253817a87b648dc9dd"
+  },
+  "notes": "Snapshot taken by /ba-sync (change-impact phase A, CHG-003). getConfluencePage now returns a version block (number 5, createdAt 2026-10-23T13:54:42.048Z, empty message) and parentId 393393 (v4 meta had parent_id null — not exposed then; not a content change). page.md = getConfluencePage markdown body; it differs from v4/page.md in one line only (W2 Capacity limits: \"no waitlist in this PoC\" → \"a waitlist is in scope for this phase, PoC\"). page.html = getConfluencePage html body: same 145 data-local-id elements as v4 (spot-checked, incl. li ffa000e075f8 / p 33e1483b3de5), the only difference is the same text change; written as v4/page.html with that one replacement."
+}

@@ -4,7 +4,7 @@ Read-only. Only the `ingest-confluence` skill writes here (new snapshots, regene
 
 | File | What it is | Source | Version |
 |---|---|---|---|
-| `01-deskshare-requirements-gathering.md` | DeskShare requirements-gathering source: sales handoff, project context, minutes of Workshops 1–3 | Confluence 65670 | v4 |
+| `01-deskshare-requirements-gathering.md` | DeskShare requirements-gathering source: sales handoff, project context, minutes of Workshops 1–3 | Confluence 65670 | v5 |
 | `02-workshop-brief.md` | Workshop brief: goal, practice project, stakeholder slide quotes, expected deliverables, ground rules, next milestone | Confluence 458755 (child of 65670) | v1 |
 <!-- rows added by ingest-confluence -->
 
@@ -33,6 +33,7 @@ Used in every reference as `[KEY · Section]`.
 | `confluence/458755/v1/` | 2026-10-21 | — (child page of 65670) |
 | `confluence/65670/v3/` | 2026-10-23 | 458755 v1 — CHG-001: C0 only (emphasis on "no approval step"); working source `01-…md` stays on v2 text, identical in words |
 | `confluence/65670/v4/` | 2026-10-23 | 458755 v1 — CHG-002: C2 D1 Floor 1 capacity 30 → 35; working source `01-…md` regenerated from v4 (also picks up the v3 emphasis on "no approval step") |
+| `confluence/65670/v5/` | 2026-10-23 | 458755 v1 — CHG-003: C4 D1 W2 · Capacity limits "no waitlist in this PoC" → "a waitlist is in scope for this phase, PoC" (BA: deliberate test edit, scenario B4; DEC-035 keeps no waitlist; SI-12); working source `01-…md` regenerated from v5. `page.md` = MCP markdown body; `page.html` rebuilt from `v4/page.html` + the one text replacement after a spot check of the fetched html (same 145 element ids) — not byte-for-byte as fetched (same method as v4, see `meta.json` notes) |
 
 ## Known missing inputs
 

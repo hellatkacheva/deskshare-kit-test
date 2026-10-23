@@ -1,0 +1,102 @@
+{
+  "generated_by": "change-impact/scripts/blockdiff.mjs",
+  "generated_at": "2026-10-23T13:56:09.448Z",
+  "quotes_scanned": 168,
+  "pages": [
+    {
+      "page_id": "65670",
+      "old_version": 4,
+      "new_version": 5,
+      "page_op": "page changed",
+      "blocks": {
+        "old": 81,
+        "new": 81
+      },
+      "count": {
+        "modified": 1
+      },
+      "changes": [
+        {
+          "op": "modified",
+          "old": {
+            "index": 36,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Capacity limits"
+            ],
+            "label": null,
+            "text": "Agreed: no waitlist in this PoC — if a floor is full, the employee is told to pick another day or floor. Waitlisting was parked as a future-phase idea, not built now."
+          },
+          "new": {
+            "index": 36,
+            "kind": "li",
+            "path": [
+              "Meeting Minutes — Workshop 2: Requirements Deep-Dive",
+              "Capacity limits"
+            ],
+            "label": null,
+            "text": "Agreed: a waitlist is in scope for this phase, PoC — if a floor is full, the employee is told to pick another day or floor. Waitlisting was parked as a future-phase idea, not built now."
+          },
+          "similarity": 0.92,
+          "words": {
+            "removed": [
+              "no"
+            ],
+            "added": [
+              "a",
+              "is",
+              "scope",
+              "for",
+              "phase"
+            ]
+          },
+          "hint": "C1?",
+          "id": "D1",
+          "hits": [
+            {
+              "file": "docs/01-requirements/requirements.md",
+              "line": 75,
+              "item": "REQ-012",
+              "quote": "the employee is told to pick another day or floor",
+              "still_in_new": true
+            },
+            {
+              "file": "docs/01-requirements/requirements.md",
+              "line": 146,
+              "item": "DEC-005",
+              "quote": "Agreed: no waitlist in this PoC",
+              "still_in_new": false
+            },
+            {
+              "file": "docs/01-requirements/requirements.md",
+              "line": 162,
+              "item": "OOS-006",
+              "quote": "Waitlisting was parked as a future-phase idea, not built now.",
+              "still_in_new": true
+            },
+            {
+              "file": "docs/03-backlog/stories/US-006.md",
+              "line": 14,
+              "item": "US-006",
+              "quote": "the employee is told to pick another day or floor",
+              "still_in_new": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": "458755",
+      "old_version": 1,
+      "new_version": 1,
+      "page_op": "page changed",
+      "blocks": {
+        "old": 27,
+        "new": 27
+      },
+      "count": {},
+      "changes": []
+    }
+  ]
+}
