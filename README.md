@@ -2,6 +2,14 @@
 
 DeskShare (kit test A) — a desk-booking proof of concept built with the BA workflow kit. Profile `static`: plain HTML/CSS/JS, bookings stored only in the browser (`localStorage`), no backend. Spec: `docs/04-spec/`.
 
+## Links
+
+| | |
+|---|---|
+| **Demo (GitHub Pages)** | https://hellatkacheva.github.io/deskshare-kit-test/ |
+| **Spec** | `docs/04-spec/` |
+| **Build and deploy status** | `docs/04-spec/build-status.md` |
+
 ## Reset demo data
 
 The app loads fictional demo bookings (seed) the first time it is opened in a browser. To start again from fresh demo data:
