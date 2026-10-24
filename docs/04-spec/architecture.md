@@ -6,7 +6,7 @@
 | **Date** | 2026-10-22 |
 | **Inputs** | `docs/03-backlog/backlog.md` + `stories/US-001…US-017` (Reviewed; US-001, US-002, US-015 updated by spec 2026-10-22), `docs/01-requirements/requirements.md` (REQ-001…REQ-044, NFR-001…NFR-010), `docs/02-analysis/analysis-log.md` (DEC-001…DEC-032, ASM-002…ASM-018), `ba-project.yaml` (`stack.deploy.profile: static`, `repo.*`) — Confluence `65670` v2, `458755` v1 |
 | **Deploy profile** | `static` — plain HTML/CSS/JS, `localStorage`, no backend (DEC-014) |
-| **Status** | Draft — Revised CHG-004 (2026-10-23, Confluence 1146892 v1, W4: booking note, US-018, DEC-036); Revised CHG-002 (2026-10-23, Confluence 65670 v4): seed rows 86 → 91 (DEC-034, trace-auditor finding); was Reviewed (BA, 2026-10-22 — BA review without the technical stakeholder, PoC) |
+| **Status** | Reviewed (BA, 2026-10-24, after CHG-002…CHG-004) — Revised CHG-004 (2026-10-23, Confluence 1146892 v1, W4: booking note, US-018, DEC-036); Revised CHG-002 (2026-10-23, Confluence 65670 v4): seed rows 86 → 91 (DEC-034, trace-auditor finding); was Reviewed (BA, 2026-10-22 — BA review without the technical stakeholder, PoC) |
 
 Spec files: `architecture.md` (this) · `data-model.md` · `storage.md` (instead of `api.md`) · `ui.md` · `config.md` · `test-plan.md` · `demo-data.md`. `build-status.md` is written by the `build` step.
 

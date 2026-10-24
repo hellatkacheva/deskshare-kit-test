@@ -6,7 +6,7 @@
 | **Date** | 2026-10-22 |
 | **Inputs** | `docs/03-backlog/backlog.md`, `stories/US-001…US-017` (Reviewed), `docs/01-requirements/requirements.md`, `docs/02-analysis/analysis-log.md` (DEC-014…DEC-032, ASM-006…ASM-018), `ba-project.yaml` — Confluence `65670` v2, `458755` v1 |
 | **Deploy profile** | `static` — `localStorage` only (DEC-014, ASM-006) |
-| **Status** | Draft — Revised CHG-004 (2026-10-23, Confluence 1146892 v1, W4: booking note, US-018, DEC-036); was Reviewed (BA, 2026-10-22 — BA review without the technical stakeholder, PoC) |
+| **Status** | Reviewed (BA, 2026-10-24, after CHG-002…CHG-004) — Revised CHG-004 (2026-10-23, Confluence 1146892 v1, W4: booking note, US-018, DEC-036); was Reviewed (BA, 2026-10-22 — BA review without the technical stakeholder, PoC) |
 
 ## 1. Storage location
 

@@ -6,7 +6,7 @@
 | **Date** | 2026-10-22 |
 | **Inputs** | `stories/US-002.md`, `US-015.md`, `US-011.md`, `US-013.md` (Reviewed, updated by spec 2026-10-22); `requirements.md` (REQ-032…REQ-034, REQ-044); `analysis-log.md` (DEC-017, DEC-031, DEC-032, ASM-004, ASM-007, ASM-008); reference seed `C:\Projects\deskshare\deskshare\docs\04-spec\demo-data.md` — Confluence `65670` v2, `458755` v1 |
 | **Deploy profile** | `static` — seed stands in for other employees' bookings (DEC-014, ASM-006) |
-| **Status** | Draft — Revised CHG-002 (2026-10-23, Confluence 65670 v4: Floor 1 = 35, REQ-045, DEC-034); was Reviewed (BA, 2026-10-22) |
+| **Status** | Reviewed (BA, 2026-10-24, after CHG-002…CHG-004) — Revised CHG-002 (2026-10-23, Confluence 65670 v4: Floor 1 = 35, REQ-045, DEC-034); was Reviewed (BA, 2026-10-22) |
 
 Seed module: `app/public/js/seed-data.js` exports the 91 rows below as `{ day: "D0", desk: "F1-02", name: "Ava Morgan", checkedIn: true, showName: true }`; `seed.js` turns them into bookings for `now` (§3). The rows equal the reference seed (DEC-032) plus 5 D1 rows on F1-31…F1-35 (DEC-034, CHG-002). All names are fictional (REQ-032); none equals a name used in the acceptance criteria ("Alex Morgan", "Jamie Lee", "Sam Rivera", "Kim") or a stakeholder.
 

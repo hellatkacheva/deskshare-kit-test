@@ -6,7 +6,7 @@
 | **Date** | 2026-10-22 |
 | **Inputs** | `docs/03-backlog/backlog.md`, `stories/US-001…US-017` (Reviewed), `docs/01-requirements/requirements.md`, `docs/02-analysis/analysis-log.md` (DEC-014…DEC-032, ASM), `ba-project.yaml` — Confluence `65670` v2, `458755` v1 |
 | **Deploy profile** | `static` — no API; this file replaces `api.md` |
-| **Status** | Draft — Revised CHG-004 (2026-10-23, Confluence 1146892 v1, W4: booking note, US-018, DEC-036); was Reviewed (BA, 2026-10-22 — BA review without the technical stakeholder, PoC) |
+| **Status** | Reviewed (BA, 2026-10-24, after CHG-002…CHG-004) — Revised CHG-004 (2026-10-23, Confluence 1146892 v1, W4: booking note, US-018, DEC-036); was Reviewed (BA, 2026-10-22 — BA review without the technical stakeholder, PoC) |
 
 There is no server and no API (DEC-014, NFR-005). The UI calls the functions of `app/public/js/storage.js`; they use the pure rules of `app/public/js/rules.js` and the time helpers of `app/public/js/time.js`. `now` is always passed in (office time `{ date: "YYYY-MM-DD", time: "HH:MM" }` from `clock.js`), so every rule is unit-testable with a fixed time (NFR-010).
 

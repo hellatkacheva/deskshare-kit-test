@@ -7,7 +7,7 @@
 | **Inputs** | `docs/01-requirements/requirements.md` (Reviewed 2026-10-21), `docs/00-source/01-deskshare-requirements-gathering.md` — Confluence `65670` v2, `docs/00-source/02-workshop-brief.md` — Confluence `458755` v1, `docs/00-source/03-workshop-4-minutes.md` — Confluence `1146892` v1 (W4, CHG-004), `docs/00-source/README.md`, `ba-project.yaml` |
 | **Deploy profile** | `static` (`ba-project.yaml` → `stack.deploy.profile`) |
 | **Deadline** | `project.deadline` not set; milestone 28 October 2026 (CST-007) |
-| **Status** | Draft — Revised CHG-002, CHG-003, CHG-004, BA review pending |
+| **Status** | Reviewed (BA, 2026-10-24, after CHG-002…CHG-004) — Revised CHG-002, CHG-003, CHG-004 |
 | **Reviewed by** | Olga Tkacheva (BA), 2026-10-21 — interpretations 1–4 confirmed (CON-004 outcome (a); "Tomorrow" green below 80 % and Friday → Monday from the reference; Variant B names on the desk grid; CON-006 recommendation given in chat); GAP-012 availability / accessibility left open for Sam (Q13), no ASM; priorities of REQ-022…REQ-032 set (requirements.md). |
 | **Revised** | 2026-10-21 by `write-stories` (BA answers to backlog OQ-1…OQ-9, all as recommended): DEC-016…DEC-024, ASM-017, ASM-018 added; REQ-033…REQ-041, NFR-009, NFR-010 added to `requirements.md`; §8 Q14 extended. |
 | **Revised** | 2026-10-21 by `review-backlog` (BA decisions on `docs/03-backlog/review.md`): DEC-025…DEC-030 added; REQ-042 added to `requirements.md`; `project.deadline` set to 2026-10-28 (DEC-027); RSK-001 updated. |

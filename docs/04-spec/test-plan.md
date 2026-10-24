@@ -6,7 +6,7 @@
 | **Date** | 2026-10-22 |
 | **Inputs** | `stories/US-001…US-018` (US-001…US-017 Reviewed; US-001, US-002, US-015 updated by spec 2026-10-22; US-018 new and US-005, US-015 revised by CHG-004), `docs/01-requirements/requirements.md`, `docs/02-analysis/analysis-log.md` (DEC-016, DEC-028, DEC-031), `ba-project.yaml` — Confluence `65670` v2 (now v5), `458755` v1, `1146892` v1 (W4, CHG-004) |
 | **Deploy profile** | `static` (DEC-014) |
-| **Status** | Draft — Revised CHG-004 (2026-10-23, Confluence 1146892 v1, W4: booking note, US-018, DEC-036); Revised CHG-002 (2026-10-23, Confluence 65670 v4: Floor 1 = 35, REQ-045, DEC-034); was Reviewed (BA, 2026-10-22) |
+| **Status** | Reviewed (BA, 2026-10-24, after CHG-002…CHG-004) — Revised CHG-004 (2026-10-23, Confluence 1146892 v1, W4: booking note, US-018, DEC-036); Revised CHG-002 (2026-10-23, Confluence 65670 v4: Floor 1 = 35, REQ-045, DEC-034); was Reviewed (BA, 2026-10-22) |
 
 ## 1. Test setup
 

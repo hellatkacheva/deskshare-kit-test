@@ -6,7 +6,7 @@
 | **Date** | 2026-10-22 |
 | **Inputs** | `docs/03-backlog/backlog.md`, `stories/US-001…US-017` (Reviewed), `docs/01-requirements/requirements.md`, `docs/02-analysis/analysis-log.md` (ASM-002…ASM-018, DEC-013…DEC-032), `ba-project.yaml` — Confluence `65670` v2, `458755` v1 |
 | **Deploy profile** | `static` (DEC-014) |
-| **Status** | Draft — Revised CHG-004 (2026-10-23, Confluence 1146892 v1, W4: booking note, US-018, DEC-036); Revised CHG-002 (2026-10-23, Confluence 65670 v4: Floor 1 = 35, REQ-045, DEC-034); was Reviewed (BA, 2026-10-22) |
+| **Status** | Reviewed (BA, 2026-10-24, after CHG-002…CHG-004) — Revised CHG-004 (2026-10-23, Confluence 1146892 v1, W4: booking note, US-018, DEC-036); Revised CHG-002 (2026-10-23, Confluence 65670 v4: Floor 1 = 35, REQ-045, DEC-034); was Reviewed (BA, 2026-10-22) |
 
 **Rule:** `app/public/js/config.js` is the **only** module that holds these values. Every other module imports them; no literal of the table below appears anywhere else in `app/public/` (checked by `test/unit/config.test.js`). There is no server, so a change means editing `config.js` and republishing the static files — no rebuild (no build step).
 

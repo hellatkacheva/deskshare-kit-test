@@ -8,7 +8,7 @@
 | **Date** | 2026-10-21 |
 | **Inputs** | `docs/00-source/01-deskshare-requirements-gathering.md` — Confluence `65670` v5 (Revised CHG-003; CHG-002 v4; built on v2, v3 = C0 only); `docs/00-source/02-workshop-brief.md` — Confluence `458755` v1 (child of `65670`); `docs/00-source/03-workshop-4-minutes.md` — Confluence `1146892` v1 (child of `65670`, CHG-004); `docs/00-source/README.md` |
 | **Not available** | `DeskShare_Sales_Discovery_Handoff_MOMs.docx` (GAP-001, not a blocker); last month's booking spreadsheet; sample data behind the no-show figure; the workshop slides (`BA_AI_Workshop_Sep_2026.pdf`, `…_Recap.pdf`) the brief was summarised from — see `docs/00-source/README.md` → Known missing inputs |
-| **Status** | Draft — Revised CHG-002, CHG-003, CHG-004, BA review pending |
+| **Status** | Reviewed (BA, 2026-10-24, after CHG-002…CHG-004) — Revised CHG-002, CHG-003, CHG-004 |
 | **Reviewed by** | Olga Tkacheva (BA), 2026-10-21 — changes: REQ-010 → Must; REQ-014, REQ-018 derived effects confirmed; DEC-010 added (who decides trade-offs); CST-005 kept as input for `analyze-conflicts` |
 | **Revised** | CHG-002 (2026-10-23, Confluence 65670 v3 → v4): REQ-004 → Superseded by REQ-045 (Floor 1 = 35); REQ-024, REQ-033, §8 items 2 and 8 revised in place. Status Draft until the BA reviews (scoped mode) |
 | **Revised** | CHG-003 (2026-10-23, Confluence 65670 v4 → v5): v5 says "a waitlist is in scope for this phase, PoC" (C4); BA kept no waitlist — DEC-035 (CON-007, SI-12, Q15). DEC-005 kept, its quote marked as v2–v4; OOS-006 kept + see CON-007 |

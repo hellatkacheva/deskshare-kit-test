@@ -7,7 +7,7 @@
 | **Inputs** | `docs/01-requirements/requirements.md` (Reviewed, revised 2026-10-21), `docs/02-analysis/analysis-log.md` (Reviewed — no conflict Open) — Confluence `65670` v2, `458755` v1; Revised CHG-004 (2026-10-23): Confluence `1146892` v1 (W4) — US-018 added (Next, Must, DEC-036), US-005 revised, US-015 note step (review O-1); Revised CHG-002 (2026-10-23): Confluence `65670` v4 — Floor 1 = 35 (REQ-045); US-002, US-003, US-004, US-005, US-006, US-010, US-013 revised in place |
 | **Deploy profile** | `static` (DEC-014 — single-device demo, data in the browser; ASM-006) |
 | **Deadline** | 2026-10-28 (`project.deadline`, DEC-027 — milestone from the brief, CST-007) |
-| **Status** | Draft — Revised CHG-002, CHG-004; scoped reviews done, findings decided by the BA (2026-10-23); was Reviewed (BA, 2026-10-21) |
+| **Status** | Reviewed (BA, 2026-10-24, after CHG-002…CHG-004) — Revised CHG-002, CHG-004; scoped reviews done, findings decided by the BA (2026-10-23); was Reviewed (BA, 2026-10-21) |
 | **Revised** | 2026-10-21 — BA answers to OQ-1…OQ-9 (all as recommended) → DEC-016…DEC-024; stories updated |
 | **Revised** | 2026-10-21 by `review-backlog` — BA decisions on `review.md` (DEC-025…DEC-030) and accepted fixes: US-005 split into US-005 / US-016 / US-017; check-in and the A/B group moved into Core; sizes agreed; see `review.md` → "BA outcome" |
 | **Revised** | 2026-10-22 by `spec` — BA answers to OQ-S1, OQ-S2 (DEC-031, DEC-032): US-001, US-002, US-015 updated; REQ-043, REQ-044 added to the coverage matrix |

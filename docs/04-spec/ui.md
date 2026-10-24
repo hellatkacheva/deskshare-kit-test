@@ -6,7 +6,7 @@
 | **Date** | 2026-10-22 |
 | **Inputs** | `docs/03-backlog/backlog.md`, `stories/US-001…US-017` (Reviewed), `docs/01-requirements/requirements.md`, `docs/02-analysis/analysis-log.md` (DEC-011…DEC-032), `ba-project.yaml` — Confluence `65670` v2, `458755` v1 |
 | **Deploy profile** | `static` (DEC-014) |
-| **Status** | Draft — Revised CHG-004 (2026-10-23, Confluence 1146892 v1, W4: booking note, US-018, DEC-036); Revised CHG-002 (2026-10-23, Confluence 65670 v4: Floor 1 = 35, REQ-045, DEC-034); was Reviewed (BA, 2026-10-22) |
+| **Status** | Reviewed (BA, 2026-10-24, after CHG-002…CHG-004) — Revised CHG-004 (2026-10-23, Confluence 1146892 v1, W4: booking note, US-018, DEC-036); Revised CHG-002 (2026-10-23, Confluence 65670 v4: Floor 1 = 35, REQ-045, DEC-034); was Reviewed (BA, 2026-10-22) |
 
 One page `app/public/index.html`, plain HTML / CSS / JS (ES modules), no framework. Two views by URL hash: `#/` **Book** (default) and `#/tomorrow` **Tomorrow** (US-013, Next band). Dialogs use `<dialog>`. All user-typed text is inserted with `textContent` — never `innerHTML` (REQ-035, US-011 "Name shown as plain text"). Dates are shown as `Thu 2026-10-22`. All asset paths are relative (GitHub Pages sub-path — I-16).
 
