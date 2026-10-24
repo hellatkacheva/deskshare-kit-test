@@ -29,6 +29,7 @@
 | `W2` | Workshop 2 — requirements deep-dive, Wed Sep 10, 2026 |
 | `W3` | Workshop 3 — requirements refinement (new conflicts surfaced), Thu Sep 11, 2026 |
 | `BR` | Workshop brief (child page 458755): BA AI Workshop 17–18 Sep 2026 — goal, practice project, stakeholder slide quotes, deliverables, ground rules, next milestone |
+| `W4` | Workshop 4 minutes (child page 1146892, CHG-004): booking note, dated 2026-10-24 (SI-13). One key, one section — the page has no headings: `[W4 · Workshop 4 — Booking note]` (README) |
 
 References are `[KEY · Section]`. For `HO`, `CTX`, `W1`–`W3` the Section is the bold sub-heading inside that source section; for `BR` it is the H2 heading of the brief. Quotes are verbatim fragments of the working source.
 
