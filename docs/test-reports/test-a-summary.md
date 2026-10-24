@@ -126,6 +126,14 @@ K-1…K-13 are accepted by the BA and recorded in the kit design §12 (K-12, K-1
 | K-14 | 7 | A gate the BA waived ("build everything, commit each") was not written to `approvals` until the BA asked | Step skills append `{status: gate-waived, …}` at once and ask for the deferred check at the end | **proposed** (`test-a-steps6-7.md`) |
 | K-15 | 9 | `jira-sync` instructions do not match the Atlassian MCP and team-managed Jira: no way to find a sprint id (Rovo search and JQL accept any id or name without error); the Sprint field cannot be set on epics; `createJiraIssue` takes the type **name** (the ID goes in `additional_fields.issuetype`); a bare `summary ~ "US"` misses issues — only the phrase form works | `jira-sync`: ask the BA for the sprint id (or set it on the first story and read it back, if only one board exists); never put epics into a sprint; create by ID via `additional_fields`; always use the phrase search for duplicates; take the board link from the BA / Jira, not from a template | **proposed** — evidence `docs/05-jira/jira-map.md` N-1, N-2, N-4, N-7 |
 
+### Later kit findings
+
+K-16…K-26 come from `/ba-sync` and are listed in `docs/07-changes/CHG-001.md` … `CHG-004.md` → "Kit observations".
+
+| # | Step | Finding (short) | Change in the kit | State |
+|---|---|---|---|---|
+| K-27 | `setup-watch` | The weekday watch notifies only through a GitHub issue; the BA works from the Jira board (KAN) and may miss it | Option `watch.notify: github \| jira \| both` (default `github`): with `jira`, the script creates one Task in `jira.project_key` (type by ID `jira.issue_types.task`, labels `jira.labels.project` + `watch.issue_label`), or comments on the open one, with the same once-per-state marker; errors as for GitHub. Needs a separate Jira token with write scope for that project only (the Confluence token stays read-only); the BA adds it with `gh secret set`; no transitions, no deletes | **proposed** (BA, 2026-10-24) |
+
 ### Build items B-4, B-5
 
 | # | Item | BA outcome |

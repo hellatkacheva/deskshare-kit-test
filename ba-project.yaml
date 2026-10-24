@@ -81,6 +81,7 @@ approvals:                            # [{step, status, by, date, note}] — onl
   - { step: spec, status: reviewed, by: "Olga Tkacheva", date: 2026-10-24, note: "after CHG-002…CHG-004 (same BA message)" }
   - { step: deploy, status: reviewed, by: "Olga Tkacheva", date: 2026-10-24, note: "after CHG-002…CHG-004 (same BA message); live 8a658cc, smoke S-1…S-6 ✓" }
   - { step: jira, status: reviewed, by: "Olga Tkacheva", date: 2026-10-24, note: "after CHG-002…CHG-004 (same BA message)" }
+  - { step: setup, status: watch-enabled, by: "Olga Tkacheva", date: 2026-10-24, note: "'Включи watch' — secrets CONFLUENCE_EMAIL / CONFLUENCE_API_TOKEN set by the BA (scoped token, api.atlassian.com; no CONFLUENCE_API variable)" }
 
 jira:
   project_key: "KAN"
@@ -121,5 +122,5 @@ stack:
     - "Re-evaluate on every user action and at least every 60 s while open (DEC-028)"
 
 watch:
-  enabled: false                      # (BA) daily GitHub Action → issue "run /ba-sync"
+  enabled: true                       # (BA) daily GitHub Action → issue "run /ba-sync"
   issue_label: ba-sync
