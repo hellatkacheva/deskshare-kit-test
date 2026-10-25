@@ -124,5 +124,10 @@ stack:
     - "Re-evaluate on every user action and at least every 60 s while open (DEC-028)"
 
 watch:
-  enabled: true                       # (BA) daily GitHub Action → issue "run /ba-sync"
-  issue_label: ba-sync
+  enabled: true                       # (BA) weekday GitHub Action → issue / Jira task "run /ba-sync"
+  issue_label: ba-sync                # label of the GitHub issue and of the Jira task
+  notify: github                      # (BA) github | jira | both — jira needs the secret JIRA_API_TOKEN (K-27) — BA 2026-10-25
+  assignee: hellatkacheva             # (BA) GitHub login to assign and mention; null = repository owner (K-28) — BA 2026-10-25
+  jira_assignee: null                 # (BA) Jira accountId for the task; null = the owner of JIRA_API_TOKEN (unused with notify: github)
+  snapshots: true                     # (BA) save every new version via REST on snapshot_branch (K-29)
+  snapshot_branch: watch/snapshots

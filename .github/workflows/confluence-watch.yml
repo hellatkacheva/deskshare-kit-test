@@ -1,9 +1,12 @@
 # BA workflow kit — weekday check of the source Confluence page (kit design §6). No AI, no MCP.
-# Reads ba-project.yaml, asks Confluence REST for the current versions, opens (or comments on) one issue
-# "run /ba-sync" when they differ. Writes nothing to the repository or to Confluence.
+# Reads ba-project.yaml, asks Confluence REST for the current versions; when they differ it saves every new
+# version as received on the branch watch.snapshot_branch (K-29) and opens (or comments on) one GitHub issue
+# and/or Jira task "run /ba-sync" (watch.notify, K-27), assigned to the BA (K-28). Writes nothing to
+# Confluence or to the main branch.
 # Off until the BA sets watch.enabled: true in ba-project.yaml and adds the secrets (the BA types them):
 #   ! gh secret set CONFLUENCE_EMAIL
 #   ! gh secret set CONFLUENCE_API_TOKEN      # API token with read scopes only — kit design §6
+#   ! gh secret set JIRA_API_TOKEN            # only for watch.notify: jira | both — read + write Jira work scopes
 name: confluence-watch
 
 on:
@@ -12,7 +15,7 @@ on:
   workflow_dispatch: {}
 
 permissions:
-  contents: read
+  contents: write             # only the snapshot branch is pushed (watch.snapshot_branch), never main
   issues: write
 
 concurrency:
@@ -22,19 +25,47 @@ concurrency:
 jobs:
   watch:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
       - name: Read ba-project.yaml
-        run: yq -o=json '.' ba-project.yaml > "$RUNNER_TEMP/ba-project.json"   # yq is preinstalled on ubuntu-latest
+        run: |   # yq is preinstalled on ubuntu-latest
+          yq -o=json '.' ba-project.yaml > "$RUNNER_TEMP/ba-project.json"
+          echo "SNAP_ON=$(yq '(.watch.enabled == true) and (.watch.snapshots != false)' ba-project.yaml)" >> "$GITHUB_ENV"
+          echo "SNAP_BRANCH=$(yq '.watch.snapshot_branch // "watch/snapshots"' ba-project.yaml)" >> "$GITHUB_ENV"
+      - name: Check out the snapshot branch
+        if: env.SNAP_ON == 'true'
+        run: |
+          SNAP="$RUNNER_TEMP/snapshots"
+          if git fetch -q --depth=1 origin "+refs/heads/$SNAP_BRANCH:refs/remotes/origin/$SNAP_BRANCH"; then
+            git worktree add -q --detach "$SNAP" "origin/$SNAP_BRANCH"
+          else   # first run: an empty branch with only the snapshots
+            git worktree add -q --detach "$SNAP"
+            git -C "$SNAP" checkout -q --orphan ba-watch-snapshots
+            git -C "$SNAP" rm -rfq .
+          fi
+          echo "SNAP=$SNAP" >> "$GITHUB_ENV"
       - name: Compare Confluence with ba-project.yaml
         env:
           BA_PROJECT_JSON: ${{ runner.temp }}/ba-project.json
           CONFLUENCE_EMAIL: ${{ secrets.CONFLUENCE_EMAIL }}
           CONFLUENCE_API_TOKEN: ${{ secrets.CONFLUENCE_API_TOKEN }}
           CONFLUENCE_API: ${{ vars.CONFLUENCE_API }}   # optional: "site" for a classic (unscoped) token
+          JIRA_EMAIL: ${{ secrets.JIRA_EMAIL }}        # optional: defaults to CONFLUENCE_EMAIL
+          JIRA_API_TOKEN: ${{ secrets.JIRA_API_TOKEN }}
+          JIRA_API: ${{ vars.JIRA_API }}               # optional: "site" for a classic (unscoped) token
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: node scripts/confluence-watch.mjs
+      - name: Push new snapshots
+        if: env.SNAP_ON == 'true' && env.SNAP != ''
+        run: |
+          cd "$SNAP"
+          git add -A
+          if git diff --cached --quiet; then echo "No new snapshots."; exit 0; fi
+          git -c user.name="github-actions[bot]" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -qm "watch: Confluence snapshots $(date -u +%F)"
+          git push -q origin "HEAD:refs/heads/$SNAP_BRANCH"
+          echo "Pushed new snapshots to $SNAP_BRANCH." >> "$GITHUB_STEP_SUMMARY"
