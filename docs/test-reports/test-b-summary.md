@@ -7,7 +7,7 @@
 | Inputs | `docs/07-changes/CHG-001.md` … `CHG-005.md` and their `changes.json` / `quotes-*.json`; `docs/run-log.md`; `ba-project.yaml` `approvals`; `git log`; GitHub Actions runs of `confluence-watch` and issues #1, #2; kit design `docs/design.md` §8.1 (scenario table B), §12 (K-17…K-20) |
 | Source version | Confluence 65670 v7 · 458755 v1 · 1146892 v1 |
 | Kit | `ba-workflow-kit` 0.4.0 (+ K-18…K-20 fixes, kit commit `18377bc`) |
-| Status | Draft |
+| Status | Reviewed (BA Olga Tkacheva, 2026-10-25 — "Отчёт test-b-summary — Reviewed") |
 
 ## 1. Scope
 
