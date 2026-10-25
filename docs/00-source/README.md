@@ -37,6 +37,7 @@ Used in every reference as `[KEY · Section]`.
 | `confluence/65670/v4/` | 2026-10-23 | 458755 v1 — CHG-002: C2 D1 Floor 1 capacity 30 → 35; working source `01-…md` regenerated from v4 (also picks up the v3 emphasis on "no approval step") |
 | `confluence/65670/v5/` | 2026-10-23 | 458755 v1 — CHG-003: C4 D1 W2 · Capacity limits "no waitlist in this PoC" → "a waitlist is in scope for this phase, PoC" (BA: deliberate test edit, scenario B4; DEC-035 keeps no waitlist; SI-12); working source `01-…md` regenerated from v5. `page.md` = MCP markdown body; `page.html` saved as fetched (re-fetched and confirmed byte-identical, K-24). Note: `v4/page.html` was assembled from v3 + one replacement, not saved as fetched (K-24, `v4/meta.json` provenance) |
 | `confluence/1146892/v1/` | 2026-10-23 | — (child page of 65670, new in CHG-004: C6 + C3, optional booking note; BA: test page, scenario B6, handled as real). `page.md` / `page.html` saved as fetched from the MCP bodies (K-24) |
+| `confluence/65670/v7/` | 2026-10-25 | 458755 v1, 1146892 v1 — CHG-005: C0 only (W1 Attendees — "Priya Nandakumar", "Sam Okafor" bold). v6 never snapshotted (watch issue #1 reported v5 → v6; K-29); MCP returned no version block (createdAt / message null). Working source `01-…md` stays on v5 text, identical in words |
 
 ## Known missing inputs
 

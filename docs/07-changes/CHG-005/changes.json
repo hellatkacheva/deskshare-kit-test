@@ -1,0 +1,69 @@
+{
+  "generated_by": "change-impact/scripts/blockdiff.mjs",
+  "generated_at": "2026-10-25T08:55:43.587Z",
+  "quotes_scanned": 201,
+  "pages": [
+    {
+      "page_id": "65670",
+      "old_version": 5,
+      "new_version": 7,
+      "page_op": "page changed",
+      "blocks": {
+        "old": 81,
+        "new": 81
+      },
+      "count": {
+        "cosmetic": 1
+      },
+      "changes": [
+        {
+          "op": "cosmetic",
+          "old": {
+            "index": 14,
+            "kind": "p",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff"
+            ],
+            "label": "Date",
+            "text": "Date: Mon, Sep 8, 2026, 10:00–10:45 Attendees: Priya Nandakumar (Office Manager, sponsor), Sam Okafor (Software Engineer), Dana Whitfield (HR Business Partner), BA (facilitator)"
+          },
+          "new": {
+            "index": 14,
+            "kind": "p",
+            "path": [
+              "Meeting Minutes — Workshop 1: Discovery Handoff & Kickoff"
+            ],
+            "label": "Date",
+            "text": "Date: Mon, Sep 8, 2026, 10:00–10:45 Attendees: Priya Nandakumar (Office Manager, sponsor), Sam Okafor (Software Engineer), Dana Whitfield (HR Business Partner), BA (facilitator)"
+          },
+          "hint": "C0",
+          "id": "D1"
+        }
+      ]
+    },
+    {
+      "page_id": "458755",
+      "old_version": 1,
+      "new_version": 1,
+      "page_op": "page changed",
+      "blocks": {
+        "old": 27,
+        "new": 27
+      },
+      "count": {},
+      "changes": []
+    },
+    {
+      "page_id": "1146892",
+      "old_version": 1,
+      "new_version": 1,
+      "page_op": "page changed",
+      "blocks": {
+        "old": 4,
+        "new": 4
+      },
+      "count": {},
+      "changes": []
+    }
+  ]
+}

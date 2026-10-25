@@ -29,23 +29,23 @@ source:
   title: "DeskShare — Requirements Gathering (source copy)"
   include_children: true              # (BA)
   include_attachments: true           # (BA) attachments are listed, files are put into docs/00-source/inbox/ by the BA
-  version: 5                          # set by ingest / sync
-  snapshot_at: "2026-10-23T13:54:42.048Z"  # version.createdAt of the v5 snapshot (CHG-003 — getConfluencePage now returns the version block); v2–v4 had only the page createdAt 2026-10-20T10:26:26.254Z
+  version: 7                          # set by ingest / sync — CHG-005 (v5 → v7; v6 never snapshotted)
+  snapshot_at: "2026-10-23T13:54:42.048Z"  # v7: createdAt not returned by MCP, fetched 2026-10-25 — value kept from v5 (CHG-005, BA OK). This is the version.createdAt of the v5 snapshot (CHG-003 — getConfluencePage now returns the version block); v2–v4 had only the page createdAt 2026-10-20T10:26:26.254Z
   children:                           # [{id, title, version}]
     - { id: "458755", title: "Workshop brief (source copy)", version: 1 }
     - { id: "1146892", title: "Workshop 4 minutes", version: 1 }   # CHG-004
   attachments: []                     # [{id, title, version, media_type}] — filled by the watch Action / REST
 
 steps:                                # status: not_started | draft | reviewed | approved | stale | skipped
-  ingest:       { status: reviewed, source_version: 5, updated: 2026-10-24 }  # CHG-002 row 1; CHG-003; CHG-004 reworked
-  requirements: { status: reviewed, source_version: 5, updated: 2026-10-24 }  # CHG-002; CHG-003; CHG-004 reworked
-  conflicts:    { status: reviewed, source_version: 5, updated: 2026-10-24 }  # CHG-002; CHG-003; CHG-004 reworked
-  stories:      { status: reviewed, source_version: 5, updated: 2026-10-24 }  # CHG-002; CHG-003; CHG-004 reworked
-  review:       { status: reviewed, source_version: 5, updated: 2026-10-24 }  # CHG-002; CHG-003 not affected (option A); CHG-004 reworked
-  spec:         { status: reviewed, source_version: 5, updated: 2026-10-24 }  # CHG-002; CHG-003 not affected (option A); CHG-004 reworked
-  build:        { status: reviewed, source_version: 5, updated: 2026-10-23 }  # CHG-002, BA accepted; CHG-003 not affected (option A); CHG-004 accepted (H6)
-  deploy:       { status: reviewed, source_version: 5, updated: 2026-10-24 }  # CHG-002 redeploy 8dda522, smoke ✓; CHG-003 not affected (option A); CHG-004 redeploy 8a658cc, smoke ✓
-  jira:         { status: reviewed, source_version: 5, updated: 2026-10-24 }  # CHG-002 row 18 (9 descriptions); CHG-003; CHG-004 reworked
+  ingest:       { status: reviewed, source_version: 7, updated: 2026-10-24 }  # CHG-002 row 1; CHG-003; CHG-004 reworked; CHG-005 not affected (C0)
+  requirements: { status: reviewed, source_version: 7, updated: 2026-10-24 }  # CHG-002; CHG-003; CHG-004 reworked; CHG-005 not affected (C0)
+  conflicts:    { status: reviewed, source_version: 7, updated: 2026-10-24 }  # CHG-002; CHG-003; CHG-004 reworked; CHG-005 not affected (C0)
+  stories:      { status: reviewed, source_version: 7, updated: 2026-10-24 }  # CHG-002; CHG-003; CHG-004 reworked; CHG-005 not affected (C0)
+  review:       { status: reviewed, source_version: 7, updated: 2026-10-24 }  # CHG-002; CHG-003 not affected (option A); CHG-004 reworked; CHG-005 not affected (C0)
+  spec:         { status: reviewed, source_version: 7, updated: 2026-10-24 }  # CHG-002; CHG-003 not affected (option A); CHG-004 reworked; CHG-005 not affected (C0)
+  build:        { status: reviewed, source_version: 7, updated: 2026-10-23 }  # CHG-002, BA accepted; CHG-003 not affected (option A); CHG-004 accepted (H6); CHG-005 not affected (C0)
+  deploy:       { status: reviewed, source_version: 7, updated: 2026-10-24 }  # CHG-002 redeploy 8dda522, smoke ✓; CHG-003 not affected (option A); CHG-004 redeploy 8a658cc, smoke ✓; CHG-005 not affected (C0)
+  jira:         { status: reviewed, source_version: 7, updated: 2026-10-24 }  # CHG-002 row 18 (9 descriptions); CHG-003; CHG-004 reworked; CHG-005 not affected (C0)
 
 approvals:                            # [{step, status, by, date, note}] — only on the BA's explicit OK
   - { step: setup, status: approved, by: "Olga Tkacheva", date: 2026-10-20, note: "ba-new" }
@@ -82,6 +82,8 @@ approvals:                            # [{step, status, by, date, note}] — onl
   - { step: deploy, status: reviewed, by: "Olga Tkacheva", date: 2026-10-24, note: "after CHG-002…CHG-004 (same BA message); live 8a658cc, smoke S-1…S-6 ✓" }
   - { step: jira, status: reviewed, by: "Olga Tkacheva", date: 2026-10-24, note: "after CHG-002…CHG-004 (same BA message)" }
   - { step: setup, status: watch-enabled, by: "Olga Tkacheva", date: 2026-10-24, note: "'Включи watch' — secrets CONFLUENCE_EMAIL / CONFLUENCE_API_TOKEN set by the BA (scoped token, api.atlassian.com; no CONFLUENCE_API variable)" }
+  - { step: sync, status: plan-ok, by: "Olga Tkacheva", date: 2026-10-25, note: "CHG-005 v5→v7: row 1 (C0 only — accept snapshot, no artifact changes); snapshot_at kept from v5 + comment" }
+  - { step: sync, status: reviewed, by: "Olga Tkacheva", date: 2026-10-25, note: "CHG-005 v5→v7 closed — 'CHG-005 → Reviewed'; v6 not snapshotted (K-29)" }
 
 jira:
   project_key: "KAN"
