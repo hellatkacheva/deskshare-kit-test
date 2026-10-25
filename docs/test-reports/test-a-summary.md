@@ -133,6 +133,7 @@ K-16…K-26 come from `/ba-sync` and are listed in `docs/07-changes/CHG-001.md` 
 | # | Step | Finding (short) | Change in the kit | State |
 |---|---|---|---|---|
 | K-27 | `setup-watch` | The weekday watch notifies only through a GitHub issue; the BA works from the Jira board (KAN) and may miss it | Option `watch.notify: github \| jira \| both` (default `github`): with `jira`, the script creates one Task in `jira.project_key` (type by ID `jira.issue_types.task`, labels `jira.labels.project` + `watch.issue_label`), or comments on the open one, with the same once-per-state marker; errors as for GitHub. Needs a separate Jira token with write scope for that project only (the Confluence token stays read-only); the BA adds it with `gh secret set`; no transitions, no deletes | **proposed** (BA, 2026-10-24) |
+| K-28 | `setup-watch` | Test B7: issue #1 (65670 v5 → v6, run 40100426022, manual run) was opened by `github-actions` with no assignee and no mention — GitHub sent no e-mail and nothing in the BA's Inbox | The script assigns the issue (and the `ba-watch-error` issue) to the repository owner — `watch.assignee` in `ba-project.yaml`, default `GITHUB_REPOSITORY_OWNER` — and mentions that login in the issue body and in every comment it adds; the workflow keeps `issues: write` | **proposed** (BA, 2026-10-25) |
 
 ### Build items B-4, B-5
 
